@@ -1,0 +1,14 @@
+{
+    "name": "kadan/blog_opcr",
+    "description": "Blog opcl formation",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Kadan\\BlogOpcr\\": "src/"
+        }
+    },
+    "minimum-stability": "stable",
+    "require": {
+        "twig/twig": "^3.4"
+    }
+}
