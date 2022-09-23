@@ -8,8 +8,6 @@ $twig = new \Twig\Environment($loader, [
     //'cache' => __DIR__. '/compilation_cache',
 ]);
 
-echo $twig->render('base.html.twig', ['name' => 'Lucie']);
-
 $posts = 'SELECT * FROM post';
 
 $postsStatement = $pdo->prepare($posts);

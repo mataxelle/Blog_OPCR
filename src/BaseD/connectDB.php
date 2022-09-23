@@ -1,11 +1,15 @@
 <?php
 
-$host = 'localhost';
-$db = 'blog_opcr';
-$user = 'root';
-$psw = '';
-$port = '3306';
-$charset = 'utf8mb4';
+$dotenv = Dotenv\Dotenv::createImmutable('../');
+$dotenv->load();
+
+
+$host = $_ENV['DB_HOST'];
+$db = $_ENV['DB_DATABASE'];
+$user = $_ENV['DB_USERNAME'];
+$psw = $_ENV['DB_PASSWORD'];
+$port = $_ENV['DB_PORT'];
+$charset = $_ENV['DB_CHARSET'];
 $dsn = "mysql:host=$host;dbname=$db;port=$port;charset=$charset";
 $options = [
     PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
@@ -15,7 +19,6 @@ $options = [
 
 try {
      $pdo = new PDO($dsn, $user, $psw, $options);
-     echo 'Database connexion established !';
 } catch (\PDOException $e) {
      throw new \PDOException($e->getMessage(), (int)$e->getCode());
 }
