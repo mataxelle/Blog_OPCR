@@ -1,23 +1,17 @@
 <?php
 
-require_once('../vendor/autoload.php');
-require '../src/BaseD/connectDB.php';
+use App\Exceptions\RouteNotFoundException;
+use App\Router\Router;
 
-$loader = new \Twig\Loader\FilesystemLoader('../templates');
-$twig = new \Twig\Environment($loader, [
-    //'cache' => __DIR__. '/compilation_cache',
-]);
+require_once __DIR__ . '/../vendor/autoload.php';
+require '../src/BaseD/ConnectDB.php';
 
-$posts = 'SELECT * FROM post';
+$router = new Router();
 
-$postsStatement = $pdo->prepare($posts);
-$postsStatement->execute();
-$allPosts = $postsStatement->fetchAll();
+$router->get('/', ['App\Controller\HomeController\HomeController', 'index']);
 
-// On affiche chaque recette une à une
-foreach ($allPosts as $post) {
-?>
-    <p><?php echo $post['title']; ?></p>
-    <p><?php echo $post['content']; ?></p>
-<?php
+try {
+    echo $router->resolve($_SERVER['REQUEST_URI']);
+} catch (RouteNotFoundException $e) {
+    echo $e->getMessage();
 }
