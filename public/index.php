@@ -4,7 +4,21 @@ use App\Exceptions\RouteNotFoundException;
 use App\Router\Router;
 
 require_once __DIR__ . '/../vendor/autoload.php';
-require '../src/BaseD/ConnectDB.php';
+//require '../src/BaseD/ConnectDB.php';
+
+$dotenv = Dotenv\Dotenv::createImmutable('../');
+$dotenv->load();
+
+$dotenv->required(
+    [
+    'DB_HOST',
+    'DB_DATABASE',
+    'DB_USERNAME',
+    'DB_PASSWORD',
+    ]
+);
+
+require_once __DIR__ . './../src/config.php';
 
 $router = new Router();
 
