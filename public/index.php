@@ -4,7 +4,6 @@ use App\Exceptions\RouteNotFoundException;
 use App\Router\Router;
 
 require_once __DIR__ . '/../vendor/autoload.php';
-//require '../src/BaseD/ConnectDB.php';
 
 $dotenv = Dotenv\Dotenv::createImmutable('../');
 $dotenv->load();
