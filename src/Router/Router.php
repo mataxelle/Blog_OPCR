@@ -3,34 +3,32 @@
 namespace App\Router;
 
 use App\Exceptions\RouteNotFoundException;
+use App\Router\HTTPRequest;
+use Exception;
 
 class Router
 {
-    private array $routes;
+    private $url;
+    private $routes = []; 
 
-    public function get(string $path, callable|array $action): void
+    public function __construct(HTTPRequest $request)
     {
-        $this->routes[$path] = $action;
+        $this->url = $request;
     }
 
-    public function resolve(string $uri): mixed
+    public function get(string $path, string $action)
     {
-        $path = explode('?', $uri)[0];
-        $action = $this->routes[$path] ?? null;
+        $this->routes['GET'][] = new Route($path, $action);
+    }
 
-        if (is_callable($action)) {
-            return $action();
-        }
-
-        if (is_array($action)) {
-            [$className, $method] = $action;
-
-            if(class_exists($className) && method_exists($className, $method)) {
-                $class = new $className();
-                return call_user_func_array([$class, $method], []);
+    public function run()
+    {
+        foreach ($this->routes[$this->url->requestMethod()] as $route) {
+            if($route->matches($this->url->getURI())) {
+                return $route->execute();
             }
         }
 
-        throw new RouteNotFoundException();
+        //throw new Exception('404 Not Found');
     }
 }
