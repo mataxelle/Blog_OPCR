@@ -42,7 +42,14 @@
 			<div class="container mb-5"> {% block body %}{% endblock %}</div>
 		</main>
 
-		<footer></footer>
+		<footer class="footer mt-auto py-3 bg-light">
+			<p class="text-center">
+					&copy; Copyright
+					{{ 'now'|date('Y') }}
+					&middot;
+				<a href="" class="text-decoration-none text-secondary">A propos</a>
+			</p>
+		</footer>
 
 		{% block javascripts %}
 			<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
