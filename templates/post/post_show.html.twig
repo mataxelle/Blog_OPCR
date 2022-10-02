@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ parent() }}
+	| Accueil
+{% endblock %}
+
+{% block body %}
+	<div>
+
+		<h1 class="text-center mt-5 mb-5">{{ post.slug }}</h1>
+
+		<div class="row">
+			<div class="col-6 offset-md-3 mx-auto">
+				<div class="card border-0">
+					<div class="d-flex justify-content-end">
+						<span class="text-muted">
+						    <em>Publié le {{ post.updated_at|date('d/m/Y') }}</em>
+						</span>
+					</div>
+
+					<hr>
+
+					<div class="card-body">
+						<p class="card-text">{{ post.content }}</p>
+					</div>
+
+					<hr>
+				</div>
+
+				<div class="border-bottom my-4 pb-4">
+					<div class="row">
+						<div class="col-3">
+							<img class="img-fluid shadow-1-strong rounded" src="" alt="admin image"/>
+						</div>
+
+						<div class="col-9">
+							<p class="mb-2">
+								<strong>Admin</strong>
+							</p>
+							<a href="#" class="text-dark">
+								<i class="fab fa-facebook-f me-1"></i>
+							</a>
+							<a href="#" class="text-dark">
+								<i class="fab fa-twitter me-1"></i>
+							</a>
+							<a href="#" class="text-dark">
+								<i class="fab fa-linkedin me-1"></i>
+							</a>
+							<p>
+								Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio est ab iure
+																inventore dolorum consectetur? Molestiae aperiam atque quasi consequatur aut?
+																Repellendus alias dolor ad nam, soluta distinctio quis accusantium!
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
