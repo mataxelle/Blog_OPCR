@@ -1,6 +1,7 @@
 <?php
 
 use App\Exceptions\RouteNotFoundException;
+use App\Router\HTTPRequest;
 use App\Router\Router;
 
 require_once __DIR__ . '/../vendor/autoload.php';
@@ -19,12 +20,12 @@ $dotenv->required(
 
 require_once __DIR__ . './../src/config.php';
 
-$router = new Router();
+$request = new HTTPRequest;
 
-$router->get('/', ['App\Controller\HomeController\HomeController', 'index']);
+$router = new Router($request);
 
-try {
-    echo $router->resolve($_SERVER['REQUEST_URI']);
-} catch (RouteNotFoundException $e) {
-    echo $e->getMessage();
-}
+$router->get('/', 'App\Controller\HomeController\HomeController@index');
+$router->get('/post', 'App\Controller\PostController\PostController@index');
+$router->get('/post/:id', 'App\Controller\PostController\PostController@onePost');
+
+$router->run();

@@ -14,10 +14,15 @@ class PostController extends TwigRender
         parent::__construct();
         $this->postManager = new PostManager();
     }
+    
+    public function index()
+    {
+        $posts = $this->postManager->getAllPost();
+        $this->twig->display('home/home.html.twig',[ 'posts' => $posts]);
+    }
 
     public function onePost()
     {
-        $posts = $this->postManager->getOnePost();
-        $this->twig->display('home/home.html.twig',[ 'posts' => $posts]);
+        return "un post ici";
     }
 }
