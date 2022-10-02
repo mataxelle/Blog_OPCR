@@ -10,19 +10,19 @@ class PostManager extends ConnectDB
     {
         $db = $this->db;
 
-        $reponse = $db->query('SELECT * FROM post ORDER BY created_at DESC');
+        $response = $db->query('SELECT * FROM post ORDER BY created_at DESC');
 
-        return $reponse;
+        return $response;
     }
 
     public function getOnePost(string $slug)
     {
         $db = $this->db;
 
-        $reponse = $db->prepare('SELECT * FROM post WHERE slug = ?');
+        $response = $db->prepare('SELECT * FROM post WHERE slug = ?');
 
-        $reponse->execute([$slug]);
+        $response->execute([$slug]);
 
-        return $reponse->fetch();  
+        return $response->fetch();  
     }
 }
