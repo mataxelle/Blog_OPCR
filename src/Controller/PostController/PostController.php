@@ -14,7 +14,7 @@ class PostController extends TwigRender
         parent::__construct();
         $this->postManager = new PostManager();
     }
-
+    
     public function index()
     {
         $posts = $this->postManager->getAllPost();
