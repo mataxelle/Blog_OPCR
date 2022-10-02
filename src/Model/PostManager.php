@@ -15,13 +15,13 @@ class PostManager extends ConnectDB
         return $reponse;
     }
 
-    public function getOnePost(int $id)
+    public function getOnePost(string $slug)
     {
         $db = $this->db;
 
-        $reponse = $db->prepare('SELECT * FROM post WHERE id = ?');
+        $reponse = $db->prepare('SELECT * FROM post WHERE slug = ?');
 
-        $reponse->execute([$id]);
+        $reponse->execute([$slug]);
 
         return $reponse->fetch();  
     }

@@ -21,9 +21,9 @@ class PostController extends TwigRender
         $this->twig->display('home/home.html.twig',[ 'posts' => $posts]);
     }
 
-    public function show(int $id)
+    public function show(string $slug)
     {
-        $post = $this->postManager->getOnePost($id);
+        $post = $this->postManager->getOnePost($slug);
         $this->twig->display('post/post_show.html.twig',[ 'post' => $post]);
     }
 }
