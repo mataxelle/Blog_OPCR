@@ -15,12 +15,14 @@ class PostManager extends ConnectDB
         return $reponse;
     }
 
-    public function getOnePost()
+    public function getOnePost(int $id)
     {
         $db = $this->db;
 
-        $reponse = $db->query('SELECT * FROM post WHERE id = ?');
+        $reponse = $db->prepare('SELECT * FROM post WHERE id = ?');
 
-        return $reponse;
+        $reponse->execute([$id]);
+
+        return $reponse->fetch();  
     }
 }

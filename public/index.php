@@ -26,6 +26,6 @@ $router = new Router($request);
 
 $router->get('/', 'App\Controller\HomeController\HomeController@index');
 $router->get('/post', 'App\Controller\PostController\PostController@index');
-$router->get('/post/:id', 'App\Controller\PostController\PostController@onePost');
+$router->get('/post/:id', 'App\Controller\PostController\PostController@show');
 
 $router->run();
