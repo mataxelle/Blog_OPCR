@@ -8,6 +8,9 @@ class HTTPRequest {
     }
 
     public function getURI() {
-        return trim($_GET['path'],'/');
+        if (array_key_exists('path', $_GET)) {
+            return trim($_GET['path'], '/');
+        }
+        return '';
     }
 }
