@@ -16,7 +16,10 @@ class TwigRender
 
     public function __construct()
     {
-        $this->loader = new FilesystemLoader(__DIR__ . './../../templates');
+        $appVariableReflection = new \ReflectionClass('\Symfony\Bridge\Twig\AppVariable');
+        $vendorTwigBridgeDirectory = dirname($appVariableReflection->getFileName());
+
+        $this->loader = new FilesystemLoader([__DIR__ . './../../templates', $vendorTwigBridgeDirectory.'/Resources/views/Form']);
         $this->twig = new Environment($this->loader, []);
     }
 
