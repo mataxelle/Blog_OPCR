@@ -2,6 +2,7 @@
 
 namespace App\Controller\ContactController;
 
+use App\Form\ContactFormType;
 use App\FormFactory\FormFactory;
 use App\Model\ContactManager;
 use App\Twig\TwigRender;
@@ -26,39 +27,26 @@ class ContactController extends TwigRender
 
     public function contact()
     {
-        //$contact = $this->contactManager->contactForm();
-
-        $form = $this->formFactory->createBuilder(FormType::class, [
+        $form = $this->formFactory->createBuilder(ContactFormType::class, [
             'action' => '/contact',
             'method' => 'POST',
-        ])
-            ->add('firstname', TextType::class, [
-                'label' => 'Nom',
-            ])
-            ->add('lastname', TextType::class, [
-                'label' => 'Prénom',
-            ])
-            ->add('email', EmailType::class)
-            ->add('label',ChoiceType::class, [
-                'choices' => [
-                    'info' => 'information',
-                    'quest' => 'question'
-                ]
-            ])
-            ->add('message', TextareaType::class)
-            ->add('button', SubmitType::class, [
-                'label' => 'Envoyer',
-            ])
-            ->getForm();
+        ])->getForm();
 
         $request = Request::createFromGlobals();        
         
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
             $data = $form->getData();
-        
-            //action 
+            
+            $cm = new ContactManager();
+            $cm->contactForm(
+                $data['firstname'],
+                $data['lastname'],
+                $data['email'],
+                $data['label'],
+                $data['message']);
                     
             $response = new RedirectResponse('/');
             $response->prepare($request);

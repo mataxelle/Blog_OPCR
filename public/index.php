@@ -27,6 +27,8 @@ $router = new Router($request);
 $router->get('/', 'App\Controller\HomeController\HomeController@index');
 $router->get('/post', 'App\Controller\PostController\PostController@index');
 $router->get('/post/:slug', 'App\Controller\PostController\PostController@show');
+$router->get('/add', 'App\Controller\PostController\PostController@add');
+$router->post('/add', 'App\Controller\PostController\PostController@add');
 $router->get('/contact', 'App\Controller\ContactController\ContactController@contact');
 $router->post('/contact', 'App\Controller\ContactController\ContactController@contact');
 

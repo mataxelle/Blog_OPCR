@@ -3,6 +3,7 @@
 namespace App\Model;
 
 use App\BaseD\ConnectDB;
+use DateTime;
 
 class ContactManager extends ConnectDB
 {
@@ -15,18 +16,19 @@ class ContactManager extends ConnectDB
         return $response;
     }
     
-    function contactForm()
+    public function contactForm($firstname, $lastname, $email, $label, $message)
     {
         $db = $this->db;
 
-        $addContact = $db->prepare('INSERT INTO contact (firstname, lastname, email, label, message ) VALUES (?, ?, ?, ?, ?)');
+        $addContact = $db->prepare('INSERT INTO contact (firstname, lastname, email, label, message, created_at ) VALUES (?, ?, ?, ?, ?, ?)');
 
         $addContact->execute(array(
-            $_POST['firstname'],
-            $_POST['lastname'],
-            $_POST['email'],
-            $_POST['label'],
-            $_POST['message']
+            $firstname,
+            $lastname,
+            $email,
+            $label,
+            $message,
+            (new DateTime())->format('Y-m-d h:i:s')
         ));
 
         return $addContact;

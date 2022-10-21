@@ -26,4 +26,41 @@ class PostController extends TwigRender
         $post = $this->postManager->getOnePost($slug);
         $this->twig->display('post/post_show.html.twig',[ 'post' => $post]);
     }
+
+    public function add()
+    {
+        if (!empty($_POST))
+        {
+           
+            $data['user_id'] = $_POST['user_id'];
+            $data['title'] = $_POST['title'];
+            $data['slug'] = $_POST['slug'];
+            $data['image'] = $_POST['image'];
+            $data['content'] = $_POST['content'];
+
+            if(!empty($_POST['is_published'])) {
+                $data['is_published'] = 1;
+            }
+            else {
+                $data['is_published'] = 0;
+            }
+
+            $post = $this->postManager->postForm($data);
+
+            if($post)
+            {
+                header('Location: /');
+            }
+        }
+
+        $this->twig->display('post/add.html.twig');
+    }
+
+    public function update()
+    {
+    }
+
+    public function delete()
+    {
+    }
 }
