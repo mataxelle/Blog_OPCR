@@ -53,7 +53,7 @@ class PostController extends TwigRender
             }
         }
 
-        $this->twig->display('post/add.html.twig');
+        $this->twig->display('post/post_add.html.twig');
     }
 
     public function update()
