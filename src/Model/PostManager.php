@@ -3,6 +3,7 @@
 namespace App\Model;
 
 use App\BaseD\ConnectDB;
+use DateTime;
 
 class PostManager extends ConnectDB
 {
@@ -24,5 +25,25 @@ class PostManager extends ConnectDB
         $response->execute([$slug]);
 
         return $response->fetch();  
+    }
+    
+    function postForm()
+    {
+        $db = $this->db;
+
+        $addPost = $db->prepare('INSERT INTO post (user_id, title, slug, image, content, is_published, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)');
+
+        $addPost->execute(array(
+            $_POST['user_id'],
+            $_POST['title'],
+            $_POST['slug'],
+            $_POST['image'],
+            $_POST['content'],
+            $_POST['is_published'],
+            (new DateTime())->format('Y-m-d h:i:s'),
+            (new DateTime())->format('Y-m-d h:i:s')
+        ));
+
+        return $addPost;
     }
 }

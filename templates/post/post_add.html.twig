@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ parent() }}
+	| Ajouter un article
+{% endblock %}
+
+{% block body %}
+	<div>
+		<h2 class="text-center text-secondary mb-5">Ajouter un article</h2>
+
+        <h5  class="text-center text-secondary mb-5"><a href="/">Accueil</a></h5>
+
+		<form action="/add" method="post">
+            <div class="form_div">
+                <label for="user_id">Auteur :</label>
+                <input type="text" name="user_id" id="user_id" value="1" required>
+            </div>
+            <div class="mb-3">
+                <label for="title" class="form-label">Titre</label>
+                <input type="text" name="title" class="form-control" id="title" required>
+            </div>
+            <div class="mb-3">
+                <label for="slug" class="form-label">Slug</label>
+                <input type="text" name="slug" class="form-control" id="slug" required>
+            </div>
+            <div class="mb-3">
+                <label for="image" class="form-label">Image</label>
+                <input name="image" class="form-control" type="file" id="image">
+            </div>
+            <div class="mb-3">
+                <label for="content" class="form-label">Contenu</label>
+                <textarea name="content" class="form-control" id="content" rows="3" required></textarea>
+            </div>
+            <div class="mb-3">
+                <input type="checkbox" name="is_published" value="1" id="is_published" aria-label="Checkbox is published or not">
+                <label for="is_published">Mettre en ligne</label>
+            </div>
+            <div class="mb-3">
+                <input type="submit" value="Soumettre">
+            </div>
+        </form>
+	</div>
+{% endblock %}
