@@ -2,85 +2,110 @@
 
 namespace App\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 class Contact
 {
     private $id;
 
-    private $firstname;
+    /**
+     * @Assert\NotBlank(message="Veuillez saisir votre prénom")
+     * @Assert\Length(min=2)
+     */
+    public $firstname;
 
-    private $lastname;
+    /**
+     * @Assert\NotBlank(message="Veuillez saisir votre prénom")
+     * @Assert\Length(min=2)
+     */
+    public $lastname;
 
-    private $email;
+    /**
+     * @Assert\NotBlank(message="Veuillez saisir votre prénom")
+     */
+    public $email;
 
-    private $label;
+    /**
+     * @Assert\NotBlank(message="Veuillez saisir votre prénom")
+     */
+    public $label;
 
-    private $message;
+    /**
+     * @Assert\NotBlank(message="Veuillez saisir votre prénom")
+     */
+    public $message;
     
-    private $created_at;
+    public $createdAt;
 
-    public function getId()
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getFirstname()
+    public function getFirstname(): ?string
     {
         return $this->firstname;
     }
 
-    public function setFirstname($firstname)
+    public function setFirstname(string $firstname): self
     {
         $this->firstname = $firstname;
+        return $this;
     }
 
-    public function getLastname()
+    public function getLastname(): ?string
     {
         return $this->lastname;
     }
 
-    public function setLastname($lastname)
+    public function setLastname(string $lastname): self
     {
         $this->lastname = $lastname;
+        return $this;
     }
 
-    public function getEmail()
+    public function getEmail(): ?string
     {
         return $this->email;
     }
 
-    public function setEmail($email)
+    public function setEmail(string $email): self
     {
         $this->email = $email;
+        return $this;
     }
 
-    public function getLabel()
+    public function getLabel(): ?string
     {
         return $this->label;
     }
 
-    public function setLabel($label)
+    public function setLabel(string $label): self
     {
         $this->label = $label;
+        return $this;
     }
 
-    public function getMessage()
+    public function getMessage(): ?string
     {
         return $this->message;
     }
 
-    public function setMessage($message)
+    public function setMessage(string $message): self
     {
         $this->message = $message;
+        return $this;
     }
 
-    public function getCreated_at()
+    public function getCreatedAt(): ?\DateTimeInterface
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 
-    public function setCreated_at($created_at)
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $this->created_at = $created_at;
+        $this->createdAt = $createdAt;
+        return $this;
     }
 
 }

@@ -26,8 +26,28 @@ class PostManager extends ConnectDB
 
         return $response->fetch();  
     }
+
+    public function postForm($userId, $title, $slug, $image, $content, $isPublished)
+    {
+        $db = $this->db;
+
+        $addPost = $db->prepare('INSERT INTO post (user_id, title, slug, image, content, is_published, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)');
+
+        $addPost->execute(array(
+            $userId,
+            $title,
+            $slug,
+            $image,
+            $content,
+            $isPublished,
+            (new DateTime())->format('Y-m-d h:i:s'),
+            (new DateTime())->format('Y-m-d h:i:s')
+        ));
+
+        return $addPost;
+    }
     
-    function postForm()
+    /*public function postForm()
     {
         $db = $this->db;
 
@@ -45,5 +65,5 @@ class PostManager extends ConnectDB
         ));
 
         return $addPost;
-    }
+    }*/
 }

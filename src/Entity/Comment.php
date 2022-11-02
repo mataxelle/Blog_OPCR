@@ -2,85 +2,95 @@
 
 namespace App\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 class Comment
 {
     private $id;
 
-    private $post_id;
+    private $postId;
 
-    private $user_id;
+    private $userId;
 
+    /**
+    * @Assert\NotBlank
+    */
     private $content;
 
-    private $is_valid;
+    private $isValid;
 
-    private $created_at;
+    private $createdAt;
 
-    private $updated_at;
+    private $updatedAt;
 
-
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
 
-    public function getPost_id()
+    public function getPostId(): int
     {
-        return $this->post_id;
+        return $this->postId;
     }
 
-    public function setPost_id($post_id)
+    public function setPostId(int $postId): self
     {
-        $this->post_id = $post_id;
+        $this->postId = $postId;
+        return $this;
     }
 
-    public function getUser_id()
+    public function getUserId(): int
     {
-        return $this->user_id;
+        return $this->userId;
     }
 
-    public function setUser_id($user_id)
+    public function setUserId(int $userId): self
     {
-        $this->user_id = $user_id;
+        $this->userId = $userId;
+        return $this;
     }
 
-    public function getContent()
+    public function getContent(): string
     {
         return $this->content;
     }
 
-    public function setContent($content)
+    public function setContent(string $content): self
     {
         $this->content = $content;
+        return $this;
     }
 
-    public function getIs_valid()
+    public function getIsValid(): bool
     {
-        return $this->is_valid;
+        return $this->isValid;
     }
 
-    public function setIs_valid($is_valid)
+    public function setIsValid(bool $isValid): self
     {
-        $this->is_valid = $is_valid;
+        $this->isValid = $isValid;
+        return $this;
     }
 
-    public function getCreated_at()
+    public function getCreatedAt(): \DateTimeInterface
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 
-    public function setCreated_at($created_at)
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $this->created_at = $created_at;
+        $this->createdAt = $createdAt;
+        return $this;
     }
 
-    public function getUpdated_at()
+    public function getUpdatedAt(): \DateTimeInterface
     {
-        return $this->updated_at;
+        return $this->updatedAt;
     }
 
-    public function setUpdated_at($updated_at)
+    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
     {
-        $this->updated_at = $updated_at;
+        $this->updatedAt = $updatedAt;
+        return $this;
     }
 }

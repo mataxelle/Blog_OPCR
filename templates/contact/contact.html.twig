@@ -10,10 +10,33 @@
 
 		<h1 class="text-center mt-5 mb-5">Contactez-moi !</h1>
 
-		<div class="text-center">
-		    {{ form_start(form) }}
-               {{ form_widget(form) }}
-            {{ form_end(form) }}
-		</div>
+		<form action="/contact" method="post">
+            <div class="mb-3">
+                <label for="firstname">Prénom</label>
+                <input type="text" name="firstname" id="firstname" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="lastname" class="form-label">Nom</label>
+                <input type="text" name="lastname" class="form-control" id="lastname" required>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" name="email" class="form-control" id="email" required>
+            </div>
+            <div class="mb-3">
+                <label for="label" class="form-label">Objet</label>
+                <select name="label" class="form-select" aria-label="select">
+                    <option value="information">Information</option>
+                    <option value="question">Question</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="message" class="form-label">Message</label>
+                <textarea name="message" class="form-control" id="message" rows="3" required></textarea>
+            </div>
+            <div class="mb-3">
+                <input type="submit" value="Envoyer">
+            </div>
+        </form>
 	</div>
 {% endblock %}

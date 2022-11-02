@@ -2,110 +2,127 @@
 
 namespace App\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 class Post
 {
-    private $id;
+    public $id;
 
-    private $user_id;
+    public $userId;
 
-    private $title;
+    /**
+    * @Assert\NotBlank
+    */
+    public $title;
 
-    private $slug;
+    /**
+    * @Assert\NotBlank
+    */
+    public $slug;
 
-    private $image;
+    public $image;
 
-    private $content;
+    /**
+    * @Assert\NotBlank
+    */
+    public $content;
 
-    private $is_published;
+    public $isPublished;
 
-    private $created_at;
+    public $createdAt;
 
-    private $updated_at;
-
-
+    public $updatedAt;
 
     public function getId()
     {
         return $this->id;
     }
 
-    public function getUser_id()
+    public function getUserId(): ?int
     {
-        return $this->user_id;
+        return $this->userId;
     }
 
-    public function setUser_id($user_id)
+    public function setUserId(int $userId): self
     {
-        $this->user_id = $user_id;
+        $this->userId = $userId;
+        return $this;
     }
 
-    public function getTitle()
+    public function getTitle(): ?string
     {
         return $this->title;
     }
 
-    public function setTitle($title)
+    public function setTitle(string $title): self
     {
         $this->title = $title;
+        return $this;
     }
 
-    public function getSlug()
+    public function getSlug(): ?string
     {
         return $this->slug;
     }
 
-    public function setSlug($slug)
+    public function setSlug(string $slug): self
     {
         $this->slug = $slug;
+        return $this;
     }
 
-    public function getImage()
+    public function getImage(): ?string
     {
         return $this->image;
     }
 
-    public function setImage($image)
+    public function setImage(string $image): self
     {
         $this->image = $image;
+        return $this;
     }
 
-    public function getContent()
+    public function getContent(): ?string
     {
         return $this->content;
     }
 
-    public function setContent($content)
+    public function setContent(string $content): self
     {
         $this->content = $content;
+        return $this;
     }
 
-    public function getIs_published()
+    public function getIsPublished(): ?bool
     {
-        return $this->is_published;
+        return $this->isPublished;
     }
 
-    public function setIs_published($is_published)
+    public function setIsPublished(bool $isPublished): self
     {
-        $this->is_published = $is_published;
+        $this->isPublished = $isPublished;
+        return $this;
     }
 
-    public function getCreated_at()
+    public function getCreatedAt(): ?\DateTimeInterface
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 
-    public function setCreated_at($created_at)
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
-        $this->created_at = $created_at;
+        $this->createdAt = $createdAt;
+        return $this;
     }
 
-    public function getUpdated_at()
+    public function getUpdatedAt(): ?\DateTimeInterface
     {
-        return $this->updated_at;
+        return $this->updatedAt;
     }
 
-    public function setUpdated_at($updated_at)
+    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
     {
-        $this->updated_at = $updated_at;
+        $this->updatedAt = $updatedAt;
+        return $this;
     }
 }

@@ -2,8 +2,13 @@
 
 namespace App\Controller\PostController;
 
+use App\Entity\Post;
+use App\Form\PostFormType;
 use App\Twig\TwigRender;
 use App\Model\PostManager;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class PostController extends TwigRender
 {
@@ -29,31 +34,46 @@ class PostController extends TwigRender
 
     public function add()
     {
-        if (!empty($_POST))
-        {
-           
-            $data['user_id'] = $_POST['user_id'];
-            $data['title'] = $_POST['title'];
-            $data['slug'] = $_POST['slug'];
-            $data['image'] = $_POST['image'];
-            $data['content'] = $_POST['content'];
+        $post = new Post();
 
-            if(!empty($_POST['is_published'])) {
-                $data['is_published'] = 1;
-            }
-            else {
-                $data['is_published'] = 0;
-            }
+        $form = $this->formFactory->createBuilder(PostFormType::class, $post, [
+            'action' => '/add',
+            'method' => 'POST',
+        ])->getForm();
 
-            $post = $this->postManager->postForm($data);
+        $request = Request::createFromGlobals();        
+        
+        $form->handleRequest($request);
 
-            if($post)
-            {
-                header('Location: /');
-            }
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $data = $form->getData();
+            
+            $pm = new PostManager();
+            $pm->postForm(
+                $data->userId = 1,
+                $data->title,
+                $data->slug,
+                $data->image,
+                $data->content,
+                $data->isPublished);
+                
+                //Condition à faire
+                if ($data->isPublished) {
+                    $data->isPublished = 1;
+                } else {
+                    $data->isPublished = 0;
+                }
+
+            $response = new RedirectResponse('/');
+            $response->prepare($request);
+        
+            return $response->send();
         }
 
-        $this->twig->display('post/post_add.html.twig');
+        $this->twig->display('post/post_add.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 
     public function update()
