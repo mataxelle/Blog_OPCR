@@ -3,6 +3,7 @@
 namespace App\Model;
 
 use App\BaseD\ConnectDB;
+use App\Entity\Post;
 use DateTime;
 
 class PostManager extends ConnectDB
@@ -27,43 +28,23 @@ class PostManager extends ConnectDB
         return $response->fetch();  
     }
 
-    public function postForm($userId, $title, $slug, $image, $content, $isPublished)
+    public function postForm(Post $post)
     {
         $db = $this->db;
 
         $addPost = $db->prepare('INSERT INTO post (user_id, title, slug, image, content, is_published, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)');
 
         $addPost->execute(array(
-            $userId,
-            $title,
-            $slug,
-            $image,
-            $content,
-            $isPublished,
+            $post->getUserId(),
+            $post->getTitle(),
+            $post->getSlug(),
+            $post->getImage(),
+            $post->getContent(),
+            $post->getIsPublished() ? 1 : 0,
             (new DateTime())->format('Y-m-d h:i:s'),
             (new DateTime())->format('Y-m-d h:i:s')
         ));
 
         return $addPost;
     }
-    
-    /*public function postForm()
-    {
-        $db = $this->db;
-
-        $addPost = $db->prepare('INSERT INTO post (user_id, title, slug, image, content, is_published, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)');
-
-        $addPost->execute(array(
-            $_POST['user_id'],
-            $_POST['title'],
-            $_POST['slug'],
-            $_POST['image'],
-            $_POST['content'],
-            $_POST['is_published'],
-            (new DateTime())->format('Y-m-d h:i:s'),
-            (new DateTime())->format('Y-m-d h:i:s')
-        ));
-
-        return $addPost;
-    }*/
 }

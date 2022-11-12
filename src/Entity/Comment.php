@@ -6,29 +6,29 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class Comment
 {
-    private $id;
+    public $id;
 
-    private $postId;
+    public $postId;
 
-    private $userId;
+    public $userId;
 
     /**
     * @Assert\NotBlank
     */
-    private $content;
+    public $content;
 
-    private $isValid;
+    public $isValid;
 
-    private $createdAt;
+    public $createdAt;
 
-    private $updatedAt;
+    public $updatedAt;
 
     public function getId(): int
     {
         return $this->id;
     }
 
-    public function getPostId(): int
+    public function getPostId(): ?int
     {
         return $this->postId;
     }
@@ -39,7 +39,7 @@ class Comment
         return $this;
     }
 
-    public function getUserId(): int
+    public function getUserId(): ?int
     {
         return $this->userId;
     }
@@ -50,7 +50,7 @@ class Comment
         return $this;
     }
 
-    public function getContent(): string
+    public function getContent(): ?string
     {
         return $this->content;
     }
@@ -61,7 +61,7 @@ class Comment
         return $this;
     }
 
-    public function getIsValid(): bool
+    public function getIsValid(): ?bool
     {
         return $this->isValid;
     }
@@ -72,7 +72,7 @@ class Comment
         return $this;
     }
 
-    public function getCreatedAt(): \DateTimeInterface
+    public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->createdAt;
     }
@@ -83,7 +83,7 @@ class Comment
         return $this;
     }
 
-    public function getUpdatedAt(): \DateTimeInterface
+    public function getUpdatedAt(): ?\DateTimeInterface
     {
         return $this->updatedAt;
     }

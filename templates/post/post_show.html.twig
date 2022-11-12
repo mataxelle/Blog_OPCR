@@ -8,7 +8,7 @@
 {% block body %}
 	<div>
 
-		<h1 class="text-center mt-5 mb-5">{{ post.slug }}</h1>
+		<h1 class="text-center mt-5 mb-5">{{ post.title }}</h1>
 
 		<div class="row">
 			<div class="col-6 offset-md-3 mx-auto">
@@ -57,5 +57,29 @@
 				</div>
 			</div>
 		</div>
+
+		<section class="row">
+            <div class="col">
+			    <h3>Commentaires</h3>
+			    <div class="card border-0">
+					{% for comment in comments %}
+				        <div class="col">
+					        
+						        <div class="card-body">
+						            <p class="card-text">{{ comment.content }}</p>
+					            </div>
+				        </div>
+			        {% endfor %}
+				</div>
+			</div>
+		</section>
+
+		<section>
+		    <div>
+				<div class="text-center">
+		            {% include "comment/add.html.twig" %}
+		        </div>
+			</div>
+		</section>
 	</div>
 {% endblock %}

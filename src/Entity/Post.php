@@ -13,7 +13,7 @@ class Post
     /**
     * @Assert\NotBlank
     */
-    public $title;
+    private $title;
 
     /**
     * @Assert\NotBlank

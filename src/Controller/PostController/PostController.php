@@ -3,9 +3,12 @@
 namespace App\Controller\PostController;
 
 use App\Entity\Post;
+use App\Entity\Comment;
 use App\Form\PostFormType;
+use App\Form\CommentFormType;
 use App\Twig\TwigRender;
 use App\Model\PostManager;
+use App\Model\CommentManager;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -18,6 +21,7 @@ class PostController extends TwigRender
     {
         parent::__construct();
         $this->postManager = new PostManager();
+        $this->commentManager = new CommentManager();
     }
     
     public function index()
@@ -29,7 +33,38 @@ class PostController extends TwigRender
     public function show(string $slug)
     {
         $post = $this->postManager->getOnePost($slug);
-        $this->twig->display('post/post_show.html.twig',[ 'post' => $post]);
+
+        $comment = new Comment();
+
+        $commentForm = $this->formFactory->createBuilder(CommentFormType::class, $comment, [
+            'action' => '/addComment',
+            'method' => 'POST',
+        ])->getForm();
+
+        $request = Request::createFromGlobals();        
+        
+        $commentForm->handleRequest($request);
+
+        if ($commentForm->isSubmitted() && $commentForm->isValid()) {
+
+            $comment->setPostId($post->getId());
+            $comment->setUserId(1);
+            $comment->setIsValid(0);
+            
+            
+            $cm = new CommentManager();
+            $cm->commentForm($comment);
+
+            $response = new RedirectResponse('/');
+            $response->prepare($request);
+        
+            return $response->send();
+        }
+
+        $this->twig->display('post/post_show.html.twig',[ 
+            'post' => $post,
+            'commentForm' => $commentForm->createView()
+        ]);
     }
 
     public function add()
@@ -46,24 +81,11 @@ class PostController extends TwigRender
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
-            $data = $form->getData();
             
+            $post->setUserId(1);
+
             $pm = new PostManager();
-            $pm->postForm(
-                $data->userId = 1,
-                $data->title,
-                $data->slug,
-                $data->image,
-                $data->content,
-                $data->isPublished);
-                
-                //Condition à faire
-                if ($data->isPublished) {
-                    $data->isPublished = 1;
-                } else {
-                    $data->isPublished = 0;
-                }
+            $pm->postForm($post);
 
             $response = new RedirectResponse('/');
             $response->prepare($request);
