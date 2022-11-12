@@ -8,13 +8,27 @@
 {% block body %}
     <h1 class="text-center my-5">Connexion</h1>
 
-    <div class="text-center">
-		{{ form_start(form) }}
-            {{ form_widget(form) }}
-        {{ form_end(form) }}
-	</div>
+    <div class="row">
+        <div class="col-6 offset-3 text-center">
+		<form action="/login" method="post">
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" name="email" class="form-control" id="email" required>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Mot de passe</label>
+                <input type="password" name="password" class="form-control" id="password" required>
+            </div>
+            <div class="mb-3">
+                <input type="submit" class="btn btn-primary" value="Se connecter">
+            </div>
+        </form>
+	    </div>
+    </div>
     
-    <div class="col-6 offset-md-3">
-        <p>Pas encore inscris ? <a href="/register">C'est par ici !</a> </p>
+    <div class="row">
+        <div class="col-6 offset-3 mt-4">
+            <p>Pas encore inscris ? <a href="/register">C'est par ici !</a> </p>
+        </div>
     </div>
 {% endblock %}

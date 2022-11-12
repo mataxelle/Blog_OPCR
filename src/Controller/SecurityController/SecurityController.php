@@ -52,33 +52,6 @@ class SecurityController extends TwigRender
 
     public function login()
     {
-        $form = $this->formFactory->createBuilder(UserFormType::class, [
-            'action' => '/login',
-            'method' => 'POST',
-        ])->getForm();
-
-        $request = Request::createFromGlobals();        
-        
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-
-            $data = $form->getData();
-            
-            $cm = new UserManager();
-            $cm->loginForm(
-                $data['email'],
-                $data['password']);
-
-                    
-            $response = new RedirectResponse('/');
-            $response->prepare($request);
-        
-            return $response->send();
-        }
-
-        $this->twig->display('security/register.html.twig', [
-            'form' => $form->createView(),
-        ]);
+        $this->twig->display('security/login.html.twig');
     }
 }

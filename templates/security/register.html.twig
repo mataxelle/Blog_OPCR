@@ -8,13 +8,35 @@
 {% block body %}
     <h1 class="text-center my-5">Inscription</h1>
 
-    <div class="text-center">
-		{{ form_start(form) }}
-            {{ form_widget(form) }}
+    <div class="row">
+        <div class="col-12 text-center">
+		{{ form_start(form, {'attr': {'class': 'col-6 offset-md-3 mb-5'}}) }}
+            <div class="mb-3">
+                {{ form_label(form.firstname, 'Prénom') }}
+                {{ form_widget(form.firstname, {'attr': {'class': 'form-control'}}) }}
+            </div>
+            <div class="mb-3">
+                {{ form_label(form.lastname, 'Nom') }}
+                {{ form_widget(form.lastname, {'attr': {'class': 'form-control'}}) }}
+            </div>
+            <div class="mb-3">
+                {{ form_label(form.email, 'Email') }}
+                {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
+            </div>
+            <div class="mb-3">
+                {{ form_label(form.password, 'Mot de passe') }}
+                {{ form_widget(form.password, {'attr': {'class': 'form-control'}}) }}
+            </div>
+            <div class="mb-3">
+	            <input type="submit" name="" class="btn btn-primary" value="S'inscrire">
+	        </div>
         {{ form_end(form) }}
-	</div>
+	    </div>
+    </div>
     
-    <div class="col-6 offset-md-3">
-        <p>Déjà inscris ? <a href="/login">C'est par ici !</a> </p>
+    <div class="row">
+        <div class="col-6 offset-md-3">
+            <p>Déjà inscris ? <a href="/login">C'est par ici !</a> </p>
+        </div>
     </div>
 {% endblock %}

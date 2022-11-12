@@ -29,16 +29,22 @@ class UserManager extends ConnectDB
         return $createUser;
     }
 
-    public function loginForm($email, $password)
+    public function loginForm(User $user)
     {
         $db = $this->db;
 
-        $login = $db->prepare('INSERT INTO user (email, password) VALUES (?, ?)');
+        $login = $db->prepare('SELECT id, firstname, password FROM user WHERE email = ?');
 
         $login->execute(array(
-            $email,
-            $password,
+            $user->getEmail()
         ));
+
+        $result = $login->fetch();
+
+        if (!$result) {
+
+            echo 'Attention mauvais identifiant ou mot de passe !';
+        }
 
         return $login;
     }

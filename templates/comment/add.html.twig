@@ -1,7 +1,19 @@
 <div class="text-center">
-    MY COMMENT FORM
+	MY COMMENT FORM
 
-    {{ form_start(commentForm) }}
-        {{ form_widget(commentForm) }}
-    {{ form_end(commentForm) }}
+	<div>
+		{{ form_start(commentForm, {'attr': {'class': 'col-6 offset-md-3 mb-5'}}) }}
+		<div class="mb-3">
+			{{ form_label(commentForm.content, 'commentaire') }}
+			{{ form_widget(commentForm.content, {'attr': {'class': 'form-control'}}) }}
+		</div>
+        <div class="mb-3">
+			{{ form_widget(commentForm.isValid) }}
+			<span>Publier l'article</span>
+		</div>
+		<div class="mb-3">
+			<input type="submit" name="" class="btn btn-primary" value="Commenter">
+		</div>
+		{{ form_end(commentForm) }}
+	</div>
 </div>
