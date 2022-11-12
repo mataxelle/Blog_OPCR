@@ -29,7 +29,7 @@ class UserFormType extends AbstractType
         ])
         ->add('password', PasswordType::class, [
             'label' => 'Mot de passe',
-            'mapped' => false,
+            //'mapped' => false,
             'attr' => ['autocomplete' => 'new-password'],
             'constraints' => [
                 new NotBlank([

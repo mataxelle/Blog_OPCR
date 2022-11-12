@@ -2,9 +2,9 @@
 
 namespace App\Controller\SecurityController;
 
+use App\Entity\User;
 use App\Form\UserFormType;
 use App\Model\UserManager;
-use App\FormFactory\FormFactory;
 use App\Twig\TwigRender;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -19,7 +19,9 @@ class SecurityController extends TwigRender
 
     public function register()
     {
-        $form = $this->formFactory->createBuilder(UserFormType::class, [
+        $user = new User();
+
+        $form = $this->formFactory->createBuilder(UserFormType::class, $user, [
             'action' => '/register',
             'method' => 'POST',
         ])->getForm();
@@ -30,17 +32,11 @@ class SecurityController extends TwigRender
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $data = $form->getData();
+            //$data = $form->getData();
+            $user->setIsAdmin(0);
             
-            $cm = new UserManager();
-            $cm->registerForm(
-                $data['firstname'],
-                $data['lastname'],
-                $data['is_admin'] = 0,
-                $data['email'],
-                $data['password'],
-                $data['created_at'],
-                $data['updated_at']);
+            $um = new UserManager();
+            $um->registerForm($user);
 
                     
             $response = new RedirectResponse('/');
