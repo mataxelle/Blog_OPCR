@@ -15,14 +15,20 @@
 				<div class="card border-0">
 					<div class="d-flex justify-content-end">
 						<span class="text-muted">
-						    <em>Publié le {{ post.updated_at|date('d/m/Y') }}</em>
+							<em>Publié le
+								{{ post.updated_at|date('d/m/Y') }}</em>
 						</span>
 					</div>
 
 					<hr>
 
 					<div class="card-body">
-						<p class="card-text">{{ post.content }}</p>
+						{% if post.image %}
+							<img class="card-img-top h-100" src="/upload/{{post.image}}" alt="{{ post.image }}">
+						{% else %}
+							<img class="card-img-top h-100" src="/assets/images/code.jpg" alt="image de partage d'info">
+						{% endif %}
+						<p class="card-text mt-4">{{ post.content }}</p>
 					</div>
 
 					<hr>
@@ -49,8 +55,8 @@
 							</a>
 							<p>
 								Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio est ab iure
-																inventore dolorum consectetur? Molestiae aperiam atque quasi consequatur aut?
-																Repellendus alias dolor ad nam, soluta distinctio quis accusantium!
+																								inventore dolorum consectetur? Molestiae aperiam atque quasi consequatur aut?
+																								Repellendus alias dolor ad nam, soluta distinctio quis accusantium!
 							</p>
 						</div>
 					</div>
@@ -59,26 +65,26 @@
 		</div>
 
 		<section class="row">
-            <div class="col">
-			    <h3>Commentaires</h3>
-			    <div class="card border-0">
+			<div class="col">
+				<h3>Commentaires</h3>
+				<div class="card border-0">
 					{% for comment in comments %}
-				        <div class="col">
-					        
-						        <div class="card-body">
-						            <p class="card-text">{{ comment.content }}</p>
-					            </div>
-				        </div>
-			        {% endfor %}
+						<div class="col">
+
+							<div class="card-body">
+								<p class="card-text">{{ comment.content }}</p>
+							</div>
+						</div>
+					{% endfor %}
 				</div>
 			</div>
 		</section>
 
 		<section>
-		    <div>
+			<div>
 				<div class="text-center">
-		            {% include "comment/add.html.twig" %}
-		        </div>
+					{% include "comment/add.html.twig" %}
+				</div>
 			</div>
 		</section>
 	</div>

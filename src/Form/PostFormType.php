@@ -25,6 +25,7 @@ class PostFormType extends AbstractType
         ])
         ->add('image', FileType::class, [
             'required' => false,
+            'data_class' => null
         ])
         ->add('content', TextareaType::class, [
             'label' => 'Contenu',

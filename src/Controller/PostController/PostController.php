@@ -84,6 +84,18 @@ class PostController extends TwigRender
             
             $post->setUserId(1);
 
+            if ($post->getImage() !== null) {
+                $file = $form->get('image')->getData();
+                $fileName =  uniqid(). '.' .$file->guessExtension();
+
+                try {
+                    $file->move('./upload/', $fileName);
+                } catch (FileException $e) {
+                }
+
+                $post->setImage($fileName);
+            };
+
             $pm = new PostManager();
             $pm->postForm($post);
 
