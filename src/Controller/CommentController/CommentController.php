@@ -22,7 +22,11 @@ class CommentController extends TwigRender
     public function postComment(int $id)
     {
         $comments = $this->commentManager->getPostComment($id);
-        $this->twig->display('post/post_show.html.twig',[ 'comments' => $comments]);
+        //var_dump($comments);
+        //die;
+        $this->twig->display('comment/comment_show.html.twig',[ 
+            'comments' => $comments
+        ]);
     }
 
     public function add()
@@ -55,7 +59,7 @@ class CommentController extends TwigRender
             return $response->send();
         }
 
-        $this->twig->display('comment/add.html.twig', [
+        $this->twig->display('comment/comment_add.html.twig', [
             'commentForm' => $commentForm->createView(),
         ]);
     }

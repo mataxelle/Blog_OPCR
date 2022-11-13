@@ -34,6 +34,11 @@ class PostController extends TwigRender
     {
         $post = $this->postManager->getOnePost($slug);
 
+        $comments = $this->commentManager->getPostComment($post['id']);
+
+        /*var_dump($comments);
+        die;*/
+
         $comment = new Comment();
 
         $commentForm = $this->formFactory->createBuilder(CommentFormType::class, $comment, [
@@ -63,6 +68,7 @@ class PostController extends TwigRender
 
         $this->twig->display('post/post_show.html.twig',[ 
             'post' => $post,
+            'comments' => $comments,
             'commentForm' => $commentForm->createView()
         ]);
     }

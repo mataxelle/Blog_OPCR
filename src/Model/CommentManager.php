@@ -8,14 +8,16 @@ use DateTime;
 
 class CommentManager extends ConnectDB
 {
-    public function getPostComment(int $id)
+    public function getPostComment(int $postId)
     {
         $db = $this->db;
 
-        $response = $db->query('SELECT * FROM comment WHERE post_id = ? ORDER BY created_at DESC');
-        $response->execute(array($id));
+        $response = $db->prepare('SELECT * FROM comment WHERE post_id = ? AND is_valid = 1 ORDER BY created_at DESC');
+        $response->execute(array($postId));
+
+        $result = $response->fetch();
         
-        return $response;
+        return $result;
     }
 
     public function commentForm(Comment $comment)
