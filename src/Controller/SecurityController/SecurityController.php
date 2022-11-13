@@ -26,22 +26,22 @@ class SecurityController extends TwigRender
             'method' => 'POST',
         ])->getForm();
 
-        $request = Request::createFromGlobals();        
-        
+        $request = Request::createFromGlobals();
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
             //$data = $form->getData();
             $user->setIsAdmin(0);
-            
+
             $um = new UserManager();
             $um->registerForm($user);
 
-                    
-            $response = new RedirectResponse('/');
+
+            $response = new RedirectResponse('/login');
             $response->prepare($request);
-        
+
             return $response->send();
         }
 
@@ -52,6 +52,35 @@ class SecurityController extends TwigRender
 
     public function login()
     {
+        if (!empty($_POST)) {
+            $data['email'] = $_POST['email'];
+            $data['password'] = $_POST['password'];
+
+            $login = $this->userManager->loginForm($data);
+
+            $isPasswordCorrect = password_verify($_POST['password'], $login['password']);
+
+            if ($isPasswordCorrect) {
+                session_start();
+                $_SESSION['id'] = $login['id'];
+                $_SESSION['firstname'] = $login['firstname'];
+                $_SESSION['email'] = $_POST['email'];
+
+                header('Location: /');
+                // die('Vous êtes connecté !');
+            } else {
+                header('Location: /login');
+                //die('Attention mauvais identifiant ou mot de passe !');
+            }
+        }
+
         $this->twig->display('security/login.html.twig');
+    }
+
+    public function logout()
+    {
+        session_destroy();
+
+        return header('/login');
     }
 }

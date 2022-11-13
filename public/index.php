@@ -29,6 +29,7 @@ $router->get('/register', 'App\Controller\SecurityController\SecurityController@
 $router->post('/register', 'App\Controller\SecurityController\SecurityController@register');
 $router->get('/login', 'App\Controller\SecurityController\SecurityController@login');
 $router->post('/login', 'App\Controller\SecurityController\SecurityController@login');
+$router->post('/logout', 'App\Controller\SecurityController\SecurityController@logout');
 $router->get('/post', 'App\Controller\PostController\PostController@index');
 $router->get('/post/:slug', 'App\Controller\PostController\PostController@show');
 $router->get('/add', 'App\Controller\PostController\PostController@add');
@@ -36,6 +37,7 @@ $router->post('/add', 'App\Controller\PostController\PostController@add');
 //$router->get('/postComment', 'App\Controller\CommentController\CommentController@postComment');
 $router->get('/post/:slug', 'App\Controller\CommentController\CommentController@show');
 $router->post('/addComment', 'App\Controller\PostController\PostController@show');
+$router->get('/account', 'App\Controller\UserController\UserController@account');
 $router->get('/contact', 'App\Controller\ContactController\ContactController@contact');
 $router->post('/contact', 'App\Controller\ContactController\ContactController@contact');
 
