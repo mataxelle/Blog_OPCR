@@ -35,7 +35,7 @@ class TwigRender
         $vendorTwigBridgeDirectory = dirname($appVariableReflection->getFileName());
 
         $this->loader = new FilesystemLoader([__DIR__ . './../../templates', $vendorTwigBridgeDirectory.'/Resources/views/Form']);
-        $this->twig = new Environment($this->loader, []);
+        $this->twig = new Environment($this->loader, ['strict_variables' => true]);
 
         $defaultFormTheme = 'form_div_layout.html.twig';
 

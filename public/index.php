@@ -24,12 +24,14 @@ $request = new HTTPRequest;
 
 $router = new Router($request);
 
+session_start();
+
 $router->get('/', 'App\Controller\HomeController\HomeController@index');
 $router->get('/register', 'App\Controller\SecurityController\SecurityController@register');
 $router->post('/register', 'App\Controller\SecurityController\SecurityController@register');
 $router->get('/login', 'App\Controller\SecurityController\SecurityController@login');
 $router->post('/login', 'App\Controller\SecurityController\SecurityController@login');
-$router->post('/logout', 'App\Controller\SecurityController\SecurityController@logout');
+$router->get('/logout', 'App\Controller\SecurityController\SecurityController@logout');
 $router->get('/post', 'App\Controller\PostController\PostController@index');
 $router->get('/post/:slug', 'App\Controller\PostController\PostController@show');
 $router->get('/add', 'App\Controller\PostController\PostController@add');

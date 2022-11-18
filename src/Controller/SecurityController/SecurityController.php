@@ -5,6 +5,7 @@ namespace App\Controller\SecurityController;
 use App\Entity\User;
 use App\Form\UserFormType;
 use App\Model\UserManager;
+use App\Session\Session;
 use App\Twig\TwigRender;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -61,16 +62,17 @@ class SecurityController extends TwigRender
             $isPasswordCorrect = password_verify($_POST['password'], $login['password']);
 
             if ($isPasswordCorrect) {
-                session_start();
+
+                $session = new Session();
+                $session->checkIsStarted();
+
                 $_SESSION['id'] = $login['id'];
                 $_SESSION['firstname'] = $login['firstname'];
                 $_SESSION['email'] = $_POST['email'];
 
                 header('Location: /');
-                // die('Vous êtes connecté !');
             } else {
                 header('Location: /login');
-                //die('Attention mauvais identifiant ou mot de passe !');
             }
         }
 
@@ -79,8 +81,11 @@ class SecurityController extends TwigRender
 
     public function logout()
     {
-        session_destroy();
+        $session = new Session();
 
-        return header('/login');
+        $session->checkIsStarted();
+        $session->destroySession();
+
+        return header('Location: /login');
     }
 }

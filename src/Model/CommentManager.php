@@ -15,7 +15,7 @@ class CommentManager extends ConnectDB
         $response = $db->prepare('SELECT * FROM comment WHERE post_id = ? AND is_valid = 1 ORDER BY created_at DESC');
         $response->execute(array($postId));
 
-        $result = $response->fetch();
+        $result = $response->fetchAll();
         
         return $result;
     }
