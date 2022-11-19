@@ -37,6 +37,14 @@ class ContactController extends TwigRender
             }
         }
 
-        $this->twig->display('contact/contact.html.twig');
+        $user = '';
+        
+        if (isset($_SESSION["firstname"])) {
+            $user = $_SESSION["firstname"];
+        }
+
+        $this->twig->display('contact/contact.html.twig', [
+            'user' => $user
+        ]);
     }
 }

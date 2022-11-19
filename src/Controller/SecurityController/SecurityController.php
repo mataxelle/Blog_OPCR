@@ -46,8 +46,15 @@ class SecurityController extends TwigRender
             return $response->send();
         }
 
+        $user = '';
+        
+        if (isset($_SESSION["firstname"])) {
+            $user = $_SESSION["firstname"];
+        }
+
         $this->twig->display('security/register.html.twig', [
             'form' => $form->createView(),
+            'user' => $user
         ]);
     }
 
@@ -76,7 +83,15 @@ class SecurityController extends TwigRender
             }
         }
 
-        $this->twig->display('security/login.html.twig');
+        $user = '';
+        
+        if (isset($_SESSION["firstname"])) {
+            $user = $_SESSION["firstname"];
+        }
+
+        $this->twig->display('security/login.html.twig', [
+            'user' => $user
+        ]);
     }
 
     public function logout()

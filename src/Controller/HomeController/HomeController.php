@@ -18,6 +18,16 @@ class HomeController extends TwigRender
     public function index()
     {
         $posts = $this->postManager->getAllPost();
-        $this->twig->display('home/home.html.twig',[ 'posts' => $posts]);
+
+        $user = '';
+        
+        if (isset($_SESSION["firstname"])) {
+            $user = $_SESSION["firstname"];
+        }
+
+        $this->twig->display('home/home.html.twig',[ 
+            'posts' => $posts,
+            'user' => $user
+        ]);
     }
 }

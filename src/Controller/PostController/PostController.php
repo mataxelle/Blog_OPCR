@@ -66,10 +66,17 @@ class PostController extends TwigRender
             return $response->send();
         }
 
+        $user = '';
+        
+        if (isset($_SESSION["firstname"])) {
+            $user = $_SESSION["firstname"];
+        }
+
         $this->twig->display('post/post_show.html.twig',[ 
             'post' => $post,
             'comments' => $comments,
-            'commentForm' => $commentForm->createView()
+            'commentForm' => $commentForm->createView(),
+            'user' => $user
         ]);
     }
 
@@ -111,8 +118,15 @@ class PostController extends TwigRender
             return $response->send();
         }
 
+        $user = '';
+        
+        if (isset($_SESSION["firstname"])) {
+            $user = $_SESSION["firstname"];
+        }
+
         $this->twig->display('post/post_add.html.twig', [
             'form' => $form->createView(),
+            'user' => $user
         ]);
     }
 
