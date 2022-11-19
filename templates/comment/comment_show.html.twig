@@ -1,18 +1,20 @@
-<div>
-	<div class="col">
-		<h3>Commentaires</h3>
-		{% if comments %}
-		<div class="card border-0">
-			{% for comment in comments %}
-				<div class="col">
-					<div class="card-body">
-						<p class="card-text">{{ comment.content }}</p>
+<div class="col-lg-8 col-md-10 mx-auto">
+	<h3 class="mb-5">Commentaires</h3>
+
+	{% if comments %}
+		{% for comment in comments %}
+			<div class="row mb-3">
+				<div class="col-4">
+					<p>{{ comment.user_id }}</p>
+				</div>
+				<div class="col-8">
+					<div>
+						<p>{{ comment.content }}</p>
 					</div>
 				</div>
-			{% endfor %}
-		</div>
-		{% else %}
+			</div>
+		{% endfor %}
+	{% else %}
 		<p>Pas de commentaires</p>
-		{% endif %}
-	</div>
+	{% endif %}
 </div>

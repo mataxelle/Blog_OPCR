@@ -1,8 +1,6 @@
-<div class="text-center">
-	MY COMMENT FORM
-
+<div class="mt-5">
 	<div>
-		{{ form_start(commentForm, {'attr': {'class': 'col-6 offset-md-3 mb-5'}}) }}
+		{{ form_start(commentForm, {'attr': {'class': 'col-lg-8 col-md-10 mx-auto mb-5'}}) }}
 		<div class="mb-3">
 			{{ form_label(commentForm.content, 'commentaire') }}
 			{{ form_widget(commentForm.content, {'attr': {'class': 'form-control'}}) }}
