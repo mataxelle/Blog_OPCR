@@ -47,4 +47,13 @@ class PostManager extends ConnectDB
 
         return $addPost;
     }
+
+    public function deletePost(string $slug)
+    {
+        $db = $this->db;
+
+        $delete = $db->prepare('DELETE FROM post WHERE slug = ?');
+        
+        $delete->execute([$slug]);
+    }
 }

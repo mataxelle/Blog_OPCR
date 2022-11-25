@@ -146,7 +146,11 @@ class PostController extends TwigRender
     {
     }
 
-    public function delete()
+    public function delete(string $slug)
     {
+
+        $this->postManager->deletePost($slug);
+
+        return header('Location: /admin');
     }
 }
