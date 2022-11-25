@@ -7,13 +7,13 @@ use DateTime;
 
 class ContactManager extends ConnectDB
 {
-    public function getAllPost()
+    public function getAllMessages()
     {
         $db = $this->db;
 
-        $response = $db->query('SELECT * FROM post ORDER BY created_at DESC');
+        $response = $db->query('SELECT * FROM contact ORDER BY created_at ASC');
 
-        return $response;
+        return $response->fetchAll();
     }
     
     public function contactForm()
@@ -32,5 +32,14 @@ class ContactManager extends ConnectDB
         ));
 
         return $addContact;
+    }
+
+    public function deleteMessage(int $id)
+    {
+        $db = $this->db;
+
+        $delete = $db->prepare('DELETE FROM contact WHERE id = ?');
+        
+        $delete->execute([$id]);
     }
 }

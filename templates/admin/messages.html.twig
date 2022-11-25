@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tableau de bord{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1 class="text-center mt-5 mb-5">liste des messages</h1>
+
+    <div class="row">
+        <div class="col">
+            <h5>Message(s)
+                <span>({{ messages|length }})</span>
+            </h5>
+            <table class="table table-striped">
+                <tr>
+                    <th>#</th>
+                    <th>Prénom</th>
+                    <th>Nom</th>
+                    <th>Email</th>
+                    <th>Date de réception</th>
+                    <th>Répondu le</th>
+                    <th>Actions</th>
+                </tr>
+                {% set i = 1 %}
+                {% for message in messages %}
+                    <tr class="hoverable">
+                        <td>{{ i }}</td>
+                        <td>{{ message.firstname }}</td>
+                        <td>{{ message.lastname }}</td>
+                        <td>{{ message.email }}</td>
+                        <td>{{ message.created_at|date('d/m/Y') }}</td>
+                        {% if message.is_answered == 1 %}
+                        <td>
+                        {{ message.answered_at|date('d/m/Y') }}
+                        </td>
+                        {% else %}
+                        <td>
+                            <span>Pas de réponse</span>
+                        </td>
+                        {% endif %}
+                        {% if message.is_answered == 0 %}
+                        <td>
+                            <a class="btn btn-success" href="/message/{{ message.id }}"><i class="fas fa-edit"></i></a>
+                            <a class="btn btn-danger" href="/delete/{{ message.id }}"><i class="fas fa-trash"></i></a>
+                        </td>
+                        {% else %}
+                        <td>
+                            <a class="btn btn-dark disabled" href=""><i class="fas fa-window-minimize"></i></i></a>
+                            <a class="btn btn-danger" href="/delete/{{ message.id }}"><i class="fas fa-trash"></i></a>
+                        </td>
+                        {% endif %}
+                    </tr>
+                {% set i = i+1 %}
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -17,7 +17,7 @@ class HomeController extends TwigRender
 
     public function index()
     {
-        $posts = $this->postManager->getAllPost();
+        $posts = $this->postManager->getAllValidedPost();
 
         $admin = '';
         $user = '';

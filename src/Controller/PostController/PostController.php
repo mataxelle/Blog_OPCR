@@ -26,7 +26,7 @@ class PostController extends TwigRender
     
     public function index()
     {
-        $posts = $this->postManager->getAllPost();
+        $posts = $this->postManager->getAllValidedPost();
         $this->twig->display('home/home.html.twig',[ 'posts' => $posts]);
     }
 

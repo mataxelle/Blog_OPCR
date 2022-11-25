@@ -1,81 +1,59 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Administration{% endblock %}
+{% block title %}Tableau de bord{% endblock %}
 
 {% block body %}
 <div class="container">
-    <h1>Administration</h1>
+    <h1 class="text-center mt-5 mb-5">Tableau de bord</h1>
 
     <div class="row">
-        <div class="col">
-            <h5>Annonces
-                <span>({{ posts|length }})</span>
-            </h5>
-            <table class="centered striped">
-                <tr>
-                    <th>#</th>
-                    <th>Titre</th>
-                    <th>Date de publication</th>
-                    <th>Date de modification</th>
-                    <th>Actions</th>
-                </tr>
-                {% set i = 1 %}
-                {% for post in posts %}
-                    <tr class="hoverable">
-                        <td>{{ i }}</td>
-                        <td><a href="/post/{{ post.slug }}" target="_blank">{{ post.title }}</a></td>
-                        <td>{{ post.created_at ? post.created_at|date('d/m/Y') : '-' }}</td>
-                        <td>{{ post.updated_at|date('d/m/Y') }}</td>
-                        <td>
-                            <a class="btn btn-success" href="/post/{{ post.slug }}"><i class="fas fa-edit"></i></a>
-                            <a class="btn btn-danger" href="/delete/{{ post.slug }}"><i class="fas fa-trash"></i></a>
-                        </td>
-                    </tr>
-                {% set i = i+1 %}
-                {% endfor %}
-            </table>
+        <div class="col-6">
+            <div class="card">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="mb-4">Il y a
+                        <span>{{ posts|length }}</span>
+                        articles
+                    </h5>
+                    <a class="btn btn-primary" href="/admin/posts">Voir les articles</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="card">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="mb-4">Il y a
+                        <span>{{ users|length }}</span>
+                        Utilisateurs
+                    </h5>
+                    <a class="btn btn-primary" href="/admin/users">Voir les utilisateurs</a>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col">
-            <h5>Utilisateurs
-                <span>({{ users|length }})</span>
-            </h5>
-            <table class="centered striped">
-                <tr>
-                    <th>#</th>
-                    <th>Nom</th>
-                    <th>Prénom</th>
-                    <th>Roles</th>
-                    <th>Email</th>
-                    <th>Inscrit le</th>
-                    <th>Actions</th>
-                </tr>
-                {% set i = 1 %}
-                {% for user in users %}
-                    <tr class="hoverable">
-                        <td>{{ i }}</td>
-                        <td><a href="/post/{{ user.id }}" target="_blank">{{ user.lastname }}</a></td>
-                        <td>{{ user.firstname }}</td>
-                        {% if user.is_admin == 1 %}
-                            <td>
-                                <span class="badge bg-info">admin</span>
-                            </td>
-                            {% else %}
-                            <td>
-                                <span class="badge bg-secondary"> no admin</span>
-                            </td>
-                        {% endif %}
-                        <td>{{ user.email }}</td>
-                        <td>{{ user.updated_at|date('d/m/Y') }}</td>
-                        <td>
-                            <a class="btn btn-success" href=""><i class="fas fa-edit"></i></a>
-                            <a class="btn btn-danger"  href=""><i class="fas fa-trash"></i></a>
-                        </td>
-                    </tr>
-                {% set i = i+1 %}
-                {% endfor %}
-            </table>
+
+    <div class="row mt-5">
+        <div class="col-6">
+            <div class="card">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="mb-4">Il y a
+                        <span>{{ messages|length }}</span>
+                        Messages
+                    </h5>
+                    <a class="btn btn-primary" href="/admin/messages">Voir les messages</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-6">
+             <div class="card">
+                <img src="..." class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="mb-4">Ajouter un article</h5>
+                    <a class="btn btn-primary" href="/add">Ajouter</a>
+                </div>
+            </div>
         </div>
     </div>
 </div>
