@@ -47,10 +47,11 @@ $router->post('/addComment', 'App\Controller\PostController\PostController@show'
 $router->get('/account', 'App\Controller\UserController\UserController@account');
 $router->get('/contact', 'App\Controller\ContactController\ContactController@contact');
 $router->post('/contact', 'App\Controller\ContactController\ContactController@contact');
+$router->get('/message/:id', 'App\Controller\ContactController\ContactController@message');
 $router->get('/admin', 'App\Controller\AdminController\AdminController@admin');
 $router->get('/admin/posts', 'App\Controller\AdminController\AdminController@posts');
 $router->get('/admin/users', 'App\Controller\AdminController\AdminController@users');
 $router->get('/admin/messages', 'App\Controller\AdminController\AdminController@messages');
-$router->get('/delete/:id', 'App\Controller\AdminController\AdminController@deleteMessage');
+$router->get('/delete/:id', 'App\Controller\AdminController\AdminController@delete');
 
 $router->run();

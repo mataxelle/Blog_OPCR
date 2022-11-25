@@ -108,7 +108,7 @@ class AdminController extends TwigRender
         ]);
     }
 
-    public function deleteMessage(int $id)
+    public function delete(int $id)
     {
 
         $this->contactManager->deleteMessage($id);

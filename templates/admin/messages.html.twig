@@ -40,11 +40,13 @@
                         {% endif %}
                         {% if message.is_answered == 0 %}
                         <td>
-                            <a class="btn btn-success" href="/message/{{ message.id }}"><i class="fas fa-edit"></i></a>
+                            <a class="btn btn-primary" href="/message/{{ message.id }}"><i class="far fa-file"></i></a>
+                            <a class="btn btn-success" href="/message/{{ message.id }}"><i class="far fa-envelope"></i></a>
                             <a class="btn btn-danger" href="/delete/{{ message.id }}"><i class="fas fa-trash"></i></a>
                         </td>
                         {% else %}
                         <td>
+                            <a class="btn btn-primary" href="/message/{{ message.id }}"><i class="far fa-file"></i></a> 
                             <a class="btn btn-dark disabled" href=""><i class="fas fa-window-minimize"></i></i></a>
                             <a class="btn btn-danger" href="/delete/{{ message.id }}"><i class="fas fa-trash"></i></a>
                         </td>

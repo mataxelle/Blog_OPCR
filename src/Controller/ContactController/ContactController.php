@@ -52,4 +52,23 @@ class ContactController extends TwigRender
             'admin' => $admin
         ]);
     }
+
+    public function message(int $id)
+    {
+        $message = $this->contactManager->getOneMessage($id);
+
+        if (isset($_SESSION["firstname"])) {
+            $user = $_SESSION["firstname"];
+        }
+
+        if (isset($_SESSION["is_admin"])) {
+            $admin = $_SESSION["is_admin"];
+        }
+
+        $this->twig->display('contact/message.html.twig', [
+            'message' => $message,
+            'user' => $user,
+            'admin' => $admin
+        ]);
+    }
 }

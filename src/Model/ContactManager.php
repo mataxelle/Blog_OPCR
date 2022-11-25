@@ -15,6 +15,17 @@ class ContactManager extends ConnectDB
 
         return $response->fetchAll();
     }
+
+    public function getOneMessage(int $id)
+    {
+        $db = $this->db;
+
+        $response = $db->prepare('SELECT * FROM contact WHERE id = ?');
+
+        $response->execute([$id]);
+
+        return $response->fetch();
+    }
     
     public function contactForm()
     {
