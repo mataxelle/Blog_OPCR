@@ -26,15 +26,9 @@ class AdminController extends TwigRender
     public function admin()
     {
 
-        $posts = $this->postManager->getAllPost(
-            [],
-            ['updated_at' => 'DESC']
-        );
+        $posts = $this->postManager->getAllPost();
 
-        $users = $this->userManager->getAllUsers(
-            [],
-            ['updated_at' => 'DESC']
-        );
+        $users = $this->userManager->getAllUsers();
 
         if (isset($_SESSION["is_admin"])) {
             $admin = $_SESSION["is_admin"];

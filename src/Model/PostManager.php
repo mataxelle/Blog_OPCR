@@ -14,7 +14,7 @@ class PostManager extends ConnectDB
 
         $response = $db->query('SELECT * FROM post WHERE is_published = 1 ORDER BY created_at DESC');
 
-        return $response;
+        return $response->fetchAll();
     }
 
     public function getOnePost(string $slug)
