@@ -12,9 +12,12 @@
 
 		<h2 class="text-center text-secondary mb-5">Lorem</h2>
 
-		<h4>
-			<a href="/add">Ajouter un article</a>
-		</h4>
+		
+		{% if admin == 1 %}
+			<h4>
+				<a href="/add">Ajouter un article</a>
+			</h4>
+		{% endif %}
 
 		<div class="row row-cols-1 row-cols-md-3 g-4 my-5">
 			{% for post in posts %}

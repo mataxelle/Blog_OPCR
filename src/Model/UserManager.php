@@ -53,16 +53,14 @@ class UserManager extends ConnectDB
     {
         $db = $this->db;
 
-        $login = $db->prepare('SELECT id, firstname, password FROM user WHERE email = ?');
+        $login = $db->prepare('SELECT * FROM user WHERE email = ?');
 
         $login->execute(array(
             $_POST['email'],
         ));
 
         $result = $login->fetch();
-
-        //
-
+        
         return $result;
     }
 }

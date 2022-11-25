@@ -19,7 +19,12 @@ class HomeController extends TwigRender
     {
         $posts = $this->postManager->getAllPost();
 
+        $admin = '';
         $user = '';
+        
+        if (isset($_SESSION["is_admin"])) {
+            $admin = $_SESSION["is_admin"];
+        }
         
         if (isset($_SESSION["firstname"])) {
             $user = $_SESSION["firstname"];
@@ -27,6 +32,7 @@ class HomeController extends TwigRender
 
         $this->twig->display('home/home.html.twig',[ 
             'posts' => $posts,
+            'admin' => $admin,
             'user' => $user
         ]);
     }

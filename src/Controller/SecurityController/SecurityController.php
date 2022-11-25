@@ -75,6 +75,9 @@ class SecurityController extends TwigRender
 
                 $_SESSION['id'] = $login['id'];
                 $_SESSION['firstname'] = $login['firstname'];
+                $_SESSION['lastname'] = $login['lastname'];
+                $_SESSION['is_admin'] = $login['is_admin'];
+                $_SESSION['updated_at'] = $login['updated_at'];
                 $_SESSION['email'] = $_POST['email'];
 
                 header('Location: /');
