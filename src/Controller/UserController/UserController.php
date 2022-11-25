@@ -21,13 +21,19 @@ class UserController extends TwigRender
     public function account()
     {
         $user = '';
+        $admin = '';
         
         if (isset($_SESSION["firstname"])) {
             $user = $_SESSION["firstname"];
         }
 
+        if (isset($_SESSION["is_admin"])) {
+            $admin = $_SESSION["is_admin"];
+        }
+
         $this->twig->display('user/account.html.twig', [ 
-            'user' => $user
+            'user' => $user,
+            'admin' => $admin
         ]);
     }
 }

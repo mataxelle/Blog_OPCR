@@ -43,8 +43,13 @@ class ContactController extends TwigRender
             $user = $_SESSION["firstname"];
         }
 
+        if (isset($_SESSION["is_admin"])) {
+            $admin = $_SESSION["is_admin"];
+        }
+
         $this->twig->display('contact/contact.html.twig', [
-            'user' => $user
+            'user' => $user,
+            'admin' => $admin
         ]);
     }
 }

@@ -25,6 +25,8 @@ $request = new HTTPRequest;
 $router = new Router($request);
 
 session_start();
+/*var_dump($_SESSION);
+die;*/
 
 $router->get('/', 'App\Controller\HomeController\HomeController@index');
 $router->get('/register', 'App\Controller\SecurityController\SecurityController@register');
@@ -44,5 +46,6 @@ $router->post('/addComment', 'App\Controller\PostController\PostController@show'
 $router->get('/account', 'App\Controller\UserController\UserController@account');
 $router->get('/contact', 'App\Controller\ContactController\ContactController@contact');
 $router->post('/contact', 'App\Controller\ContactController\ContactController@contact');
+$router->get('/admin', 'App\Controller\AdminController\AdminController@admin');
 
 $router->run();

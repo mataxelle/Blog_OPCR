@@ -67,16 +67,22 @@ class PostController extends TwigRender
         }
 
         $user = '';
+        $admin = '';
         
         if (isset($_SESSION["firstname"])) {
             $user = $_SESSION["firstname"];
+        }
+
+        if (isset($_SESSION["is_admin"])) {
+            $admin = $_SESSION["is_admin"];
         }
 
         $this->twig->display('post/post_show.html.twig',[ 
             'post' => $post,
             'comments' => $comments,
             'commentForm' => $commentForm->createView(),
-            'user' => $user
+            'user' => $user,
+            'admin' => $admin
         ]);
     }
 
@@ -118,15 +124,21 @@ class PostController extends TwigRender
             return $response->send();
         }
 
-        $user = '';
+        $user = "";
+        $admin = "";
         
         if (isset($_SESSION["firstname"])) {
             $user = $_SESSION["firstname"];
         }
 
+        if (isset($_SESSION["is_admin"])) {
+            $admin = $_SESSION["is_admin"];
+        }
+
         $this->twig->display('post/post_add.html.twig', [
             'form' => $form->createView(),
-            'user' => $user
+            'user' => $user,
+            'admin' => $admin
         ]);
     }
 
