@@ -40,7 +40,7 @@
                         <td>{{ user.updated_at|date('d/m/Y') }}</td>
                         <td>
                             <a class="btn btn-success" href=""><i class="fas fa-edit"></i></a>
-                            <a class="btn btn-danger"  href=""><i class="fas fa-trash"></i></a>
+                            <a class="btn btn-danger"  href="/delete_user/{{ user.id }}"><i class="fas fa-trash"></i></a>
                         </td>
                     </tr>
                 {% set i = i+1 %}

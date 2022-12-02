@@ -43,7 +43,7 @@ $router->get('/comment', 'App\Controller\CommentController\CommentController@pos
 $router->post('/addComment', 'App\Controller\PostController\PostController@show');
 $router->get('/account', 'App\Controller\UserController\UserController@account');
 $router->get('/account/:id', 'App\Controller\UserController\UserController@usersAccount');
-$router->get('/delete/:id', 'App\Controller\UserController\UserController@delete');
+$router->get('/delete_user/:id', 'App\Controller\UserController\UserController@delete');
 $router->get('/contact', 'App\Controller\ContactController\ContactController@contact');
 $router->post('/contact', 'App\Controller\ContactController\ContactController@contact');
 $router->get('/message/:id', 'App\Controller\ContactController\ContactController@message');
@@ -51,6 +51,6 @@ $router->get('/admin', 'App\Controller\AdminController\AdminController@admin');
 $router->get('/admin/posts', 'App\Controller\AdminController\AdminController@posts');
 $router->get('/admin/users', 'App\Controller\AdminController\AdminController@users');
 $router->get('/admin/messages', 'App\Controller\AdminController\AdminController@messages');
-$router->get('/delete/:id', 'App\Controller\ContactController\ContactController@delete');
+$router->get('/delete_message/:id', 'App\Controller\ContactController\ContactController@delete');
 
 $router->run();

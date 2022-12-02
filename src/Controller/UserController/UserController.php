@@ -72,9 +72,9 @@ class UserController extends TwigRender
         $this->userManager->deleteUser($id);
 
         if ($admin) {
-            return header('Location: /login');
-        } else if ($user) {
             return header('Location: /admin');
+        } else if ($user) {
+            return header('Location: /login');
         }
     }
 }
