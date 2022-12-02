@@ -107,12 +107,4 @@ class AdminController extends TwigRender
             'user' => $user
         ]);
     }
-
-    public function delete(int $id)
-    {
-
-        $this->contactManager->deleteMessage($id);
-
-        return header('Location: /admin');
-    }
 }

@@ -71,4 +71,12 @@ class ContactController extends TwigRender
             'admin' => $admin
         ]);
     }
+
+    public function delete(int $id)
+    {
+
+        $this->contactManager->deleteMessage($id);
+
+        return header('Location: /admin');
+    }
 }

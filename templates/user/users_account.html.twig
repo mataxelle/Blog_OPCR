@@ -7,9 +7,12 @@
 
 {% block body %}
 	<div>
-		<h2 class="text-center my-5">Mon compte {{ user }}</h2>
+		{% if admin %}
+		    Compte de {{ account.firstname }}
+	    
+		{% endif %}
 
-		<div class="row">
+        <div class="row">
         <div class="col-lg-5 col-md-10 mx-auto">
             <div class="card" style="width: 30rem;">
                 <img class="card-img-top" src="/assets/images/avatar-user1.png" alt"user-account-image">
@@ -25,7 +28,5 @@
             </div>
         </div>
         </div>
-
-		
 	</div>
 {% endblock %}

@@ -63,4 +63,13 @@ class UserManager extends ConnectDB
         
         return $result;
     }
+
+    public function deleteUser(int $id)
+    {
+        $db = $this->db;
+
+        $delete = $db->prepare('DELETE FROM user WHERE id = ?');
+        
+        $delete->execute([$id]);
+    }
 }
