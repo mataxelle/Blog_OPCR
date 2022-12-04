@@ -38,6 +38,8 @@ $router->get('/post', 'App\Controller\PostController\PostController@index');
 $router->get('/post/:slug', 'App\Controller\PostController\PostController@show');
 $router->get('/add', 'App\Controller\PostController\PostController@add');
 $router->post('/add', 'App\Controller\PostController\PostController@add');
+$router->get('/update/:id', 'App\Controller\PostController\PostController@update');
+$router->post('/update/:id', 'App\Controller\PostController\PostController@update');
 $router->get('/delete/:slug', 'App\Controller\PostController\PostController@delete');
 $router->get('/comment', 'App\Controller\CommentController\CommentController@postComment');
 $router->post('/addComment', 'App\Controller\PostController\PostController@show');

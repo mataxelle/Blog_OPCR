@@ -142,8 +142,71 @@ class PostController extends TwigRender
         ]);
     }
 
-    public function update()
+    public function update(int $id)
     {
+        //$post = ;
+        $post = $this->postManager->getPostId($id);
+      
+        $oldImage = $post->getImage();
+
+        $postId = $post->getId();
+
+        $form = $this->formFactory->createBuilder(PostFormType::class, $post, [
+            'action' => '/update/' . $postId,
+            'method' => 'POST',
+        ])->getForm();
+
+        $request = Request::createFromGlobals();        
+        
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            if (!$post->getUserId()) {
+                $post->setUserId(1);
+            }
+
+            if ($post->getImage() !== null && $post->getImage() !== $oldImage) {
+                $file = $form->get('image')->getData();
+                $fileName =  uniqid(). '.' .$file->guessExtension();
+
+                try {
+                    $file->move('./upload/', $fileName);
+                } catch (FileException $e) {
+                }
+
+                $post->setImage($fileName);
+            }else {
+                $post->setImage($oldImage);
+            };
+
+
+            $pm = new PostManager();
+            $pm->postUpdate($post);
+
+            $response = new RedirectResponse('/');
+            $response->prepare($request);
+        
+            return $response->send();
+        }
+
+        $user = "";
+        $admin = "";
+        
+        if (isset($_SESSION["firstname"])) {
+            $user = $_SESSION["firstname"];
+        }
+
+        if (isset($_SESSION["is_admin"])) {
+            $admin = $_SESSION["is_admin"];
+        }
+
+        $this->twig->display('post/update.html.twig', [
+            'form' => $form->createView(),
+            'post' => $post,
+            'user' => $user,
+            'admin' => $admin
+        ]);
     }
 
     public function delete(string $slug)
