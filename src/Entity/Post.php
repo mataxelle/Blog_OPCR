@@ -104,7 +104,7 @@ class Post
         return $this->image;
     }
 
-    public function setImage(string $image): self
+    public function setImage(string $image = null): self
     {
         $this->image = $image;
         return $this;

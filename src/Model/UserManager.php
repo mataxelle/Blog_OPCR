@@ -13,7 +13,7 @@ class UserManager extends ConnectDB
     {
         $db = $this->db;
 
-        $response = $db->query('SELECT * FROM user ORDER BY created_at DESC');
+        $response = $db->query('SELECT * FROM user ORDER BY createdAt DESC');
 
         return $response->fetchAll();  
     }

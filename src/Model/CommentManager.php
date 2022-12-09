@@ -12,7 +12,7 @@ class CommentManager extends ConnectDB
     {
         $db = $this->db;
 
-        $response = $db->prepare('SELECT * FROM comment WHERE post_id = ? AND is_valid = 1 ORDER BY created_at DESC');
+        $response = $db->prepare('SELECT * FROM comment WHERE postId = ? AND isValid = 1 ORDER BY createdAt DESC');
         $response->execute(array($postId));
 
         $result = $response->fetchAll();
@@ -24,7 +24,7 @@ class CommentManager extends ConnectDB
     {
         $db = $this->db;
 
-        $addComment = $db->prepare('INSERT INTO comment (post_id, user_id, content, is_valid, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?)');
+        $addComment = $db->prepare('INSERT INTO comment (postId, userId, content, isValid, createdAt, updatedAt) VALUES (?, ?, ?, ?, ?, ?)');
 
         $addComment->execute(array(
             $comment->getPostId(),

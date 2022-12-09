@@ -27,8 +27,8 @@
                     <tr class="hoverable">
                         <td>{{ i }}</td>
                         <td><a href="/post/{{ post.slug }}" target="_blank">{{ post.title }}</a></td>
-                        <td>{{ post.created_at ? post.created_at|date('d/m/Y') : '-' }}</td>
-                        <td>{{ post.updated_at|date('d/m/Y') }}</td>
+                        <td>{{ post.createdAt ? post.createdAt|date('d/m/Y') : '-' }}</td>
+                        <td>{{ post.updatedAt|date('d/m/Y') }}</td>
                         <td>
                             <a class="btn btn-success" href="/update/{{ post.id}}"><i class="fas fa-edit"></i></a>
                             <a class="btn btn-danger" href="/delete/{{ post.slug }}"><i class="fas fa-trash"></i></a>

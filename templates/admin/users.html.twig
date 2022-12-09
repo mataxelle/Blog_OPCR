@@ -30,7 +30,7 @@
                         <td>{{ i }}</td>
                         <td><a href="/account/{{ user.id }}" target="_blank">{{ user.lastname }}</a></td>
                         <td>{{ user.firstname }}</td>
-                        {% if user.is_admin == 1 %}
+                        {% if user.isAdmin == 1 %}
                             <td>
                                 <span class="badge bg-info">admin</span>
                             </td>
@@ -40,7 +40,7 @@
                             </td>
                         {% endif %}
                         <td>{{ user.email }}</td>
-                        <td>{{ user.updated_at|date('d/m/Y') }}</td>
+                        <td>{{ user.updatedAt|date('d/m/Y') }}</td>
                         <td>
                             <a class="btn btn-success" href=""><i class="fas fa-edit"></i></a>
                             <a class="btn btn-danger"  href="/delete_user/{{ user.id }}"><i class="fas fa-trash"></i></a>

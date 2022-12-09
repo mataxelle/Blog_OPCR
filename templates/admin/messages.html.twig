@@ -30,17 +30,17 @@
                         <td>{{ message.firstname }}</td>
                         <td>{{ message.lastname }}</td>
                         <td>{{ message.email }}</td>
-                        <td>{{ message.created_at|date('d/m/Y') }}</td>
-                        {% if message.is_answered == 1 %}
+                        <td>{{ message.createdAt|date('d/m/Y') }}</td>
+                        {% if message.isAnswered == 1 %}
                         <td>
-                        {{ message.answered_at|date('d/m/Y') }}
+                        {{ message.answeredAt|date('d/m/Y') }}
                         </td>
                         {% else %}
                         <td>
                             <span>Pas de réponse</span>
                         </td>
                         {% endif %}
-                        {% if message.is_answered == 0 %}
+                        {% if message.isAnswered == 0 %}
                         <td>
                             <a class="btn btn-primary" href="/message/{{ message.id }}"><i class="far fa-file"></i></a>
                             <a class="btn btn-success" href="/message/{{ message.id }}"><i class="far fa-envelope"></i></a>

@@ -16,7 +16,7 @@
                 <div class="card-content">
                     <h3 class="card-title">{{ account.firstname }} {{ account.lastname }}</h3><br>
                     <p class="fw-semibold">Email : {{ account.email }}</p><br>
-                    <p class="fw-semibold">Date d'inscription : {{ account.created_at|date('d/m/Y') }}</p><br>
+                    <p class="fw-semibold">Date d'inscription : {{ account.createdAt|date('d/m/Y') }}</p><br>
                     <div class="card-action">
                         <a class="btn btn-success" href="/upadate/{{ account.id }}">Modifier</a>
                         <a class="btn btn-danger" href="/delete/{{ account.id }}}">Supprimer</a>

@@ -11,7 +11,7 @@ class ContactManager extends ConnectDB
     {
         $db = $this->db;
 
-        $response = $db->query('SELECT * FROM contact ORDER BY created_at ASC');
+        $response = $db->query('SELECT * FROM contact ORDER BY createdAt ASC');
 
         return $response->fetchAll();
     }
@@ -31,7 +31,7 @@ class ContactManager extends ConnectDB
     {
         $db = $this->db;
 
-        $addContact = $db->prepare('INSERT INTO contact (firstname, lastname, email, label, message, created_at ) VALUES (?, ?, ?, ?, ?, ?)');
+        $addContact = $db->prepare('INSERT INTO contact (firstname, lastname, email, label, message, createdAt ) VALUES (?, ?, ?, ?, ?, ?)');
 
         $addContact->execute(array(
             $_POST['firstname'],

@@ -13,7 +13,7 @@ class PostManager extends ConnectDB
     {
         $db = $this->db;
 
-        $response = $db->query('SELECT * FROM post ORDER BY created_at DESC');
+        $response = $db->query('SELECT * FROM post ORDER BY createdAt DESC');
 
         return $response->fetchAll();
     }
