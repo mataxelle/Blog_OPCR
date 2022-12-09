@@ -22,7 +22,7 @@ class PostManager extends ConnectDB
     {
         $db = $this->db;
 
-        $response = $db->query('SELECT * FROM post WHERE is_published = 1 ORDER BY created_at DESC');
+        $response = $db->query('SELECT * FROM post WHERE isPublished = 1 ORDER BY createdAt DESC');
 
         return $response->fetchAll();
     }
@@ -55,7 +55,7 @@ class PostManager extends ConnectDB
     {
         $db = $this->db;
 
-        $addPost = $db->prepare('INSERT INTO post (user_id, title, slug, image, content, is_published, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)');
+        $addPost = $db->prepare('INSERT INTO post (userId, title, slug, image, content, isPublished, createdAt, updatedAt) VALUES (?, ?, ?, ?, ?, ?, ?, ?)');
 
         $addPost->execute(array(
             $post->getUserId(),
@@ -75,7 +75,7 @@ class PostManager extends ConnectDB
     {
         $db = $this->db;
 
-        $upPost = $db->prepare('UPDATE post SET user_id = ?, title = ?, slug = ?, image = ?, content = ?, is_published = ?, updated_at = ? WHERE id = ?');
+        $upPost = $db->prepare('UPDATE post SET userId = ?, title = ?, slug = ?, image = ?, content = ?, isPublished = ?, updatedt = ? WHERE id = ?');
 
         $upPost->bindValue(1, $post->getUserId(), PDO::PARAM_INT);
         $upPost->bindValue(2, $post->getTitle(), PDO::PARAM_STR);

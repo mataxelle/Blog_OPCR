@@ -21,9 +21,14 @@ class HomeController extends TwigRender
 
         $admin = '';
         $user = '';
+        $id = '';
         
-        if (isset($_SESSION["is_admin"])) {
-            $admin = $_SESSION["is_admin"];
+        if (isset($_SESSION["isAdmin"])) {
+            $admin = $_SESSION["isAdmin"];
+        }
+
+        if (isset($_SESSION["id"])) {
+            $id = $_SESSION["id"];
         }
         
         if (isset($_SESSION["firstname"])) {
@@ -33,7 +38,8 @@ class HomeController extends TwigRender
         $this->twig->display('home/home.html.twig',[ 
             'posts' => $posts,
             'admin' => $admin,
-            'user' => $user
+            'user' => $user,
+            'id' => $id
         ]);
     }
 }

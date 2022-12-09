@@ -5,6 +5,7 @@ namespace App\Model;
 use App\BaseD\ConnectDB;
 use App\Entity\User;
 use DateTime;
+use PDO;
 
 class UserManager extends ConnectDB
 {
@@ -23,16 +24,18 @@ class UserManager extends ConnectDB
 
         $response = $db->prepare('SELECT * FROM user WHERE id = ?');
 
-        $response->execute([$id]);
+        $response->bindValue(1, $id, PDO::PARAM_INT);
 
-        return $response->fetch();  
+        $response->execute();
+
+        return new User($response->fetch());  
     }
 
     public function registerForm(User $user)
     {
         $db = $this->db;
 
-        $createUser = $db->prepare('INSERT INTO user (firstname, lastname, is_admin, email, password, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?)');
+        $createUser = $db->prepare('INSERT INTO user (firstname, lastname, isAdmin, email, password, createdAt, updatedAt) VALUES (?, ?, ?, ?, ?, ?, ?)');
 
         $pass_hache = password_hash($user->getPassword(), PASSWORD_DEFAULT);
 
@@ -49,19 +52,17 @@ class UserManager extends ConnectDB
         return $createUser;
     }
 
-    public function loginForm()
+    public function loginForm(string $email)
     {
         $db = $this->db;
 
         $login = $db->prepare('SELECT * FROM user WHERE email = ?');
 
-        $login->execute(array(
-            $_POST['email'],
-        ));
+        $login->bindValue(1, $email, PDO::PARAM_STR);
 
-        $result = $login->fetch();
+        $login->execute();
         
-        return $result;
+        return new User($login->fetch());
     }
 
     public function deleteUser(int $id)

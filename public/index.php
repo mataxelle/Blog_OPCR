@@ -43,7 +43,7 @@ $router->post('/update/:id', 'App\Controller\PostController\PostController@updat
 $router->get('/delete/:slug', 'App\Controller\PostController\PostController@delete');
 $router->get('/comment', 'App\Controller\CommentController\CommentController@postComment');
 $router->post('/addComment', 'App\Controller\PostController\PostController@show');
-$router->get('/account', 'App\Controller\UserController\UserController@account');
+$router->get('/account/:id', 'App\Controller\UserController\UserController@account');
 $router->get('/account/:id', 'App\Controller\UserController\UserController@usersAccount');
 $router->get('/delete_user/:id', 'App\Controller\UserController\UserController@delete');
 $router->get('/contact', 'App\Controller\ContactController\ContactController@contact');

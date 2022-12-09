@@ -44,8 +44,12 @@ class CommentController extends TwigRender
 
         if ($commentForm->isSubmitted() && $commentForm->isValid()) {
 
+            if (isset($_SESSION["id"])) {
+                $id = $_SESSION["id"];
+            }
+
             $comment->setPostId(1);
-            $comment->setUserId(1);
+            $comment->setUserId($id);
             $comment->setIsValid(0);
             //var_dump($comment);
             //die;

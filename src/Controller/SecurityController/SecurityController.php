@@ -53,8 +53,8 @@ class SecurityController extends TwigRender
             $user = $_SESSION["firstname"];
         }
 
-        if (isset($_SESSION["is_admin"])) {
-            $admin = $_SESSION["is_admin"];
+        if (isset($_SESSION["isAdmin"])) {
+            $admin = $_SESSION["isAdmin"];
         }
 
         $this->twig->display('security/register.html.twig', [
@@ -70,21 +70,23 @@ class SecurityController extends TwigRender
             $data['email'] = $_POST['email'];
             $data['password'] = $_POST['password'];
 
-            $login = $this->userManager->loginForm($data);
+            $email = $data['email'];
 
-            $isPasswordCorrect = password_verify($_POST['password'], $login['password']);
+            $login = $this->userManager->loginForm($email);
+
+            $isPasswordCorrect = password_verify($_POST['password'], $login->getPassword());
 
             if ($isPasswordCorrect) {
 
                 $session = new Session();
                 $session->checkIsStarted();
 
-                $_SESSION['id'] = $login['id'];
-                $_SESSION['firstname'] = $login['firstname'];
-                $_SESSION['lastname'] = $login['lastname'];
-                $_SESSION['is_admin'] = $login['is_admin'];
-                $_SESSION['updated_at'] = $login['updated_at'];
-                $_SESSION['email'] = $_POST['email'];
+                $_SESSION['id'] = $login->getId();
+                $_SESSION['firstname'] = $login->getFirstname();
+                $_SESSION['lastname'] = $login->getLastname();
+                $_SESSION['isAdmin'] = $login->getIsAdmin();
+                $_SESSION['updatedAt'] = $login->getUpdatedAt();
+                $_SESSION['email'] = $login->getEmail();
 
                 header('Location: /');
             } else {
@@ -93,18 +95,24 @@ class SecurityController extends TwigRender
         }
 
         $user = '';
+        $id = '';
         $admin = '';
         
         if (isset($_SESSION["firstname"])) {
             $user = $_SESSION["firstname"];
         }
 
-        if (isset($_SESSION["is_admin"])) {
-            $admin = $_SESSION["is_admin"];
+        if (isset($_SESSION["id"])) {
+            $id = $_SESSION["id"];
+        }
+
+        if (isset($_SESSION["isAdmin"])) {
+            $admin = $_SESSION["isAdmin"];
         }
 
         $this->twig->display('security/login.html.twig', [
             'user' => $user,
+            'id' => $id,
             'admin' => $admin
         ]);
     }

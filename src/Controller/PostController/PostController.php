@@ -68,13 +68,18 @@ class PostController extends TwigRender
 
         $user = '';
         $admin = '';
-        
+        $id = '';
+
         if (isset($_SESSION["firstname"])) {
             $user = $_SESSION["firstname"];
         }
 
-        if (isset($_SESSION["is_admin"])) {
-            $admin = $_SESSION["is_admin"];
+        if (isset($_SESSION["isAdmin"])) {
+            $admin = $_SESSION["isAdmin"];
+        }
+
+        if (isset($_SESSION["id"])) {
+            $id = $_SESSION["id"];
         }
 
         $this->twig->display('post/post_show.html.twig',[ 
@@ -82,7 +87,8 @@ class PostController extends TwigRender
             'comments' => $comments,
             'commentForm' => $commentForm->createView(),
             'user' => $user,
-            'admin' => $admin
+            'admin' => $admin,
+            'id' => $id
         ]);
     }
 
@@ -126,19 +132,25 @@ class PostController extends TwigRender
 
         $user = "";
         $admin = "";
-        
+        $id = '';
+
         if (isset($_SESSION["firstname"])) {
             $user = $_SESSION["firstname"];
         }
 
-        if (isset($_SESSION["is_admin"])) {
-            $admin = $_SESSION["is_admin"];
+        if (isset($_SESSION["isAdmin"])) {
+            $admin = $_SESSION["isAdmin"];
+        }
+
+        if (isset($_SESSION["id"])) {
+            $id = $_SESSION["id"];
         }
 
         $this->twig->display('post/post_add.html.twig', [
             'form' => $form->createView(),
             'user' => $user,
-            'admin' => $admin
+            'admin' => $admin,
+            'id' => $id
         ]);
     }
 
@@ -192,20 +204,26 @@ class PostController extends TwigRender
 
         $user = "";
         $admin = "";
+        $id = '';
         
         if (isset($_SESSION["firstname"])) {
             $user = $_SESSION["firstname"];
         }
 
-        if (isset($_SESSION["is_admin"])) {
-            $admin = $_SESSION["is_admin"];
+        if (isset($_SESSION["isAdmin"])) {
+            $admin = $_SESSION["isAdmin"];
+        }
+
+        if (isset($_SESSION["id"])) {
+            $id = $_SESSION["id"];
         }
 
         $this->twig->display('post/update.html.twig', [
             'form' => $form->createView(),
             'post' => $post,
             'user' => $user,
-            'admin' => $admin
+            'admin' => $admin,
+            'id' => $id
         ]);
     }
 

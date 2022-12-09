@@ -34,12 +34,16 @@ class AdminController extends TwigRender
 
         $messages = $this->contactManager->getAllMessages();
 
-        if (isset($_SESSION["is_admin"])) {
-            $admin = $_SESSION["is_admin"];
+        if (isset($_SESSION["isAdmin"])) {
+            $admin = $_SESSION["isAdmin"];
         }
 
         if (isset($_SESSION["firstname"])) {
             $user = $_SESSION["firstname"];
+        }
+
+        if (isset($_SESSION["id"])) {
+            $id = $_SESSION["id"];
         }
 
         $this->twig->display('admin/index.html.twig', [
@@ -47,7 +51,8 @@ class AdminController extends TwigRender
             'users' => $users,
             'messages' => $messages,
             'admin' => $admin,
-            'user' => $user
+            'user' => $user,
+            'id' => $id
         ]);
     }
 
@@ -55,18 +60,23 @@ class AdminController extends TwigRender
     {
         $posts = $this->postManager->getAllPost();
 
-        if (isset($_SESSION["is_admin"])) {
-            $admin = $_SESSION["is_admin"];
+        if (isset($_SESSION["isAdmin"])) {
+            $admin = $_SESSION["isAdmin"];
         }
 
         if (isset($_SESSION["firstname"])) {
             $user = $_SESSION["firstname"];
         }
 
+        if (isset($_SESSION["id"])) {
+            $id = $_SESSION["id"];
+        }
+
         $this->twig->display('admin/posts.html.twig', [
             'posts' => $posts,
             'admin' => $admin,
-            'user' => $user
+            'user' => $user,
+            'id' => $id
         ]);
     }
 
@@ -74,18 +84,23 @@ class AdminController extends TwigRender
     {
         $users = $this->userManager->getAllUsers();
 
-        if (isset($_SESSION["is_admin"])) {
-            $admin = $_SESSION["is_admin"];
+        if (isset($_SESSION["isAdmin"])) {
+            $admin = $_SESSION["isAdmin"];
         }
 
         if (isset($_SESSION["firstname"])) {
             $user = $_SESSION["firstname"];
         }
 
+        if (isset($_SESSION["id"])) {
+            $id = $_SESSION["id"];
+        }
+
         $this->twig->display('admin/users.html.twig', [
             'users' => $users,
             'admin' => $admin,
-            'user' => $user
+            'user' => $user,
+            'id' => $id
         ]);
     }
 
@@ -93,18 +108,23 @@ class AdminController extends TwigRender
     {
         $messages = $this->contactManager->getAllMessages();
 
-        if (isset($_SESSION["is_admin"])) {
-            $admin = $_SESSION["is_admin"];
+        if (isset($_SESSION["isAdmin"])) {
+            $admin = $_SESSION["isAdmin"];
         }
 
         if (isset($_SESSION["firstname"])) {
             $user = $_SESSION["firstname"];
         }
 
+        if (isset($_SESSION["id"])) {
+            $id = $_SESSION["id"];
+        }
+
         $this->twig->display('admin/messages.html.twig', [
             'messages' => $messages,
             'admin' => $admin,
-            'user' => $user
+            'user' => $user,
+            'id' => $id,
         ]);
     }
 }

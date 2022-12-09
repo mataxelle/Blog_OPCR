@@ -18,22 +18,31 @@ class UserController extends TwigRender
         $this->userManager = new UserManager();
     }
     
-    public function account()
+    public function account(int $id)
     {
+        $account = $this->userManager->getUser($id);
+        
         $user = '';
         $admin = '';
+        $id = '';
         
         if (isset($_SESSION["firstname"])) {
             $user = $_SESSION["firstname"];
         }
 
-        if (isset($_SESSION["is_admin"])) {
-            $admin = $_SESSION["is_admin"];
+        if (isset($_SESSION["isAdmin"])) {
+            $admin = $_SESSION["isAdmin"];
+        }
+
+        if (isset($_SESSION["id"])) {
+            $id = $_SESSION["id"];
         }
 
         $this->twig->display('user/account.html.twig', [ 
+            'account' => $account,
             'user' => $user,
-            'admin' => $admin
+            'admin' => $admin,
+            'id' => $id
         ]);
     }
 
@@ -41,18 +50,23 @@ class UserController extends TwigRender
     {
         $account = $this->userManager->getUser($id);
 
-        if (isset($_SESSION["is_admin"])) {
-            $admin = $_SESSION["is_admin"];
+        if (isset($_SESSION["isAdmin"])) {
+            $admin = $_SESSION["isAdmin"];
         }
 
         if (isset($_SESSION["firstname"])) {
             $user = $_SESSION["firstname"];
         }
 
+        if (isset($_SESSION["id"])) {
+            $id = $_SESSION["id"];
+        }
+
         $this->twig->display('user/users_account.html.twig', [
             'account' => $account,
             'admin' => $admin,
-            'user' => $user
+            'user' => $user,
+            'id' => $id
         ]);
     }
 
@@ -60,13 +74,18 @@ class UserController extends TwigRender
     {
         $user = '';
         $admin = '';
+        $id = '';
         
         if (isset($_SESSION["firstname"])) {
             $user = $_SESSION["firstname"];
         }
 
-        if (isset($_SESSION["is_admin"])) {
-            $admin = $_SESSION["is_admin"];
+        if (isset($_SESSION["isAdmin"])) {
+            $admin = $_SESSION["isAdmin"];
+        }
+
+        if (isset($_SESSION["id"])) {
+            $id = $_SESSION["id"];
         }
 
         $this->userManager->deleteUser($id);
