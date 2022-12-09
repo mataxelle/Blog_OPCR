@@ -37,11 +37,37 @@ class User
 
     private $updatedAt;
 
+    public function __construct(array $data = [])
+    {
+        $this->hydrate($data);
+    }
 
+    public function hydrate(array $data)
+    {
+        // Boucle sur tableau de données
+        foreach ($data as $key => $value) {
+            // Récupération du setter corespondant
+            $method = 'set' . ucfirst($key);
+            
+            if (method_exists($this, $method)) {
+                $this->$method($value);
+            }
+        }
+    }
 
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function setId($id)
+    {
+        if (is_string($id) && intval($id) > 0) {
+            $this->id = intval($id);
+        }
+        if (is_int($id) && $id > 0) {
+            $this->id = $id;
+        }
     }
 
     public function getFirstname(): ?string

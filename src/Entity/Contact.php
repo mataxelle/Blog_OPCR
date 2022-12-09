@@ -12,34 +12,62 @@ class Contact
      * @Assert\NotBlank(message="Veuillez saisir votre prénom")
      * @Assert\Length(min=2)
      */
-    public $firstname;
+    private $firstname;
 
     /**
      * @Assert\NotBlank(message="Veuillez saisir votre prénom")
      * @Assert\Length(min=2)
      */
-    public $lastname;
+    private $lastname;
 
     /**
      * @Assert\NotBlank(message="Veuillez saisir votre prénom")
      */
-    public $email;
+    private $email;
 
     /**
      * @Assert\NotBlank(message="Veuillez saisir votre prénom")
      */
-    public $label;
+    private $label;
 
     /**
      * @Assert\NotBlank(message="Veuillez saisir votre prénom")
      */
-    public $message;
+    private $message;
     
-    public $createdAt;
+    private $createdAt;
+
+    public function __construct(array $data = [])
+    {
+        $this->hydrate($data);
+    }
+
+    public function hydrate(array $data)
+    {
+        // Boucle sur tableau de données
+        foreach ($data as $key => $value) {
+            // Récupération du setter corespondant
+            $method = 'set' . ucfirst($key);
+            
+            if (method_exists($this, $method)) {
+                $this->$method($value);
+            }
+        }
+    }
 
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function setId($id)
+    {
+        if (is_string($id) && intval($id) > 0) {
+            $this->id = intval($id);
+        }
+        if (is_int($id) && $id > 0) {
+            $this->id = $id;
+        }
     }
 
     public function getFirstname(): ?string
