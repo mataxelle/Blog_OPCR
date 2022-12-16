@@ -45,13 +45,34 @@ class User
     public function hydrate(array $data)
     {
         // Boucle sur tableau de données
-        foreach ($data as $key => $value) {
+        /*foreach ($data as $key => $value) {
             // Récupération du setter corespondant
             $method = 'set' . ucfirst($key);
             
             if (method_exists($this, $method)) {
                 $this->$method($value);
             }
+        }*/
+        foreach ($data as $key => $value) {
+            switch ($key)
+                {
+                    case 'id':
+                    case 'isAdmin':
+                        $this->$key = (int) $value;
+                        break;
+
+                    case 'firstname':
+                    case 'lastname':
+                    case 'email':
+                    case 'password':
+                        $this->$key = (string) $value;
+                        break;
+                     
+                    case 'createdAt':
+                    case 'updtedAt':    
+                        $this->$key = new \DateTime($value);
+                        break;
+                }
         }
     }
 

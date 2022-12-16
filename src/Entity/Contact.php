@@ -44,14 +44,25 @@ class Contact
 
     public function hydrate(array $data)
     {
-        // Boucle sur tableau de données
         foreach ($data as $key => $value) {
-            // Récupération du setter corespondant
-            $method = 'set' . ucfirst($key);
-            
-            if (method_exists($this, $method)) {
-                $this->$method($value);
-            }
+            switch ($key)
+                {
+                    case 'id':
+                        $this->$key = (int) $value;
+                        break;
+
+                    case 'firstname':
+                    case 'lastname':
+                    case 'email':
+                    case 'label':
+                    case 'message':
+                        $this->$key = (string) $value;
+                        break;
+                     
+                    case 'createdAt':    
+                        $this->$key = new \DateTime($value);
+                        break;
+                }
         }
     }
 

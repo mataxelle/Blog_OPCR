@@ -42,12 +42,26 @@ class Post
     {
         // Boucle sur tableau de données
         foreach ($data as $key => $value) {
-            // Récupération du setter corespondant
-            $method = 'set' . ucfirst($key);
-            
-            if (method_exists($this, $method)) {
-                $this->$method($value);
-            }
+            switch ($key)
+                {
+                    case 'id':
+                    case 'userId':
+                    case 'isPublished':    
+                        $this->$key = (int) $value;
+                        break;
+
+                    case 'title':
+                    case 'slug':
+                    case 'image':
+                    case 'content':
+                        $this->$key = (string) $value;
+                        break;
+                     
+                    case 'createdAt':
+                    case 'updtedAt':    
+                        $this->$key = new \DateTime($value);
+                        break;
+                }
         }
     }
 

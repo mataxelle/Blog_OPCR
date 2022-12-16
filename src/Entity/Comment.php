@@ -30,14 +30,25 @@ class Comment
 
     public function hydrate(array $data)
     {
-        // Boucle sur tableau de données
         foreach ($data as $key => $value) {
-            // Récupération du setter corespondant
-            $method = 'set' . ucfirst($key);
-            
-            if (method_exists($this, $method)) {
-                $this->$method($value);
-            }
+            switch ($key)
+                {
+                    case 'id':
+                    case 'PostId':
+                    case 'userId':
+                    case 'isValid':
+                        $this->$key = (int) $value;
+                        break;
+
+                    case 'content':
+                        $this->$key = (string) $value;
+                        break;
+                     
+                    case 'createdAt':
+                    case 'updtedAt':    
+                        $this->$key = new \DateTime($value);
+                        break;
+                }
         }
     }
 
