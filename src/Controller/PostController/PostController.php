@@ -34,7 +34,7 @@ class PostController extends TwigRender
     {
         $post = $this->postManager->getOnePost($slug);
 
-        $comments = $this->commentManager->getPostComment($post['id']);
+        $comments = $this->commentManager->getPostComment($post->getId());
 
         /*var_dump($comments);
         die;*/

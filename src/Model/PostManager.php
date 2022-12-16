@@ -46,9 +46,11 @@ class PostManager extends ConnectDB
 
         $response = $db->prepare('SELECT * FROM post WHERE slug = ?');
 
-        $response->execute([$slug]);
+        $response->bindValue(1, $slug, PDO::PARAM_STR);
 
-        return $response->fetch();  
+        $response->execute();
+
+        return new Post($response->fetch());  
     }
 
     public function postForm(Post $post)
@@ -75,7 +77,7 @@ class PostManager extends ConnectDB
     {
         $db = $this->db;
 
-        $upPost = $db->prepare('UPDATE post SET userId = ?, title = ?, slug = ?, image = ?, content = ?, isPublished = ?, updatedt = ? WHERE id = ?');
+        $upPost = $db->prepare('UPDATE post SET userId = ?, title = ?, slug = ?, image = ?, content = ?, isPublished = ?, updatedAt = ? WHERE id = ?');
 
         $upPost->bindValue(1, $post->getUserId(), PDO::PARAM_INT);
         $upPost->bindValue(2, $post->getTitle(), PDO::PARAM_STR);

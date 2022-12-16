@@ -3,7 +3,9 @@
 namespace App\Model;
 
 use App\BaseD\ConnectDB;
+use App\Entity\Contact;
 use DateTime;
+use PDO;
 
 class ContactManager extends ConnectDB
 {
@@ -22,9 +24,11 @@ class ContactManager extends ConnectDB
 
         $response = $db->prepare('SELECT * FROM contact WHERE id = ?');
 
+        $response->bindValue(1, $id, PDO::PARAM_INT);
+
         $response->execute([$id]);
 
-        return $response->fetch();
+        return new Contact($response->fetch());
     }
     
     public function contactForm()
