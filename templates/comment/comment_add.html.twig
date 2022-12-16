@@ -1,6 +1,20 @@
-<div class="mt-5">
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	{{ parent() }}
+	| Ajouter un article
+{% endblock %}
+
+{% block body %}
 	<div>
-		{{ form_start(commentForm, {'attr': {'class': 'col-lg-8 col-md-10 mx-auto mb-5'}}) }}
+		<h2 class="text-center text-secondary mb-5">Ajouter un commentaire</h2>
+
+		<h5 class="text-center text-secondary mb-5">
+			<a href="/">Accueil</a>
+		</h5>
+
+		<div class="text-center">
+			{{ form_start(commentForm, {'attr': {'class': 'col-lg-8 col-md-10 mx-auto mb-5'}}) }}
 		<div class="mb-3">
 			{{ form_label(commentForm.content, 'commentaire') }}
 			{{ form_widget(commentForm.content, {'attr': {'class': 'form-control'}}) }}
@@ -13,5 +27,6 @@
 			<input type="submit" name="" class="btn btn-primary" value="Commenter">
 		</div>
 		{{ form_end(commentForm) }}
+		</div>
 	</div>
-</div>
+{% endblock %}

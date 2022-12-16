@@ -2,6 +2,7 @@
 
 namespace App\Controller\CommentController;
 
+use App\Auth\Auth;
 use App\Entity\Comment;
 use App\Form\CommentFormType;
 use App\Twig\TwigRender;
@@ -11,11 +12,13 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class CommentController extends TwigRender
 {
+    private $auth;
     private $commentManager;
 
     public function __construct()
     {
         parent::__construct();
+        $this->auth = new Auth();
         $this->commentManager = new CommentManager();
     }
 
@@ -29,12 +32,16 @@ class CommentController extends TwigRender
         ]);
     }
 
-    public function add()
+    public function add(int $postId)
     {
+        $user = $this->auth->getCurrentUser();
+        $author = $user->getId();
+        $post = $this->postManager->getPostId($postId);
+
         $comment = new Comment();
 
         $commentForm = $this->formFactory->createBuilder(CommentFormType::class, $comment, [
-            'action' => '/addComment',
+            'action' => '/post/' . $postId . '/addComment',
             'method' => 'POST',
         ])->getForm();
 
@@ -48,11 +55,12 @@ class CommentController extends TwigRender
                 $id = $_SESSION["id"];
             }
 
-            $comment->setPostId(1);
-            $comment->setUserId($id);
+            $comment->setPostId($postId);
+            $comment->setUserId($author);
             $comment->setIsValid(0);
-            //var_dump($comment);
-            //die;
+            
+            /*var_dump($comment);
+            die;*/
             
             $cm = new CommentManager();
             $cm->commentForm($comment);
@@ -63,8 +71,27 @@ class CommentController extends TwigRender
             return $response->send();
         }
 
+        $user = '';
+        $admin = '';
+        $id = '';
+
+        if (isset($_SESSION["firstname"])) {
+            $user = $_SESSION["firstname"];
+        }
+
+        if (isset($_SESSION["isAdmin"])) {
+            $admin = $_SESSION["isAdmin"];
+        }
+
+        if (isset($_SESSION["id"])) {
+            $id = $_SESSION["id"];
+        }
+
         $this->twig->display('comment/comment_add.html.twig', [
             'commentForm' => $commentForm->createView(),
+            'user' => $user,
+            'admin' => $admin,
+            'id' => $id
         ]);
     }
 }

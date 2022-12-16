@@ -2,6 +2,7 @@
 
 namespace App\Controller\PostController;
 
+use App\Auth\Auth;
 use App\Entity\Post;
 use App\Entity\Comment;
 use App\Form\PostFormType;
@@ -15,11 +16,13 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class PostController extends TwigRender
 {
+    private $auth;
     private $postManager;
 
     public function __construct()
     {
         parent::__construct();
+        $this->auth = new Auth();
         $this->postManager = new PostManager();
         $this->commentManager = new CommentManager();
     }
@@ -38,33 +41,6 @@ class PostController extends TwigRender
 
         /*var_dump($comments);
         die;*/
-
-        $comment = new Comment();
-
-        $commentForm = $this->formFactory->createBuilder(CommentFormType::class, $comment, [
-            'action' => '/addComment',
-            'method' => 'POST',
-        ])->getForm();
-
-        $request = Request::createFromGlobals();        
-        
-        $commentForm->handleRequest($request);
-
-        if ($commentForm->isSubmitted() && $commentForm->isValid()) {
-
-            $comment->setPostId($post->getId());
-            $comment->setUserId(1);
-            $comment->setIsValid(0);
-            
-            
-            $cm = new CommentManager();
-            $cm->commentForm($comment);
-
-            $response = new RedirectResponse('/');
-            $response->prepare($request);
-        
-            return $response->send();
-        }
 
         $user = '';
         $admin = '';
@@ -85,7 +61,6 @@ class PostController extends TwigRender
         $this->twig->display('post/post_show.html.twig',[ 
             'post' => $post,
             'comments' => $comments,
-            'commentForm' => $commentForm->createView(),
             'user' => $user,
             'admin' => $admin,
             'id' => $id
