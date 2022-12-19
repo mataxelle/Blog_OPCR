@@ -7,6 +7,7 @@ use App\Entity\Comment;
 use App\Form\CommentFormType;
 use App\Twig\TwigRender;
 use App\Model\CommentManager;
+use App\Model\PostManager;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
@@ -14,12 +15,14 @@ class CommentController extends TwigRender
 {
     private $auth;
     private $commentManager;
+    private $postManager;
 
     public function __construct()
     {
         parent::__construct();
         $this->auth = new Auth();
         $this->commentManager = new CommentManager();
+        $this->postManager = new PostManager();
     }
 
     public function postComment(int $id)
@@ -32,16 +35,19 @@ class CommentController extends TwigRender
         ]);
     }
 
-    public function add(int $postId)
+    public function add(string $slug)
     {
         $user = $this->auth->getCurrentUser();
         $author = $user->getId();
-        $post = $this->postManager->getPostId($postId);
+        
+        $post = $this->postManager->getOnePost($slug);
+        $postSlug = $post->getSlug();
+        $postId = $post->getId();
 
         $comment = new Comment();
 
         $commentForm = $this->formFactory->createBuilder(CommentFormType::class, $comment, [
-            'action' => '/post/' . $postId . '/addComment',
+            'action' => '/post/' . $postSlug . '/addComment',
             'method' => 'POST',
         ])->getForm();
 
@@ -58,9 +64,6 @@ class CommentController extends TwigRender
             $comment->setPostId($postId);
             $comment->setUserId($author);
             $comment->setIsValid(0);
-            
-            /*var_dump($comment);
-            die;*/
             
             $cm = new CommentManager();
             $cm->commentForm($comment);

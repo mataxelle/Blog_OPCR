@@ -42,8 +42,8 @@ $router->get('/update/:id', 'App\Controller\PostController\PostController@update
 $router->post('/update/:id', 'App\Controller\PostController\PostController@update');
 $router->get('/delete/:slug', 'App\Controller\PostController\PostController@delete');
 $router->get('/comment', 'App\Controller\CommentController\CommentController@postComment');
-$router->get('/post/:id/addComment', 'App\Controller\CommentController\CommentController@add');
-$router->post('/post/:id/addComment', 'App\Controller\CommentController\CommentController@add');
+$router->get('/post/:slug/addComment', 'App\Controller\CommentController\CommentController@add');
+$router->post('/post/:slug/addComment', 'App\Controller\CommentController\CommentController@add');
 $router->get('/account/:id', 'App\Controller\UserController\UserController@account');
 $router->get('/account/:id', 'App\Controller\UserController\UserController@usersAccount');
 $router->get('/delete_user/:id', 'App\Controller\UserController\UserController@delete');
