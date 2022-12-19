@@ -68,7 +68,7 @@ class CommentController extends TwigRender
             $cm = new CommentManager();
             $cm->commentForm($comment);
 
-            $response = new RedirectResponse('/');
+            $response = new RedirectResponse('/post/' . $postSlug);
             $response->prepare($request);
         
             return $response->send();
