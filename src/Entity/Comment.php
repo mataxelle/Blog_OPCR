@@ -31,24 +31,30 @@ class Comment
     public function hydrate(array $data)
     {
         foreach ($data as $key => $value) {
-            switch ($key)
+
+            $method = 'set' . ucfirst($key);
+
+            if (method_exists($this, $method)) {
+                switch ($key)
                 {
                     case 'id':
                     case 'PostId':
                     case 'userId':
+                        $this->$method((int) $value);
                     case 'isValid':
-                        $this->$key = (int) $value;
+                        $this->$method((boolean) $value);
                         break;
 
                     case 'content':
-                        $this->$key = (string) $value;
+                        $this->$method((string) $value);
                         break;
                      
                     case 'createdAt':
                     case 'updtedAt':    
-                        $this->$key = new \DateTime($value);
+                        $this->$method(new \DateTime($value));
                         break;
                 }
+            }
         }
     }
 

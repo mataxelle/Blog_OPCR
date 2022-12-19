@@ -45,10 +45,14 @@ class Contact
     public function hydrate(array $data)
     {
         foreach ($data as $key => $value) {
-            switch ($key)
+
+            $method = 'set' . ucfirst($key);
+
+            if (method_exists($this, $method)) {
+                switch ($key)
                 {
                     case 'id':
-                        $this->$key = (int) $value;
+                        $this->$method((int) $value);
                         break;
 
                     case 'firstname':
@@ -56,13 +60,14 @@ class Contact
                     case 'email':
                     case 'label':
                     case 'message':
-                        $this->$key = (string) $value;
+                        $this->$method((string) $value);
                         break;
                      
                     case 'createdAt':    
-                        $this->$key = new \DateTime($value);
+                        $this->$method(new \DateTime($value));
                         break;
                 }
+            }
         }
     }
 

@@ -42,26 +42,33 @@ class Post
     {
         // Boucle sur tableau de données
         foreach ($data as $key => $value) {
-            switch ($key)
+
+            $method = 'set' . ucfirst($key);
+
+            if (method_exists($this, $method)) {
+                switch ($key)
                 {
                     case 'id':
                     case 'userId':
+                        $this->$method((int) $value);
+                        break;
                     case 'isPublished':    
-                        $this->$key = (int) $value;
+                        $this->$method((boolean) $value);
                         break;
 
                     case 'title':
                     case 'slug':
                     case 'image':
                     case 'content':
-                        $this->$key = (string) $value;
+                        $this->$method((string) $value);
                         break;
                      
                     case 'createdAt':
                     case 'updtedAt':    
-                        $this->$key = new \DateTime($value);
+                        $this->$method(new \DateTime($value));
                         break;
                 }
+            }
         }
     }
 
