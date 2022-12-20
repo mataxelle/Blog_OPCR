@@ -1,0 +1,61 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tableau de bord{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1 class="text-center mt-5 mb-5">liste des commentaires</h1>
+
+    <div class="row">
+        <div class="col">
+            <div class="row mb-5">
+                <h5>Commentaires(s)
+                    <span>({{ comments|length }})</span>
+                </h5>
+            </div>
+            <table class="table table-striped">
+                <tr>
+                    <th>#</th>
+                    <th>Article</th>
+                    <th>comment</th>
+                    <th>Validé</th>
+                    <th>Ajouté le</th>
+                    <th>Modifié le</th>
+                    <th>Actions</th>
+                </tr>
+                {% set i = 1 %}
+                {% for comment in comments %}
+                    <tr class="hoverable">
+                        <td>{{ i }}</td>
+                        <td>{{ comment.postId }}</td>
+                        <td>{{ comment.content }}</td>
+                        {% if comment.isValid == 0 %}
+                        <td>
+                            <a class="btn btn-primary" href="/message/{{ comment.id }}"><i class="far fa-eye-slash"></i></a>
+                        </td>
+                        {% else %}
+                        <td>
+                            <a class="btn btn-dark disabled" href=""><i class="far fa-eye"></i></a>
+                        </td>
+                        {% endif %}
+                        <td>{{ comment.createdAt|date('d/m/Y') }}</td>
+                        <td>{{ comment.updatedAt|date('d/m/Y') }}</td>
+                        {% if comment.isValid == 0 %}
+                        <td>
+                            <a class="btn btn-success" href="/admin/comment/{{ comment.id }}/validation"><i class="fas fa-edit"></i></a>
+                            <a class="btn btn-danger" href="/admin/delete_comment/{{ comment.id }}"><i class="fas fa-trash"></i></a>
+                        </td>
+                        {% else %}
+                        <td>
+                            <a class="btn btn-success" href="/admin/comment/{{ comment.id }}/validation"><i class="fas fa-edit"></i></a>
+                            <a class="btn btn-danger" href="/admin/delete_comment/{{ comment.id }}"><i class="fas fa-trash"></i></a>
+                        </td>
+                        {% endif %}
+                    </tr>
+                {% set i = i+1 %}
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -34,6 +34,8 @@ class AdminController extends TwigRender
 
         $messages = $this->contactManager->getAllMessages();
 
+        $comments = $this->commentManager->getAllComments();
+
         if (isset($_SESSION["isAdmin"])) {
             $admin = $_SESSION["isAdmin"];
         }
@@ -52,7 +54,8 @@ class AdminController extends TwigRender
             'messages' => $messages,
             'admin' => $admin,
             'user' => $user,
-            'id' => $id
+            'id' => $id,
+            'comments' => $comments
         ]);
     }
 
@@ -74,6 +77,30 @@ class AdminController extends TwigRender
 
         $this->twig->display('admin/posts.html.twig', [
             'posts' => $posts,
+            'admin' => $admin,
+            'user' => $user,
+            'id' => $id
+        ]);
+    }
+
+    public function comments()
+    {
+        $comments = $this->commentManager->getAllComments();
+
+        if (isset($_SESSION["isAdmin"])) {
+            $admin = $_SESSION["isAdmin"];
+        }
+
+        if (isset($_SESSION["firstname"])) {
+            $user = $_SESSION["firstname"];
+        }
+
+        if (isset($_SESSION["id"])) {
+            $id = $_SESSION["id"];
+        }
+
+        $this->twig->display('admin/comments.html.twig',[ 
+            'comments' => $comments,
             'admin' => $admin,
             'user' => $user,
             'id' => $id

@@ -39,9 +39,6 @@ class PostController extends TwigRender
 
         $comments = $this->commentManager->getPostComment($post->getId());
 
-        /*var_dump($comments);
-        die;*/
-
         $user = '';
         $admin = '';
         $id = '';
@@ -131,7 +128,6 @@ class PostController extends TwigRender
 
     public function update(int $id)
     {
-        //$post = ;
         $post = $this->postManager->getPostId($id);
       
         $oldImage = $post->getImage();

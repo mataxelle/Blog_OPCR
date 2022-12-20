@@ -38,7 +38,7 @@ class Comment
                 switch ($key)
                 {
                     case 'id':
-                    case 'PostId':
+                    case 'postId':
                     case 'userId':
                         $this->$method((int) $value);
                     case 'isValid':

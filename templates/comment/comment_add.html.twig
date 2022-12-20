@@ -2,7 +2,7 @@
 
 {% block title %}
 	{{ parent() }}
-	| Ajouter un article
+	| Ajouter un commentaire
 {% endblock %}
 
 {% block body %}
@@ -19,10 +19,14 @@
 			{{ form_label(commentForm.content, 'commentaire') }}
 			{{ form_widget(commentForm.content, {'attr': {'class': 'form-control'}}) }}
 		</div>
-        <div class="mb-3">
+		{% if admin == 1 %}
+		<div class="mb-3">
 			{{ form_widget(commentForm.isValid) }}
-			<span>Publier l'article</span>
+			<span>Valider</span>
 		</div>
+		{% else %}
+			{% do commentForm.isValid.setRendered %}
+		{% endif %}
 		<div class="mb-3">
 			<input type="submit" name="" class="btn btn-primary" value="Commenter">
 		</div>

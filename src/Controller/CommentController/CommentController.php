@@ -25,16 +25,6 @@ class CommentController extends TwigRender
         $this->postManager = new PostManager();
     }
 
-    public function postComment(int $id)
-    {
-        $comments = $this->commentManager->getPostComment($id);
-        //var_dump($comments);
-        //die;
-        $this->twig->display('comment/comment_show.html.twig',[ 
-            'comments' => $comments
-        ]);
-    }
-
     public function add(string $slug)
     {
         $user = $this->auth->getCurrentUser();
@@ -63,7 +53,10 @@ class CommentController extends TwigRender
 
             $comment->setPostId($postId);
             $comment->setUserId($author);
-            $comment->setIsValid(0);
+            
+            if ($author !== 1) {
+                $comment->setIsValid(0);
+            }
             
             $cm = new CommentManager();
             $cm->commentForm($comment);
@@ -96,5 +89,62 @@ class CommentController extends TwigRender
             'admin' => $admin,
             'id' => $id
         ]);
+    }
+
+    public function validation(int $id)
+    {
+        $comment = $this->commentManager->getComment($id);
+        $commentId = $comment->getId();
+
+        $commentForm = $this->formFactory->createBuilder(CommentFormType::class, $comment, [
+            'action' => '/admin/comment/' . $commentId . '/validation',
+            'method' => 'POST',
+        ])->getForm();
+
+        $request = Request::createFromGlobals();        
+        
+        $commentForm->handleRequest($request);
+
+        if ($commentForm->isSubmitted() && $commentForm->isValid()) {
+            
+            $cm = new CommentManager();
+            $cm->Validation($comment);
+
+            $response = new RedirectResponse('/admin/comments');
+            $response->prepare($request);
+        
+            return $response->send();
+        }
+
+        $user = '';
+        $admin = '';
+        $id = '';
+
+        if (isset($_SESSION["firstname"])) {
+            $user = $_SESSION["firstname"];
+        }
+
+        if (isset($_SESSION["isAdmin"])) {
+            $admin = $_SESSION["isAdmin"];
+        }
+
+        if (isset($_SESSION["id"])) {
+            $id = $_SESSION["id"];
+        }
+
+        $this->twig->display('comment/comment_update.html.twig', [
+            'commentForm' => $commentForm->createView(),
+            'user' => $user,
+            'admin' => $admin,
+            'id' => $id
+        ]);
+    }
+
+    public function delete(int $id)
+    {
+
+        $this->commentManager->deleteComment($id);
+
+        return header('Location: /admin');
     }
 }
