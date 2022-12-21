@@ -28,7 +28,9 @@ class CommentController extends TwigRender
     public function add(string $slug)
     {
         $user = $this->auth->getCurrentUser();
-        $author = $user->getId();
+        $userName = $user->getFirstname();
+        $isAdmin = $user->getIsAdmin();
+        $userId = $user->getId();
         
         $post = $this->postManager->getOnePost($slug);
         $postSlug = $post->getSlug();
@@ -47,14 +49,10 @@ class CommentController extends TwigRender
 
         if ($commentForm->isSubmitted() && $commentForm->isValid()) {
 
-            if (isset($_SESSION["id"])) {
-                $id = $_SESSION["id"];
-            }
-
             $comment->setPostId($postId);
-            $comment->setUserId($author);
+            $comment->setUserId($userId);
             
-            if ($author !== 1) {
+            if ($userId !== 1) {
                 $comment->setIsValid(0);
             }
             
@@ -67,27 +65,11 @@ class CommentController extends TwigRender
             return $response->send();
         }
 
-        $user = '';
-        $admin = '';
-        $id = '';
-
-        if (isset($_SESSION["firstname"])) {
-            $user = $_SESSION["firstname"];
-        }
-
-        if (isset($_SESSION["isAdmin"])) {
-            $admin = $_SESSION["isAdmin"];
-        }
-
-        if (isset($_SESSION["id"])) {
-            $id = $_SESSION["id"];
-        }
-
         $this->twig->display('comment/comment_add.html.twig', [
             'commentForm' => $commentForm->createView(),
-            'user' => $user,
-            'admin' => $admin,
-            'id' => $id
+            'user' => $userName,
+            'admin' => $isAdmin,
+            'id' => $userId
         ]);
     }
 
@@ -116,27 +98,16 @@ class CommentController extends TwigRender
             return $response->send();
         }
 
-        $user = '';
-        $admin = '';
-        $id = '';
-
-        if (isset($_SESSION["firstname"])) {
-            $user = $_SESSION["firstname"];
-        }
-
-        if (isset($_SESSION["isAdmin"])) {
-            $admin = $_SESSION["isAdmin"];
-        }
-
-        if (isset($_SESSION["id"])) {
-            $id = $_SESSION["id"];
-        }
+        $user = $this->auth->getCurrentUser();
+        $userName = $user->getFirstname();
+        $isAdmin = $user->getIsAdmin();
+        $userId = $user->getId();
 
         $this->twig->display('comment/comment_update.html.twig', [
             'commentForm' => $commentForm->createView(),
-            'user' => $user,
-            'admin' => $admin,
-            'id' => $id
+            'user' => $userName,
+            'admin' => $isAdmin,
+            'id' => $userId
         ]);
     }
 

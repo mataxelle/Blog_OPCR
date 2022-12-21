@@ -12,6 +12,8 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class SecurityController extends TwigRender
 {
+    private $userManager;
+
     public function __construct()
     {
         parent::__construct();

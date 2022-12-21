@@ -28,7 +28,7 @@
                 {% for user in users %}
                     <tr class="hoverable">
                         <td>{{ i }}</td>
-                        <td><a href="/account/{{ user.id }}" target="_blank">{{ user.lastname }}</a></td>
+                        <td><a href="/admin/users/account/{{ user.id }}" target="_blank">{{ user.lastname }}</a></td>
                         <td>{{ user.firstname }}</td>
                         {% if user.isAdmin == 1 %}
                             <td>

@@ -31,17 +31,6 @@ class CommentManager extends ConnectDB
         return new Comment($response->fetch());
     }
 
-    /*public function getComment(int $id)
-    {
-        $db = $this->db;
-
-        $response = $db->prepare('SELECT * FROM comment WHERE id = ?');
-
-        $response->execute([$id]);
-
-        return $response->fetch();
-    }*/
-
     public function getPostComment(int $postId)
     {
         $db = $this->db;

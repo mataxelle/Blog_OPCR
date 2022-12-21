@@ -2,16 +2,19 @@
 
 namespace App\Controller\HomeController;
 
+use App\Auth\Auth;
 use App\Twig\TwigRender;
 use App\Model\PostManager;
 
 class HomeController extends TwigRender
 {
+    private $auth;
     private $postManager;
 
     public function __construct()
     {
         parent::__construct();
+        $this->auth = new Auth();
         $this->postManager = new PostManager();
     }
 
@@ -19,27 +22,16 @@ class HomeController extends TwigRender
     {
         $posts = $this->postManager->getAllValidedPost();
 
-        $admin = '';
-        $user = '';
-        $id = '';
-        
-        if (isset($_SESSION["isAdmin"])) {
-            $admin = $_SESSION["isAdmin"];
-        }
-
-        if (isset($_SESSION["id"])) {
-            $id = $_SESSION["id"];
-        }
-        
-        if (isset($_SESSION["firstname"])) {
-            $user = $_SESSION["firstname"];
-        }
+        $user = $this->auth->getCurrentUser();
+        $userName = $user->getFirstname();
+        $isAdmin = $user->getIsAdmin();
+        $userId = $user->getId();
 
         $this->twig->display('home/home.html.twig',[ 
             'posts' => $posts,
-            'admin' => $admin,
-            'user' => $user,
-            'id' => $id
+            'admin' => $isAdmin,
+            'user' => $userName,
+            'id' => $userId
         ]);
     }
 }

@@ -37,25 +37,15 @@ class ContactController extends TwigRender
             }
         }
 
-        $user = '';
-        $admin = '';
-        
-        if (isset($_SESSION["firstname"])) {
-            $user = $_SESSION["firstname"];
-        }
-
-        if (isset($_SESSION["isAdmin"])) {
-            $admin = $_SESSION["isAdmin"];
-        }
-
-        if (isset($_SESSION["id"])) {
-            $id = $_SESSION["id"];
-        }
+        $user = $this->auth->getCurrentUser();
+        $userName = $user->getFirstname();
+        $isAdmin = $user->getIsAdmin();
+        $userId = $user->getId();
 
         $this->twig->display('contact/contact.html.twig', [
-            'user' => $user,
-            'admin' => $admin,
-            'id' => $id
+            'user' => $userName,
+            'admin' => $isAdmin,
+            'id' => $userId
         ]);
     }
 
@@ -63,23 +53,16 @@ class ContactController extends TwigRender
     {
         $message = $this->contactManager->getOneMessage($id);
 
-        if (isset($_SESSION["firstname"])) {
-            $user = $_SESSION["firstname"];
-        }
-
-        if (isset($_SESSION["isAdmin"])) {
-            $admin = $_SESSION["isAdmin"];
-        }
-
-        if (isset($_SESSION["id"])) {
-            $id = $_SESSION["id"];
-        }
+        $user = $this->auth->getCurrentUser();
+        $userName = $user->getFirstname();
+        $isAdmin = $user->getIsAdmin();
+        $userId = $user->getId();
 
         $this->twig->display('contact/message.html.twig', [
             'message' => $message,
-            'user' => $user,
-            'admin' => $admin,
-            'id' => $id
+            'user' => $userName,
+            'admin' => $isAdmin,
+            'id' => $userId
         ]);
     }
 

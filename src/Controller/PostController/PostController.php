@@ -4,9 +4,7 @@ namespace App\Controller\PostController;
 
 use App\Auth\Auth;
 use App\Entity\Post;
-use App\Entity\Comment;
 use App\Form\PostFormType;
-use App\Form\CommentFormType;
 use App\Twig\TwigRender;
 use App\Model\PostManager;
 use App\Model\CommentManager;
@@ -39,28 +37,17 @@ class PostController extends TwigRender
 
         $comments = $this->commentManager->getPostComment($post->getId());
 
-        $user = '';
-        $admin = '';
-        $id = '';
-
-        if (isset($_SESSION["firstname"])) {
-            $user = $_SESSION["firstname"];
-        }
-
-        if (isset($_SESSION["isAdmin"])) {
-            $admin = $_SESSION["isAdmin"];
-        }
-
-        if (isset($_SESSION["id"])) {
-            $id = $_SESSION["id"];
-        }
+        $user = $this->auth->getCurrentUser();
+        $userName = $user->getFirstname();
+        $isAdmin = $user->getIsAdmin();
+        $userId = $user->getId();
 
         $this->twig->display('post/post_show.html.twig',[ 
             'post' => $post,
             'comments' => $comments,
-            'user' => $user,
-            'admin' => $admin,
-            'id' => $id
+            'user' => $userName,
+            'admin' => $isAdmin,
+            'id' => $userId
         ]);
     }
 
@@ -102,27 +89,16 @@ class PostController extends TwigRender
             return $response->send();
         }
 
-        $user = "";
-        $admin = "";
-        $id = '';
-
-        if (isset($_SESSION["firstname"])) {
-            $user = $_SESSION["firstname"];
-        }
-
-        if (isset($_SESSION["isAdmin"])) {
-            $admin = $_SESSION["isAdmin"];
-        }
-
-        if (isset($_SESSION["id"])) {
-            $id = $_SESSION["id"];
-        }
+        $user = $this->auth->getCurrentUser();
+        $userName = $user->getFirstname();
+        $isAdmin = $user->getIsAdmin();
+        $userId = $user->getId();
 
         $this->twig->display('post/post_add.html.twig', [
             'form' => $form->createView(),
-            'user' => $user,
-            'admin' => $admin,
-            'id' => $id
+            'user' => $userName,
+            'admin' => $isAdmin,
+            'id' => $userId
         ]);
     }
 
@@ -173,28 +149,17 @@ class PostController extends TwigRender
             return $response->send();
         }
 
-        $user = "";
-        $admin = "";
-        $id = '';
-        
-        if (isset($_SESSION["firstname"])) {
-            $user = $_SESSION["firstname"];
-        }
-
-        if (isset($_SESSION["isAdmin"])) {
-            $admin = $_SESSION["isAdmin"];
-        }
-
-        if (isset($_SESSION["id"])) {
-            $id = $_SESSION["id"];
-        }
+        $user = $this->auth->getCurrentUser();
+        $userName = $user->getFirstname();
+        $isAdmin = $user->getIsAdmin();
+        $userId = $user->getId();
 
         $this->twig->display('post/update.html.twig', [
             'form' => $form->createView(),
             'post' => $post,
-            'user' => $user,
-            'admin' => $admin,
-            'id' => $id
+            'user' => $userName,
+            'admin' => $isAdmin,
+            'id' => $userId
         ]);
     }
 

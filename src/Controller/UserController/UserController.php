@@ -2,71 +2,35 @@
 
 namespace App\Controller\UserController;
 
+use App\Auth\Auth;
 use App\Entity\User;
 use App\Twig\TwigRender;
 use App\Model\UserManager;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class UserController extends TwigRender
 {
+    private $auth;
     private $userManager;
 
     public function __construct()
     {
         parent::__construct();
+        $this->auth = new Auth();
         $this->userManager = new UserManager();
     }
     
     public function account(int $id)
     {
-        $account = $this->userManager->getUser($id);
-        
-        $user = '';
-        $admin = '';
-        $id = '';
-        
-        if (isset($_SESSION["firstname"])) {
-            $user = $_SESSION["firstname"];
-        }
-
-        if (isset($_SESSION["isAdmin"])) {
-            $admin = $_SESSION["isAdmin"];
-        }
-
-        if (isset($_SESSION["id"])) {
-            $id = $_SESSION["id"];
-        }
+        $user = $this->auth->getCurrentUser();
+        $userName = $user->getFirstname();
+        $isAdmin = $user->getIsAdmin();
+        $userId = $user->getId();
 
         $this->twig->display('user/account.html.twig', [ 
-            'account' => $account,
-            'user' => $user,
-            'admin' => $admin,
-            'id' => $id
-        ]);
-    }
-
-    public function usersAccount(int $id)
-    {
-        $account = $this->userManager->getUser($id);
-
-        if (isset($_SESSION["isAdmin"])) {
-            $admin = $_SESSION["isAdmin"];
-        }
-
-        if (isset($_SESSION["firstname"])) {
-            $user = $_SESSION["firstname"];
-        }
-
-        if (isset($_SESSION["id"])) {
-            $id = $_SESSION["id"];
-        }
-
-        $this->twig->display('user/users_account.html.twig', [
-            'account' => $account,
-            'admin' => $admin,
-            'user' => $user,
-            'id' => $id
+            'account' => $user,
+            'user' => $userName,
+            'admin' => $isAdmin,
+            'id' => $userId
         ]);
     }
 
