@@ -40,6 +40,7 @@ class ContactController extends TwigRender
             }
         }
 
+        $user = '';
         $userName = '';
         $userId = '';
         $isAdmin = '';
@@ -52,6 +53,7 @@ class ContactController extends TwigRender
         }
 
         $this->twig->display('contact/contact.html.twig', [
+            'userInfo' => $user,
             'user' => $userName,
             'admin' => $isAdmin,
             'id' => $userId

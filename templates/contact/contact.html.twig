@@ -15,15 +15,27 @@
 				<form action="/contact" method="post">
 					<div class="mb-3">
 						<label for="firstname">Prénom</label>
-						<input type="text" name="firstname" id="firstname" class="form-control" required>
+						{% if userInfo %}
+						    <input type="text" name="firstname" id="firstname" value="{{userInfo.firstname}}" class="form-control" required>
+					    {% else %}
+						    <input type="text" name="firstname" id="firstname" class="form-control" required>
+						{% endif %}
 					</div>
 					<div class="mb-3">
 						<label for="lastname" class="form-label">Nom</label>
-						<input type="text" name="lastname" class="form-control" id="lastname" required>
+						{% if userInfo %}
+						    <input type="text" name="lastname" class="form-control" id="lastname" value="{{userInfo.lastname}}" required>
+						{% else %}
+						    <input type="text" name="lastname" class="form-control" id="lastname" required>
+						{% endif %}
 					</div>
 					<div class="mb-3">
 						<label for="email" class="form-label">Email</label>
-						<input type="email" name="email" class="form-control" id="email" required>
+						{% if userInfo %}
+						    <input type="email" name="email" class="form-control" id="email" value="{{userInfo.email}}" required>
+						{% else %}
+							<input type="email" name="email" class="form-control" id="email" required>
+						{% endif %}						
 					</div>
 					<div class="mb-3">
 						<label for="label" class="form-label">Objet</label>
