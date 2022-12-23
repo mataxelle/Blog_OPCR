@@ -36,25 +36,12 @@ class UserController extends TwigRender
 
     public function delete(int $id)
     {
-        $user = '';
-        $admin = '';
-        $id = '';
-        
-        if (isset($_SESSION["firstname"])) {
-            $user = $_SESSION["firstname"];
-        }
-
-        if (isset($_SESSION["isAdmin"])) {
-            $admin = $_SESSION["isAdmin"];
-        }
-
-        if (isset($_SESSION["id"])) {
-            $id = $_SESSION["id"];
-        }
-
+        $user = $this->auth->getCurrentUser();
+        $isAdmin = $user->getIsAdmin();
+    
         $this->userManager->deleteUser($id);
 
-        if ($admin) {
+        if ($isAdmin) {
             return header('Location: /admin');
         } else if ($user) {
             return header('Location: /login');

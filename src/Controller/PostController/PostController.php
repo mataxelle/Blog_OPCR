@@ -165,6 +165,12 @@ class PostController extends TwigRender
 
     public function delete(string $slug)
     {
+        $user = $this->auth->getCurrentUser();
+        $isAdmin = $user->getIsAdmin();
+
+        if (!$isAdmin) {
+            return header('Location: /');
+        }
 
         $this->postManager->deletePost($slug);
 

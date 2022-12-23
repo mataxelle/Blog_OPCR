@@ -2,16 +2,19 @@
 
 namespace App\Controller\ContactController;
 
+use App\Auth\Auth;
 use App\Model\ContactManager;
 use App\Twig\TwigRender;
 
 class ContactController extends TwigRender
 {
+    private $auth;
     private $contactManager;
 
     public function __construct()
     {
         parent::__construct();
+        $this->auth = new Auth();
         $this->contactManager = new ContactManager();
     }
 
@@ -37,10 +40,16 @@ class ContactController extends TwigRender
             }
         }
 
-        $user = $this->auth->getCurrentUser();
-        $userName = $user->getFirstname();
-        $isAdmin = $user->getIsAdmin();
-        $userId = $user->getId();
+        $userName = '';
+        $userId = '';
+        $isAdmin = '';
+        
+        if (isset($_SESSION["firstname"]) && isset($_SESSION["id"]) && isset($_SESSION["isAdmin"])) {
+            $user = $this->auth->getCurrentUser();
+            $userName = $user->getFirstname();
+            $userId = $user->getId();
+            $isAdmin = $user->getIsAdmin();
+        }
 
         $this->twig->display('contact/contact.html.twig', [
             'user' => $userName,

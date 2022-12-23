@@ -113,7 +113,13 @@ class CommentController extends TwigRender
 
     public function delete(int $id)
     {
+        $user = $this->auth->getCurrentUser();
+        $isAdmin = $user->getIsAdmin();
 
+        if (!$isAdmin) {
+            return header('Location: /');
+        }
+        
         $this->commentManager->deleteComment($id);
 
         return header('Location: /admin');
