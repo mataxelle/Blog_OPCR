@@ -13,14 +13,14 @@ class Route
         $this->path = trim($path,'/');
         $this->action = $action;
     }
-
+    
     public function matches(string $url)
     {
         $reg = preg_replace('#:([\w]+)#', '([^/]+)', $this->path);
         $pathToMatch = "#^$reg$#";
 
         if(preg_match($pathToMatch, $url, $matches)) {
-            $this->matches = $matches; 
+            $this->matches = $matches;
             return true;
         } else {
             return false;

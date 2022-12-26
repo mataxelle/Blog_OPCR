@@ -10,7 +10,7 @@ class Session
             session_start();
         }
     }
-
+    
     public function destroySession()
     {
         if (session_status() === PHP_SESSION_ACTIVE) {

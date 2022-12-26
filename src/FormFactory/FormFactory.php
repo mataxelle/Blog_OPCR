@@ -18,7 +18,7 @@ class FormFactory
         $csrfManager = new CsrfTokenManager();
         
         $validator = Validation::createValidator();
-
+        
         $this->formFactory = Forms::createFormFactoryBuilder()
             ->addExtension(new CsrfExtension($csrfManager))
             ->addExtension(new HttpFoundationExtension())

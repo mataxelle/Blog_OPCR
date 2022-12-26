@@ -9,6 +9,7 @@ use App\Model\PostManager;
 class HomeController extends TwigRender
 {
     private $auth;
+    
     private $postManager;
 
 
@@ -19,10 +20,10 @@ class HomeController extends TwigRender
         $this->postManager = new PostManager();
     }
     
-
+    
     /**
-     * Get all posts
-     */
+    * Get all posts
+    */
     public function index()
     {
         $posts = $this->postManager->getAllValidedPost();
@@ -32,7 +33,7 @@ class HomeController extends TwigRender
         $isAdmin = $user->getIsAdmin();
         $userId = $user->getId();
 
-        $this->twig->display('home/home.html.twig',[ 
+        $this->twig->display('home/home.html.twig',[
             'posts' => $posts,
             'admin' => $isAdmin,
             'user' => $userName,

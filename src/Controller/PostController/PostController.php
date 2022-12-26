@@ -10,11 +10,13 @@ use App\Model\PostManager;
 use App\Model\CommentManager;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class PostController extends TwigRender
 {
     private $auth;
+    
     private $postManager;
 
     public function __construct()
@@ -32,10 +34,10 @@ class PostController extends TwigRender
     }
 
     /**
-     * Show a post and his comments
-     * 
-     * @param string $slug Post slug
-     */
+    * Show a post and his comments
+    *
+    * @param string $slug Post slug
+    */
     public function show(string $slug)
     {
         $post = $this->postManager->getOnePost($slug);
@@ -57,9 +59,11 @@ class PostController extends TwigRender
     }
 
     /**
-     * Add a post
-     */
-    public function add()
+    * Add a post
+    * 
+    * @return Response
+    */
+    public function add(): Response
     {
         $post = new Post();
 
@@ -88,8 +92,8 @@ class PostController extends TwigRender
                 $post->setImage($fileName);
             };
 
-            $pm = new PostManager();
-            $pm->postForm($post);
+            $postmanager = new PostManager();
+            $postmanager->postForm($post);
 
             $response = new RedirectResponse('/');
             $response->prepare($request);
@@ -111,11 +115,12 @@ class PostController extends TwigRender
     }
 
     /**
-     * Update a post
-     * 
-     * @param int $id Post id
-     */
-    public function update(int $id)
+    * Update a post
+    * 
+    * @param int $id Post id
+    * @return Response
+    */
+    public function update(int $id): Response
     {
         $post = $this->postManager->getPostId($id);
       
@@ -153,8 +158,8 @@ class PostController extends TwigRender
             };
 
 
-            $pm = new PostManager();
-            $pm->postUpdate($post);
+            $postmanager = new PostManager();
+            $postmanager->postUpdate($post);
 
             $response = new RedirectResponse('/');
             $response->prepare($request);
@@ -177,10 +182,10 @@ class PostController extends TwigRender
     }
 
     /**
-     * Delete a post
-     * 
-     * @param string $slug Post slug
-     */
+    * Delete a post
+    * 
+    * @param string $slug Post slug
+    */
     public function delete(string $slug)
     {
         $user = $this->auth->getCurrentUser();

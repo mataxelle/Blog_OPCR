@@ -9,28 +9,28 @@ class User
     private $id;
 
     /**
-     * @Assert\NotBlank(message="Veuillez saisir votre prénom")
-     * @Assert\Length(min=2)
-     */
+    * @Assert\NotBlank(message="Veuillez saisir votre prénom")
+    * @Assert\Length(min=2)
+    */
     private $firstname;
 
     /**
-     * @Assert\NotBlank(message="Veuillez saisir votre nom")
-     * @Assert\Length(min=2)
-     */
+    * @Assert\NotBlank(message="Veuillez saisir votre nom")
+    * @Assert\Length(min=2)
+    */
     private $lastname;
 
     private $isAdmin;
 
     /**
-     * @Assert\NotBlank(message="Veuillez saisir votre email")
-     */
+    * @Assert\NotBlank(message="Veuillez saisir votre email")
+    */
     private $email;
 
     /**
-     * @Assert\NotBlank(message="Veuillez saisir votre mot de passe ")
-     * @Assert\Length(min=8)
-     */
+    * @Assert\NotBlank(message="Veuillez saisir votre mot de passe ")
+    * @Assert\Length(min=8)
+    */
     private $password;
     
     private $createdAt;
@@ -41,10 +41,10 @@ class User
     {
         $this->hydrate($data);
     }
-
+    
     /**
-     * Filling out a new user object with data
-     */
+    * Filling out a new user object with data
+    */
     public function hydrate(array $data)
     {
         foreach ($data as $key => $value) {
@@ -59,14 +59,12 @@ class User
                     case 'isAdmin':
                         $this->$method((boolean) $value);
                         break;
-
                     case 'firstname':
                     case 'lastname':
                     case 'email':
                     case 'password':
                         $this->$method((string) $value);
                         break;
-                     
                     case 'createdAt':
                     case 'updtedAt':    
                         $this->$method(new \DateTime($value));
@@ -77,16 +75,16 @@ class User
     }
 
     /**
-     * Get value of user id
-     */
+    * Get value of user id
+    */
     public function getId(): ?int
     {
         return $this->id;
     }
 
     /**
-     * Set value of user id
-     */
+    * Set value of user id
+    */
     public function setId($id)
     {
         if (is_string($id) && intval($id) > 0) {
@@ -124,6 +122,9 @@ class User
         return $this->email;
     }
 
+    /**
+     * Set value of user email
+     */
     public function setEmail(string $email): self
     {
         $this->email = $email;

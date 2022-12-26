@@ -6,7 +6,7 @@ use PDO;
 
 class ConnectDB extends PDO
 {
-     protected $db;
+     protected $database;
 
      public function __construct()
      {
@@ -16,12 +16,11 @@ class ConnectDB extends PDO
                PDO::ATTR_EMULATE_PREPARES   => false,
           ];
 
-          $this->db = new PDO(
+          $this->database = new PDO(
                'mysql:host=' . __DBHOST . ';dbname=' . __DBDATABASE . ';charset=utf8',
                __DBUSERNAME,
                __DBPASSWORD,
                $options
           );
-          
      }
 }

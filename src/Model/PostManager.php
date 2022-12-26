@@ -16,18 +16,18 @@ class PostManager extends ConnectDB
      */
     public function getAllPost()
     {
-        $db = $this->db;
+        $database = $this->database;
 
-        $response = $db->query('SELECT * FROM post ORDER BY createdAt DESC');
+        $response = $database->query('SELECT * FROM post ORDER BY createdAt DESC');
 
         return $response->fetchAll();
     }
-
+    
     public function getAllValidedPost()
     {
-        $db = $this->db;
+        $database = $this->database;
 
-        $response = $db->query('SELECT * FROM post WHERE isPublished = 1 ORDER BY createdAt DESC');
+        $response = $database->query('SELECT * FROM post WHERE isPublished = 1 ORDER BY createdAt DESC');
 
         return $response->fetchAll();
     }
@@ -35,39 +35,39 @@ class PostManager extends ConnectDB
     /**
      * Get a post by id
      *
-     * @param  integer $id Post id
+     * @param  int $id Post id
      * @return Post
      */
     public function getPostId(int $id)
     {
-        $db = $this->db;
+        $database = $this->database;
 
-        $response = $db->prepare('SELECT * FROM post WHERE id = ?');
+        $response = $database->prepare('SELECT * FROM post WHERE id = ?');
 
         $response->bindValue(1, $id, PDO::PARAM_INT);
 
         $response->execute();
 
-        return new Post($response->fetch());  
+        return new Post($response->fetch());
     }
 
     /**
      * get a post by slug
-     * 
+     *
      * @param string $slug Post slug
      * @return Post
      */
     public function getOnePost(string $slug)
     {
-        $db = $this->db;
+        $database = $this->database;
 
-        $response = $db->prepare('SELECT * FROM post WHERE slug = ?');
+        $response = $database->prepare('SELECT * FROM post WHERE slug = ?');
 
         $response->bindValue(1, $slug, PDO::PARAM_STR);
 
         $response->execute();
 
-        return new Post($response->fetch());  
+        return new Post($response->fetch());
     }
 
     /**
@@ -75,9 +75,9 @@ class PostManager extends ConnectDB
      */
     public function postForm(Post $post)
     {
-        $db = $this->db;
+        $database = $this->database;
 
-        $addPost = $db->prepare('INSERT INTO post (userId, title, slug, image, content, isPublished, createdAt, updatedAt) VALUES (?, ?, ?, ?, ?, ?, ?, ?)');
+        $addPost = $database->prepare('INSERT INTO post (userId, title, slug, image, content, isPublished, createdAt, updatedAt) VALUES (?, ?, ?, ?, ?, ?, ?, ?)');
 
         $addPost->execute(array(
             $post->getUserId(),
@@ -98,9 +98,9 @@ class PostManager extends ConnectDB
      */
     public function postUpdate(Post $post)
     {
-        $db = $this->db;
+        $database = $this->database;
 
-        $upPost = $db->prepare('UPDATE post SET userId = ?, title = ?, slug = ?, image = ?, content = ?, isPublished = ?, updatedAt = ? WHERE id = ?');
+        $upPost = $database->prepare('UPDATE post SET userId = ?, title = ?, slug = ?, image = ?, content = ?, isPublished = ?, updatedAt = ? WHERE id = ?');
 
         $upPost->bindValue(1, $post->getUserId(), PDO::PARAM_INT);
         $upPost->bindValue(2, $post->getTitle(), PDO::PARAM_STR);
@@ -116,15 +116,15 @@ class PostManager extends ConnectDB
 
     /**
      * Delete a post
-     * 
+     *
      * @param  string $slug Post slug
      * @return void
      */
     public function deletePost(string $slug)
     {
-        $db = $this->db;
+        $database = $this->database;
 
-        $delete = $db->prepare('DELETE FROM post WHERE slug = ?');
+        $delete = $database->prepare('DELETE FROM post WHERE slug = ?');
         
         $delete->execute([$slug]);
     }

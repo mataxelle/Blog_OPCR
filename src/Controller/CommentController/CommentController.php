@@ -14,10 +14,11 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 class CommentController extends TwigRender
 {
     private $auth;
+
     private $commentManager;
+    
     private $postManager;
-
-
+    
     public function __construct()
     {
         parent::__construct();
@@ -26,12 +27,11 @@ class CommentController extends TwigRender
         $this->postManager = new PostManager();
     }
     
-
     /**
-     * Create a comment
-     * 
-     * @param string $slug Post slug
-     */
+    * Create a comment
+    *
+    * @param string $slug Post slug
+    */
     public function add(string $slug)
     {
         $user = $this->auth->getCurrentUser();
@@ -81,10 +81,10 @@ class CommentController extends TwigRender
     }
 
     /**
-     * Valdate a comment
-     * 
-     * @param int $id Comment id
-     */
+    * Valdate a comment
+    *
+    * @param int $id Comment id
+    */
     public function validation(int $id)
     {
         $comment = $this->commentManager->getComment($id);
@@ -101,8 +101,8 @@ class CommentController extends TwigRender
 
         if ($commentForm->isSubmitted() && $commentForm->isValid()) {
             
-            $cm = new CommentManager();
-            $cm->Validation($comment);
+            $commentmanager = new CommentManager();
+            $commentmanager->Validation($comment);
 
             $response = new RedirectResponse('/admin/comments');
             $response->prepare($request);
@@ -124,10 +124,10 @@ class CommentController extends TwigRender
     }
 
     /**
-     * Delete a comment
-     * 
-     *  @param int $id Comment id
-     */
+    * Delete a comment
+    * 
+    * @param int $id Comment id
+    */
     public function delete(int $id)
     {
         $user = $this->auth->getCurrentUser();

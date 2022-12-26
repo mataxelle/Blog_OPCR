@@ -13,7 +13,7 @@ class Comment
     private $userId;
 
     /**
-    * @Assert\NotBlank
+    * @Assert\NotBlank(message="Veuillez saisir votre contenu")
     */
     private $content;
 
@@ -44,13 +44,11 @@ class Comment
                     case 'isValid':
                         $this->$method((boolean) $value);
                         break;
-
                     case 'content':
                         $this->$method((string) $value);
                         break;
-                     
                     case 'createdAt':
-                    case 'updtedAt':    
+                    case 'updtedAt':
                         $this->$method(new \DateTime($value));
                         break;
                 }

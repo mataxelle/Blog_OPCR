@@ -21,17 +21,17 @@ class Contact
     private $lastname;
 
     /**
-     * @Assert\NotBlank(message="Veuillez saisir votre prénom")
+     * @Assert\NotBlank(message="Veuillez saisir votre email")
      */
     private $email;
 
     /**
-     * @Assert\NotBlank(message="Veuillez saisir votre prénom")
+     * @Assert\NotBlank(message="Veuillez choisir")
      */
     private $label;
 
     /**
-     * @Assert\NotBlank(message="Veuillez saisir votre prénom")
+     * @Assert\NotBlank(message="Veuillez saisir votre message")
      */
     private $message;
     
@@ -41,7 +41,7 @@ class Contact
     {
         $this->hydrate($data);
     }
-
+    
     public function hydrate(array $data)
     {
         foreach ($data as $key => $value) {
@@ -54,7 +54,6 @@ class Contact
                     case 'id':
                         $this->$method((int) $value);
                         break;
-
                     case 'firstname':
                     case 'lastname':
                     case 'email':
@@ -62,7 +61,6 @@ class Contact
                     case 'message':
                         $this->$method((string) $value);
                         break;
-                     
                     case 'createdAt':    
                         $this->$method(new \DateTime($value));
                         break;

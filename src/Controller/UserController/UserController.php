@@ -10,6 +10,7 @@ use App\Model\UserManager;
 class UserController extends TwigRender
 {
     private $auth;
+    
     private $userManager;
 
     public function __construct()
@@ -20,10 +21,10 @@ class UserController extends TwigRender
     }
     
     /**
-     * Get a user account information
-     * 
-     * @param int $id User id
-     */
+    * Get a user account information
+    *
+    * @param int $id User id
+    */
     public function account(int $id)
     {
         $user = $this->auth->getCurrentUser();
@@ -40,10 +41,10 @@ class UserController extends TwigRender
     }
 
     /**
-     * Delete a user
-     * 
-     * @param int $id User id
-     */
+    * Delete a user
+    * 
+    * @param int $id User id
+    */
     public function delete(int $id)
     {
         $user = $this->auth->getCurrentUser();

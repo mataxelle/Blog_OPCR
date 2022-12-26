@@ -11,19 +11,19 @@ class Post
     private $userId;
 
     /**
-    * @Assert\NotBlank
+    * @Assert\NotBlank(message="Veuillez saisir votre titre")
     */
     private $title;
 
     /**
-    * @Assert\NotBlank
+    * @Assert\NotBlank(message="Veuillez saisir votre slug")
     */
     private $slug;
 
     private $image;
 
     /**
-    * @Assert\NotBlank
+    * @Assert\NotBlank(message="Veuillez saisir votre contenu")
     */
     private $content;
 
@@ -54,19 +54,17 @@ class Post
                     case 'userId':
                         $this->$method((int) $value);
                         break;
-                    case 'isPublished':    
+                    case 'isPublished':
                         $this->$method((boolean) $value);
                         break;
-
                     case 'title':
                     case 'slug':
                     case 'image':
                     case 'content':
                         $this->$method((string) $value);
                         break;
-                     
                     case 'createdAt':
-                    case 'updtedAt':    
+                    case 'updtedAt':
                         $this->$method(new \DateTime($value));
                         break;
                 }

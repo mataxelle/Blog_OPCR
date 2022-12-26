@@ -9,6 +9,7 @@ use App\Session\Session;
 class Auth
 {
     private $session;
+    
     private $userManager;
     
     public function __construct()
@@ -16,7 +17,7 @@ class Auth
         $this->session = new Session();
         $this->userManager = new UserManager();
     }
-
+    
     /**
      * Get current user from session storage
      *

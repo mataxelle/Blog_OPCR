@@ -24,7 +24,7 @@ class ContactFormType extends AbstractType
             'label' => 'Prénom',
         ])
         ->add('email', EmailType::class)
-        ->add('label',ChoiceType::class, [
+        ->add('label', ChoiceType::class, [
             'label' => 'Objet',
             'choices' => [
                 'information' => 'information',
@@ -33,9 +33,9 @@ class ContactFormType extends AbstractType
         ])
         ->add('message', TextareaType::class)
         ->add('Envoyer', SubmitType::class)
-        ; 
+        ;
     }
-
+    
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([

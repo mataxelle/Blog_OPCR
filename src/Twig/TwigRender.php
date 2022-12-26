@@ -10,8 +10,6 @@ use Symfony\Bridge\Twig\Form\TwigRendererEngine;
 use Symfony\Component\Form\FormRenderer;
 use Symfony\Component\Form\Forms;
 use Symfony\Component\Security\Csrf\CsrfTokenManager;
-use Symfony\Component\Security\Csrf\TokenGenerator\UriSafeTokenGenerator;
-use Symfony\Component\Security\Csrf\TokenStorage\SessionTokenStorage;
 use Twig\RuntimeLoader\FactoryRuntimeLoader;
 use Symfony\Component\Form\Extension\Csrf\CsrfExtension;
 use Symfony\Component\Form\Extension\HttpFoundation\HttpFoundationExtension;
@@ -39,12 +37,6 @@ class TwigRender
 
         $defaultFormTheme = 'form_div_layout.html.twig';
 
-        /*$requestStack = new RequestStack();
-        $requestStack->push($request);
-
-        $csrfGenerator = new UriSafeTokenGenerator();
-        $csrfStorage = new SessionTokenStorage($requestStack);
-        $csrfManager = new CsrfTokenManager($csrfGenerator, $csrfStorage);*/
         $csrfManager = new CsrfTokenManager();
 
         $formEngine = new TwigRendererEngine([$defaultFormTheme], $this->twig);

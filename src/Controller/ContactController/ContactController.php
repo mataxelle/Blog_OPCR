@@ -9,6 +9,7 @@ use App\Twig\TwigRender;
 class ContactController extends TwigRender
 {
     private $auth;
+    
     private $contactManager;
 
 
@@ -19,10 +20,10 @@ class ContactController extends TwigRender
         $this->contactManager = new ContactManager();
     }
     
-
+    
     /**
-     * Create a contact message
-     */
+    * Create a contact message
+    */
     public function contact()
     {
         if (!empty($_POST)) {
@@ -39,7 +40,7 @@ class ContactController extends TwigRender
             }
 
             $contact = $this->contactManager->contactForm($data);
-
+            
             if ($contact) {
                 header('Location: /');
             }
@@ -64,12 +65,12 @@ class ContactController extends TwigRender
             'id' => $userId
         ]);
     }
-
+    
     /**
-     * Get a contact message
-     * 
-     * @param int $id Contact message id
-     */
+    * Get a contact message
+    * 
+    * @param int $id Contact message id
+    */
     public function message(int $id)
     {
         $message = $this->contactManager->getOneMessage($id);
@@ -86,12 +87,12 @@ class ContactController extends TwigRender
             'id' => $userId
         ]);
     }
-
+    
     /**
-     * Delete a contact message
-     * 
-     * @param int $id Contact message id
-     */
+    * Delete a contact message
+    * 
+    * @param int $id Contact message id
+    */
     public function delete(int $id)
     {
         $this->contactManager->deleteMessage($id);

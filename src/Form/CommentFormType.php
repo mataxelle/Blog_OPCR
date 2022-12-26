@@ -15,12 +15,9 @@ class CommentFormType extends AbstractType
     {
         $builder
         ->add('content', TextareaType::class)
-        ->add('isValid', CheckboxType::class, [
-            'required' => false,
-        ])
-        ;  
+        ->add('isValid', CheckboxType::class, ['required' => false]);
     }
-
+    
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([

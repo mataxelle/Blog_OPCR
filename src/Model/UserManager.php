@@ -16,13 +16,13 @@ class UserManager extends ConnectDB
      */
     public function getAllUsers()
     {
-        $db = $this->db;
+        $database = $this->database;
 
-        $response = $db->query('SELECT * FROM user ORDER BY createdAt DESC');
+        $response = $database->query('SELECT * FROM user ORDER BY createdAt DESC');
 
-        return $response->fetchAll();  
+        return $response->fetchAll();
     }
-
+    
     /**
      * Get a user by id
      *
@@ -31,25 +31,27 @@ class UserManager extends ConnectDB
      */
     public function getUser(int $id)
     {
-        $db = $this->db;
+        $database = $this->database;
 
-        $response = $db->prepare('SELECT * FROM user WHERE id = ?');
+        $response = $database->prepare('SELECT * FROM user WHERE id = ?');
 
         $response->bindValue(1, $id, PDO::PARAM_INT);
 
         $response->execute();
 
-        return new User($response->fetch());  
+        return new User($response->fetch());
     }
 
     /**
      * Register a new user
+     * 
+     * @return int
      */
     public function registerForm(User $user)
     {
-        $db = $this->db;
+        $database = $this->database;
 
-        $createUser = $db->prepare('INSERT INTO user (firstname, lastname, isAdmin, email, password, createdAt, updatedAt) VALUES (?, ?, ?, ?, ?, ?, ?)');
+        $createUser = $database->prepare('INSERT INTO user (firstname, lastname, isAdmin, email, password, createdAt, updatedAt) VALUES (?, ?, ?, ?, ?, ?, ?)');
 
         $pass_hache = password_hash($user->getPassword(), PASSWORD_DEFAULT);
 
@@ -67,13 +69,16 @@ class UserManager extends ConnectDB
     }
 
     /**
-     * Update a user
+     * Log a user by id
+     * 
+     * @param strin $email User email
+     * @return User
      */
     public function loginForm(string $email)
     {
-        $db = $this->db;
+        $database = $this->database;
 
-        $login = $db->prepare('SELECT * FROM user WHERE email = ?');
+        $login = $database->prepare('SELECT * FROM user WHERE email = ?');
 
         $login->bindValue(1, $email, PDO::PARAM_STR);
 
@@ -90,9 +95,9 @@ class UserManager extends ConnectDB
      */
     public function deleteUser(int $id)
     {
-        $db = $this->db;
+        $database = $this->database;
 
-        $delete = $db->prepare('DELETE FROM user WHERE id = ?');
+        $delete = $database->prepare('DELETE FROM user WHERE id = ?');
         
         $delete->execute([$id]);
     }

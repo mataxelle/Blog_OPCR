@@ -12,9 +12,13 @@ use App\Twig\TwigRender;
 class AdminController extends TwigRender
 {
     private $auth;
+
     private $commentManager;
+
     private $contactManager;
+
     private $postManager;
+    
     private $userManager;
 
 
@@ -54,7 +58,7 @@ class AdminController extends TwigRender
             'comments' => $comments
         ]);
     }
-
+    
     public function posts()
     {
         $posts = $this->postManager->getAllPost();
@@ -81,7 +85,7 @@ class AdminController extends TwigRender
         $isAdmin = $user->getIsAdmin();
         $userId = $user->getId();
 
-        $this->twig->display('admin/comments.html.twig',[ 
+        $this->twig->display('admin/comments.html.twig',[
             'comments' => $comments,
             'admin' => $isAdmin,
             'user' => $userName,
@@ -119,14 +123,14 @@ class AdminController extends TwigRender
         }
 
         if (isset($_SESSION["id"])) {
-            $id = $_SESSION["id"];
+            $userId = $_SESSION["id"];
         }
 
         $this->twig->display('user/users_account.html.twig', [
             'account' => $account,
             'admin' => $admin,
             'user' => $user,
-            'id' => $id
+            'id' => $userId
         ]);
     }
 

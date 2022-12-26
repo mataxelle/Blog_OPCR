@@ -9,13 +9,13 @@ use Exception;
 class Router
 {
     private $url;
-    private $routes = []; 
+    private $routes = [];
 
     public function __construct(HTTPRequest $request)
     {
         $this->url = $request;
     }
-
+    
     public function get(string $path, string $action)
     {
         $this->routes['GET'][] = new Route($path, $action);

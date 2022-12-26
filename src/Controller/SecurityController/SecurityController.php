@@ -21,8 +21,8 @@ class SecurityController extends TwigRender
     }
 
     /**
-     * Create a user
-     */
+    * Create a user
+    */
     public function register()
     {
         $user = new User();
@@ -37,13 +37,11 @@ class SecurityController extends TwigRender
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
-            //$data = $form->getData();
+            
             $user->setIsAdmin(0);
 
-            $um = new UserManager();
-            $um->registerForm($user);
-
+            $usermanager = new UserManager();
+            $usermanager->registerForm($user);
 
             $response = new RedirectResponse('/login');
             $response->prepare($request);
@@ -65,13 +63,13 @@ class SecurityController extends TwigRender
         $this->twig->display('security/register.html.twig', [
             'form' => $form->createView(),
             'user' => $user,
-            'admin' => $admin
-        ]);
+            'admin' => $admin]
+        );
     }
 
     /**
-     * Log a user
-     */
+    * Log a user
+    */
     public function login()
     {
         if (!empty($_POST)) {
@@ -103,7 +101,7 @@ class SecurityController extends TwigRender
         }
 
         $user = '';
-        $id = '';
+        $userId = '';
         $admin = '';
         
         if (isset($_SESSION["firstname"])) {
@@ -111,7 +109,7 @@ class SecurityController extends TwigRender
         }
 
         if (isset($_SESSION["id"])) {
-            $id = $_SESSION["id"];
+            $userId = $_SESSION["id"];
         }
 
         if (isset($_SESSION["isAdmin"])) {
@@ -120,14 +118,14 @@ class SecurityController extends TwigRender
 
         $this->twig->display('security/login.html.twig', [
             'user' => $user,
-            'id' => $id,
+            'id' => $userId,
             'admin' => $admin
         ]);
     }
 
     /**
-     * Logout a user
-     */
+    * Logout a user
+    */
     public function logout()
     {
         $session = new Session();

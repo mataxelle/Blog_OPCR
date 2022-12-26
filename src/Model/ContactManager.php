@@ -16,13 +16,13 @@ class ContactManager extends ConnectDB
      */
     public function getAllMessages()
     {
-        $db = $this->db;
+        $database = $this->database;
 
-        $response = $db->query('SELECT * FROM contact ORDER BY createdAt ASC');
+        $response = $database->query('SELECT * FROM contact ORDER BY createdAt ASC');
 
         return $response->fetchAll();
     }
-
+    
     /**
      * Get a message by id
      *
@@ -31,9 +31,9 @@ class ContactManager extends ConnectDB
      */
     public function getOneMessage(int $id)
     {
-        $db = $this->db;
+        $database = $this->database;
 
-        $response = $db->prepare('SELECT * FROM contact WHERE id = ?');
+        $response = $database->prepare('SELECT * FROM contact WHERE id = ?');
 
         $response->bindValue(1, $id, PDO::PARAM_INT);
 
@@ -44,12 +44,14 @@ class ContactManager extends ConnectDB
     
     /**
      * Insert a new contact message
+     *
+     * @return int
      */
     public function contactForm()
     {
-        $db = $this->db;
+        $database = $this->database;
 
-        $addContact = $db->prepare('INSERT INTO contact (firstname, lastname, email, label, message, createdAt ) VALUES (?, ?, ?, ?, ?, ?)');
+        $addContact = $database->prepare('INSERT INTO contact (firstname, lastname, email, label, message, createdAt ) VALUES (?, ?, ?, ?, ?, ?)');
 
         $addContact->execute(array(
             $_POST['firstname'],
@@ -65,15 +67,15 @@ class ContactManager extends ConnectDB
 
     /**
      * Delete a contact message
-     * 
-     * @param  int îd Contact message id
+     *
+     * @param  int $id Contact message id
      * @return void
      */
     public function deleteMessage(int $id)
     {
-        $db = $this->db;
+        $database = $this->database;
 
-        $delete = $db->prepare('DELETE FROM contact WHERE id = ?');
+        $delete = $database->prepare('DELETE FROM contact WHERE id = ?');
         
         $delete->execute([$id]);
     }
