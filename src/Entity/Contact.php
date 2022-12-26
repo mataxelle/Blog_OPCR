@@ -40,6 +40,10 @@ class Contact
     
     private $createdAt;
 
+    private $isAnswered;
+
+    private $answeredAt;
+
     public function __construct(array $data = [])
     {
         $this->hydrate($data);
@@ -64,7 +68,11 @@ class Contact
                     case 'message':
                         $this->$method((string) $value);
                         break;
-                    case 'createdAt':    
+                    case 'isAswered':
+                        $this->$method((boolean) $value);
+                        break;
+                    case 'createdAt':
+                    case 'answeredAt':   
                         $this->$method(new \DateTime($value));
                         break;
                 }
@@ -150,6 +158,28 @@ class Contact
     public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
+        return $this;
+    }
+
+    public function getIsAnswered(): ?bool
+    {
+        return $this->isAnswered;
+    }
+
+    public function setIsAnswered(bool $isAnswered): self
+    {
+        $this->isAnswered = $isAnswered;
+        return $this;
+    }
+
+    public function getAnsweredAt(): ?\DateTimeInterface
+    {
+        return $this->answeredAt;
+    }
+
+    public function setAnsweredAt(\DateTimeInterface $answeredAt): self
+    {
+        $this->answeredAt = $answeredAt;
         return $this;
     }
 

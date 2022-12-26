@@ -44,22 +44,22 @@ class ContactManager extends ConnectDB
     
     /**
      * Insert a new contact message
-     *
-     * @return int
      */
-    public function contactForm()
+    public function contactForm(Contact $contact)
     {
         $database = $this->database;
 
-        $addContact = $database->prepare('INSERT INTO contact (firstname, lastname, email, label, message, createdAt ) VALUES (?, ?, ?, ?, ?, ?)');
+        $addContact = $database->prepare('INSERT INTO contact (firstname, lastname, email, label, message, createdAt, isAnswered, answeredAt ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)');
 
         $addContact->execute(array(
-            $_POST['firstname'],
-            $_POST['lastname'],
-            $_POST['email'],
-            $_POST['label'],
-            $_POST['message'],
-            (new DateTime())->format('Y-m-d h:i:s')
+            $contact->getFirstname(),
+            $contact->getLastname(),
+            $contact->getEmail(),
+            $contact->getLabel(),
+            $contact->getMessage(),
+            (new DateTime())->format('Y-m-d h:i:s'),
+            $contact->getIsAnswered() ? 1 : 0,
+            $contact->getAnsweredAt()
         ));
 
         return $addContact;

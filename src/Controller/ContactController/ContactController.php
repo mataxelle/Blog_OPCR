@@ -3,8 +3,13 @@
 namespace App\Controller\ContactController;
 
 use App\Auth\Auth;
+use App\Entity\Contact;
+use App\Form\ContactFormType;
 use App\Model\ContactManager;
 use App\Twig\TwigRender;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class ContactController extends TwigRender
 {
@@ -26,24 +31,28 @@ class ContactController extends TwigRender
     */
     public function contact()
     {
-        if (!empty($_POST)) {
-            $data['firstname'] = $_POST['firstname'];
-            $data['lastname'] = $_POST['lastname'];
-            $data['email'] = $_POST['email'];
-            $data['label'] = $_POST['label'];
-            $data['message'] = $_POST['message'];
+        $contact = new Contact();
 
-            if ($_POST['label']) {
-                $data['label'] = 'information';
-            } else {
-                $data['label'] = 'question';
-            }
+        $form = $this->formFactory->createBuilder(ContactFormType::class, $contact, [
+            'action' => '/contact',
+            'method' => 'POST',
+        ])->getForm();
 
-            $contact = $this->contactManager->contactForm($data);
-            
-            if ($contact) {
-                header('Location: /');
-            }
+        $request = Request::createFromGlobals();        
+        
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $contact->setIsAnswered(0);
+
+            $contactmanager = new ContactManager();
+            $contactmanager->contactForm($contact);
+
+            $response = new RedirectResponse('/');
+            $response->prepare($request);
+        
+            return $response->send();
         }
 
         $user = '';
@@ -58,7 +67,8 @@ class ContactController extends TwigRender
             $isAdmin = $user->getIsAdmin();
         }
 
-        $this->twig->display('contact/contact.html.twig', [
+        $this->twig->display('contact/contact_add.html.twig', [
+            'form' => $form->createView(),
             'userInfo' => $user,
             'user' => $userName,
             'admin' => $isAdmin,

@@ -27,12 +27,11 @@ class ContactFormType extends AbstractType
         ->add('label', ChoiceType::class, [
             'label' => 'Objet',
             'choices' => [
-                'information' => 'information',
-                'question' => 'question'
+                'Information' => 'information',
+                'Question' => 'question'
             ]
         ])
         ->add('message', TextareaType::class)
-        ->add('Envoyer', SubmitType::class)
         ;
     }
     
