@@ -3,8 +3,6 @@
 namespace App\Controller\AdminController;
 
 use App\Auth\Auth;
-use App\Entity\User;
-use App\Entity\Post;
 use App\Model\CommentManager;
 use App\Model\ContactManager;
 use App\Model\PostManager;
@@ -19,6 +17,7 @@ class AdminController extends TwigRender
     private $postManager;
     private $userManager;
 
+
     public function __construct()
     {
         parent::__construct();
@@ -28,6 +27,7 @@ class AdminController extends TwigRender
         $this->postManager = new PostManager();
         $this->userManager = new UserManager();
     }
+    
 
     public function admin()
     {

@@ -33,6 +33,8 @@ class PostController extends TwigRender
 
     /**
      * Show a post and his comments
+     * 
+     * @param string $slug Post slug
      */
     public function show(string $slug)
     {
@@ -110,6 +112,8 @@ class PostController extends TwigRender
 
     /**
      * Update a post
+     * 
+     * @param int $id Post id
      */
     public function update(int $id)
     {
@@ -174,6 +178,8 @@ class PostController extends TwigRender
 
     /**
      * Delete a post
+     * 
+     * @param string $slug Post slug
      */
     public function delete(string $slug)
     {

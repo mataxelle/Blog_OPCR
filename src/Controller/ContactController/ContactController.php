@@ -11,12 +11,14 @@ class ContactController extends TwigRender
     private $auth;
     private $contactManager;
 
+
     public function __construct()
     {
         parent::__construct();
         $this->auth = new Auth();
         $this->contactManager = new ContactManager();
     }
+    
 
     /**
      * Create a contact message
@@ -65,6 +67,8 @@ class ContactController extends TwigRender
 
     /**
      * Get a contact message
+     * 
+     * @param int $id Contact message id
      */
     public function message(int $id)
     {
@@ -85,6 +89,8 @@ class ContactController extends TwigRender
 
     /**
      * Delete a contact message
+     * 
+     * @param int $id Contact message id
      */
     public function delete(int $id)
     {

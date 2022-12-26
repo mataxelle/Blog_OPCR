@@ -11,12 +11,14 @@ class HomeController extends TwigRender
     private $auth;
     private $postManager;
 
+
     public function __construct()
     {
         parent::__construct();
         $this->auth = new Auth();
         $this->postManager = new PostManager();
     }
+    
 
     /**
      * Get all posts

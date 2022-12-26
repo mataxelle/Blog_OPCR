@@ -35,7 +35,7 @@ class PostManager extends ConnectDB
     /**
      * Get a post by id
      *
-     * @param  integer $id
+     * @param  integer $id Post id
      * @return Post
      */
     public function getPostId(int $id)
@@ -54,7 +54,7 @@ class PostManager extends ConnectDB
     /**
      * get a post by slug
      * 
-     * @param string $slug
+     * @param string $slug Post slug
      * @return Post
      */
     public function getOnePost(string $slug)
@@ -117,7 +117,7 @@ class PostManager extends ConnectDB
     /**
      * Delete a post
      * 
-     * @param  string $slug
+     * @param  string $slug Post slug
      * @return void
      */
     public function deletePost(string $slug)

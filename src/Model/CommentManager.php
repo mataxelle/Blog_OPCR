@@ -9,6 +9,11 @@ use PDO;
 
 class CommentManager extends ConnectDB
 {
+    /**
+     * Get all comments sorted by update date
+     *
+     * @return array
+     */
     public function getAllComments()
     {
         $db = $this->db;
@@ -18,6 +23,12 @@ class CommentManager extends ConnectDB
         return $response->fetchAll();
     }
 
+    /**
+     * Get a comment by id
+     *
+     * @param int $id Comment id
+     * @return Comment
+     */
     public function getComment(int $id)
     {
         $db = $this->db;
@@ -31,6 +42,12 @@ class CommentManager extends ConnectDB
         return new Comment($response->fetch());
     }
 
+    /**
+     * Get post comments
+     *
+     * @param int $id Post id
+     * @return array
+     */
     public function getPostComment(int $postId)
     {
         $db = $this->db;
@@ -44,6 +61,9 @@ class CommentManager extends ConnectDB
         return $response->fetchAll();
     }
 
+    /**
+     * Insert a new comment
+     */
     public function commentForm(Comment $comment)
     {
         $db = $this->db;
@@ -62,6 +82,9 @@ class CommentManager extends ConnectDB
         return $addComment;
     }
 
+    /**
+     * Validate a comment
+     */
     public function Validation(Comment $comment)
     {
         $db = $this->db;
@@ -75,6 +98,12 @@ class CommentManager extends ConnectDB
         $commentValidation->execute();
     }
 
+    /**
+     * Delete a comment
+     * 
+     * @param int $is Comment id
+     * @return void
+     */
     public function deleteComment(int $id)
     {
         $db = $this->db;

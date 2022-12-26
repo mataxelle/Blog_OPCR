@@ -9,6 +9,11 @@ use PDO;
 
 class ContactManager extends ConnectDB
 {
+    /**
+     * Get all contact messages sorted by creation date
+     *
+     * @return array
+     */
     public function getAllMessages()
     {
         $db = $this->db;
@@ -18,6 +23,12 @@ class ContactManager extends ConnectDB
         return $response->fetchAll();
     }
 
+    /**
+     * Get a message by id
+     *
+     * @param  integer $id Contact message id
+     * @return Contact
+     */
     public function getOneMessage(int $id)
     {
         $db = $this->db;
@@ -31,6 +42,9 @@ class ContactManager extends ConnectDB
         return new Contact($response->fetch());
     }
     
+    /**
+     * Insert a new contact message
+     */
     public function contactForm()
     {
         $db = $this->db;
@@ -49,6 +63,12 @@ class ContactManager extends ConnectDB
         return $addContact;
     }
 
+    /**
+     * Delete a contact message
+     * 
+     * @param  int îd Contact message id
+     * @return void
+     */
     public function deleteMessage(int $id)
     {
         $db = $this->db;

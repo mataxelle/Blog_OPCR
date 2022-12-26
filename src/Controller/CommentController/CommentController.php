@@ -17,6 +17,7 @@ class CommentController extends TwigRender
     private $commentManager;
     private $postManager;
 
+
     public function __construct()
     {
         parent::__construct();
@@ -24,9 +25,12 @@ class CommentController extends TwigRender
         $this->commentManager = new CommentManager();
         $this->postManager = new PostManager();
     }
+    
 
     /**
      * Create a comment
+     * 
+     * @param string $slug Post slug
      */
     public function add(string $slug)
     {
@@ -78,6 +82,8 @@ class CommentController extends TwigRender
 
     /**
      * Valdate a comment
+     * 
+     * @param int $id Comment id
      */
     public function validation(int $id)
     {
@@ -119,6 +125,8 @@ class CommentController extends TwigRender
 
     /**
      * Delete a comment
+     * 
+     *  @param int $id Comment id
      */
     public function delete(int $id)
     {
