@@ -21,9 +21,9 @@ class UserController extends TwigRender
     }
     
     /**
-    * Get a user account information
-    *
-    * @param int $id User id
+     * Get a user account information
+     *
+     * @param int $id User id
     */
     public function account(int $id)
     {
@@ -41,9 +41,9 @@ class UserController extends TwigRender
     }
 
     /**
-    * Delete a user
-    * 
-    * @param int $id User id
+     * Delete a user
+     * 
+     * @param int $id User id
     */
     public function delete(int $id)
     {

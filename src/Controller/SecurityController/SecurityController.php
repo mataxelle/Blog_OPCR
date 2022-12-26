@@ -21,7 +21,7 @@ class SecurityController extends TwigRender
     }
 
     /**
-    * Create a user
+     * Create a user
     */
     public function register()
     {
@@ -68,7 +68,7 @@ class SecurityController extends TwigRender
     }
 
     /**
-    * Log a user
+     * Log a user
     */
     public function login()
     {
@@ -124,7 +124,7 @@ class SecurityController extends TwigRender
     }
 
     /**
-    * Logout a user
+     * Logout a user
     */
     public function logout()
     {

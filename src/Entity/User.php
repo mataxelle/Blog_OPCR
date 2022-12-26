@@ -9,27 +9,28 @@ class User
     private $id;
 
     /**
-    * @Assert\NotBlank(message="Veuillez saisir votre prénom")
-    * @Assert\Length(min=2)
+     * @Assert\NotBlank(message="Veuillez saisir votre prénom")
+     * @Assert\Length(min=2)
     */
     private $firstname;
 
     /**
-    * @Assert\NotBlank(message="Veuillez saisir votre nom")
-    * @Assert\Length(min=2)
+     * @Assert\NotBlank(message="Veuillez saisir votre nom")
+     * @Assert\Length(min=2)
     */
     private $lastname;
 
     private $isAdmin;
 
     /**
-    * @Assert\NotBlank(message="Veuillez saisir votre email")
+     * @Assert\NotBlank(message="Veuillez saisir votre email")
+     * @Assert\Length(min=2)
     */
     private $email;
 
     /**
-    * @Assert\NotBlank(message="Veuillez saisir votre mot de passe ")
-    * @Assert\Length(min=8)
+     * @Assert\NotBlank(message="Veuillez saisir votre mot de passe ")
+     * @Assert\Length(min=8)
     */
     private $password;
     

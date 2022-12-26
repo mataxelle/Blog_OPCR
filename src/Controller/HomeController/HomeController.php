@@ -22,7 +22,7 @@ class HomeController extends TwigRender
     
     
     /**
-    * Get all posts
+     * Get all posts
     */
     public function index()
     {

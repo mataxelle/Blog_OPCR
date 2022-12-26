@@ -22,16 +22,19 @@ class Contact
 
     /**
      * @Assert\NotBlank(message="Veuillez saisir votre email")
+     * @Assert\Length(min=2)
      */
     private $email;
 
     /**
      * @Assert\NotBlank(message="Veuillez choisir")
+     * @Assert\Length(min=2)
      */
     private $label;
 
     /**
      * @Assert\NotBlank(message="Veuillez saisir votre message")
+     * @Assert\Length(min=2)
      */
     private $message;
     

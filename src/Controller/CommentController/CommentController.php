@@ -28,9 +28,9 @@ class CommentController extends TwigRender
     }
     
     /**
-    * Create a comment
-    *
-    * @param string $slug Post slug
+     * Create a comment
+     *
+     * @param string $slug Post slug
     */
     public function add(string $slug)
     {
@@ -81,9 +81,9 @@ class CommentController extends TwigRender
     }
 
     /**
-    * Valdate a comment
-    *
-    * @param int $id Comment id
+     * Valdate a comment
+     *
+     * @param int $id Comment id
     */
     public function validation(int $id)
     {
@@ -124,9 +124,9 @@ class CommentController extends TwigRender
     }
 
     /**
-    * Delete a comment
-    * 
-    * @param int $id Comment id
+     * Delete a comment
+     * 
+     * @param int $id Comment id
     */
     public function delete(int $id)
     {

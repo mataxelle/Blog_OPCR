@@ -13,7 +13,8 @@ class Comment
     private $userId;
 
     /**
-    * @Assert\NotBlank(message="Veuillez saisir votre contenu")
+     * @Assert\NotBlank(message="Veuillez saisir votre contenu")
+     * @Assert\Length(min=2)
     */
     private $content;
 

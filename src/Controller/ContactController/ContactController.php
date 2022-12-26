@@ -22,7 +22,7 @@ class ContactController extends TwigRender
     
     
     /**
-    * Create a contact message
+     * Create a contact message
     */
     public function contact()
     {
@@ -67,9 +67,9 @@ class ContactController extends TwigRender
     }
     
     /**
-    * Get a contact message
-    * 
-    * @param int $id Contact message id
+     * Get a contact message
+     * 
+     * @param int $id Contact message id
     */
     public function message(int $id)
     {
@@ -89,9 +89,9 @@ class ContactController extends TwigRender
     }
     
     /**
-    * Delete a contact message
-    * 
-    * @param int $id Contact message id
+     * Delete a contact message
+     * 
+     * @param int $id Contact message id
     */
     public function delete(int $id)
     {

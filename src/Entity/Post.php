@@ -11,19 +11,22 @@ class Post
     private $userId;
 
     /**
-    * @Assert\NotBlank(message="Veuillez saisir votre titre")
+     * @Assert\NotBlank(message="Veuillez saisir votre titre")
+     * @Assert\Length(min=2)
     */
     private $title;
 
     /**
-    * @Assert\NotBlank(message="Veuillez saisir votre slug")
+     * @Assert\NotBlank(message="Veuillez saisir votre slug")
+     * @Assert\Length(min=2)
     */
     private $slug;
 
     private $image;
 
     /**
-    * @Assert\NotBlank(message="Veuillez saisir votre contenu")
+     * @Assert\NotBlank(message="Veuillez saisir votre contenu")
+     *@Assert\Length(min=2)
     */
     private $content;
 

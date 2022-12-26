@@ -34,9 +34,9 @@ class PostController extends TwigRender
     }
 
     /**
-    * Show a post and his comments
-    *
-    * @param string $slug Post slug
+     * Show a post and his comments
+     *
+     * @param string $slug Post slug
     */
     public function show(string $slug)
     {
@@ -59,9 +59,9 @@ class PostController extends TwigRender
     }
 
     /**
-    * Add a post
-    * 
-    * @return Response
+     * Add a post
+     * 
+     * @return Response
     */
     public function add(): Response
     {
@@ -115,10 +115,10 @@ class PostController extends TwigRender
     }
 
     /**
-    * Update a post
-    * 
-    * @param int $id Post id
-    * @return Response
+     * Update a post
+     * 
+     * @param int $id Post id
+     * @return Response
     */
     public function update(int $id): Response
     {
