@@ -25,6 +25,9 @@ class CommentController extends TwigRender
         $this->postManager = new PostManager();
     }
 
+    /**
+     * Create a comment
+     */
     public function add(string $slug)
     {
         $user = $this->auth->getCurrentUser();
@@ -73,6 +76,9 @@ class CommentController extends TwigRender
         ]);
     }
 
+    /**
+     * Valdate a comment
+     */
     public function validation(int $id)
     {
         $comment = $this->commentManager->getComment($id);
@@ -111,6 +117,9 @@ class CommentController extends TwigRender
         ]);
     }
 
+    /**
+     * Delete a comment
+     */
     public function delete(int $id)
     {
         $user = $this->auth->getCurrentUser();

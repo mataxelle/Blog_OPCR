@@ -9,6 +9,11 @@ use PDO;
 
 class UserManager extends ConnectDB
 {
+    /**
+     * Get all users sorted by creation date
+     *
+     * @return array
+     */
     public function getAllUsers()
     {
         $db = $this->db;
@@ -18,6 +23,12 @@ class UserManager extends ConnectDB
         return $response->fetchAll();  
     }
 
+    /**
+     * Get a user by id
+     *
+     * @param  int $id
+     * @return User
+     */
     public function getUser(int $id)
     {
         $db = $this->db;
@@ -31,6 +42,9 @@ class UserManager extends ConnectDB
         return new User($response->fetch());  
     }
 
+    /**
+     * Register a new user
+     */
     public function registerForm(User $user)
     {
         $db = $this->db;
@@ -52,6 +66,9 @@ class UserManager extends ConnectDB
         return $createUser;
     }
 
+    /**
+     * Update a user
+     */
     public function loginForm(string $email)
     {
         $db = $this->db;
@@ -65,6 +82,12 @@ class UserManager extends ConnectDB
         return new User($login->fetch());
     }
 
+    /**
+     * Insert a new post
+     * 
+     * @param int $id
+     * @return void
+     */
     public function deleteUser(int $id)
     {
         $db = $this->db;

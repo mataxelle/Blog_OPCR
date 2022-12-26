@@ -20,6 +20,9 @@ class SecurityController extends TwigRender
         $this->userManager = new UserManager();
     }
 
+    /**
+     * Create a user
+     */
     public function register()
     {
         $user = new User();
@@ -66,6 +69,9 @@ class SecurityController extends TwigRender
         ]);
     }
 
+    /**
+     * Log a user
+     */
     public function login()
     {
         if (!empty($_POST)) {
@@ -119,6 +125,9 @@ class SecurityController extends TwigRender
         ]);
     }
 
+    /**
+     * Logout a user
+     */
     public function logout()
     {
         $session = new Session();

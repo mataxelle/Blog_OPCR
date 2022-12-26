@@ -42,11 +42,13 @@ class User
         $this->hydrate($data);
     }
 
+    /**
+     * Filling out a new user object with data
+     */
     public function hydrate(array $data)
     {
-        // Boucle sur tableau de données
         foreach ($data as $key => $value) {
-            // Récupération du setter corespondant
+
             $method = 'set' . ucfirst($key);
 
             if (method_exists($this, $method)) {
@@ -74,11 +76,17 @@ class User
         }
     }
 
+    /**
+     * Get value of user id
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * Set value of user id
+     */
     public function setId($id)
     {
         if (is_string($id) && intval($id) > 0) {

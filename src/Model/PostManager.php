@@ -9,6 +9,11 @@ use PDO;
 
 class PostManager extends ConnectDB
 {
+    /**
+     * Get all posts sorted by creation date
+     *
+     * @return array
+     */
     public function getAllPost()
     {
         $db = $this->db;
@@ -27,6 +32,12 @@ class PostManager extends ConnectDB
         return $response->fetchAll();
     }
 
+    /**
+     * Get a post by id
+     *
+     * @param  integer $id
+     * @return Post
+     */
     public function getPostId(int $id)
     {
         $db = $this->db;
@@ -40,6 +51,12 @@ class PostManager extends ConnectDB
         return new Post($response->fetch());  
     }
 
+    /**
+     * get a post by slug
+     * 
+     * @param string $slug
+     * @return Post
+     */
     public function getOnePost(string $slug)
     {
         $db = $this->db;
@@ -53,6 +70,9 @@ class PostManager extends ConnectDB
         return new Post($response->fetch());  
     }
 
+    /**
+     * Insert a new post
+     */
     public function postForm(Post $post)
     {
         $db = $this->db;
@@ -73,6 +93,9 @@ class PostManager extends ConnectDB
         return $addPost;
     }
 
+    /**
+     * Update a post
+     */
     public function postUpdate(Post $post)
     {
         $db = $this->db;
@@ -91,6 +114,12 @@ class PostManager extends ConnectDB
         $upPost->execute();
     }
 
+    /**
+     * Delete a post
+     * 
+     * @param  string $slug
+     * @return void
+     */
     public function deletePost(string $slug)
     {
         $db = $this->db;

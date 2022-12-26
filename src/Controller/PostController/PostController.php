@@ -31,6 +31,9 @@ class PostController extends TwigRender
         $this->twig->display('home/home.html.twig',[ 'posts' => $posts]);
     }
 
+    /**
+     * Show a post and his comments
+     */
     public function show(string $slug)
     {
         $post = $this->postManager->getOnePost($slug);
@@ -51,6 +54,9 @@ class PostController extends TwigRender
         ]);
     }
 
+    /**
+     * Add a post
+     */
     public function add()
     {
         $post = new Post();
@@ -102,6 +108,9 @@ class PostController extends TwigRender
         ]);
     }
 
+    /**
+     * Update a post
+     */
     public function update(int $id)
     {
         $post = $this->postManager->getPostId($id);
@@ -163,6 +172,9 @@ class PostController extends TwigRender
         ]);
     }
 
+    /**
+     * Delete a post
+     */
     public function delete(string $slug)
     {
         $user = $this->auth->getCurrentUser();

@@ -18,6 +18,11 @@ class Session
         }
     }
     
+    /**
+     * @param  string $key
+     * @param  mixed  $default
+     * @return mixed
+     */
     public function get(string $key, $default = null)
     {
         $this->checkIsStarted();
@@ -27,6 +32,11 @@ class Session
         return $default;
     }
 
+    /**
+     * @param  string $key
+     * @param  $value
+     * @return mixed
+     */
     public function set(string $key, $value): void
     {
         $this->checkIsStarted();

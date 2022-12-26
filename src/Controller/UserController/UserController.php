@@ -19,6 +19,9 @@ class UserController extends TwigRender
         $this->userManager = new UserManager();
     }
     
+    /**
+     * Get a user account information
+     */
     public function account(int $id)
     {
         $user = $this->auth->getCurrentUser();
@@ -34,6 +37,9 @@ class UserController extends TwigRender
         ]);
     }
 
+    /**
+     * Delete a user
+     */
     public function delete(int $id)
     {
         $user = $this->auth->getCurrentUser();

@@ -17,6 +17,11 @@ class Auth
         $this->userManager = new UserManager();
     }
 
+    /**
+     * Get current user from session storage
+     *
+     * @return User
+     */
     public function getCurrentUser(): User
     {
         return $this->userManager->getUser($this->session->get('id'));

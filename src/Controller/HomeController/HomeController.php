@@ -18,6 +18,9 @@ class HomeController extends TwigRender
         $this->postManager = new PostManager();
     }
 
+    /**
+     * Get all posts
+     */
     public function index()
     {
         $posts = $this->postManager->getAllValidedPost();

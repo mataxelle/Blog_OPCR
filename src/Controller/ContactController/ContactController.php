@@ -18,6 +18,9 @@ class ContactController extends TwigRender
         $this->contactManager = new ContactManager();
     }
 
+    /**
+     * Create a contact message
+     */
     public function contact()
     {
         if (!empty($_POST)) {
@@ -60,6 +63,9 @@ class ContactController extends TwigRender
         ]);
     }
 
+    /**
+     * Get a contact message
+     */
     public function message(int $id)
     {
         $message = $this->contactManager->getOneMessage($id);
@@ -77,6 +83,9 @@ class ContactController extends TwigRender
         ]);
     }
 
+    /**
+     * Delete a contact message
+     */
     public function delete(int $id)
     {
         $this->contactManager->deleteMessage($id);

@@ -38,9 +38,11 @@ class Post
         $this->hydrate($data);
     }
 
+    /**
+     * Filling out a new post object with data
+     */
     public function hydrate(array $data)
     {
-        // Boucle sur tableau de données
         foreach ($data as $key => $value) {
 
             $method = 'set' . ucfirst($key);
@@ -72,11 +74,17 @@ class Post
         }
     }
 
+    /**
+     * Get value of post id
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * Set value of post id
+     */
     public function setId($id)
     {
         if (is_string($id) && intval($id) > 0) {
@@ -87,6 +95,9 @@ class Post
         }
     }
 
+    /**
+     * Get value of userId
+     */
     public function getUserId(): ?int
     {
         return $this->userId;
