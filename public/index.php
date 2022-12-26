@@ -1,32 +1,27 @@
 <?php
 
-use App\Exceptions\RouteNotFoundException;
 use App\Router\HTTPRequest;
 use App\Router\Router;
 
-require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__.'/../vendor/autoload.php';
 
 $dotenv = Dotenv\Dotenv::createImmutable('../');
 $dotenv->load();
 
 $dotenv->required(
     [
-    'DB_HOST',
-    'DB_DATABASE',
-    'DB_USERNAME',
-    'DB_PASSWORD',
+     'DB_HOST',
+     'DB_DATABASE',
+     'DB_USERNAME',
+     'DB_PASSWORD'
     ]
 );
 
-require_once __DIR__ . './../src/config.php';
+require_once __DIR__.'./../src/config.php';
 
 $request = new HTTPRequest;
 
 $router = new Router($request);
-
-session_start();
-/*var_dump($_SESSION);
-die;*/
 
 $router->get('/', 'App\Controller\HomeController\HomeController@index');
 $router->get('/register', 'App\Controller\SecurityController\SecurityController@register');
@@ -50,7 +45,6 @@ $router->get('/delete_user/:id', 'App\Controller\UserController\UserController@d
 $router->get('/contact', 'App\Controller\ContactController\ContactController@contact');
 $router->post('/contact', 'App\Controller\ContactController\ContactController@contact');
 $router->get('/message/:id', 'App\Controller\ContactController\ContactController@message');
-// Admin
 $router->get('/admin', 'App\Controller\AdminController\AdminController@admin');
 $router->get('/admin/posts', 'App\Controller\AdminController\AdminController@posts');
 $router->get('/admin/comments', 'App\Controller\AdminController\AdminController@comments');

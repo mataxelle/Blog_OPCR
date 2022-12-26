@@ -8,16 +8,20 @@ use App\Session\Session;
 
 class Auth
 {
+
     private $session;
     
     private $userManager;
+    
     
     public function __construct()
     {
         $this->session = new Session();
         $this->userManager = new UserManager();
+
     }
-    
+
+
     /**
      * Get current user from session storage
      *

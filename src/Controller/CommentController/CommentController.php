@@ -19,12 +19,14 @@ class CommentController extends TwigRender
     
     private $postManager;
     
+
     public function __construct()
     {
         parent::__construct();
         $this->auth = new Auth();
         $this->commentManager = new CommentManager();
         $this->postManager = new PostManager();
+        
     }
     
     /**

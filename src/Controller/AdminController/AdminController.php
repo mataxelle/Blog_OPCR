@@ -8,17 +8,43 @@ use App\Model\ContactManager;
 use App\Model\PostManager;
 use App\Model\UserManager;
 use App\Twig\TwigRender;
+use Symfony\Component\HttpFoundation\Response;
 
 class AdminController extends TwigRender
 {
+    /**
+     * User Auth
+     *
+     * @var Auth
+     */
     private $auth;
 
+    /**
+     * Comment manager
+     *
+     * @var CommentManager
+     */
     private $commentManager;
 
+    /**
+     * Contact manager
+     *
+     * @var ContactManager
+     */
     private $contactManager;
 
+    /**
+     * Post manager
+     *
+     * @var PostManager
+     */
     private $postManager;
     
+    /**
+     * User manager
+     *
+     * @var UserManager
+     */
     private $userManager;
 
 
@@ -30,9 +56,15 @@ class AdminController extends TwigRender
         $this->contactManager = new ContactManager();
         $this->postManager = new PostManager();
         $this->userManager = new UserManager();
+
     }
     
 
+    /**
+     * Display all blog infos
+     *
+     * @return array
+     */
     public function admin()
     {
         $posts = $this->postManager->getAllPost();
@@ -48,17 +80,23 @@ class AdminController extends TwigRender
         $isAdmin = $user->getIsAdmin();
         $userId = $user->getId();
 
-        $this->twig->display('admin/index.html.twig', [
-            'posts' => $posts,
-            'users' => $users,
-            'messages' => $messages,
-            'admin' => $isAdmin,
-            'user' => $userName,
-            'id' => $userId,
-            'comments' => $comments
-        ]);
+        $this->twig->display('admin/index.html.twig',
+            [
+             'posts' => $posts,
+             'users' => $users,
+             'messages' => $messages,
+             'admin' => $isAdmin,
+             'user' => $userName,
+             'id' => $userId,
+             'comments' => $comments
+            ]);
     }
     
+    /**
+     * Display all posts
+     *
+     * @return array
+     */
     public function posts()
     {
         $posts = $this->postManager->getAllPost();
@@ -68,14 +106,20 @@ class AdminController extends TwigRender
         $isAdmin = $user->getIsAdmin();
         $userId = $user->getId();
 
-        $this->twig->display('admin/posts.html.twig', [
-            'posts' => $posts,
-            'admin' => $isAdmin,
-            'user' => $userName,
-            'id' => $userId
-        ]);
+        $this->twig->display('admin/posts.html.twig',
+            [
+             'posts' => $posts,
+             'admin' => $isAdmin,
+             'user' => $userName,
+             'id' => $userId
+            ]);
     }
 
+    /**
+     * Display all comments
+     *
+     * @return array
+     */
     public function comments()
     {
         $comments = $this->commentManager->getAllComments();
@@ -85,14 +129,20 @@ class AdminController extends TwigRender
         $isAdmin = $user->getIsAdmin();
         $userId = $user->getId();
 
-        $this->twig->display('admin/comments.html.twig',[
-            'comments' => $comments,
-            'admin' => $isAdmin,
-            'user' => $userName,
-            'id' => $userId
-        ]);
+        $this->twig->display('admin/comments.html.twig',
+            [
+             'comments' => $comments,
+             'admin' => $isAdmin,
+             'user' => $userName,
+             'id' => $userId
+            ]);
     }
 
+    /**
+     * Display all users
+     *
+     * @return array
+     */
     public function users()
     {
         $users = $this->userManager->getAllUsers();
@@ -102,14 +152,21 @@ class AdminController extends TwigRender
         $isAdmin = $user->getIsAdmin();
         $userId = $user->getId();
 
-        $this->twig->display('admin/users.html.twig', [
-            'users' => $users,
-            'admin' => $isAdmin,
-            'user' => $userName,
-            'id' => $userId
-        ]);
+        $this->twig->display('admin/users.html.twig',
+            [
+             'users' => $users,
+             'admin' => $isAdmin,
+             'user' => $userName,
+             'id' => $userId
+            ]);
     }
 
+    /**
+     * Display one user infos
+     *
+     * @param int $id User $id
+     * @return User
+     */
     public function usersAccount(int $id)
     {
         $account = $this->userManager->getUser($id);
@@ -126,14 +183,20 @@ class AdminController extends TwigRender
             $userId = $_SESSION["id"];
         }
 
-        $this->twig->display('user/users_account.html.twig', [
-            'account' => $account,
-            'admin' => $admin,
-            'user' => $user,
-            'id' => $userId
-        ]);
+        $this->twig->display('user/users_account.html.twig',
+            [
+             'account' => $account,
+             'admin' => $admin,
+             'user' => $user,
+             'id' => $userId
+            ]);
     }
 
+    /**
+     * Display all messages
+     *
+     * @return array
+     */
     public function messages()
     {
         $messages = $this->contactManager->getAllMessages();
@@ -143,11 +206,12 @@ class AdminController extends TwigRender
         $isAdmin = $user->getIsAdmin();
         $userId = $user->getId();
 
-        $this->twig->display('admin/messages.html.twig', [
-            'messages' => $messages,
-            'admin' => $isAdmin,
-            'user' => $userName,
-            'id' => $userId,
-        ]);
+        $this->twig->display('admin/messages.html.twig',
+            [
+             'messages' => $messages,
+             'admin' => $isAdmin,
+             'user' => $userName,
+             'id' => $userId,
+            ]);
     }
 }
