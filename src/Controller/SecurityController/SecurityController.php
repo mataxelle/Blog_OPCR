@@ -125,6 +125,8 @@ class SecurityController extends TwigRender
 
     /**
      * Logout a user
+     * 
+     * @return void
     */
     public function logout()
     {
