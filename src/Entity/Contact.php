@@ -6,43 +6,51 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class Contact
 {
+    /**
+     * @var int
+     */
     private $id;
 
     /**
-     * @Assert\NotBlank(message="Veuillez saisir votre prénom")
-     * @Assert\Length(min=2)
+     * @var string
      */
     private $firstname;
 
     /**
-     * @Assert\NotBlank(message="Veuillez saisir votre prénom")
-     * @Assert\Length(min=2)
+     * @var string
      */
     private $lastname;
 
     /**
-     * @Assert\NotBlank(message="Veuillez saisir votre email")
-     * @Assert\Length(min=2)
+     * @var string
      */
     private $email;
 
     /**
-     * @Assert\NotBlank(message="Veuillez choisir")
-     * @Assert\Length(min=2)
+     * @var string
      */
     private $label;
 
     /**
-     * @Assert\NotBlank(message="Veuillez saisir votre message")
-     * @Assert\Length(min=2)
+     * @var string
      */
     private $message;
     
+    /**
+     * @var \datetime
+     */
     private $createdAt;
 
+    /**
+     * @var boolean
+     */
     private $isAnswered;
 
+    /**
+     * @var \datetime
+     */
     private $answeredAt;
+
 
     public function __construct(array $data = [])
     {
@@ -53,11 +61,10 @@ class Contact
     {
         foreach ($data as $key => $value) {
 
-            $method = 'set' . ucfirst($key);
+            $method = 'set'.ucfirst($key);
 
             if (method_exists($this, $method)) {
-                switch ($key)
-                {
+                switch ($key) {
                     case 'id':
                         $this->$method((int) $value);
                         break;
@@ -72,7 +79,7 @@ class Contact
                         $this->$method((boolean) $value);
                         break;
                     case 'createdAt':
-                    case 'answeredAt':   
+                    case 'answeredAt':
                         $this->$method(new \DateTime($value));
                         break;
                 }
@@ -80,103 +87,157 @@ class Contact
         }
     }
 
+    /**
+     * Get value of contact id
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * Set value of contact id
+     */
     public function setId($id)
     {
-        if (is_string($id) && intval($id) > 0) {
-            $this->id = intval($id);
+        if (is_string($id) && (int)$id > 0) {
+            $this->id = (int)$id;
         }
         if (is_int($id) && $id > 0) {
             $this->id = $id;
         }
     }
 
+    /**
+     * Get value of contact firstname
+     */
     public function getFirstname(): ?string
     {
         return $this->firstname;
     }
 
+    /**
+     * Set value of contact firstname
+     */
     public function setFirstname(string $firstname): self
     {
         $this->firstname = $firstname;
         return $this;
     }
 
+    /**
+     * Get value of contact lastname
+     */
     public function getLastname(): ?string
     {
         return $this->lastname;
     }
 
+    /**
+     * Set value of contact lastname
+     */
     public function setLastname(string $lastname): self
     {
         $this->lastname = $lastname;
         return $this;
     }
 
+    /**
+     * Get value of contact email
+     */
     public function getEmail(): ?string
     {
         return $this->email;
     }
 
+    /**
+     * Set value of contact email
+     */
     public function setEmail(string $email): self
     {
         $this->email = $email;
         return $this;
     }
 
+    /**
+     * Get value of contact label
+     */
     public function getLabel(): ?string
     {
         return $this->label;
     }
 
+    /**
+     * Set value of contact label
+     */
     public function setLabel(string $label): self
     {
         $this->label = $label;
         return $this;
     }
 
+    /**
+     * Get value of contact message
+     */
     public function getMessage(): ?string
     {
         return $this->message;
     }
 
+    /**
+     * Set value of contact message
+     */
     public function setMessage(string $message): self
     {
         $this->message = $message;
         return $this;
     }
 
+    /**
+     * Get value of contact creation date
+     */
     public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->createdAt;
     }
 
+    /**
+     * Set value of contact creation date
+     */
     public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
         return $this;
     }
 
+    /**
+     * Get value of contact is answered
+     */
     public function getIsAnswered(): ?bool
     {
         return $this->isAnswered;
     }
 
+    /**
+     * Set value of contact is answered
+     */
     public function setIsAnswered(bool $isAnswered): self
     {
         $this->isAnswered = $isAnswered;
         return $this;
     }
 
+    /**
+     * Get value of contact answered at
+     */
     public function getAnsweredAt(): ?\DateTimeInterface
     {
         return $this->answeredAt;
     }
 
+    /**
+     * Set value of contact answered at
+     */
     public function setAnsweredAt(\DateTimeInterface $answeredAt): self
     {
         $this->answeredAt = $answeredAt;

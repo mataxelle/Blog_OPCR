@@ -6,35 +6,51 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class Post
 {
+    /**
+     * @var int
+     */
     private $id;
 
+    /**
+     * @var int
+     */
     private $userId;
 
     /**
-     * @Assert\NotBlank(message="Veuillez saisir votre titre")
-     * @Assert\Length(min=2)
-    */
+     * @var string
+     */
     private $title;
 
     /**
-     * @Assert\NotBlank(message="Veuillez saisir votre slug")
-     * @Assert\Length(min=2)
-    */
+     * @var string
+     */
     private $slug;
 
+    /**
+     * @var string
+     */
     private $image;
 
     /**
-     * @Assert\NotBlank(message="Veuillez saisir votre contenu")
-     *@Assert\Length(min=2)
-    */
+     * @var string
+     */
     private $content;
 
+    /**
+     * @var boolean
+     */
     private $isPublished;
 
+    /**
+     * @var \datetime
+     */
     private $createdAt;
 
+    /**
+     * @var \datetime
+     */
     private $updatedAt;
+
 
     public function __construct(array $data = [])
     {
@@ -48,11 +64,10 @@ class Post
     {
         foreach ($data as $key => $value) {
 
-            $method = 'set' . ucfirst($key);
+            $method = 'set'.ucfirst($key);
 
             if (method_exists($this, $method)) {
-                switch ($key)
-                {
+                switch ($key) {
                     case 'id':
                     case 'userId':
                         $this->$method((int) $value);
@@ -88,8 +103,8 @@ class Post
      */
     public function setId($id)
     {
-        if (is_string($id) && intval($id) > 0) {
-            $this->id = intval($id);
+        if (is_string($id) && (int)$id > 0) {
+            $this->id = (int)$id;
         }
         if (is_int($id) && $id > 0) {
             $this->id = $id;
@@ -97,90 +112,135 @@ class Post
     }
 
     /**
-     * Get value of userId
+     * Get value of post user id
      */
     public function getUserId(): ?int
     {
         return $this->userId;
     }
 
+    /**
+     * Set value of post user id
+     */
     public function setUserId(int $userId): self
     {
         $this->userId = $userId;
         return $this;
     }
 
+    /**
+     * Get value of post title
+     */
     public function getTitle(): ?string
     {
         return $this->title;
     }
 
+    /**
+     * Set value of post title
+     */
     public function setTitle(string $title): self
     {
         $this->title = $title;
         return $this;
     }
 
+    /**
+     * Get value of post slug
+     */
     public function getSlug(): ?string
     {
         return $this->slug;
     }
 
+    /**
+     * Set value of post slug
+     */
     public function setSlug(string $slug): self
     {
         $this->slug = $slug;
         return $this;
     }
 
+    /**
+     * Get value of post image
+     */
     public function getImage(): ?string
     {
         return $this->image;
     }
 
+    /**
+     * Set value of post image
+     */
     public function setImage(string $image = null): self
     {
         $this->image = $image;
         return $this;
     }
 
+    /**
+     * Get value of post content
+     */
     public function getContent(): ?string
     {
         return $this->content;
     }
 
+    /**
+     * Set value of post content
+     */
     public function setContent(string $content): self
     {
         $this->content = $content;
         return $this;
     }
 
+    /**
+     * Get value of post is published
+     */
     public function getIsPublished(): ?bool
     {
         return $this->isPublished;
     }
 
+    /**
+     * Set value of post is published
+     */
     public function setIsPublished(bool $isPublished): self
     {
         $this->isPublished = $isPublished;
         return $this;
     }
 
+    /**
+     * Get value of post creation date
+     */
     public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->createdAt;
     }
 
+    /**
+     * Set value of post creation date
+     */
     public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
         return $this;
     }
 
+    /**
+     * Get value of post update date
+     */
     public function getUpdatedAt(): ?\DateTimeInterface
     {
         return $this->updatedAt;
     }
 
+    /**
+     * Set value of post update date
+     */
     public function setUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;

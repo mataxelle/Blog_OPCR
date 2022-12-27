@@ -2,41 +2,49 @@
 
 namespace App\Entity;
 
-use Symfony\Component\Validator\Constraints as Assert;
-
 class User
 {
+
+    /**
+     * @var int
+     */
     private $id;
 
     /**
-     * @Assert\NotBlank(message="Veuillez saisir votre prénom")
-     * @Assert\Length(min=2)
-    */
+     * @var string
+     */
     private $firstname;
 
     /**
-     * @Assert\NotBlank(message="Veuillez saisir votre nom")
-     * @Assert\Length(min=2)
-    */
+     * @var string
+     */
     private $lastname;
 
+    /**
+     * @var boolean
+     */
     private $isAdmin;
 
     /**
-     * @Assert\NotBlank(message="Veuillez saisir votre email")
-     * @Assert\Length(min=2)
-    */
+     * @var string
+     */
     private $email;
 
     /**
-     * @Assert\NotBlank(message="Veuillez saisir votre mot de passe ")
-     * @Assert\Length(min=8)
-    */
+     * @var string
+     */
     private $password;
-    
+
+    /**
+     * @var \datetime
+     */
     private $createdAt;
 
+    /**
+     * @var \datetime
+     */
     private $updatedAt;
+
 
     public function __construct(array $data = [])
     {
@@ -50,7 +58,7 @@ class User
     {
         foreach ($data as $key => $value) {
 
-            $method = 'set' . ucfirst($key);
+            $method = 'set'.ucfirst($key);
 
             if (method_exists($this, $method)) {
                 switch ($key) {
@@ -67,7 +75,7 @@ class User
                         $this->$method((string) $value);
                         break;
                     case 'createdAt':
-                    case 'updtedAt':    
+                    case 'updtedAt':
                         $this->$method(new \DateTime($value));
                         break;
                 }
@@ -76,48 +84,63 @@ class User
     }
 
     /**
-    * Get value of user id
-    */
+     * Get value of user id
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
     /**
-    * Set value of user id
-    */
+     * Set value of user id
+     */
     public function setId($id)
     {
-        if (is_string($id) && intval($id) > 0) {
-            $this->id = intval($id);
+        if (is_string($id) && (int)$id > 0) {
+            $this->id = (int)$id;
         }
         if (is_int($id) && $id > 0) {
             $this->id = $id;
         }
     }
 
+    /**
+     * Get value of user firstname
+     */
     public function getFirstname(): ?string
     {
         return $this->firstname;
     }
 
+    /**
+     * Set value of user firstname
+     */
     public function setFirstname(string $firstname): self
     {
         $this->firstname = $firstname;
         return $this;
     }
 
+    /**
+     * Get value of user lastname
+     */
     public function getLastname(): ?string
     {
         return $this->lastname;
     }
 
+    /**
+     * Set value of user lastname
+     */
     public function setLastname(string $lastname): self
     {
         $this->lastname = $lastname;
         return $this;
     }
 
+    /**
+     * Get value of user email
+     */
     public function getEmail(): ?string
     {
         return $this->email;
@@ -132,44 +155,68 @@ class User
         return $this;
     }
 
+    /**
+     * Get value of user password
+     */
     public function getPassword(): ?string
     {
         return $this->password;
     }
 
+    /**
+     * Set value of user password
+     */
     public function setPassword(string $password): self
     {
         $this->password = $password;
         return $this;
     }
 
+    /**
+     * Get value of user is admin
+     */
     public function getIsAdmin(): ?bool
     {
         return $this->isAdmin;
     }
 
+    /**
+     * Set value of user is admin
+     */
     public function setIsAdmin(bool $isAdmin): self
     {
         $this->isAdmin = $isAdmin;
         return $this;
     }
 
+    /**
+     * Get value of user creation date
+     */
     public function getCreatedAt(): ?\DateTimeInterface
     {
         return $this->createdAt;
     }
 
+    /**
+     * Set value of user creation date
+     */
     public function setCreatedAt(\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
         return $this;
     }
 
+    /**
+     * Get value of user update date
+     */
     public function getUpdatedAt(): ?\DateTimeInterface
     {
         return $this->updatedAt;
     }
 
+    /**
+     * Set value of user update date
+     */
     public function setUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
