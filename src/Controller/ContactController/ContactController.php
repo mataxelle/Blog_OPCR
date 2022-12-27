@@ -8,13 +8,22 @@ use App\Form\ContactFormType;
 use App\Model\ContactManager;
 use App\Twig\TwigRender;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class ContactController extends TwigRender
 {
+    /**
+     * User Auth
+     *
+     * @var Auth
+     */
     private $auth;
     
+    /**
+     * Contact manager
+     *
+     * @var ContactManager
+     */
     private $contactManager;
 
 

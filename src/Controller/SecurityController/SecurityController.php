@@ -12,6 +12,11 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class SecurityController extends TwigRender
 {
+    /**
+     * User manager
+     *
+     * @var UserManager
+     */
     private $userManager;
 
     public function __construct()

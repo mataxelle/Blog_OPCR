@@ -7,7 +7,7 @@ class Session
     /**
      * Start user session
      *
-     * @return
+     * @return true
      */
     public function checkIsStarted()
     {
@@ -30,9 +30,9 @@ class Session
     
     /**
      * Retrieve the value for `$key` or return `$default` instead
-     * 
-     * @param  string $key The parameter to return
-     * @param  mixed  $default The default value if it contains no value
+     *
+     * @param string $key The parameter to return
+     * @param mixed $default The default value if it contains no value
      * @return mixed
      */
     public function get(string $key, $default= null)
@@ -46,9 +46,9 @@ class Session
 
     /**
      * Set a value on the item for the provided `$key`
-     * 
-     * @param  string $key
-     * @param  $value
+     *
+     * @param string $key
+     * @param $value
      * @return mixed
      */
     public function set(string $key, $value): void

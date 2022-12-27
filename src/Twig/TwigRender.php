@@ -28,9 +28,6 @@ class TwigRender
      */
     protected $twig;
 
-    /**
-     * @var
-     */
     protected $formFactory;
 
 
@@ -47,13 +44,15 @@ class TwigRender
         $csrfManager = new CsrfTokenManager();
 
         $formEngine = new TwigRendererEngine([$defaultFormTheme], $this->twig);
-        $this->twig->addRuntimeLoader(new FactoryRuntimeLoader(
-            [
-             FormRenderer::class => function () use ($formEngine, $csrfManager) {
-                return new FormRenderer($formEngine, $csrfManager);
-             },
-            ]
-        ));
+        $this->twig->addRuntimeLoader(
+            new FactoryRuntimeLoader(
+             [
+              FormRenderer::class => function () use ($formEngine, $csrfManager) {
+                 return new FormRenderer($formEngine, $csrfManager);
+              },
+             ]
+            )
+        );
 
         $this->twig->addExtension(new FormExtension());
         $this->twig->addExtension(new TranslationExtension());

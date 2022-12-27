@@ -23,6 +23,8 @@ $request = new HTTPRequest;
 
 $router = new Router($request);
 
+session_start();
+
 $router->get('/', 'App\Controller\HomeController\HomeController@index');
 $router->get('/register', 'App\Controller\SecurityController\SecurityController@register');
 $router->post('/register', 'App\Controller\SecurityController\SecurityController@register');

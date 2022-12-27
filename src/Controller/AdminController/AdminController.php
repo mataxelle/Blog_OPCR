@@ -80,7 +80,9 @@ class AdminController extends TwigRender
         $isAdmin = $user->getIsAdmin();
         $userId = $user->getId();
 
-        $this->twig->display('admin/index.html.twig', [
+        $this->twig->display(
+            'admin/index.html.twig',
+            [
              'posts' => $posts,
              'users' => $users,
              'messages' => $messages,
@@ -88,7 +90,8 @@ class AdminController extends TwigRender
              'user' => $userName,
              'id' => $userId,
              'comments' => $comments
-            ]);
+            ]
+        );
     }
     
     /**
@@ -105,12 +108,15 @@ class AdminController extends TwigRender
         $isAdmin = $user->getIsAdmin();
         $userId = $user->getId();
 
-        $this->twig->display('admin/posts.html.twig', [
+        $this->twig->display(
+            'admin/posts.html.twig',
+            [
              'posts' => $posts,
              'admin' => $isAdmin,
              'user' => $userName,
              'id' => $userId
-            ]);
+            ]
+        );
     }
 
     /**
@@ -127,12 +133,15 @@ class AdminController extends TwigRender
         $isAdmin = $user->getIsAdmin();
         $userId = $user->getId();
 
-        $this->twig->display('admin/comments.html.twig', [
+        $this->twig->display(
+            'admin/comments.html.twig',
+            [
              'comments' => $comments,
              'admin' => $isAdmin,
              'user' => $userName,
              'id' => $userId
-            ]);
+            ]
+        );
     }
 
     /**
@@ -149,12 +158,15 @@ class AdminController extends TwigRender
         $isAdmin = $user->getIsAdmin();
         $userId = $user->getId();
 
-        $this->twig->display('admin/users.html.twig', [
+        $this->twig->display(
+            'admin/users.html.twig',
+            [
              'users' => $users,
              'admin' => $isAdmin,
              'user' => $userName,
              'id' => $userId
-            ]);
+            ]
+        );
     }
 
     /**
@@ -179,12 +191,15 @@ class AdminController extends TwigRender
             $userId = $_SESSION["id"];
         }
 
-        $this->twig->display('user/users_account.html.twig', [
+        $this->twig->display(
+            'user/users_account.html.twig',
+            [
              'account' => $account,
              'admin' => $admin,
              'user' => $user,
              'id' => $userId
-            ]);
+            ]
+        );
     }
 
     /**
@@ -201,11 +216,14 @@ class AdminController extends TwigRender
         $isAdmin = $user->getIsAdmin();
         $userId = $user->getId();
 
-        $this->twig->display('admin/messages.html.twig', [
+        $this->twig->display(
+            'admin/messages.html.twig',
+            [
              'messages' => $messages,
              'admin' => $isAdmin,
              'user' => $userName,
              'id' => $userId,
-            ]);
+            ]
+        );
     }
 }

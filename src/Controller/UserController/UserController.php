@@ -3,14 +3,23 @@
 namespace App\Controller\UserController;
 
 use App\Auth\Auth;
-use App\Entity\User;
 use App\Twig\TwigRender;
 use App\Model\UserManager;
 
 class UserController extends TwigRender
 {
+    /**
+     * User Auth
+     *
+     * @var Auth
+     */
     private $auth;
     
+    /**
+     * User manager
+     *
+     * @var UserManager
+     */
     private $userManager;
 
     public function __construct()

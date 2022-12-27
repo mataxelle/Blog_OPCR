@@ -8,8 +8,18 @@ use App\Model\PostManager;
 
 class HomeController extends TwigRender
 {
+    /**
+     * User Auth
+     *
+     * @var Auth
+     */
     private $auth;
     
+    /**
+     * Post manager
+     *
+     * @var PostManager
+     */
     private $postManager;
 
 

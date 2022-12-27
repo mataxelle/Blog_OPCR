@@ -15,8 +15,18 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class PostController extends TwigRender
 {
+    /**
+     * User Auth
+     *
+     * @var Auth
+     */
     private $auth;
     
+    /**
+     * Post manager
+     *
+     * @var PostManager
+     */
     private $postManager;
 
     public function __construct()

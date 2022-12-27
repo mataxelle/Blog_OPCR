@@ -13,10 +13,25 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class CommentController extends TwigRender
 {
+    /**
+     * User Auth
+     *
+     * @var Auth
+     */
     private $auth;
 
+    /**
+     * Comment manager
+     *
+     * @var CommentManager
+     */
     private $commentManager;
-    
+
+    /**
+     * Post manager
+     *
+     * @var PostManager
+     */
     private $postManager;
     
 

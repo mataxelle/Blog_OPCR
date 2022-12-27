@@ -3,7 +3,6 @@
 namespace App\Form;
 
 use App\Entity\Post;
-use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -17,22 +16,22 @@ class PostFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-        ->add('title', TextType::class, [
-            'label' => 'Titre',
-        ])
-        ->add('slug', TextType::class, [
-            'label' => 'Slug',
-        ])
-        ->add('image', FileType::class, [
-            'required' => false,
-            'data_class' => null
-        ])
-        ->add('content', TextareaType::class, [
-            'label' => 'Contenu',
-        ])
-        ->add('isPublished', CheckboxType::class, [
-            'required' => false
-        ])
+            ->add('title', TextType::class, [
+                'label' => 'Titre',
+            ])
+            ->add('slug', TextType::class, [
+                'label' => 'Slug',
+            ])
+            ->add('image', FileType::class, [
+                'required' => false,
+                'data_class' => null
+            ])
+            ->add('content', TextareaType::class, [
+                'label' => 'Contenu',
+            ])
+            ->add('isPublished', CheckboxType::class, [
+                'required' => false
+            ])
         ;
     }
     
