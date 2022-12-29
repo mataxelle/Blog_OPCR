@@ -6,7 +6,7 @@ class User
 {
 
     /**
-     * @var int
+     * @var integer
      */
     private $id;
 
@@ -46,18 +46,20 @@ class User
     private $updatedAt;
 
 
-    public function __construct(array $data = [])
+    public function __construct(array $data= [])
     {
         $this->hydrate($data);
+    
     }
     
+    
     /**
-    * Filling out a new user object with data
-    */
+     * Filling out a new user object with data
+     */
     public function hydrate(array $data)
     {
         foreach ($data as $key => $value) {
-
+            
             $method = 'set'.ucfirst($key);
 
             if (method_exists($this, $method)) {
@@ -97,8 +99,9 @@ class User
     public function setId($id)
     {
         if (is_string($id) && (int)$id > 0) {
-            $this->id = (int)$id;
+            $this->id = (int) $id;
         }
+
         if (is_int($id) && $id > 0) {
             $this->id = $id;
         }

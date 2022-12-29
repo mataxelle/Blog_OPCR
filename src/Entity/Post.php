@@ -2,17 +2,16 @@
 
 namespace App\Entity;
 
-use Symfony\Component\Validator\Constraints as Assert;
-
 class Post
 {
+    
     /**
-     * @var int
+     * @var integer
      */
     private $id;
 
     /**
-     * @var int
+     * @var integer
      */
     private $userId;
 
@@ -52,10 +51,12 @@ class Post
     private $updatedAt;
 
 
-    public function __construct(array $data = [])
+    public function __construct(array $data= [])
     {
         $this->hydrate($data);
+
     }
+
 
     /**
      * Filling out a new post object with data
@@ -63,7 +64,7 @@ class Post
     public function hydrate(array $data)
     {
         foreach ($data as $key => $value) {
-
+            
             $method = 'set'.ucfirst($key);
 
             if (method_exists($this, $method)) {
@@ -104,8 +105,9 @@ class Post
     public function setId($id)
     {
         if (is_string($id) && (int)$id > 0) {
-            $this->id = (int)$id;
+            $this->id = (int) $id;
         }
+
         if (is_int($id) && $id > 0) {
             $this->id = $id;
         }

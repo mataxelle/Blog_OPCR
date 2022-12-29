@@ -8,6 +8,7 @@ use App\Model\UserManager;
 
 class UserController extends TwigRender
 {
+    
     /**
      * User Auth
      *
@@ -22,44 +23,49 @@ class UserController extends TwigRender
      */
     private $userManager;
 
+
     public function __construct()
     {
         parent::__construct();
         $this->auth = new Auth();
         $this->userManager = new UserManager();
+
     }
     
     /**
      * Get a user account information
      *
-     * @param int $id User id
-    */
-    public function account(int $id)
+     * @param int $uId User id
+     */
+    public function account(int $uId)
     {
         $user = $this->auth->getCurrentUser();
         $userName = $user->getFirstname();
         $isAdmin = $user->getIsAdmin();
         $userId = $user->getId();
 
-        $this->twig->display('user/account.html.twig', [ 
-            'account' => $user,
-            'user' => $userName,
-            'admin' => $isAdmin,
-            'id' => $userId
-        ]);
+        $this->twig->display(
+            'user/account.html.twig',
+            [ 
+             'account' => $user,
+             'user' => $userName,
+             'admin' => $isAdmin,
+             'id' => $userId
+            ]
+        );
     }
-
+    
     /**
      * Delete a user
-     * 
-     * @param int $id User id
-    */
-    public function delete(int $id)
+     *
+     * @param int $userId User id
+     */
+    public function delete(int $userId)
     {
         $user = $this->auth->getCurrentUser();
         $isAdmin = $user->getIsAdmin();
     
-        $this->userManager->deleteUser($id);
+        $this->userManager->deleteUser($userId);
 
         if ($isAdmin) {
             return header('Location: /admin');

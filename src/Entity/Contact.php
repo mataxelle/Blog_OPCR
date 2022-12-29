@@ -2,12 +2,11 @@
 
 namespace App\Entity;
 
-use Symfony\Component\Validator\Constraints as Assert;
-
 class Contact
 {
+
     /**
-     * @var int
+     * @var integer
      */
     private $id;
 
@@ -52,15 +51,17 @@ class Contact
     private $answeredAt;
 
 
-    public function __construct(array $data = [])
+    public function __construct(array $data= [])
     {
         $this->hydrate($data);
+
     }
     
+
     public function hydrate(array $data)
     {
         foreach ($data as $key => $value) {
-
+            
             $method = 'set'.ucfirst($key);
 
             if (method_exists($this, $method)) {
@@ -101,8 +102,9 @@ class Contact
     public function setId($id)
     {
         if (is_string($id) && (int)$id > 0) {
-            $this->id = (int)$id;
+            $this->id = (int) $id;
         }
+
         if (is_int($id) && $id > 0) {
             $this->id = $id;
         }

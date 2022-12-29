@@ -8,10 +8,12 @@ use App\Model\UserManager;
 use App\Session\Session;
 use App\Twig\TwigRender;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class SecurityController extends TwigRender
 {
+    
     /**
      * User manager
      *
@@ -19,35 +21,42 @@ class SecurityController extends TwigRender
      */
     private $userManager;
 
+
     public function __construct()
     {
         parent::__construct();
         $this->userManager = new UserManager();
+
     }
 
     /**
      * Create a user
-    */
-    public function register()
+     * 
+     * @return Response
+     */
+    public function register(): Response
     {
         $user = new User();
 
-        $form = $this->formFactory->createBuilder(UserFormType::class, $user, [
-            'action' => '/register',
-            'method' => 'POST',
-        ])->getForm();
+        $form = $this->formFactory->createBuilder(
+            UserFormType::class,
+            $user,
+            [
+             'action' => '/register',
+             'method' => 'POST',
+            ]
+        )
+        ->getForm();
 
         $request = Request::createFromGlobals();
-
+        
         $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
+        
+        if ($form->isSubmitted() === true && $form->isValid() === true) {
             
             $user->setIsAdmin(0);
-
             $usermanager = new UserManager();
             $usermanager->registerForm($user);
-
             $response = new RedirectResponse('/login');
             $response->prepare($request);
 
@@ -57,27 +66,31 @@ class SecurityController extends TwigRender
         $user = '';
         $admin = '';
         
-        if (isset($_SESSION["firstname"])) {
+        if (isset($_SESSION["firstname"]) === true) {
             $user = $_SESSION["firstname"];
         }
 
-        if (isset($_SESSION["isAdmin"])) {
+        if (isset($_SESSION["isAdmin"]) === true) {
             $admin = $_SESSION["isAdmin"];
         }
 
-        $this->twig->display('security/register.html.twig', [
-            'form' => $form->createView(),
-            'user' => $user,
-            'admin' => $admin]
+        $this->twig->display(
+            'security/register.html.twig',
+            [
+             'form' => $form->createView(),
+             'user' => $user,
+             'admin' => $admin
+            ]
         );
     }
-
+    
     /**
      * Log a user
-    */
+     *
+     */
     public function login()
     {
-        if (!empty($_POST)) {
+        if (empty($_POST) === false) {
             $data['email'] = $_POST['email'];
             $data['password'] = $_POST['password'];
 
@@ -87,7 +100,7 @@ class SecurityController extends TwigRender
 
             $isPasswordCorrect = password_verify($_POST['password'], $login->getPassword());
 
-            if ($isPasswordCorrect) {
+            if ($isPasswordCorrect === true) {
 
                 $session = new Session();
                 $session->checkIsStarted();
@@ -109,30 +122,33 @@ class SecurityController extends TwigRender
         $userId = '';
         $admin = '';
         
-        if (isset($_SESSION["firstname"])) {
+        if (isset($_SESSION["firstname"]) === true) {
             $user = $_SESSION["firstname"];
         }
 
-        if (isset($_SESSION["id"])) {
+        if (isset($_SESSION["id"]) === true) {
             $userId = $_SESSION["id"];
         }
 
-        if (isset($_SESSION["isAdmin"])) {
+        if (isset($_SESSION["isAdmin"]) === true) {
             $admin = $_SESSION["isAdmin"];
         }
 
-        $this->twig->display('security/login.html.twig', [
-            'user' => $user,
-            'id' => $userId,
-            'admin' => $admin
-        ]);
+        $this->twig->display(
+            'security/login.html.twig',
+            [
+             'user' => $user,
+             'id' => $userId,
+             'admin' => $admin
+            ]
+        );
     }
-
+    
     /**
      * Logout a user
-     * 
+     *
      * @return void
-    */
+     */
     public function logout()
     {
         $session = new Session();

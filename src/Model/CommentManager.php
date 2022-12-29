@@ -26,16 +26,16 @@ class CommentManager extends ConnectDB
     /**
      * Get a comment by id
      *
-     * @param int $commnetId Comment id
+     * @param int $commentId Comment id
      * @return Comment
      */
-    public function getComment(int $commnetId)
+    public function getComment(int $commentId)
     {
         $database = $this->database;
         
         $response = $database->prepare('SELECT * FROM comment WHERE id = ?');
         
-        $response->bindValue(1, $commnetId, PDO::PARAM_INT);
+        $response->bindValue(1, $commentId, PDO::PARAM_INT);
         
         $response->execute();
         

@@ -8,6 +8,7 @@ use App\Model\PostManager;
 
 class HomeController extends TwigRender
 {
+    
     /**
      * User Auth
      *
@@ -28,12 +29,15 @@ class HomeController extends TwigRender
         parent::__construct();
         $this->auth = new Auth();
         $this->postManager = new PostManager();
+
     }
     
     
     /**
-     * Get all posts
-    */
+     * Get all validated posts
+     *
+     * @return array
+     */
     public function index()
     {
         $posts = $this->postManager->getAllValidedPost();
@@ -43,11 +47,14 @@ class HomeController extends TwigRender
         $isAdmin = $user->getIsAdmin();
         $userId = $user->getId();
 
-        $this->twig->display('home/home.html.twig',[
-            'posts' => $posts,
-            'admin' => $isAdmin,
-            'user' => $userName,
-            'id' => $userId
-        ]);
+        $this->twig->display(
+            'home/home.html.twig',
+            [
+             'posts' => $posts,
+             'admin' => $isAdmin,
+             'user' => $userName,
+             'id' => $userId
+            ]
+        );
     }
 }

@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class AdminController extends TwigRender
 {
+    
     /**
      * User Auth
      *
@@ -93,7 +94,7 @@ class AdminController extends TwigRender
             ]
         );
     }
-    
+        
     /**
      * Display all posts
      *
