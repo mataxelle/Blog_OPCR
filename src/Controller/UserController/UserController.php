@@ -31,7 +31,7 @@ class UserController extends TwigRender
         $this->auth = new Auth();
         $this->userManager = new UserManager();
 
-        // End __construct()
+        // End __construct().
 
     }
     
@@ -74,7 +74,6 @@ class UserController extends TwigRender
 
             $response = new RedirectResponse('/admin');
             $response->send();
-        
         } else if ($user) {
 
             $response = new RedirectResponse('/login');

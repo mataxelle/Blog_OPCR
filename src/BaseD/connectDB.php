@@ -25,7 +25,7 @@ class ConnectDB extends PDO
            $options
           );
 
-          // End __construct()
+          // End __construct().
           
      }
      

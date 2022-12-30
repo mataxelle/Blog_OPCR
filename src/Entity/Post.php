@@ -55,7 +55,7 @@ class Post
     {
         $this->hydrate($data);
 
-        // End __construct()
+        // End __construct().
 
     }
 
@@ -89,7 +89,7 @@ class Post
                         break;
                 }
             }
-            // End foreach
+            // End foreach.
         }
 
     }

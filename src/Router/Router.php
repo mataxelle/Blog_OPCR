@@ -18,7 +18,7 @@ class Router
     {
         $this->url = $request;
 
-        // End __construct()
+        // End __construct().
     }
     
     public function get(string $path, string $action)

@@ -35,7 +35,7 @@ class ContactController extends TwigRender
         $this->auth = new Auth();
         $this->contactManager = new ContactManager();
 
-        // End __construct()
+        // End __construct().
 
     }
     

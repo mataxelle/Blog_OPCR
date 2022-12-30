@@ -44,7 +44,7 @@ class CommentController extends TwigRender
         $this->commentManager = new CommentManager();
         $this->postManager = new PostManager();
 
-        // End __construct()
+        // End __construct().
         
     }
     

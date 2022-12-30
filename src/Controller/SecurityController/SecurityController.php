@@ -27,7 +27,7 @@ class SecurityController extends TwigRender
         parent::__construct();
         $this->userManager = new UserManager();
 
-        // End __construct()
+        // End __construct().
         
     }
 
@@ -121,7 +121,6 @@ class SecurityController extends TwigRender
                     $response = new RedirectResponse('/');
                     $response->send();
                 }
-
             } else {
 
                 $response = new RedirectResponse('/login');

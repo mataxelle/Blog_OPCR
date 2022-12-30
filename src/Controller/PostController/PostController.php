@@ -54,7 +54,7 @@ class PostController extends TwigRender
         $this->postManager = new PostManager();
         $this->userManager = new UserManager();
 
-        // End __construct()
+        // End __construct().
 
     }
     
