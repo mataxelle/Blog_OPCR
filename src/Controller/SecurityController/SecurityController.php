@@ -27,6 +27,8 @@ class SecurityController extends TwigRender
         parent::__construct();
         $this->userManager = new UserManager();
 
+        // end __construct()
+        
     }
 
     /**
@@ -46,7 +48,7 @@ class SecurityController extends TwigRender
              'method' => 'POST',
             ]
         )
-        ->getForm();
+            ->getForm();
 
         $request = Request::createFromGlobals();
         

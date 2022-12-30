@@ -9,6 +9,7 @@ use PDO;
 
 class UserManager extends ConnectDB
 {
+    
     /**
      * Get all users sorted by creation date
      *
@@ -57,15 +58,15 @@ class UserManager extends ConnectDB
         $pass_hache = password_hash($user->getPassword(), PASSWORD_DEFAULT);
         
         $createUser->execute(
-            array(
+            [
              $user->getFirstname(),
              $user->getLastname(),
              $user->getIsAdmin() ? 1 : 0,
              $user->getEmail(),
              $pass_hache,
              (new DateTime())->format('Y-m-d h:i:s'),
-             (new DateTime())->format('Y-m-d h:i:s')
-            )
+             (new DateTime())->format('Y-m-d h:i:s'),
+            ]
         );
 
         return $createUser;

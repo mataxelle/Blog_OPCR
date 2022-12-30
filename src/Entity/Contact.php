@@ -51,9 +51,11 @@ class Contact
     private $answeredAt;
 
 
-    public function __construct(array $data= [])
+    public function __construct(array $data = [])
     {
         $this->hydrate($data);
+        
+        // end __construct()
 
     }
     
@@ -61,7 +63,6 @@ class Contact
     public function hydrate(array $data)
     {
         foreach ($data as $key => $value) {
-            
             $method = 'set'.ucfirst($key);
 
             if (method_exists($this, $method)) {
@@ -85,11 +86,16 @@ class Contact
                         break;
                 }
             }
+            // end foreach
         }
+
     }
+
 
     /**
      * Get value of contact id
+     *
+     * @return int
      */
     public function getId(): ?int
     {
@@ -112,6 +118,8 @@ class Contact
 
     /**
      * Get value of contact firstname
+     *
+     * @return string
      */
     public function getFirstname(): ?string
     {
@@ -129,6 +137,8 @@ class Contact
 
     /**
      * Get value of contact lastname
+     *
+     * @return string
      */
     public function getLastname(): ?string
     {
@@ -146,6 +156,8 @@ class Contact
 
     /**
      * Get value of contact email
+     *
+     * @return string
      */
     public function getEmail(): ?string
     {
@@ -163,6 +175,8 @@ class Contact
 
     /**
      * Get value of contact label
+     *
+     * @return string
      */
     public function getLabel(): ?string
     {
@@ -180,6 +194,8 @@ class Contact
 
     /**
      * Get value of contact message
+     *
+     * @return string
      */
     public function getMessage(): ?string
     {
@@ -197,6 +213,8 @@ class Contact
 
     /**
      * Get value of contact creation date
+     *
+     * @return \Datetime
      */
     public function getCreatedAt(): ?\DateTimeInterface
     {
@@ -214,6 +232,8 @@ class Contact
 
     /**
      * Get value of contact is answered
+     *
+     * @return boolean
      */
     public function getIsAnswered(): ?bool
     {
@@ -231,6 +251,8 @@ class Contact
 
     /**
      * Get value of contact answered at
+     *
+     * @return \Datetime
      */
     public function getAnsweredAt(): ?\DateTimeInterface
     {

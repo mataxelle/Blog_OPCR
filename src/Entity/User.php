@@ -46,10 +46,12 @@ class User
     private $updatedAt;
 
 
-    public function __construct(array $data= [])
+    public function __construct(array $data = [])
     {
         $this->hydrate($data);
-    
+
+        // end __construct()
+        
     }
     
     
@@ -59,7 +61,6 @@ class User
     public function hydrate(array $data)
     {
         foreach ($data as $key => $value) {
-            
             $method = 'set'.ucfirst($key);
 
             if (method_exists($this, $method)) {
@@ -82,11 +83,16 @@ class User
                         break;
                 }
             }
+            // end foreach
         }
+
     }
+
 
     /**
      * Get value of user id
+     *
+     * @return int
      */
     public function getId(): ?int
     {
@@ -109,6 +115,8 @@ class User
 
     /**
      * Get value of user firstname
+     *
+     * @return string
      */
     public function getFirstname(): ?string
     {
@@ -126,6 +134,8 @@ class User
 
     /**
      * Get value of user lastname
+     *
+     * @return string
      */
     public function getLastname(): ?string
     {
@@ -143,6 +153,8 @@ class User
 
     /**
      * Get value of user email
+     *
+     * @return string
      */
     public function getEmail(): ?string
     {
@@ -160,6 +172,8 @@ class User
 
     /**
      * Get value of user password
+     *
+     * @return string
      */
     public function getPassword(): ?string
     {
@@ -177,6 +191,8 @@ class User
 
     /**
      * Get value of user is admin
+     *
+     * @return boolean
      */
     public function getIsAdmin(): ?bool
     {
@@ -194,6 +210,8 @@ class User
 
     /**
      * Get value of user creation date
+     *
+     * @return \Datetime
      */
     public function getCreatedAt(): ?\DateTimeInterface
     {
@@ -211,6 +229,8 @@ class User
 
     /**
      * Get value of user update date
+     *
+     * @return \Datetime
      */
     public function getUpdatedAt(): ?\DateTimeInterface
     {

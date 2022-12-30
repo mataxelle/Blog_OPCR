@@ -58,6 +58,8 @@ class AdminController extends TwigRender
         $this->postManager = new PostManager();
         $this->userManager = new UserManager();
 
+        // end __construct()
+
     }
     
 
@@ -227,4 +229,5 @@ class AdminController extends TwigRender
             ]
         );
     }
+    
 }

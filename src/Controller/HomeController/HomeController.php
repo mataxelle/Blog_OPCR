@@ -30,6 +30,8 @@ class HomeController extends TwigRender
         $this->auth = new Auth();
         $this->postManager = new PostManager();
 
+        // end __construct()
+
     }
     
     
@@ -57,4 +59,5 @@ class HomeController extends TwigRender
             ]
         );
     }
+    
 }

@@ -19,8 +19,9 @@ class Auth
         $this->session = new Session();
         $this->userManager = new UserManager();
 
-    }
+        // end __construct()
 
+    }
 
     /**
      * Get current user from session storage
@@ -30,5 +31,7 @@ class Auth
     public function getCurrentUser(): User
     {
         return $this->userManager->getUser($this->session->get('id'));
+
     }
+
 }

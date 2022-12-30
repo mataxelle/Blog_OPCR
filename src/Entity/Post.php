@@ -51,9 +51,11 @@ class Post
     private $updatedAt;
 
 
-    public function __construct(array $data= [])
+    public function __construct(array $data = [])
     {
         $this->hydrate($data);
+
+        // end __construct()
 
     }
 
@@ -64,7 +66,6 @@ class Post
     public function hydrate(array $data)
     {
         foreach ($data as $key => $value) {
-            
             $method = 'set'.ucfirst($key);
 
             if (method_exists($this, $method)) {
@@ -88,11 +89,16 @@ class Post
                         break;
                 }
             }
+            // end foreach
         }
+
     }
+
 
     /**
      * Get value of post id
+     *
+     * @return int
      */
     public function getId(): ?int
     {
@@ -115,6 +121,8 @@ class Post
 
     /**
      * Get value of post user id
+     *
+     * @return int
      */
     public function getUserId(): ?int
     {
@@ -132,6 +140,8 @@ class Post
 
     /**
      * Get value of post title
+     *
+     * @return string
      */
     public function getTitle(): ?string
     {
@@ -149,6 +159,8 @@ class Post
 
     /**
      * Get value of post slug
+     *
+     * @return string
      */
     public function getSlug(): ?string
     {
@@ -166,6 +178,8 @@ class Post
 
     /**
      * Get value of post image
+     *
+     * @return string
      */
     public function getImage(): ?string
     {
@@ -183,6 +197,8 @@ class Post
 
     /**
      * Get value of post content
+     *
+     * @return string
      */
     public function getContent(): ?string
     {
@@ -200,6 +216,8 @@ class Post
 
     /**
      * Get value of post is published
+     *
+     * @return boolean
      */
     public function getIsPublished(): ?bool
     {
@@ -217,6 +235,8 @@ class Post
 
     /**
      * Get value of post creation date
+     *
+     * @return \Datetime
      */
     public function getCreatedAt(): ?\DateTimeInterface
     {
@@ -234,6 +254,8 @@ class Post
 
     /**
      * Get value of post update date
+     *
+     * @return \Datetime
      */
     public function getUpdatedAt(): ?\DateTimeInterface
     {

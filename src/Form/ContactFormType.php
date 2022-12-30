@@ -13,6 +13,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ContactFormType extends AbstractType
 {
+    
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -30,14 +31,18 @@ class ContactFormType extends AbstractType
                     'Question' => 'question'
                 ]
             ])
-            ->add('message', TextareaType::class)
-        ;
+            ->add('message', TextareaType::class);
+
+        // end buildForm
+
     }
     
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setDefaults([
-            'data_class' => Contact::class,
-        ]);
+        $resolver->setDefaults(
+            [
+             'data_class' => Contact::class,
+            ]
+        );
     }
 }

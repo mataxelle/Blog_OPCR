@@ -18,6 +18,7 @@ use Symfony\Component\Validator\Validation;
 
 class TwigRender
 {
+    
     /**
      * @var FilesystemLoader
      */
@@ -46,11 +47,11 @@ class TwigRender
         $formEngine = new TwigRendererEngine([$defaultFormTheme], $this->twig);
         $this->twig->addRuntimeLoader(
             new FactoryRuntimeLoader(
-             [
-              FormRenderer::class => function () use ($formEngine, $csrfManager) {
-                 return new FormRenderer($formEngine, $csrfManager);
-              },
-             ]
+                [
+                 FormRenderer::class => function () use ($formEngine, $csrfManager) {
+                    return new FormRenderer($formEngine, $csrfManager);
+                 },
+                ]
             )
         );
 
@@ -67,6 +68,8 @@ class TwigRender
             ->addExtension(new ValidatorExtension($validator))
             ->getFormFactory();
 
+
+        // end __construct()
     }
 
     

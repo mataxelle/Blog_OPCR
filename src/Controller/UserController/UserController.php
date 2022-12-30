@@ -35,9 +35,9 @@ class UserController extends TwigRender
     /**
      * Get a user account information
      *
-     * @param int $uId User id
+     * @return User
      */
-    public function account(int $uId)
+    public function account()
     {
         $user = $this->auth->getCurrentUser();
         $userName = $user->getFirstname();
@@ -46,7 +46,7 @@ class UserController extends TwigRender
 
         $this->twig->display(
             'user/account.html.twig',
-            [ 
+            [
              'account' => $user,
              'user' => $userName,
              'admin' => $isAdmin,

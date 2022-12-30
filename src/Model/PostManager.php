@@ -9,6 +9,7 @@ use PDO;
 
 class PostManager extends ConnectDB
 {
+    
     /**
      * Get all posts sorted by creation date
      *
@@ -77,7 +78,7 @@ class PostManager extends ConnectDB
     
     /**
      * Insert a new post
-     * 
+     *
      * @param Post $post Post Entity
      * @return int
      */
@@ -88,7 +89,7 @@ class PostManager extends ConnectDB
         $addPost = $database->prepare('INSERT INTO post (userId, title, slug, image, content, isPublished, createdAt, updatedAt) VALUES (?, ?, ?, ?, ?, ?, ?, ?)');
         
         $addPost->execute(
-            array(
+            [
              $post->getUserId(),
              $post->getTitle(),
              $post->getSlug(),
@@ -97,7 +98,7 @@ class PostManager extends ConnectDB
              $post->getIsPublished() ? 1 : 0,
              (new DateTime())->format('Y-m-d h:i:s'),
              (new DateTime())->format('Y-m-d h:i:s'),
-            )
+            ]
         );
         
         return $addPost;

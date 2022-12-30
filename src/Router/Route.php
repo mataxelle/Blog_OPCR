@@ -4,6 +4,7 @@ namespace App\Router;
 
 class Route
 {
+    
     private $path;
 
     private $action;
@@ -16,6 +17,8 @@ class Route
         $this->path = trim($path,'/');
         $this->action = $action;
 
+        // end __construct()
+
     }
     
     public function matches(string $url)
@@ -27,6 +30,7 @@ class Route
             $this->matches = $matches;
             return true;
         }
+        
     }
 
     public function execute()

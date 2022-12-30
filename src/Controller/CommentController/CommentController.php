@@ -43,6 +43,8 @@ class CommentController extends TwigRender
         $this->auth = new Auth();
         $this->commentManager = new CommentManager();
         $this->postManager = new PostManager();
+
+        // end __construct()
         
     }
     
@@ -73,7 +75,7 @@ class CommentController extends TwigRender
              'method' => 'POST',
             ]
         )
-        ->getForm();
+            ->getForm();
 
         $request = Request::createFromGlobals();
         
@@ -177,4 +179,5 @@ class CommentController extends TwigRender
 
         return header('Location: /admin');
     }
+    
 }

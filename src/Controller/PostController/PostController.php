@@ -54,6 +54,8 @@ class PostController extends TwigRender
         $this->postManager = new PostManager();
         $this->userManager = new UserManager();
 
+        // end __construct()
+
     }
     
     /**
@@ -83,7 +85,7 @@ class PostController extends TwigRender
 
         $this->twig->display(
             'post/post_show.html.twig',
-            [ 
+            [
              'post' => $post,
              'comments' => $comments,
              'user' => $userName,
@@ -110,7 +112,7 @@ class PostController extends TwigRender
              'method' => 'POST',
             ]
         )
-        ->getForm();
+            ->getForm();
 
         $request = Request::createFromGlobals();
         
@@ -154,7 +156,7 @@ class PostController extends TwigRender
              'user' => $userName,
              'admin' => $isAdmin,
              'id' => $userId
-           ]
+            ]
         );
     }
     

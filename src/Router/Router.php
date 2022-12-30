@@ -8,12 +8,17 @@ use Exception;
 
 class Router
 {
+
     private $url;
+
     private $routes = [];
+
 
     public function __construct(HTTPRequest $request)
     {
         $this->url = $request;
+
+        // end __construct()
     }
     
     public function get(string $path, string $action)
@@ -34,6 +39,6 @@ class Router
             }
         }
 
-        //throw new Exception('404 Not Found');
+        // throw new Exception('404 Not Found');
     }
 }

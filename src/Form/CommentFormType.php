@@ -11,18 +11,24 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class CommentFormType extends AbstractType
 {
+    
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('content', TextareaType::class)
-            ->add('isValid', CheckboxType::class, ['required' => false])
-        ;
+            ->add('isValid', CheckboxType::class, ['required' => false]);
+
+        // end buildForm
+
+
     }
     
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setDefaults([
-            'data_class' => Comment::class,
-        ]);
+        $resolver->setDefaults(
+            [
+             'data_class' => Comment::class,
+            ]
+        );
     }
 }

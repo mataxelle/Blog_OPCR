@@ -35,12 +35,14 @@ class ContactController extends TwigRender
         $this->auth = new Auth();
         $this->contactManager = new ContactManager();
 
+        // end __construct()
+
     }
     
     /**
      * Create a contact message
      *
-     *@return Response
+     * @return Response
      */
     public function contact(): Response
     {
@@ -54,7 +56,7 @@ class ContactController extends TwigRender
              'method' => 'POST',
             ]
         )
-        ->getForm();
+            ->getForm();
 
         $request = Request::createFromGlobals();
         
@@ -133,4 +135,5 @@ class ContactController extends TwigRender
 
         return header('Location: /admin');
     }
+    
 }

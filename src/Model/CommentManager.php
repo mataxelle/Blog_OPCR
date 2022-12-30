@@ -9,6 +9,7 @@ use PDO;
 
 class CommentManager extends ConnectDB
 {
+    
     /**
      * Get all comments sorted by update date
      *
@@ -74,14 +75,14 @@ class CommentManager extends ConnectDB
         $addComment = $database->prepare('INSERT INTO comment (postId, userId, content, isValid, createdAt, updatedAt) VALUES (?, ?, ?, ?, ?, ?)');
         
         $addComment->execute(
-            array(
+            [
              $comment->getPostId(),
              $comment->getUserId(),
              $comment->getContent(),
              $comment->getIsValid() ? 1 : 0,
              (new DateTime())->format('Y-m-d h:i:s'),
-             (new DateTime())->format('Y-m-d h:i:s')
-            )
+             (new DateTime())->format('Y-m-d h:i:s'),
+            ]
         );
         
         return $addComment;

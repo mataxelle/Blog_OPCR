@@ -9,6 +9,7 @@ use PDO;
 
 class ContactManager extends ConnectDB
 {
+    
     /**
      * Get all contact messages sorted by creation date
      *
@@ -44,7 +45,7 @@ class ContactManager extends ConnectDB
     
     /**
      * Insert a new contact message
-     * 
+     *
      * @param Contact $contact Contact entity
      * @return int
      */
@@ -55,7 +56,7 @@ class ContactManager extends ConnectDB
         $addContact = $database->prepare('INSERT INTO contact (firstname, lastname, email, label, message, createdAt, isAnswered, answeredAt ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)');
 
         $addContact->execute(
-            array(
+            [
              $contact->getFirstname(),
              $contact->getLastname(),
              $contact->getEmail(),
@@ -64,7 +65,7 @@ class ContactManager extends ConnectDB
              (new DateTime())->format('Y-m-d h:i:s'),
              $contact->getIsAnswered() ? 1 : 0,
              (new DateTime())->format('Y-m-d h:i:s'),
-            )
+            ]
         );
 
         return $addContact;

@@ -41,19 +41,20 @@ class Comment
     private $updatedAt;
 
 
-    public function __construct(array $data= [])
+    public function __construct(array $data = [])
     {
         $this->hydrate($data);
 
+        // end __construct()
+        
     }
 
 
     public function hydrate(array $data)
     {
         foreach ($data as $key => $value) {
-            
             $method = 'set'.ucfirst($key);
-
+            
             if (method_exists($this, $method)) {
                 switch ($key) {
                     case 'id':
@@ -72,11 +73,16 @@ class Comment
                         break;
                 }
             }
+            // end foreach
         }
+
     }
+
     
     /**
      * Get value of comment id
+     *
+     * @return int
      */
     public function getId(): ?int
     {
@@ -99,6 +105,8 @@ class Comment
 
     /**
      * Get value of comment post id
+     *
+     * @return int
      */
     public function getPostId(): ?int
     {
@@ -116,6 +124,8 @@ class Comment
 
     /**
      * Get value of comment user id
+     *
+     * @return int
      */
     public function getUserId(): ?int
     {
@@ -133,6 +143,8 @@ class Comment
 
     /**
      * Get value of comment content
+     *
+     * @return string
      */
     public function getContent(): ?string
     {
@@ -150,6 +162,8 @@ class Comment
 
     /**
      * Get value of comment is valid
+     *
+     * @return boolean
      */
     public function getIsValid(): ?bool
     {
@@ -167,6 +181,8 @@ class Comment
 
     /**
      * Get value of comment creation date
+     *
+     * @return \Datetime
      */
     public function getCreatedAt(): ?\DateTimeInterface
     {
@@ -184,6 +200,8 @@ class Comment
 
     /**
      * Get value of comment update date
+     *
+     * @return \Datetime
      */
     public function getUpdatedAt(): ?\DateTimeInterface
     {

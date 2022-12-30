@@ -4,6 +4,7 @@ namespace App\Session;
 
 class Session
 {
+
     /**
      * Start user session
      *
@@ -14,6 +15,7 @@ class Session
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
+
     }
     
     /**
@@ -26,6 +28,7 @@ class Session
         if (session_status() === PHP_SESSION_ACTIVE) {
             session_destroy();
         }
+
     }
     
     /**
@@ -35,12 +38,13 @@ class Session
      * @param mixed $default The default value if it contains no value
      * @return mixed
      */
-    public function get(string $key, $default= null)
+    public function get(string $key, $default = null)
     {
         $this->checkIsStarted();
         if (array_key_exists($key, $_SESSION)) {
             return $_SESSION[$key];
         }
+
         return $default;
     }
 
@@ -57,6 +61,10 @@ class Session
         $_SESSION[$key] = $value;
     }
 
+    /**
+     * @param string $key
+     * @return void
+     */
     public function delete(string $key): void
     {
         $this->checkIsStarted();
