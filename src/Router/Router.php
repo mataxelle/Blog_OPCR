@@ -18,7 +18,7 @@ class Router
     {
         $this->url = $request;
 
-        // end __construct()
+        // End __construct()
     }
     
     public function get(string $path, string $action)
@@ -39,6 +39,6 @@ class Router
             }
         }
 
-        // throw new Exception('404 Not Found');
+        // Throw new Exception('404 Not Found');
     }
 }

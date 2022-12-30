@@ -55,7 +55,7 @@ class Contact
     {
         $this->hydrate($data);
         
-        // end __construct()
+        // End __construct()
 
     }
     
@@ -86,7 +86,7 @@ class Contact
                         break;
                 }
             }
-            // end foreach
+            // End foreach
         }
 
     }

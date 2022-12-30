@@ -5,6 +5,7 @@ namespace App\Controller\UserController;
 use App\Auth\Auth;
 use App\Twig\TwigRender;
 use App\Model\UserManager;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class UserController extends TwigRender
 {
@@ -29,6 +30,8 @@ class UserController extends TwigRender
         parent::__construct();
         $this->auth = new Auth();
         $this->userManager = new UserManager();
+
+        // End __construct()
 
     }
     
@@ -68,9 +71,15 @@ class UserController extends TwigRender
         $this->userManager->deleteUser($userId);
 
         if ($isAdmin) {
-            return header('Location: /admin');
+
+            $response = new RedirectResponse('/admin');
+            $response->send();
+        
         } else if ($user) {
-            return header('Location: /login');
+
+            $response = new RedirectResponse('/login');
+            $response->send();
+
         }
     }
 }

@@ -45,7 +45,7 @@ class Comment
     {
         $this->hydrate($data);
 
-        // end __construct()
+        // End __construct()
         
     }
 
@@ -73,7 +73,7 @@ class Comment
                         break;
                 }
             }
-            // end foreach
+            // End foreach
         }
 
     }

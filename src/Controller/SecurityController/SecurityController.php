@@ -27,7 +27,7 @@ class SecurityController extends TwigRender
         parent::__construct();
         $this->userManager = new UserManager();
 
-        // end __construct()
+        // End __construct()
         
     }
 
@@ -114,9 +114,19 @@ class SecurityController extends TwigRender
                 $_SESSION['updatedAt'] = $login->getUpdatedAt();
                 $_SESSION['email'] = $login->getEmail();
 
-                header('Location: /');
+                if ($login->getIsAdmin() === true) {
+                    $response = new RedirectResponse('/admin');
+                    $response->send();
+                } else {
+                    $response = new RedirectResponse('/');
+                    $response->send();
+                }
+
             } else {
-                header('Location: /login');
+
+                $response = new RedirectResponse('/login');
+                $response->send();
+                
             }
         }
 
@@ -158,6 +168,7 @@ class SecurityController extends TwigRender
         $session->checkIsStarted();
         $session->destroySession();
 
-        return header('Location: /login');
+        $response = new RedirectResponse('/login');
+        $response->send();
     }
 }

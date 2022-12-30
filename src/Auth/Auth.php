@@ -19,7 +19,7 @@ class Auth
         $this->session = new Session();
         $this->userManager = new UserManager();
 
-        // end __construct()
+        // End __construct()
 
     }
 

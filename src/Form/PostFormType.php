@@ -34,7 +34,7 @@ class PostFormType extends AbstractType
                 'required' => false
             ]);
         
-        // end buildForm
+        // End buildForm
 
     }
     

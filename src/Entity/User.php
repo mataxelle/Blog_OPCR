@@ -50,7 +50,7 @@ class User
     {
         $this->hydrate($data);
 
-        // end __construct()
+        // End __construct()
         
     }
     
@@ -83,7 +83,7 @@ class User
                         break;
                 }
             }
-            // end foreach
+            // End foreach
         }
 
     }

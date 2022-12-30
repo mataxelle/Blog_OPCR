@@ -9,7 +9,7 @@ class HTTPRequest
     {
         return $_SERVER['REQUEST_METHOD'];
 
-        // end requestMethod()
+        // End requestMethod()
 
     }
     

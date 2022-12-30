@@ -54,7 +54,7 @@ class PostController extends TwigRender
         $this->postManager = new PostManager();
         $this->userManager = new UserManager();
 
-        // end __construct()
+        // End __construct()
 
     }
     
@@ -247,11 +247,14 @@ class PostController extends TwigRender
         $isAdmin = $user->getIsAdmin();
 
         if ($isAdmin === false) {
-            return header('Location: /');
+            
+            $response = new RedirectResponse('/');
+            $response->send();
         }
 
         $this->postManager->deletePost($slug);
 
-        return header('Location: /admin');
+        $response = new RedirectResponse('admin');
+        $response->send();
     }
 }

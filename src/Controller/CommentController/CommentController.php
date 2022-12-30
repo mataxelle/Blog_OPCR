@@ -44,7 +44,7 @@ class CommentController extends TwigRender
         $this->commentManager = new CommentManager();
         $this->postManager = new PostManager();
 
-        // end __construct()
+        // End __construct()
         
     }
     
@@ -172,12 +172,15 @@ class CommentController extends TwigRender
         $isAdmin = $user->getIsAdmin();
 
         if ($isAdmin === false) {
-            return header('Location: /');
+            $response = new RedirectResponse('/');
+            $response->send();
         }
         
         $this->commentManager->deleteComment($commentId);
 
-        return header('Location: /admin');
+        $response = new RedirectResponse('/admin');
+        $response->send();
+
     }
     
 }

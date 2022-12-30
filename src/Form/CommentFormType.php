@@ -18,7 +18,7 @@ class CommentFormType extends AbstractType
             ->add('content', TextareaType::class)
             ->add('isValid', CheckboxType::class, ['required' => false]);
 
-        // end buildForm
+        // End buildForm
 
 
     }

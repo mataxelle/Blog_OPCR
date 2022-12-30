@@ -35,7 +35,7 @@ class ContactController extends TwigRender
         $this->auth = new Auth();
         $this->contactManager = new ContactManager();
 
-        // end __construct()
+        // End __construct()
 
     }
     
@@ -133,7 +133,8 @@ class ContactController extends TwigRender
     {
         $this->contactManager->deleteMessage($messageId);
 
-        return header('Location: /admin');
+        $response = new RedirectResponse('/admin');
+        $response->send();
     }
     
 }
