@@ -7,6 +7,7 @@ use App\Entity\Contact;
 use App\Form\ContactFormType;
 use App\Model\ContactManager;
 use App\Twig\TwigRender;
+use App\Session\Session;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -14,6 +15,13 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 class ContactController extends TwigRender
 {
     
+    /**
+     * Session
+     *
+     * @var Session
+     */
+    private $session;
+
     /**
      * User Auth
      *
@@ -33,6 +41,7 @@ class ContactController extends TwigRender
     {
         parent::__construct();
         $this->auth = new Auth();
+        $this->session = new Session();
         $this->contactManager = new ContactManager();
 
         // End __construct().
@@ -80,7 +89,8 @@ class ContactController extends TwigRender
         $userId = '';
         $isAdmin = '';
         
-        if (isset($_SESSION["firstname"]) && isset($_SESSION["id"]) && isset($_SESSION["isAdmin"])) {
+        if ($this->session->get('firstname') && $this->session->get('id')) {
+            
             $user = $this->auth->getCurrentUser();
             $userName = $user->getFirstname();
             $userId = $user->getId();

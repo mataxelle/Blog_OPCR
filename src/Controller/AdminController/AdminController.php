@@ -8,7 +8,8 @@ use App\Model\ContactManager;
 use App\Model\PostManager;
 use App\Model\UserManager;
 use App\Twig\TwigRender;
-use Symfony\Component\HttpFoundation\Response;
+use App\Session\Session;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class AdminController extends TwigRender
 {
@@ -19,6 +20,13 @@ class AdminController extends TwigRender
      * @var Auth
      */
     private $auth;
+
+    /**
+     * Session
+     *
+     * @var Session
+     */
+    private $session;
 
     /**
      * Comment manager
@@ -53,6 +61,7 @@ class AdminController extends TwigRender
     {
         parent::__construct();
         $this->auth = new Auth();
+        $this->session = new Session();
         $this->commentManager = new CommentManager();
         $this->contactManager = new ContactManager();
         $this->postManager = new PostManager();
@@ -182,24 +191,22 @@ class AdminController extends TwigRender
     {
         $account = $this->userManager->getUser($id);
 
-        if (isset($_SESSION["isAdmin"])) {
-            $admin = $_SESSION["isAdmin"];
-        }
+        $user = $this->auth->getCurrentUser();
+        $userName = $user->getFirstname();
+        $isAdmin = $user->getIsAdmin();
+        $userId = $user->getId();
 
-        if (isset($_SESSION["firstname"])) {
-            $user = $_SESSION["firstname"];
-        }
-
-        if (isset($_SESSION["id"])) {
-            $userId = $_SESSION["id"];
+        if ($isAdmin === false) {
+            $response = new RedirectResponse('/');
+            $response->send();
         }
 
         $this->twig->display(
             'user/users_account.html.twig',
             [
              'account' => $account,
-             'admin' => $admin,
-             'user' => $user,
+             'admin' => $isAdmin,
+             'user' => $userName,
              'id' => $userId
             ]
         );

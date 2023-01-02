@@ -78,7 +78,7 @@ class UserManager extends ConnectDB
      * @param string $email User email
      * @return User
      */
-    public function loginForm(string $email)
+    public function getUserByEmail(string $email)
     {
         $database = $this->database;
         

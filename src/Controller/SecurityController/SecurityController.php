@@ -13,6 +13,13 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class SecurityController extends TwigRender
 {
+
+    /**
+     * Session
+     *
+     * @var Session
+     */
+    private $session;
     
     /**
      * User manager
@@ -25,6 +32,7 @@ class SecurityController extends TwigRender
     public function __construct()
     {
         parent::__construct();
+        $this->session = new Session();
         $this->userManager = new UserManager();
 
         // End __construct().
@@ -68,12 +76,12 @@ class SecurityController extends TwigRender
         $user = '';
         $admin = '';
         
-        if (isset($_SESSION["firstname"]) === true) {
-            $user = $_SESSION["firstname"];
+        if ($this->session->get('firstname')) {
+            $user = $this->session->get('lastname');
         }
 
-        if (isset($_SESSION["isAdmin"]) === true) {
-            $admin = $_SESSION["isAdmin"];
+        if ($this->session->get('isAdmin')) {
+            $admin = $this->session->get('isAdmin');
         }
 
         $this->twig->display(
@@ -93,27 +101,29 @@ class SecurityController extends TwigRender
     public function login()
     {
         if (empty($_POST) === false) {
-            $email = $_POST['email'];
+            $email = htmlspecialchars($_POST['email']);
             
             $data['password'] = isset($_POST['password']);
+            $data['password'] = htmlspecialchars($_POST['password']);
+            $password = $data['password'];
             
-            $login = $this->userManager->loginForm($email);
+            $user = $this->userManager->getUserByEmail($email);
 
-            $isPasswordCorrect = password_verify($_POST['password'], $login->getPassword());
+            $isPasswordCorrect = password_verify($password, $user->getPassword());
 
             if ($isPasswordCorrect === true) {
 
-                $session = new Session();
-                $session->checkIsStarted();
+                $this->session->checkIsStarted();
 
-                $_SESSION['id'] = $login->getId();
-                $_SESSION['firstname'] = $login->getFirstname();
-                $_SESSION['lastname'] = $login->getLastname();
-                $_SESSION['isAdmin'] = $login->getIsAdmin();
-                $_SESSION['updatedAt'] = $login->getUpdatedAt();
-                $_SESSION['email'] = $login->getEmail();
+                // set user in session
+                $this->session->set('id', $user->getId());
+                $this->session->set('firstname', $user->getFirstname());
+                $this->session->set('lastname', $user->getLastname());
+                $this->session->set('isAdmin', $user->getIsAdmin());
+                $this->session->set('email', $user->getEmail());
+                
 
-                if ($login->getIsAdmin() === true) {
+                if ($user->getIsAdmin() === true) {
                     $response = new RedirectResponse('/admin');
                     $response->send();
                 } else {
@@ -128,28 +138,28 @@ class SecurityController extends TwigRender
             }
         }
 
-        $user = '';
+        $userName = '';
         $userId = '';
-        $admin = '';
+        $isAdmin = '';
         
-        if (isset($_SESSION["firstname"]) === true) {
-            $user = $_SESSION["firstname"];
+        if ($this->session->get('firstname')) {
+            $userName = $this->session->get('firstname');
         }
 
-        if (isset($_SESSION["id"]) === true) {
-            $userId = $_SESSION["id"];
+        if ($this->session->get('id')) {
+            $userId = $this->session->get('id');
         }
 
-        if (isset($_SESSION["isAdmin"]) === true) {
-            $admin = $_SESSION["isAdmin"];
+        if ($this->session->get('isAdmin')) {
+            $isAdmin = $this->session->get('isAdmin');
         }
 
         $this->twig->display(
             'security/login.html.twig',
             [
-             'user' => $user,
+             'user' => $userName,
              'id' => $userId,
-             'admin' => $admin
+             'admin' => $isAdmin
             ]
         );
     }
