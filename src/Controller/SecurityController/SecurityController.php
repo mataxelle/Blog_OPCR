@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Form\UserFormType;
 use App\Model\UserManager;
 use App\Session\Session;
+use App\Superglobals\Superglobals;
 use App\Twig\TwigRender;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -28,12 +29,20 @@ class SecurityController extends TwigRender
      */
     private $userManager;
 
+    /**
+     * Superglobals
+     *
+     * @var Superglobals
+     */
+    private $superglobals;
+
 
     public function __construct()
     {
         parent::__construct();
         $this->session = new Session();
         $this->userManager = new UserManager();
+        $this->superglobals = new Superglobals();
 
         // End __construct().
         
@@ -76,11 +85,11 @@ class SecurityController extends TwigRender
         $user = '';
         $admin = '';
         
-        if ($this->session->get('firstname')) {
+        if ($this->session->get('firstname') === true) {
             $user = $this->session->get('lastname');
         }
 
-        if ($this->session->get('isAdmin')) {
+        if ($this->session->get('isAdmin') === true) {
             $admin = $this->session->get('isAdmin');
         }
 
@@ -100,11 +109,10 @@ class SecurityController extends TwigRender
      */
     public function login()
     {
-        if (empty($_POST) === false) {
-            $email = htmlspecialchars($_POST['email']);
+        if (empty($this->superglobals->get_POST()) === false) {
+            $email = htmlspecialchars($this->superglobals->get_POST('email'));
             
-            $data['password'] = isset($_POST['password']);
-            $data['password'] = htmlspecialchars($_POST['password']);
+            $data['password'] = htmlspecialchars($this->superglobals->get_POST('password'));
             $password = $data['password'];
             
             $user = $this->userManager->getUserByEmail($email);
@@ -115,7 +123,7 @@ class SecurityController extends TwigRender
 
                 $this->session->checkIsStarted();
 
-                // set user in session
+                // Set user in session
                 $this->session->set('id', $user->getId());
                 $this->session->set('firstname', $user->getFirstname());
                 $this->session->set('lastname', $user->getLastname());
@@ -159,7 +167,7 @@ class SecurityController extends TwigRender
             [
              'user' => $userName,
              'id' => $userId,
-             'admin' => $isAdmin
+             'admin' => $isAdmin,
             ]
         );
     }

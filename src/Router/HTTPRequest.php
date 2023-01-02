@@ -2,12 +2,30 @@
 
 namespace App\Router;
 
+use App\Superglobals\Superglobals;
+
 class HTTPRequest
 {
     
+    /**
+     * Superglobals
+     *
+     * @var Superglobals
+     */
+    private $superglobals;
+
+
+    public function __construct()
+    {
+        $this->superglobals = new Superglobals();
+
+        // End __construct().
+        
+    }
+
     public function requestMethod()
     {
-        return $_SERVER['REQUEST_METHOD'];
+        return $this->superglobals->get_SERVER('REQUEST_METHOD');
 
         // End requestMethod().
 
@@ -15,8 +33,8 @@ class HTTPRequest
     
     public function getURI()
     {
-        if (array_key_exists('path', $_GET)) {
-            return trim($_GET['path'], '/');
+        if (array_key_exists('path', $this->superglobals->get_GET())) {
+            return trim($this->superglobals->get_GET('path'), '/');
         }
 
         return '';

@@ -53,11 +53,6 @@ class HomeController extends TwigRender
     {
         $posts = $this->postManager->getAllValidedPost();
 
-        /*$user = $this->auth->getCurrentUser();
-        $userName = $user->getFirstname();
-        $isAdmin = $user->getIsAdmin();
-        $userId = $user->getId();*/
-
         $userName = '';
         $userId = '';
         $isAdmin = '';

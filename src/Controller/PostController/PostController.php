@@ -87,21 +87,21 @@ class PostController extends TwigRender
         var_dump($authors);
             die;*/
 
-            $userName = '';
-            $userId = '';
-            $isAdmin = '';
+        $userName = '';
+        $userId = '';
+        $isAdmin = '';
             
-            if ($this->session->get('firstname')) {
-                $userName = $this->session->get('firstname');
-            }
+        if ($this->session->get('firstname')) {
+            $userName = $this->session->get('firstname');
+        }
     
-            if ($this->session->get('id')) {
-                $userId = $this->session->get('id');
-            }
+        if ($this->session->get('id')) {
+            $userId = $this->session->get('id');
+        }
     
-            if ($this->session->get('isAdmin')) {
-                $isAdmin = $this->session->get('isAdmin');
-            }
+        if ($this->session->get('isAdmin')) {
+            $isAdmin = $this->session->get('isAdmin');
+        }
 
         $this->twig->display(
             'post/post_show.html.twig',

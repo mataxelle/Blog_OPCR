@@ -2,8 +2,26 @@
 
 namespace App\Session;
 
+use App\Superglobals\Superglobals;
+
 class Session
 {
+
+    /**
+     * Superglobals
+     *
+     * @var Superglobals
+     */
+    private $superglobals;
+
+
+    public function __construct()
+    {
+        $this->superglobals = new Superglobals();
+
+        // End __construct().
+        
+    }
 
     /**
      * Start user session
@@ -41,7 +59,7 @@ class Session
     public function get(string $key, $default = null)
     {
         $this->checkIsStarted();
-        if (array_key_exists($key, $_SESSION)) {
+        if (array_key_exists($key, $this->superglobals->get_SESSION())) {
             return $_SESSION[$key];
         }
 
