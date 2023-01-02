@@ -93,11 +93,10 @@ class SecurityController extends TwigRender
     public function login()
     {
         if (empty($_POST) === false) {
-            $data['email'] = $_POST['email'];
-            $data['password'] = $_POST['password'];
-
-            $email = $data['email'];
-
+            $email = $_POST['email'];
+            
+            $data['password'] = isset($_POST['password']);
+            
             $login = $this->userManager->loginForm($email);
 
             $isPasswordCorrect = password_verify($_POST['password'], $login->getPassword());
