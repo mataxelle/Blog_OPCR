@@ -12,10 +12,12 @@
 
 		<h2 class="text-center text-secondary mb-5">Lorem</h2>
 
+		<img class="img-fluid" src="/assets/images/light.jpg" alt="image de code">
+
 		
 		{% if admin == 1 %}
 			<h4>
-				<a href="/add">Ajouter un article</a>
+				<a href="/add" role="button" class="btn btn-lg btn-primary">Ajouter un article</a>
 			</h4>
 		{% endif %}
 
@@ -26,10 +28,10 @@
 						<div class="card-body">
 							{% if user %}
 							<h5 class="card-title">{{ post.title }}</h5>
-							<a href="/post/{{ post.slug }}" role="button" class="btn btn-lg btn-danger my-4">Lire l'article</a>
+							<a href="/post/{{ post.slug }}" role="button" class="btn btn-outline-danger my-4">Lire l'article</a>
 							{% else %}
 							<h5 class="card-title">{{ post.title }}</h5>
-							<button type="button" class="btn btn-lg btn-danger my-4" data-bs-toggle="popover" data-bs-content="Se connecter">Lire l'article</button>
+							<button type="button" class="btn btn-outline-danger my-4" data-bs-toggle="popover" data-bs-content="Se connecter">Lire l'article</button>
 							{% endif %}
 							<p class="card-text d-flex justify-content-end">
 								<small class="text-muted">

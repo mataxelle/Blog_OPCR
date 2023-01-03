@@ -20,7 +20,6 @@ class Session
         $this->superglobals = new Superglobals();
 
         // End __construct().
-        
     }
 
     /**

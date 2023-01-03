@@ -4,6 +4,7 @@ namespace App\Superglobals;
 
 class Superglobals
 {
+    
     private $_SERVER;
 
     private $_POST;
@@ -12,14 +13,13 @@ class Superglobals
 
     private $_SESSION;
 
-    private $_ENV;
-
 
     public function __construct()
     {
         $this->define_superglobals();
 
         // End __construct().
+
     }
 
     /**
@@ -31,7 +31,7 @@ class Superglobals
      */
     public function get_SERVER($key = null)
     {
-        if (null !== $key) {
+        if ($key !== null) {
             return (isset($this->_SERVER["$key"])) ? $this->_SERVER["$key"] : null;
         } else {
             return $this->_SERVER;
@@ -47,7 +47,7 @@ class Superglobals
      */
     public function get_POST($key = null)
     {
-        if (null !== $key) {
+        if ($key !== null) {
             return (isset($this->_POST["$key"])) ? $this->_POST["$key"] : null;
         } else {
             return $this->_POST;
@@ -63,7 +63,7 @@ class Superglobals
      */
     public function get_GET($key = null)
     {
-        if (null !== $key) {
+        if ($key !== null) {
             return (isset($this->_GET["$key"])) ? $this->_GET["$key"] : null;
         } else {
             return $this->_GET;
@@ -79,26 +79,10 @@ class Superglobals
      */
     public function get_SESSION($key = null)
     {
-        if (null !== $key) {
+        if ($key !== null) {
             return (isset($this->_SESSION["$key"])) ? $this->_SESSION["$key"] : null;
         } else {
             return $this->_SESSION;
-        }
-    }
-
-    /**
-     * Returns a key from the superglobal,
-     * as it was at the time of instantiation.
-     *
-     * @param $key
-     * @return mixed
-     */
-    public function get_ENV($key = null)
-    {
-        if (null !== $key) {
-            return (isset($this->_ENV["$key"])) ? $this->_ENV["$key"] : null;
-        } else {
-            return $this->_ENV;
         }
     }
 
@@ -114,12 +98,11 @@ class Superglobals
 
         // Store a local copy of the PHP superglobals
         // This should avoid dealing with the global scope directly
-        // $this->_SERVER = $_SERVER;
+        // $this->_SERVER = $_SERVER.
         $this->_SERVER = (isset($_SERVER)) ? $_SERVER : null;
         $this->_POST = (isset($_POST)) ? $_POST : null;
         $this->_GET = (isset($_GET)) ? $_GET : null;
         $this->_SESSION = (isset($_SESSION)) ? $_SESSION : null;
-        $this->_ENV = (isset($_ENV)) ? $_ENV : null;
 
     }
 
@@ -136,7 +119,6 @@ class Superglobals
         unset($_POST);
         unset($_GET);
         unset($_SESSION);
-        unset($_ENV);
     }
 
 }

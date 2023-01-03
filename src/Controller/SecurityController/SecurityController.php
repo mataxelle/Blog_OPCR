@@ -123,7 +123,7 @@ class SecurityController extends TwigRender
 
                 $this->session->checkIsStarted();
 
-                // Set user in session
+                // Set user in session.
                 $this->session->set('id', $user->getId());
                 $this->session->set('firstname', $user->getFirstname());
                 $this->session->set('lastname', $user->getLastname());

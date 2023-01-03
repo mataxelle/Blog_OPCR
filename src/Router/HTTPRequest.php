@@ -20,7 +20,6 @@ class HTTPRequest
         $this->superglobals = new Superglobals();
 
         // End __construct().
-        
     }
 
     public function requestMethod()
