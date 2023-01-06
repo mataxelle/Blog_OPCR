@@ -3,6 +3,7 @@
 namespace App\BaseD;
 
 use PDO;
+use App\Superglobals\Environnement;
 
 class ConnectDB extends PDO
 {
@@ -18,14 +19,16 @@ class ConnectDB extends PDO
                       PDO::ATTR_EMULATE_PREPARES   => false,
                      ];
                     
+          $env = new Environnement();
+
           $this->database = new PDO(
-           'mysql:host='.filter_input(INPUT_ENV, "DBHOST").';dbname='.filter_var($_ENV['DBDATABASE']).';charset=utf8',
-           filter_var($_ENV['DBUSERNAME']),
-           filter_var($_ENV['DBPASSWORD']),
+           'mysql:host='.$env->get("DBHOST").';dbname='.$env->get('DBDATABASE').';charset=utf8',
+           $env->get('DBUSERNAME'),
+           $env->get('DBPASSWORD'),
            $options
           );
 
-          // End __construct(). filter_input(INPUT_ENV, "DBUSERNAME")  filter_input(INPUT_ENV, "DBPASSWORD")
+          // End __construct().
           
      }
      
