@@ -105,7 +105,8 @@ class CommentController extends TwigRender
              'commentForm' => $commentForm->createView(),
              'user' => $userName,
              'admin' => $isAdmin,
-             'id' => $userId
+             'id' => $userId,
+             'slug' => $postSlug,
             ]
         );
     }
