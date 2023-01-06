@@ -17,6 +17,7 @@
         "symfony/security-csrf": "^6.1",
         "symfony/http-foundation": "^6.1",
         "symfony/validator": "^6.1",
-        "symfony/mime": "^6.1"
+        "symfony/mime": "^6.1",
+        "symfony/dotenv": "^6.2"
     }
 }

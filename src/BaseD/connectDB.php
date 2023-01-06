@@ -19,13 +19,13 @@ class ConnectDB extends PDO
                      ];
                     
           $this->database = new PDO(
-           'mysql:host='.__DBHOST.';dbname='.__DBDATABASE.';charset=utf8',
-           __DBUSERNAME,
-           __DBPASSWORD,
+           'mysql:host='.filter_input(INPUT_ENV, "DBHOST").';dbname='.filter_var($_ENV['DBDATABASE']).';charset=utf8',
+           filter_var($_ENV['DBUSERNAME']),
+           filter_var($_ENV['DBPASSWORD']),
            $options
           );
 
-          // End __construct().
+          // End __construct(). filter_input(INPUT_ENV, "DBUSERNAME")  filter_input(INPUT_ENV, "DBPASSWORD")
           
      }
      

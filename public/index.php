@@ -2,22 +2,13 @@
 
 use App\Router\HTTPRequest;
 use App\Router\Router;
+use Symfony\Component\Dotenv\Dotenv;
 
 require_once __DIR__.'/../vendor/autoload.php';
 
-$dotenv = Dotenv\Dotenv::createImmutable('../');
-$dotenv->load();
+$dotenv = new Dotenv();
+$dotenv->load(__DIR__.'/../.env');
 
-$dotenv->required(
-    [
-     'DB_HOST',
-     'DB_DATABASE',
-     'DB_USERNAME',
-     'DB_PASSWORD',
-    ]
-);
-
-require_once __DIR__.'./../src/config.php';
 
 $request = new HTTPRequest;
 

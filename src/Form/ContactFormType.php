@@ -33,6 +33,8 @@ class ContactFormType extends AbstractType
             ])
             ->add('message', TextareaType::class);
 
+        parent::buildForm($builder, $options);
+        
         // End buildForm
 
     }
