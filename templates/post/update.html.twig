@@ -7,11 +7,10 @@
 
 {% block body %}
 	<div>
-		<h2 class="text-center text-secondary mb-5">Modification de l'article {{ post.title}}</h2>
-
-		<h5 class="text-center text-secondary mb-5">
-			<a href="/">Accueil</a>
-		</h5>
+		<div class="row">
+            <a href="/admin" class="col-1 d-flex align-items-center">Retour</a>
+            <h2 class="col text-center text-secondary my-5">Modification de l'article {{ post.title}}</h2>
+        </div>
 
         <div class="row">
 			    <div class="col-4 mx-auto">

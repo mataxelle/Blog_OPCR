@@ -33,11 +33,6 @@ $router->post('/login', 'App\Controller\SecurityController\SecurityController@lo
 $router->get('/logout', 'App\Controller\SecurityController\SecurityController@logout');
 $router->get('/post', 'App\Controller\PostController\PostController@index');
 $router->get('/post/:slug', 'App\Controller\PostController\PostController@show');
-$router->get('/add', 'App\Controller\PostController\PostController@add');
-$router->post('/add', 'App\Controller\PostController\PostController@add');
-$router->get('/update/:id', 'App\Controller\PostController\PostController@update');
-$router->post('/update/:id', 'App\Controller\PostController\PostController@update');
-$router->get('/delete/:slug', 'App\Controller\PostController\PostController@delete');
 $router->get('/comment', 'App\Controller\CommentController\CommentController@postComment');
 $router->get('/post/:slug/addComment', 'App\Controller\CommentController\CommentController@add');
 $router->post('/post/:slug/addComment', 'App\Controller\CommentController\CommentController@add');
@@ -48,6 +43,11 @@ $router->get('/contact', 'App\Controller\ContactController\ContactController@con
 $router->post('/contact', 'App\Controller\ContactController\ContactController@contact');
 $router->get('/message/:id', 'App\Controller\ContactController\ContactController@message');
 $router->get('/admin', 'App\Controller\AdminController\AdminController@admin');
+$router->get('admin/post/add', 'App\Controller\PostController\PostController@add');
+$router->post('admin/post/add', 'App\Controller\PostController\PostController@add');
+$router->get('admin/post/update/:id', 'App\Controller\PostController\PostController@update');
+$router->post('admin/post/update/:id', 'App\Controller\PostController\PostController@update');
+$router->get('admin/post/delete/:slug', 'App\Controller\PostController\PostController@delete');
 $router->get('/admin/posts', 'App\Controller\AdminController\AdminController@posts');
 $router->get('/admin/comments', 'App\Controller\AdminController\AdminController@comments');
 $router->get('/admin/comment/:id/validation', 'App\Controller\CommentController\CommentController@validation');

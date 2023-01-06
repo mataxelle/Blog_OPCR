@@ -92,6 +92,11 @@ class AdminController extends TwigRender
         $isAdmin = $user->getIsAdmin();
         $userId = $user->getId();
 
+        if ($isAdmin === false) {
+            $response = new RedirectResponse('/');
+            $response->send();
+        }
+
         $this->twig->display(
             'admin/index.html.twig',
             [
@@ -120,6 +125,11 @@ class AdminController extends TwigRender
         $isAdmin = $user->getIsAdmin();
         $userId = $user->getId();
 
+        if ($isAdmin === false) {
+            $response = new RedirectResponse('/');
+            $response->send();
+        }
+
         $this->twig->display(
             'admin/posts.html.twig',
             [
@@ -145,6 +155,11 @@ class AdminController extends TwigRender
         $isAdmin = $user->getIsAdmin();
         $userId = $user->getId();
 
+        if ($isAdmin === false) {
+            $response = new RedirectResponse('/');
+            $response->send();
+        }
+
         $this->twig->display(
             'admin/comments.html.twig',
             [
@@ -169,6 +184,11 @@ class AdminController extends TwigRender
         $userName = $user->getFirstname();
         $isAdmin = $user->getIsAdmin();
         $userId = $user->getId();
+
+        if ($isAdmin === false) {
+            $response = new RedirectResponse('/');
+            $response->send();
+        }
 
         $this->twig->display(
             'admin/users.html.twig',
@@ -225,6 +245,11 @@ class AdminController extends TwigRender
         $userName = $user->getFirstname();
         $isAdmin = $user->getIsAdmin();
         $userId = $user->getId();
+
+        if ($isAdmin === false) {
+            $response = new RedirectResponse('/');
+            $response->send();
+        }
 
         $this->twig->display(
             'admin/messages.html.twig',

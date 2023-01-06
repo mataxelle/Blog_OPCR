@@ -4,7 +4,10 @@
 
 {% block body %}
 <div class="container">
-    <h1 class="text-center mt-5 mb-5">Liste des articles</h1>
+    <div class="row">
+        <a href="/admin" class="col-1 d-flex align-items-center">Retour</a>
+        <h1 class="col text-center mt-5 mb-5">Liste des articles</h1>
+    </div>
 
     <div class="row">
         <div class="col">
@@ -12,12 +15,13 @@
                 <h5 class="col-6 col-lg-2">Article(s)
                     <span>({{ posts|length }})</span>
                 </h5>
-                <a href="/add" role="button" class="btn btn-lg btn-primary col-6 col-lg-2">Ajouter un article</a>
+                <a href="admin/post/add" role="button" class="btn btn-lg btn-primary col-6 col-lg-2">Ajouter un article</a>
             </div>
             <table class="table table-striped">
                 <tr>
                     <th>#</th>
                     <th>Titre</th>
+                    <th>Publié</th>
                     <th>Date de publication</th>
                     <th>Date de modification</th>
                     <th>Actions</th>
@@ -27,11 +31,20 @@
                     <tr class="hoverable">
                         <td>{{ i }}</td>
                         <td><a href="/post/{{ post.slug }}" target="_blank" class="text-decoration-none text-black">{{ post.title }}</a></td>
+                        {% if post.isPublished == 0 %}
+                        <td>
+                            <a class="btn btn-warning" href=""><i class="far fa-eye-slash"></i></a>
+                        </td>
+                        {% else %}
+                        <td>
+                            <a class="btn btn-info disabled" href=""><i class="far fa-eye"></i></a>
+                        </td>
+                        {% endif %}
                         <td>{{ post.createdAt ? post.createdAt|date('d/m/Y') : '-' }}</td>
                         <td>{{ post.updatedAt|date('d/m/Y') }}</td>
                         <td>
-                            <a class="btn btn-success" href="/update/{{ post.id}}"><i class="fas fa-edit"></i></a>
-                            <a class="btn btn-danger" href="/delete/{{ post.slug }}"><i class="fas fa-trash"></i></a>
+                            <a class="btn btn-success" href="/admin/post/update/{{ post.id}}"><i class="fas fa-edit"></i></a>
+                            <a class="btn btn-danger" href="/admin/delete/{{ post.slug }}"><i class="fas fa-trash"></i></a>
                         </td>
                     </tr>
                 {% set i = i+1 %}

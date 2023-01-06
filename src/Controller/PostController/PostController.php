@@ -87,21 +87,10 @@ class PostController extends TwigRender
         var_dump($authors);
             die;*/
 
-        $userName = '';
-        $userId = '';
-        $isAdmin = '';
-            
-        if ($this->session->get('firstname')) {
-            $userName = $this->session->get('firstname');
-        }
-    
-        if ($this->session->get('id')) {
-            $userId = $this->session->get('id');
-        }
-    
-        if ($this->session->get('isAdmin')) {
-            $isAdmin = $this->session->get('isAdmin');
-        }
+        $user = $this->auth->getCurrentUser();
+        $userName = $user->getFirstname();
+        $isAdmin = $user->getIsAdmin();
+        $userId = $user->getId();
 
         $this->twig->display(
             'post/post_show.html.twig',
@@ -128,7 +117,7 @@ class PostController extends TwigRender
             PostFormType::class,
             $post,
             [
-             'action' => '/add',
+             'action' => 'admin/post/add',
              'method' => 'POST',
             ]
         )
@@ -164,20 +153,14 @@ class PostController extends TwigRender
             return $response->send();
         }
 
-        $userName = '';
-        $userId = '';
-        $isAdmin = '';
-        
-        if ($this->session->get('firstname')) {
-            $userName = $this->session->get('firstname');
-        }
+        $user = $this->auth->getCurrentUser();
+        $userName = $user->getFirstname();
+        $isAdmin = $user->getIsAdmin();
+        $userId = $user->getId();
 
-        if ($this->session->get('id')) {
-            $userId = $this->session->get('id');
-        }
-
-        if ($this->session->get('isAdmin')) {
-            $isAdmin = $this->session->get('isAdmin');
+        if ($isAdmin === false) {
+            $response = new RedirectResponse('/');
+            $response->send();
         }
 
         $this->twig->display(
@@ -209,7 +192,7 @@ class PostController extends TwigRender
             PostFormType::class,
             $post,
             [
-             'action' => '/update/'.$pId,
+             'action' => '/admin/post/update/'.$pId,
              'method' => 'POST',
             ]
         )
@@ -250,20 +233,14 @@ class PostController extends TwigRender
             return $response->send();
         }
 
-        $userName = '';
-        $userId = '';
-        $isAdmin = '';
-        
-        if ($this->session->get('firstname')) {
-            $userName = $this->session->get('firstname');
-        }
+        $user = $this->auth->getCurrentUser();
+        $userName = $user->getFirstname();
+        $isAdmin = $user->getIsAdmin();
+        $userId = $user->getId();
 
-        if ($this->session->get('id')) {
-            $userId = $this->session->get('id');
-        }
-
-        if ($this->session->get('isAdmin')) {
-            $isAdmin = $this->session->get('isAdmin');
+        if ($isAdmin === false) {
+            $response = new RedirectResponse('/');
+            $response->send();
         }
 
         $this->twig->display(
@@ -289,7 +266,6 @@ class PostController extends TwigRender
         $isAdmin = $user->getIsAdmin();
 
         if ($isAdmin === false) {
-            
             $response = new RedirectResponse('/');
             $response->send();
         }

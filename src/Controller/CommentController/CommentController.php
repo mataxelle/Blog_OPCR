@@ -112,7 +112,7 @@ class CommentController extends TwigRender
     }
     
     /**
-     * Valdate a comment
+     * Validate a comment
      *
      * @param int $commentId Comment id
      */
@@ -150,6 +150,11 @@ class CommentController extends TwigRender
         $userName = $user->getFirstname();
         $isAdmin = $user->getIsAdmin();
         $userId = $user->getId();
+
+        if ($isAdmin === false) {
+            $response = new RedirectResponse('/');
+            $response->send();
+        }
 
         $this->twig->display(
             'comment/comment_update.html.twig',
