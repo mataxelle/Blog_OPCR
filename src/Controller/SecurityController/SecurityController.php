@@ -28,7 +28,7 @@ class SecurityController extends TwigRender
      * @var UserManager
      */
     private $userManager;
-
+    
     /**
      * Superglobals
      *
@@ -36,7 +36,11 @@ class SecurityController extends TwigRender
      */
     private $superglobals;
 
-
+    /**
+     * Constructor
+     *
+     * @return void
+     */
     public function __construct()
     {
         parent::__construct();
@@ -45,12 +49,12 @@ class SecurityController extends TwigRender
         $this->superglobals = new Superglobals();
 
         // End __construct().
-        
     }
+    
 
     /**
      * Create a user
-     * 
+     *
      * @return Response
      */
     public function register(): Response
@@ -66,16 +70,14 @@ class SecurityController extends TwigRender
             ]
         )
             ->getForm();
-
+            
         $request = Request::createFromGlobals();
         
         $form->handleRequest($request);
         
         if ($form->isSubmitted() === true && $form->isValid() === true) {
-            
             $user->setIsAdmin(0);
-            $usermanager = new UserManager();
-            $usermanager->registerForm($user);
+            $this->userManager->registerForm($user);
             $response = new RedirectResponse('/login');
             $response->prepare($request);
 
@@ -101,11 +103,13 @@ class SecurityController extends TwigRender
              'admin' => $admin
             ]
         );
+
     }
     
     /**
      * Log a user
      *
+     * @return mixte
      */
     public function login()
     {
@@ -116,11 +120,10 @@ class SecurityController extends TwigRender
             $password = $data['password'];
             
             $user = $this->userManager->getUserByEmail($email);
-
+            
             $isPasswordCorrect = password_verify($password, $user->getPassword());
-
+            
             if ($isPasswordCorrect === true) {
-
                 $this->session->checkIsStarted();
 
                 // Set user in session.
@@ -130,19 +133,17 @@ class SecurityController extends TwigRender
                 $this->session->set('isAdmin', $user->getIsAdmin());
                 $this->session->set('email', $user->getEmail());
                 
-
                 if ($user->getIsAdmin() === true) {
                     $response = new RedirectResponse('/admin');
                     $response->send();
-                } else {
-                    $response = new RedirectResponse('/');
-                    $response->send();
                 }
-            } else {
 
+                $response = new RedirectResponse('/');
+                $response->send();
+            } else {
                 $response = new RedirectResponse('/login');
                 $response->send();
-                
+                // End if condition. 
             }
         }
 
@@ -165,9 +166,9 @@ class SecurityController extends TwigRender
         $this->twig->display(
             'security/login.html.twig',
             [
-             'user' => $userName,
-             'id' => $userId,
-             'admin' => $isAdmin,
+              'user' => $userName,
+              'id' => $userId,
+              'admin' => $isAdmin,
             ]
         );
     }

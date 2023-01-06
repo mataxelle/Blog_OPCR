@@ -18,7 +18,7 @@ use Symfony\Component\Validator\Validation;
 
 class TwigRender
 {
-    
+
     /**
      * @var FilesystemLoader
      */
@@ -32,6 +32,11 @@ class TwigRender
     protected $formFactory;
 
 
+    /**
+     * Constructor
+     *
+     * @return void
+     */
     public function __construct()
     {
         $appVarReflection = new \ReflectionClass('\Symfony\Bridge\Twig\AppVariable');
@@ -70,7 +75,6 @@ class TwigRender
 
 
         // End __construct().
-        
     }
 
     

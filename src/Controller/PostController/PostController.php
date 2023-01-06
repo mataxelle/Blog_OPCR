@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class PostController extends TwigRender
 {
-    
+
     /**
      * User Auth
      *
@@ -53,7 +53,12 @@ class PostController extends TwigRender
      */
     private $userManager;
     
-    
+
+    /**
+     * Constructor
+     *
+     * @return void
+     */
     public function __construct()
     {
         parent::__construct();
@@ -64,13 +69,14 @@ class PostController extends TwigRender
         $this->userManager = new UserManager();
 
         // End __construct().
-
     }
+
     
     /**
      * Show a post and his comments
      *
      * @param string $slug Post slug
+     * @return void
      */
     public function show(string $slug)
     {
@@ -102,6 +108,7 @@ class PostController extends TwigRender
              'id' => $userId
             ]
         );
+
     }
     
     /**
@@ -117,18 +124,17 @@ class PostController extends TwigRender
             PostFormType::class,
             $post,
             [
-             'action' => 'admin/post/add',
+             'action' => '/admin/post/add',
              'method' => 'POST',
             ]
         )
             ->getForm();
-
+            
         $request = Request::createFromGlobals();
         
         $form->handleRequest($request);
         
         if ($form->isSubmitted() && $form->isValid()) {
-            
             $post->setUserId(1);
 
             if ($post->getImage() !== null) {
@@ -151,6 +157,7 @@ class PostController extends TwigRender
             $response->prepare($request);
         
             return $response->send();
+            // End if condition.
         }
 
         $user = $this->auth->getCurrentUser();
@@ -196,14 +203,13 @@ class PostController extends TwigRender
              'method' => 'POST',
             ]
         )
-        ->getForm();
+            ->getForm();
 
         $request = Request::createFromGlobals();
         
         $form->handleRequest($request);
         
         if ($form->isSubmitted() && $form->isValid()) {
-
             if (!$post->getUserId()) {
                 $post->setUserId(1);
             }

@@ -9,11 +9,26 @@ use App\Session\Session;
 class Auth
 {
 
+    /**
+     * Session
+     *
+     * @var Session
+     */
     private $session;
     
+    /**
+     * User manager
+     *
+     * @var UserManager
+     */
     private $userManager;
     
     
+    /**
+     * Constructor
+     *
+     * @return void
+     */
     public function __construct()
     {
         $this->session = new Session();

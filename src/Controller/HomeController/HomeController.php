@@ -9,7 +9,7 @@ use App\Model\PostManager;
 
 class HomeController extends TwigRender
 {
-    
+
     /**
      * User Auth
      *
@@ -32,6 +32,11 @@ class HomeController extends TwigRender
     private $postManager;
 
 
+    /**
+     * Constructor
+     *
+     * @return void
+     */
     public function __construct()
     {
         parent::__construct();
@@ -40,7 +45,6 @@ class HomeController extends TwigRender
         $this->postManager = new PostManager();
 
         // End __construct().
-
     }
     
     
@@ -78,6 +82,7 @@ class HomeController extends TwigRender
              'id' => $userId
             ]
         );
+        
     }
     
 }

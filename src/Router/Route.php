@@ -4,7 +4,7 @@ namespace App\Router;
 
 class Route
 {
-    
+
     private $path;
 
     private $action;
@@ -18,7 +18,6 @@ class Route
         $this->action = $action;
 
         // End __construct().
-
     }
     
     public function matches(string $url)

@@ -13,7 +13,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class PostFormType extends AbstractType
 {
-    
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -36,9 +36,9 @@ class PostFormType extends AbstractType
         
         parent::buildForm($builder, $options);
         
-        // End buildForm
-
+        // End buildForm.
     }
+
     
     public function configureOptions(OptionsResolver $resolver): void
     {
@@ -47,5 +47,6 @@ class PostFormType extends AbstractType
              'data_class' => Post::class,
             ]
         );
+        
     }
 }

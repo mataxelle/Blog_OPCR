@@ -6,7 +6,7 @@ use App\Superglobals\Superglobals;
 
 class HTTPRequest
 {
-    
+
     /**
      * Superglobals
      *
@@ -15,6 +15,11 @@ class HTTPRequest
     private $superglobals;
 
 
+    /**
+     * Constructor
+     *
+     * @return void
+     */
     public function __construct()
     {
         $this->superglobals = new Superglobals();
@@ -27,7 +32,6 @@ class HTTPRequest
         return $this->superglobals->get_SERVER('REQUEST_METHOD');
 
         // End requestMethod().
-
     }
     
     public function getURI()

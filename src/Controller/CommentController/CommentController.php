@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class CommentController extends TwigRender
 {
-    
+
     /**
      * User Auth
      *
@@ -36,7 +36,12 @@ class CommentController extends TwigRender
      */
     private $postManager;
     
-    
+
+    /**
+     * Constructor
+     *
+     * @return void
+     */
     public function __construct()
     {
         parent::__construct();
@@ -45,8 +50,8 @@ class CommentController extends TwigRender
         $this->postManager = new PostManager();
 
         // End __construct().
-        
     }
+
     
     /**
      * Create a comment
@@ -82,7 +87,6 @@ class CommentController extends TwigRender
         $commentForm->handleRequest($request);
         
         if ($commentForm->isSubmitted() && $commentForm->isValid()) {
-
             $comment->setPostId($postId);
             $comment->setUserId($userId);
             
@@ -106,9 +110,10 @@ class CommentController extends TwigRender
              'user' => $userName,
              'admin' => $isAdmin,
              'id' => $userId,
-             'slug' => $postSlug,
+             'post' => $post,
             ]
         );
+        
     }
     
     /**

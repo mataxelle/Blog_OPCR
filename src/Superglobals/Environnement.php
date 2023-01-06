@@ -4,8 +4,15 @@ namespace App\Superglobals;
 
 class Environnement
 {
+
     private $envs;
 
+
+    /**
+     * Constructor
+     *
+     * @return void
+     */
     public function __construct()
     {
         $this->envs = $_ENV;

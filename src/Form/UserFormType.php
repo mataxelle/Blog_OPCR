@@ -14,7 +14,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 class UserFormType extends AbstractType
 {
-    
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -35,9 +35,9 @@ class UserFormType extends AbstractType
                 ],
             ]);
         
-        // End buildForm
-
+        // End buildForm.
     }
+
     
     public function configureOptions(OptionsResolver $resolver): void
     {
@@ -46,5 +46,6 @@ class UserFormType extends AbstractType
              'data_class' => User::class,
             ]
         );
+        
     }
 }

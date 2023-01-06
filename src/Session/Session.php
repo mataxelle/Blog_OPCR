@@ -15,12 +15,18 @@ class Session
     private $superglobals;
 
 
+    /**
+     * Constructor
+     *
+     * @return void
+     */
     public function __construct()
     {
         $this->superglobals = new Superglobals();
 
         // End __construct().
     }
+    
 
     /**
      * Start user session

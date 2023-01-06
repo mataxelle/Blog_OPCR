@@ -4,23 +4,28 @@ namespace App\Superglobals;
 
 class Superglobals
 {
-    
-    private $_SERVER;
 
-    private $_POST;
+    private $SERVER;
 
-    private $_GET;
+    private $POST;
 
-    private $_SESSION;
+    private $GET;
+
+    private $SESSION;
 
 
+    /**
+     * Constructor
+     *
+     * @return void
+     */
     public function __construct()
     {
         $this->define_superglobals();
 
         // End __construct().
-
     }
+    
 
     /**
      * Returns a key from the superglobal,
@@ -32,9 +37,9 @@ class Superglobals
     public function get_SERVER($key = null)
     {
         if ($key !== null) {
-            return (isset($this->_SERVER["$key"])) ? $this->_SERVER["$key"] : null;
+            return (isset($this->SERVER["$key"])) ? $this->SERVER["$key"] : null;
         } else {
-            return $this->_SERVER;
+            return $this->SERVER;
         }
     }
 
@@ -48,9 +53,9 @@ class Superglobals
     public function get_POST($key = null)
     {
         if ($key !== null) {
-            return (isset($this->_POST["$key"])) ? $this->_POST["$key"] : null;
+            return (isset($this->POST["$key"])) ? $this->POST["$key"] : null;
         } else {
-            return $this->_POST;
+            return $this->POST;
         }
     }
 
@@ -64,9 +69,9 @@ class Superglobals
     public function get_GET($key = null)
     {
         if ($key !== null) {
-            return (isset($this->_GET["$key"])) ? $this->_GET["$key"] : null;
+            return (isset($this->GET["$key"])) ? $this->GET["$key"] : null;
         } else {
-            return $this->_GET;
+            return $this->GET;
         }
     }
 
@@ -80,9 +85,9 @@ class Superglobals
     public function get_SESSION($key = null)
     {
         if ($key !== null) {
-            return (isset($this->_SESSION["$key"])) ? $this->_SESSION["$key"] : null;
+            return (isset($this->SESSION["$key"])) ? $this->SESSION["$key"] : null;
         } else {
-            return $this->_SESSION;
+            return $this->SESSION;
         }
     }
 
@@ -99,10 +104,14 @@ class Superglobals
         // Store a local copy of the PHP superglobals
         // This should avoid dealing with the global scope directly
         // $this->_SERVER = $_SERVER.
-        $this->_SERVER = (isset($_SERVER)) ? $_SERVER : null;
-        $this->_POST = (isset($_POST)) ? $_POST : null;
-        $this->_GET = (isset($_GET)) ? $_GET : null;
-        $this->_SESSION = (isset($_SESSION)) ? $_SESSION : null;
+        $this->SERVER = (isset($_SERVER)) ? $_SERVER : null;
+        $this->POST = (isset($_POST)) ? $_POST : null;
+        $this->GET = (isset($_GET)) ? $_GET : null;
+        $this->SESSION = (isset($_SESSION)) ? $_SESSION : null;
+        /*$this->GET = filter_input_array(INPUT_GET) ?? null;
+        $this->POST = filter_input_array(INPUT_POST) ?? null;*/
+        /*var_dump($this);
+        die;*/
 
     }
 

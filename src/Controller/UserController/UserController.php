@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class UserController extends TwigRender
 {
-    
+
     /**
      * User Auth
      *
@@ -25,6 +25,11 @@ class UserController extends TwigRender
     private $userManager;
 
 
+    /**
+     * Constructor
+     *
+     * @return void
+     */
     public function __construct()
     {
         parent::__construct();
@@ -32,8 +37,8 @@ class UserController extends TwigRender
         $this->userManager = new UserManager();
 
         // End __construct().
-
     }
+
     
     /**
      * Get a user account information
@@ -56,29 +61,28 @@ class UserController extends TwigRender
              'id' => $userId
             ]
         );
+
     }
     
     /**
      * Delete a user
      *
      * @param int $userId User id
+     * @return void
      */
     public function delete(int $userId)
     {
         $user = $this->auth->getCurrentUser();
         $isAdmin = $user->getIsAdmin();
-    
+        
         $this->userManager->deleteUser($userId);
-
+        
         if ($isAdmin) {
-
             $response = new RedirectResponse('/admin');
             $response->send();
         } else if ($user) {
-
             $response = new RedirectResponse('/login');
             $response->send();
-
         }
     }
 }

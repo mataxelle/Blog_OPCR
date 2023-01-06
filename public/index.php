@@ -34,11 +34,11 @@ $router->get('/contact', 'App\Controller\ContactController\ContactController@con
 $router->post('/contact', 'App\Controller\ContactController\ContactController@contact');
 $router->get('/message/:id', 'App\Controller\ContactController\ContactController@message');
 $router->get('/admin', 'App\Controller\AdminController\AdminController@admin');
-$router->get('admin/post/add', 'App\Controller\PostController\PostController@add');
-$router->post('admin/post/add', 'App\Controller\PostController\PostController@add');
-$router->get('admin/post/update/:id', 'App\Controller\PostController\PostController@update');
-$router->post('admin/post/update/:id', 'App\Controller\PostController\PostController@update');
-$router->get('admin/post/delete/:slug', 'App\Controller\PostController\PostController@delete');
+$router->get('/admin/post/add', 'App\Controller\PostController\PostController@add');
+$router->post('/admin/post/add', 'App\Controller\PostController\PostController@add');
+$router->get('/admin/post/update/:id', 'App\Controller\PostController\PostController@update');
+$router->post('/admin/post/update/:id', 'App\Controller\PostController\PostController@update');
+$router->get('/admin/post/delete/:slug', 'App\Controller\PostController\PostController@delete');
 $router->get('/admin/posts', 'App\Controller\AdminController\AdminController@posts');
 $router->get('/admin/comments', 'App\Controller\AdminController\AdminController@comments');
 $router->get('/admin/comment/:id/validation', 'App\Controller\CommentController\CommentController@validation');

@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class ContactController extends TwigRender
 {
-    
+
     /**
      * Session
      *
@@ -37,6 +37,11 @@ class ContactController extends TwigRender
     private $contactManager;
 
 
+    /**
+     * Constructor
+     *
+     * @return void
+     */
     public function __construct()
     {
         parent::__construct();
@@ -45,8 +50,8 @@ class ContactController extends TwigRender
         $this->contactManager = new ContactManager();
 
         // End __construct().
-
     }
+
     
     /**
      * Create a contact message
@@ -66,13 +71,12 @@ class ContactController extends TwigRender
             ]
         )
             ->getForm();
-
+            
         $request = Request::createFromGlobals();
         
         $form->handleRequest($request);
         
         if ($form->isSubmitted() && $form->isValid()) {
-
             $contact->setIsAnswered(0);
 
             $contactmanager = new ContactManager();
@@ -90,7 +94,6 @@ class ContactController extends TwigRender
         $isAdmin = '';
         
         if ($this->session->get('firstname') && $this->session->get('id')) {
-            
             $user = $this->auth->getCurrentUser();
             $userName = $user->getFirstname();
             $userId = $user->getId();
@@ -107,12 +110,14 @@ class ContactController extends TwigRender
              'id' => $userId
             ]
         );
+
     }
     
     /**
      * Get a contact message
      *
      * @param int $messageId Contact message id
+     * @return void
      */
     public function message(int $messageId)
     {

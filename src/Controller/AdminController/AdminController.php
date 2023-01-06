@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class AdminController extends TwigRender
 {
-    
+
     /**
      * User Auth
      *
@@ -57,6 +57,11 @@ class AdminController extends TwigRender
     private $userManager;
 
 
+    /**
+     * Constructor
+     *
+     * @return void
+     */
     public function __construct()
     {
         parent::__construct();
@@ -68,7 +73,6 @@ class AdminController extends TwigRender
         $this->userManager = new UserManager();
 
         // End __construct().
-
     }
     
 
@@ -109,6 +113,7 @@ class AdminController extends TwigRender
              'comments' => $comments
             ]
         );
+
     }
         
     /**
@@ -204,12 +209,12 @@ class AdminController extends TwigRender
     /**
      * Display one user infos
      *
-     * @param int $id User $id
+     * @param int $uId User id
      * @return User
      */
-    public function usersAccount(int $id)
+    public function usersAccount(int $uId)
     {
-        $account = $this->userManager->getUser($id);
+        $account = $this->userManager->getUser($uId);
 
         $user = $this->auth->getCurrentUser();
         $userName = $user->getFirstname();
