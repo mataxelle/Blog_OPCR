@@ -27,6 +27,7 @@ class Router
     /**
      * Constructor
      *
+     * @param HTTPRequest $request Request
      * @return void
      */
     public function __construct(HTTPRequest $request)
@@ -34,22 +35,23 @@ class Router
         $this->url = $request;
 
         // End __construct().
-    
     }
 
     
     /**
      * Get
      *
-     * @param string $path
-     * @param string $action
+     * @param string $path Path
+     * @param string $action Action
      * @return void
      */
     public function get(string $path, string $action)
     {
         $this->routes['GET'][] = new Route($path, $action);
+
     }
 
+    
     /**
      * Post
      *

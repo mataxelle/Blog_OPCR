@@ -12,6 +12,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class CommentFormType extends AbstractType
 {
 
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -19,7 +20,7 @@ class CommentFormType extends AbstractType
             ->add('isValid', CheckboxType::class, ['required' => false]);
 
         parent::buildForm($builder, $options);
-        
+
         // End buildForm.
     }
 
@@ -31,6 +32,7 @@ class CommentFormType extends AbstractType
              'data_class' => Comment::class,
             ]
         );
-        
+
     }
+    
 }

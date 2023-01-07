@@ -40,7 +40,8 @@ class Session
         }
 
     }
-    
+
+
     /**
      * Destroy user session
      *
@@ -61,7 +62,7 @@ class Session
      * @param mixed $default The default value if it contains no value
      * @return mixed
      */
-    public function get(string $key, $default = null)
+    public function get(string $key, $default= null)
     {
         $this->checkIsStarted();
         if (array_key_exists($key, $this->superglobals->get_SESSION())) {
@@ -85,7 +86,7 @@ class Session
     }
 
     /**
-     * @param string $key
+     * @param string $key Comment
      * @return void
      */
     public function delete(string $key): void

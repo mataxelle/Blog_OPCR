@@ -49,7 +49,7 @@ class User
     /**
      * Constructor
      *
-     * @param array $data
+     * @param array $data Comment
      * @return void
      */
     public function __construct(array $data= [])
@@ -58,8 +58,8 @@ class User
 
         // End __construct().
     }
-    
-    
+
+
     /**
      * Filling out a new user object with data
      *
@@ -90,13 +90,10 @@ class User
                         $this->$method(new \DateTime($value));
                         break;
                 }
-
-                // End if condition.
             }
-
-            // End foreach.
+            // End if.
         }
-
+        // End foreach.
     }
 
 
@@ -115,6 +112,9 @@ class User
 
     /**
      * Set value of user id
+     * 
+     * @param mixed $id The set id
+     * @return void
      */
     public function setId($id)
     {
@@ -126,6 +126,7 @@ class User
             $this->id = $id;
         }
     }
+    
 
     /**
      * Get value of user firstname

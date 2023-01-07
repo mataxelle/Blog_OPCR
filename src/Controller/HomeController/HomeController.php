@@ -23,7 +23,7 @@ class HomeController extends TwigRender
      * @var Session
      */
     private $session;
-    
+
     /**
      * Post manager
      *
@@ -44,7 +44,7 @@ class HomeController extends TwigRender
         $this->session = new Session();
         $this->postManager = new PostManager();
 
-        // End __construct().
+        // End__construct().
     }
     
     
@@ -84,5 +84,6 @@ class HomeController extends TwigRender
         );
         
     }
+    
     
 }

@@ -23,17 +23,25 @@ class HTTPRequest
     public function __construct()
     {
         $this->superglobals = new Superglobals();
-
         // End __construct().
     }
 
+    /**
+     * Request
+     *
+     * @return mixed
+     */
     public function requestMethod()
     {
         return $this->superglobals->get_SERVER('REQUEST_METHOD');
-
         // End requestMethod().
     }
     
+    /**
+     * Get uri
+     *
+     * @return string
+     */
     public function getURI()
     {
         if (array_key_exists('path', $this->superglobals->get_GET())) {

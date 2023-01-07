@@ -15,15 +15,15 @@ class Auth
      * @var Session
      */
     private $session;
-    
+
     /**
      * User manager
      *
      * @var UserManager
      */
     private $userManager;
-    
-    
+
+
     /**
      * Constructor
      *
@@ -35,8 +35,8 @@ class Auth
         $this->userManager = new UserManager();
 
         // End __construct().
-
     }
+    
 
     /**
      * Get current user from session storage

@@ -5,16 +5,28 @@ namespace App\Router;
 class Route
 {
 
+    /**
+     * Path
+     * 
+     * @var string
+     */
     private $path;
 
+    /**
+     * Action
+     * 
+     * @var string
+     */
     private $action;
-    
+
     private $matches;
 
 
     /**
      * Constructor
      *
+     * @param string $path Path
+     * @param string $action Action
      * @return void
      */
     public function __construct(string $path, string $action)
@@ -28,7 +40,7 @@ class Route
     /**
      * Return matches
      *
-     * @param string $url
+     * @param string $url Url
      * @return true|void
      */
     public function matches(string $url)

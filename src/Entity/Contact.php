@@ -54,13 +54,13 @@ class Contact
     /**
      * Constructor
      *
-     * @param array $data
+     * @param array $data Comment
      * @return void
      */
     public function __construct(array $data= [])
     {
         $this->hydrate($data);
-        
+
         // End __construct().
     }
     
@@ -118,6 +118,9 @@ class Contact
 
     /**
      * Set value of contact id
+     * 
+     * @param mixed $id The set id
+     * @return void
      */
     public function setId($id)
     {
@@ -129,6 +132,7 @@ class Contact
             $this->id = $id;
         }
     }
+    
 
     /**
      * Get value of contact firstname

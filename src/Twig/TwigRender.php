@@ -62,17 +62,16 @@ class TwigRender
 
         $this->twig->addExtension(new FormExtension());
         $this->twig->addExtension(new TranslationExtension());
-        
+
         $csrfManager = new CsrfTokenManager();
 
         $validator = Validation::createValidator();
-        
+
         $this->formFactory = Forms::createFormFactoryBuilder()
             ->addExtension(new CsrfExtension($csrfManager))
             ->addExtension(new HttpFoundationExtension())
             ->addExtension(new ValidatorExtension($validator))
             ->getFormFactory();
-
 
         // End __construct().
     }

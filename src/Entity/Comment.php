@@ -44,7 +44,7 @@ class Comment
     /**
      * Constructor
      *
-     * @param array $data
+     * @param array $data Comment
      * @return void
      */
     public function __construct(array $data= [])
@@ -65,29 +65,27 @@ class Comment
     {
         foreach ($data as $key => $value) {
             $method = 'set'.ucfirst($key);
-            
+
             if (method_exists($this, $method)) {
                 switch ($key) {
-                    case 'id':
-                    case 'postId':
-                    case 'userId':
-                        $this->$method((int) $value);
-                    case 'isValid':
-                        $this->$method((boolean) $value);
-                        break;
-                    case 'content':
-                        $this->$method((string) $value);
-                        break;
-                    case 'createdAt':
-                    case 'updtedAt':
-                        $this->$method(new \DateTime($value));
-                        break;
+                case 'id':
+                case 'postId':
+                case 'userId':
+                    $this->$method((int) $value);
+                case 'isValid':
+                    $this->$method((boolean) $value);
+                    break;
+                case 'content':
+                    $this->$method((string) $value);
+                    break;
+                case 'createdAt':
+                case 'updtedAt':
+                    $this->$method(new \DateTime($value));
+                    break;
                 }
-
-                // End if condition.
             }
 
-            // End foreach.
+            // End if condition.
         }
 
     }
@@ -107,6 +105,9 @@ class Comment
 
     /**
      * Set value of comment id
+     * 
+     * @param mixed $id The set id
+     * @return void
      */
     public function setId($id)
     {
@@ -118,6 +119,7 @@ class Comment
             $this->id = $id;
         }
     }
+
 
     /**
      * Get value of comment post id

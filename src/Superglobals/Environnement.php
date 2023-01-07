@@ -21,12 +21,14 @@ class Environnement
     public function __construct()
     {
         $this->envs = $_ENV;
+        // End construct().
     }
+
 
     /**
      * Get envs
      *
-     * @param mixed $key
+     * @param mixed $key Comment
      * @return mixed
      */
     public function get($key)

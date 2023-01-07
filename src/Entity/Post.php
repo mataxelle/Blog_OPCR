@@ -54,7 +54,7 @@ class Post
     /**
      * Constructor
      *
-     * @param array $data
+     * @param array $data Comment
      * @return void
      */
     public function __construct(array $data = [])
@@ -95,9 +95,8 @@ class Post
                     case 'updtedAt':
                         $this->$method(new \DateTime($value));
                         break;
-
-                    // End switch.
                 }
+                // End switch.
             }
 
             // End foreach.
@@ -120,6 +119,9 @@ class Post
 
     /**
      * Set value of post id
+     * 
+     * @param mixed $id The set id
+     * @return void
      */
     public function setId($id)
     {
@@ -131,6 +133,7 @@ class Post
             $this->id = $id;
         }
     }
+    
 
     /**
      * Get value of post user id

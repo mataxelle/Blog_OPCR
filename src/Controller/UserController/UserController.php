@@ -16,7 +16,7 @@ class UserController extends TwigRender
      * @var Auth
      */
     private $auth;
-    
+
     /**
      * User manager
      *
@@ -36,7 +36,7 @@ class UserController extends TwigRender
         $this->auth = new Auth();
         $this->userManager = new UserManager();
 
-        // End __construct().
+        // End__construct().
     }
 
     
@@ -63,6 +63,7 @@ class UserController extends TwigRender
         );
 
     }
+    
     
     /**
      * Delete a user

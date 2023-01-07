@@ -22,16 +22,15 @@ class Superglobals
     public function __construct()
     {
         $this->define_superglobals();
-
         // End __construct().
     }
-    
+
 
     /**
      * Returns a key from the superglobal,
      * as it was at the time of instantiation.
      *
-     * @param $key
+     * @param $key Key
      * @return mixed
      */
     public function get_SERVER($key = null)
@@ -43,6 +42,7 @@ class Superglobals
         }
     }
 
+
     /**
      * Returns a key from the superglobal,
      * as it was at the time of instantiation.
@@ -50,7 +50,7 @@ class Superglobals
      * @param $key
      * @return mixed
      */
-    public function get_POST($key = null)
+    public function get_POST($key= null)
     {
         if ($key !== null) {
             return (isset($this->POST["$key"])) ? $this->POST["$key"] : null;
@@ -66,7 +66,7 @@ class Superglobals
      * @param $key
      * @return mixed
      */
-    public function get_GET($key = null)
+    public function get_GET($key= null)
     {
         if ($key !== null) {
             return (isset($this->GET["$key"])) ? $this->GET["$key"] : null;
@@ -82,7 +82,7 @@ class Superglobals
      * @param $key
      * @return mixed
      */
-    public function get_SESSION($key = null)
+    public function get_SESSION($key= null)
     {
         if ($key !== null) {
             return (isset($this->SESSION["$key"])) ? $this->SESSION["$key"] : null;
