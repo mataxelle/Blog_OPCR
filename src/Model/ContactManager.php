@@ -9,6 +9,7 @@ use PDO;
 
 class ContactManager extends ConnectDB
 {
+
     
     /**
      * Get all contact messages sorted by creation date
@@ -22,7 +23,10 @@ class ContactManager extends ConnectDB
         $response = $database->query('SELECT * FROM contact ORDER BY createdAt ASC');
         
         return $response->fetchAll();
+
+        // End getAllMessages().
     }
+    
     
     /**
      * Get a message by id

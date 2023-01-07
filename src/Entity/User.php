@@ -46,17 +46,25 @@ class User
     private $updatedAt;
 
 
-    public function __construct(array $data = [])
+    /**
+     * Constructor
+     *
+     * @param array $data
+     * @return void
+     */
+    public function __construct(array $data= [])
     {
         $this->hydrate($data);
 
         // End __construct().
-        
     }
     
     
     /**
      * Filling out a new user object with data
+     *
+     * @param array $data
+     * @return void
      */
     public function hydrate(array $data)
     {
@@ -82,7 +90,10 @@ class User
                         $this->$method(new \DateTime($value));
                         break;
                 }
+
+                // End if condition.
             }
+
             // End foreach.
         }
 
@@ -97,14 +108,17 @@ class User
     public function getId(): ?int
     {
         return $this->id;
+
     }
+
+
 
     /**
      * Set value of user id
      */
     public function setId($id)
     {
-        if (is_string($id) && (int)$id > 0) {
+        if (is_string($id) && (int) $id > 0) {
             $this->id = (int) $id;
         }
 

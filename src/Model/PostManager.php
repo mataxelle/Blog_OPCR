@@ -9,7 +9,8 @@ use PDO;
 
 class PostManager extends ConnectDB
 {
-    
+
+
     /**
      * Get all posts sorted by creation date
      *
@@ -22,7 +23,10 @@ class PostManager extends ConnectDB
         $response = $database->query('SELECT * FROM post ORDER BY createdAt DESC');
         
         return $response->fetchAll();
+
+        // End getAllPosts().
     }
+    
     
     /**
      * Get all validated posts
@@ -106,7 +110,7 @@ class PostManager extends ConnectDB
 
     /**
      * Update a post
-     * 
+     *
      * @param Post $post Post Entity
      * @return void
      */

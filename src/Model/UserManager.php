@@ -9,7 +9,8 @@ use PDO;
 
 class UserManager extends ConnectDB
 {
-    
+
+
     /**
      * Get all users sorted by creation date
      *
@@ -22,7 +23,10 @@ class UserManager extends ConnectDB
         $response = $database->query('SELECT * FROM user ORDER BY createdAt DESC');
         
         return $response->fetchAll();
+
+        // end getAllUsers()
     }
+
     
     /**
      * Get a user by id

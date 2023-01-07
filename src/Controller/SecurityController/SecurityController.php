@@ -143,7 +143,7 @@ class SecurityController extends TwigRender
             } else {
                 $response = new RedirectResponse('/login');
                 $response->send();
-                // End if condition. 
+                // End if condition.
             }
         }
 
@@ -168,7 +168,7 @@ class SecurityController extends TwigRender
             [
               'user' => $userName,
               'id' => $userId,
-              'admin' => $isAdmin,
+             'admin' => $isAdmin,
             ]
         );
     }

@@ -9,36 +9,72 @@ use Exception;
 class Router
 {
 
+    /**
+     * Url
+     *
+     * @var url
+     */
     private $url;
 
+    /**
+     * Routes
+     *
+     * @var array $routes
+     */
     private $routes = [];
 
 
+    /**
+     * Constructor
+     *
+     * @return void
+     */
     public function __construct(HTTPRequest $request)
     {
         $this->url = $request;
 
         // End __construct().
-    }
     
+    }
+
+    
+    /**
+     * Get
+     *
+     * @param string $path
+     * @param string $action
+     * @return void
+     */
     public function get(string $path, string $action)
     {
         $this->routes['GET'][] = new Route($path, $action);
     }
 
+    /**
+     * Post
+     *
+     * @param string $path
+     * @param string $action
+     * @return void
+     */
     public function post(string $path, string $action)
     {
         $this->routes['POST'][] = new Route($path, $action);
     }
 
+    /**
+     * Run
+     *
+     * @return mixed
+     */
     public function run()
     {
         foreach ($this->routes[$this->url->requestMethod()] as $route) {
-            if($route->matches($this->url->getURI())) {
+            if ($route->matches($this->url->getURI())) {
                 return $route->execute();
             }
         }
 
-        // Throw new Exception('404 Not Found');
+        // Throw new Exception('404 Not Found').
     }
 }

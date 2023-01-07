@@ -41,15 +41,26 @@ class Comment
     private $updatedAt;
 
 
-    public function __construct(array $data = [])
+    /**
+     * Constructor
+     *
+     * @param array $data
+     * @return void
+     */
+    public function __construct(array $data= [])
     {
         $this->hydrate($data);
 
         // End __construct().
-        
     }
 
 
+    /**
+     * Filling out a new user object with data
+     *
+     * @param array $data
+     * @return void
+     */
     public function hydrate(array $data)
     {
         foreach ($data as $key => $value) {
@@ -72,7 +83,10 @@ class Comment
                         $this->$method(new \DateTime($value));
                         break;
                 }
+
+                // End if condition.
             }
+
             // End foreach.
         }
 
@@ -87,14 +101,16 @@ class Comment
     public function getId(): ?int
     {
         return $this->id;
+
     }
+
 
     /**
      * Set value of comment id
      */
     public function setId($id)
     {
-        if (is_string($id) && (int)$id > 0) {
+        if (is_string($id) && (int) $id > 0) {
             $this->id = (int) $id;
         }
 

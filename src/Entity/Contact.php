@@ -34,7 +34,7 @@ class Contact
      * @var string
      */
     private $message;
-    
+
     /**
      * @var \datetime
      */
@@ -51,15 +51,26 @@ class Contact
     private $answeredAt;
 
 
-    public function __construct(array $data = [])
+    /**
+     * Constructor
+     *
+     * @param array $data
+     * @return void
+     */
+    public function __construct(array $data= [])
     {
         $this->hydrate($data);
         
         // End __construct().
-
     }
     
 
+    /**
+     * Filling out a new user object with data
+     *
+     * @param array $data
+     * @return void
+     */
     public function hydrate(array $data)
     {
         foreach ($data as $key => $value) {
@@ -86,6 +97,7 @@ class Contact
                         break;
                 }
             }
+
             // End foreach.
         }
 
@@ -100,14 +112,16 @@ class Contact
     public function getId(): ?int
     {
         return $this->id;
+
     }
+
 
     /**
      * Set value of contact id
      */
     public function setId($id)
     {
-        if (is_string($id) && (int)$id > 0) {
+        if (is_string($id) && (int) $id > 0) {
             $this->id = (int) $id;
         }
 

@@ -26,7 +26,7 @@ class Session
 
         // End __construct().
     }
-    
+
 
     /**
      * Start user session
@@ -74,8 +74,8 @@ class Session
     /**
      * Set a value on the item for the provided `$key`
      *
-     * @param string $key
-     * @param $value
+     * @param string $key The parameter to set
+     * @param $value The value
      * @return mixed
      */
     public function set(string $key, $value): void

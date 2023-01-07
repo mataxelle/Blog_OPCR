@@ -9,7 +9,8 @@ use PDO;
 
 class CommentManager extends ConnectDB
 {
-    
+
+
     /**
      * Get all comments sorted by update date
      *
@@ -22,7 +23,10 @@ class CommentManager extends ConnectDB
         $response = $database->query('SELECT * FROM comment ORDER BY updatedAt DESC');
         
         return $response->fetchAll();
+
+        // End getAllComments().
     }
+    
     
     /**
      * Get a comment by id

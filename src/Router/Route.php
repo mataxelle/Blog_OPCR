@@ -12,6 +12,11 @@ class Route
     private $matches;
 
 
+    /**
+     * Constructor
+     *
+     * @return void
+     */
     public function __construct(string $path, string $action)
     {
         $this->path = trim($path,'/');
@@ -20,6 +25,12 @@ class Route
         // End __construct().
     }
     
+    /**
+     * Return matches
+     *
+     * @param string $url
+     * @return true|void
+     */
     public function matches(string $url)
     {
         $reg = preg_replace('#:([\w]+)#', '([^/]+)', $this->path);
@@ -32,6 +43,11 @@ class Route
         
     }
 
+    /**
+     * Execute
+     *
+     * @return mixed
+     */
     public function execute()
     {
         $params = explode('@', $this->action);

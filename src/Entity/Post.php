@@ -4,7 +4,7 @@ namespace App\Entity;
 
 class Post
 {
-    
+
     /**
      * @var integer
      */
@@ -51,17 +51,25 @@ class Post
     private $updatedAt;
 
 
+    /**
+     * Constructor
+     *
+     * @param array $data
+     * @return void
+     */
     public function __construct(array $data = [])
     {
         $this->hydrate($data);
 
         // End __construct().
-
     }
 
 
     /**
      * Filling out a new post object with data
+     *
+     * @param array $data
+     * @return void
      */
     public function hydrate(array $data)
     {
@@ -87,8 +95,11 @@ class Post
                     case 'updtedAt':
                         $this->$method(new \DateTime($value));
                         break;
+
+                    // End switch.
                 }
             }
+
             // End foreach.
         }
 
@@ -103,14 +114,16 @@ class Post
     public function getId(): ?int
     {
         return $this->id;
+
     }
+
 
     /**
      * Set value of post id
      */
     public function setId($id)
     {
-        if (is_string($id) && (int)$id > 0) {
+        if (is_string($id) && (int) $id > 0) {
             $this->id = (int) $id;
         }
 
@@ -189,7 +202,7 @@ class Post
     /**
      * Set value of post image
      */
-    public function setImage(string $image = null): self
+    public function setImage(string $image= null): self
     {
         $this->image = $image;
         return $this;
