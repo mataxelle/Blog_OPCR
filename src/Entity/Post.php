@@ -96,6 +96,7 @@ class Post
                         $this->$method(new \DateTime($value));
                         break;
                 }
+                
                 // End switch.
             }
 
@@ -119,7 +120,7 @@ class Post
 
     /**
      * Set value of post id
-     * 
+     *
      * @param mixed $id The set id
      * @return void
      */
@@ -133,7 +134,7 @@ class Post
             $this->id = $id;
         }
     }
-    
+
 
     /**
      * Get value of post user id

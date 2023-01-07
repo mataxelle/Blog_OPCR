@@ -7,14 +7,14 @@ class Route
 
     /**
      * Path
-     * 
+     *
      * @var string
      */
     private $path;
 
     /**
      * Action
-     * 
+     *
      * @var string
      */
     private $action;
@@ -25,7 +25,7 @@ class Route
     /**
      * Constructor
      *
-     * @param string $path Path
+     * @param string $path   Path
      * @param string $action Action
      * @return void
      */

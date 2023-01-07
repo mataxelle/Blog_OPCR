@@ -91,6 +91,7 @@ class User
                         break;
                 }
             }
+            
             // End if.
         }
         // End foreach.
@@ -112,7 +113,7 @@ class User
 
     /**
      * Set value of user id
-     * 
+     *
      * @param mixed $id The set id
      * @return void
      */

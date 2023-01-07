@@ -41,7 +41,7 @@ class Router
     /**
      * Get
      *
-     * @param string $path Path
+     * @param string $path   Path
      * @param string $action Action
      * @return void
      */

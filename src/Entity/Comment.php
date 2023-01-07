@@ -105,7 +105,7 @@ class Comment
 
     /**
      * Set value of comment id
-     * 
+     *
      * @param mixed $id The set id
      * @return void
      */
