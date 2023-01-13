@@ -48,7 +48,7 @@ class AdminController extends TwigRender
      * @var PostManager
      */
     private $postManager;
-    
+
     /**
      * User manager
      *
@@ -71,10 +71,9 @@ class AdminController extends TwigRender
         $this->contactManager = new ContactManager();
         $this->postManager = new PostManager();
         $this->userManager = new UserManager();
-
         // End __construct().
     }
-    
+
 
     /**
      * Display all blog infos
@@ -93,7 +92,7 @@ class AdminController extends TwigRender
 
         $user = $this->auth->getCurrentUser();
         $userName = $user->getFirstname();
-        $isAdmin = $user->getIsAdmin();
+        $isAdmin = $user->isAdmin();
         $userId = $user->getId();
 
         if ($isAdmin === false) {
@@ -115,7 +114,7 @@ class AdminController extends TwigRender
         );
 
     }
-        
+
     /**
      * Display all posts
      *
@@ -127,7 +126,7 @@ class AdminController extends TwigRender
 
         $user = $this->auth->getCurrentUser();
         $userName = $user->getFirstname();
-        $isAdmin = $user->getIsAdmin();
+        $isAdmin = $user->isAdmin();
         $userId = $user->getId();
 
         if ($isAdmin === false) {
@@ -157,7 +156,7 @@ class AdminController extends TwigRender
 
         $user = $this->auth->getCurrentUser();
         $userName = $user->getFirstname();
-        $isAdmin = $user->getIsAdmin();
+        $isAdmin = $user->isAdmin();
         $userId = $user->getId();
 
         if ($isAdmin === false) {
@@ -187,7 +186,7 @@ class AdminController extends TwigRender
 
         $user = $this->auth->getCurrentUser();
         $userName = $user->getFirstname();
-        $isAdmin = $user->getIsAdmin();
+        $isAdmin = $user->isAdmin();
         $userId = $user->getId();
 
         if ($isAdmin === false) {
@@ -218,7 +217,7 @@ class AdminController extends TwigRender
 
         $user = $this->auth->getCurrentUser();
         $userName = $user->getFirstname();
-        $isAdmin = $user->getIsAdmin();
+        $isAdmin = $user->isAdmin();
         $userId = $user->getId();
 
         if ($isAdmin === false) {
@@ -248,7 +247,7 @@ class AdminController extends TwigRender
 
         $user = $this->auth->getCurrentUser();
         $userName = $user->getFirstname();
-        $isAdmin = $user->getIsAdmin();
+        $isAdmin = $user->isAdmin();
         $userId = $user->getId();
 
         if ($isAdmin === false) {

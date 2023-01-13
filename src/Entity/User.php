@@ -8,7 +8,7 @@ class User
     /**
      * @var integer
      */
-    private $id;
+    private $userId;
 
     /**
      * @var string
@@ -105,7 +105,7 @@ class User
      */
     public function getId(): ?int
     {
-        return $this->id;
+        return $this->userId;
 
     }
 
@@ -117,14 +117,14 @@ class User
      * @param mixed $id The set id
      * @return void
      */
-    public function setId($id)
+    public function setId($userId)
     {
-        if (is_string($id) && (int) $id > 0) {
-            $this->id = (int) $id;
+        if (is_string($userId) && (int) $userId > 0) {
+            $this->userId = (int) $userId;
         }
 
-        if (is_int($id) && $id > 0) {
-            $this->id = $id;
+        if (is_int($userId) && $userId > 0) {
+            $this->userId = $userId;
         }
     }
     
@@ -210,7 +210,7 @@ class User
      *
      * @return boolean
      */
-    public function getIsAdmin(): ?bool
+    public function isAdmin(): ?bool
     {
         return $this->isAdmin;
     }

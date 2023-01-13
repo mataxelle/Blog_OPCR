@@ -8,7 +8,7 @@ class Contact
     /**
      * @var integer
      */
-    private $id;
+    private $contactId;
 
     /**
      * @var string
@@ -111,7 +111,7 @@ class Contact
      */
     public function getId(): ?int
     {
-        return $this->id;
+        return $this->contactId;
 
     }
 
@@ -122,14 +122,14 @@ class Contact
      * @param mixed $id The set id
      * @return void
      */
-    public function setId($id)
+    public function setId($contactId)
     {
-        if (is_string($id) && (int) $id > 0) {
-            $this->id = (int) $id;
+        if (is_string($contactId) && (int) $contactId > 0) {
+            $this->contactId = (int) $contactId;
         }
 
-        if (is_int($id) && $id > 0) {
-            $this->id = $id;
+        if (is_int($contactId) && $contactId > 0) {
+            $this->contactId = $contactId;
         }
     }
     
@@ -253,7 +253,7 @@ class Contact
      *
      * @return boolean
      */
-    public function getIsAnswered(): ?bool
+    public function isAnswered(): ?bool
     {
         return $this->isAnswered;
     }

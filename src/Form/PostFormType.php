@@ -33,11 +33,11 @@ class PostFormType extends AbstractType
             ])
             ->add('isPublished', CheckboxType::class, [
                 'required' => false
-            ]);
+            ]
+            );
         
         parent::buildForm($builder, $options);
-
-        // End buildForm.
+        // End buildForm().
     }
 
 

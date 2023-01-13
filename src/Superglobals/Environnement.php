@@ -21,7 +21,7 @@ class Environnement
     public function __construct()
     {
         $this->envs = $_ENV;
-        // End construct().
+        // End __construct().
     }
 
 

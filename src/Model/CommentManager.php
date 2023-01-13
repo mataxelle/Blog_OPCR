@@ -23,11 +23,10 @@ class CommentManager extends ConnectDB
         $response = $database->query('SELECT * FROM comment ORDER BY updatedAt DESC');
         
         return $response->fetchAll();
-
         // End getAllComments().
     }
-    
-    
+
+
     /**
      * Get a comment by id
      *
@@ -83,7 +82,7 @@ class CommentManager extends ConnectDB
              $comment->getPostId(),
              $comment->getUserId(),
              $comment->getContent(),
-             $comment->getIsValid() ? 1 : 0,
+             $comment->isValid() ? 1 : 0,
              (new DateTime())->format('Y-m-d h:i:s'),
              (new DateTime())->format('Y-m-d h:i:s'),
             ]
@@ -105,7 +104,7 @@ class CommentManager extends ConnectDB
         $commentValidation = $database->prepare('UPDATE comment SET content = ?, isValid = ? WHERE id = ?');
         
         $commentValidation->bindValue(1, $comment->getContent(), PDO::PARAM_STR);
-        $commentValidation->bindValue(2, $comment->getIsValid() ? 1 : 0, PDO::PARAM_INT);
+        $commentValidation->bindValue(2, $comment->isValid() ? 1 : 0, PDO::PARAM_INT);
         $commentValidation->bindValue(3, $comment->getId(), PDO::PARAM_INT);
         
         $commentValidation->execute();

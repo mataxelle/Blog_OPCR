@@ -8,7 +8,7 @@ class Post
     /**
      * @var integer
      */
-    private $id;
+    private $postId;
 
     /**
      * @var integer
@@ -113,7 +113,7 @@ class Post
      */
     public function getId(): ?int
     {
-        return $this->id;
+        return $this->postId;
 
     }
 
@@ -124,14 +124,14 @@ class Post
      * @param mixed $id The set id
      * @return void
      */
-    public function setId($id)
+    public function setId($postId)
     {
-        if (is_string($id) && (int) $id > 0) {
-            $this->id = (int) $id;
+        if (is_string($postId) && (int) $postId > 0) {
+            $this->postId = (int) $postId;
         }
 
-        if (is_int($id) && $id > 0) {
-            $this->id = $id;
+        if (is_int($postId) && $postId > 0) {
+            $this->postId = $postId;
         }
     }
 
@@ -236,7 +236,7 @@ class Post
      *
      * @return boolean
      */
-    public function getIsPublished(): ?bool
+    public function isPublished(): ?bool
     {
         return $this->isPublished;
     }

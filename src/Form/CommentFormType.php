@@ -20,11 +20,10 @@ class CommentFormType extends AbstractType
             ->add('isValid', CheckboxType::class, ['required' => false]);
 
         parent::buildForm($builder, $options);
-
         // End buildForm.
     }
 
-    
+
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults(

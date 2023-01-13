@@ -54,7 +54,7 @@ class Session
         }
 
     }
-    
+
     /**
      * Retrieve the value for `$key` or return `$default` instead
      *

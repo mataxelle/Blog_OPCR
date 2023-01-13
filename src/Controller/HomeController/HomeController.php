@@ -43,11 +43,10 @@ class HomeController extends TwigRender
         $this->auth = new Auth();
         $this->session = new Session();
         $this->postManager = new PostManager();
-
         // End__construct().
     }
-    
-    
+
+
     /**
      * Get all validated posts
      *

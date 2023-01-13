@@ -99,7 +99,7 @@ class PostManager extends ConnectDB
              $post->getSlug(),
              $post->getImage(),
              $post->getContent(),
-             $post->getIsPublished() ? 1 : 0,
+             $post->isPublished() ? 1 : 0,
              (new DateTime())->format('Y-m-d h:i:s'),
              (new DateTime())->format('Y-m-d h:i:s'),
             ]
@@ -125,7 +125,7 @@ class PostManager extends ConnectDB
         $upPost->bindValue(3, $post->getSlug(), PDO::PARAM_STR);
         $upPost->bindValue(4, $post->getImage(), PDO::PARAM_STR);
         $upPost->bindValue(5, $post->getContent(), PDO::PARAM_STR);
-        $upPost->bindValue(6, $post->getIsPublished() ? 1 : 0, PDO::PARAM_INT);
+        $upPost->bindValue(6, $post->isPublished() ? 1 : 0, PDO::PARAM_INT);
         $upPost->bindValue(7, (new DateTime())->format('Y-m-d h:i:s'));
         $upPost->bindValue(8, $post->getId(), PDO::PARAM_INT);
 

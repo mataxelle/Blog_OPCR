@@ -10,7 +10,7 @@ use PDO;
 class ContactManager extends ConnectDB
 {
 
-    
+
     /**
      * Get all contact messages sorted by creation date
      *
@@ -19,15 +19,15 @@ class ContactManager extends ConnectDB
     public function getAllMessages()
     {
         $database = $this->database;
-        
+
         $response = $database->query('SELECT * FROM contact ORDER BY createdAt ASC');
-        
+
         return $response->fetchAll();
 
         // End getAllMessages().
     }
-    
-    
+
+
     /**
      * Get a message by id
      *
@@ -46,7 +46,8 @@ class ContactManager extends ConnectDB
 
         return new Contact($response->fetch());
     }
-    
+
+
     /**
      * Insert a new contact message
      *
@@ -67,7 +68,7 @@ class ContactManager extends ConnectDB
              $contact->getLabel(),
              $contact->getMessage(),
              (new DateTime())->format('Y-m-d h:i:s'),
-             $contact->getIsAnswered() ? 1 : 0,
+             $contact->isAnswered() ? 1 : 0,
              (new DateTime())->format('Y-m-d h:i:s'),
             ]
         );

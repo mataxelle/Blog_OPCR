@@ -35,7 +35,7 @@ class CommentController extends TwigRender
      * @var PostManager
      */
     private $postManager;
-    
+
 
     /**
      * Constructor
@@ -48,11 +48,10 @@ class CommentController extends TwigRender
         $this->auth = new Auth();
         $this->commentManager = new CommentManager();
         $this->postManager = new PostManager();
-
         // End __construct().
     }
 
-    
+
     /**
      * Create a comment
      *
@@ -63,7 +62,7 @@ class CommentController extends TwigRender
     {
         $user = $this->auth->getCurrentUser();
         $userName = $user->getFirstname();
-        $isAdmin = $user->getIsAdmin();
+        $isAdmin = $user->isAdmin();
         $userId = $user->getId();
         
         $post = $this->postManager->getOnePost($slug);
@@ -113,9 +112,9 @@ class CommentController extends TwigRender
              'post' => $post,
             ]
         );
-        
+
     }
-    
+
     /**
      * Validate a comment
      *
@@ -153,7 +152,7 @@ class CommentController extends TwigRender
 
         $user = $this->auth->getCurrentUser();
         $userName = $user->getFirstname();
-        $isAdmin = $user->getIsAdmin();
+        $isAdmin = $user->isAdmin();
         $userId = $user->getId();
 
         if ($isAdmin === false) {
@@ -180,7 +179,7 @@ class CommentController extends TwigRender
     public function delete(int $commentId)
     {
         $user = $this->auth->getCurrentUser();
-        $isAdmin = $user->getIsAdmin();
+        $isAdmin = $user->isAdmin();
 
         if ($isAdmin === false) {
             $response = new RedirectResponse('/');

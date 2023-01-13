@@ -21,14 +21,14 @@ class SecurityController extends TwigRender
      * @var Session
      */
     private $session;
-    
+
     /**
      * User manager
      *
      * @var UserManager
      */
     private $userManager;
-    
+
     /**
      * Superglobals
      *
@@ -47,10 +47,9 @@ class SecurityController extends TwigRender
         $this->session = new Session();
         $this->userManager = new UserManager();
         $this->superglobals = new Superglobals();
-
         // End __construct().
     }
-    
+
 
     /**
      * Create a user
@@ -130,10 +129,10 @@ class SecurityController extends TwigRender
                 $this->session->set('id', $user->getId());
                 $this->session->set('firstname', $user->getFirstname());
                 $this->session->set('lastname', $user->getLastname());
-                $this->session->set('isAdmin', $user->getIsAdmin());
+                $this->session->set('isAdmin', $user->isAdmin());
                 $this->session->set('email', $user->getEmail());
                 
-                if ($user->getIsAdmin() === true) {
+                if ($user->isAdmin() === true) {
                     $response = new RedirectResponse('/admin');
                     $response->send();
                 }

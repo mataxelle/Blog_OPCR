@@ -8,7 +8,7 @@ class Comment
     /**
      * @var integer
      */
-    private $id;
+    private $commentId;
 
     /**
      * @var integer
@@ -98,7 +98,7 @@ class Comment
      */
     public function getId(): ?int
     {
-        return $this->id;
+        return $this->commentId;
 
     }
 
@@ -109,14 +109,14 @@ class Comment
      * @param mixed $id The set id
      * @return void
      */
-    public function setId($id)
+    public function setId($commentId)
     {
-        if (is_string($id) && (int) $id > 0) {
-            $this->id = (int) $id;
+        if (is_string($commentId) && (int) $commentId > 0) {
+            $this->commentId = (int) $commentId;
         }
 
-        if (is_int($id) && $id > 0) {
-            $this->id = $id;
+        if (is_int($commentId) && $commentId > 0) {
+            $this->commentId = $commentId;
         }
     }
 
@@ -183,7 +183,7 @@ class Comment
      *
      * @return boolean
      */
-    public function getIsValid(): ?bool
+    public function isValid(): ?bool
     {
         return $this->isValid;
     }

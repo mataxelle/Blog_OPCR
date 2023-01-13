@@ -48,11 +48,10 @@ class ContactController extends TwigRender
         $this->auth = new Auth();
         $this->session = new Session();
         $this->contactManager = new ContactManager();
-
         // End __construct().
     }
 
-    
+
     /**
      * Create a contact message
      *
@@ -97,7 +96,7 @@ class ContactController extends TwigRender
             $user = $this->auth->getCurrentUser();
             $userName = $user->getFirstname();
             $userId = $user->getId();
-            $isAdmin = $user->getIsAdmin();
+            $isAdmin = $user->isAdmin();
         }
 
         $this->twig->display(
@@ -125,7 +124,7 @@ class ContactController extends TwigRender
 
         $user = $this->auth->getCurrentUser();
         $userName = $user->getFirstname();
-        $isAdmin = $user->getIsAdmin();
+        $isAdmin = $user->isAdmin();
         $userId = $user->getId();
 
         $this->twig->display(

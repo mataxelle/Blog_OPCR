@@ -52,7 +52,7 @@ class PostController extends TwigRender
      * @var UserManager
      */
     private $userManager;
-    
+
 
     /**
      * Constructor
@@ -71,7 +71,7 @@ class PostController extends TwigRender
         // End __construct().
     }
 
-    
+
     /**
      * Show a post and his comments
      *
@@ -95,7 +95,7 @@ class PostController extends TwigRender
 
         $user = $this->auth->getCurrentUser();
         $userName = $user->getFirstname();
-        $isAdmin = $user->getIsAdmin();
+        $isAdmin = $user->isAdmin();
         $userId = $user->getId();
 
         $this->twig->display(
@@ -110,7 +110,8 @@ class PostController extends TwigRender
         );
 
     }
-    
+
+
     /**
      * Add a post
      *
@@ -162,7 +163,7 @@ class PostController extends TwigRender
 
         $user = $this->auth->getCurrentUser();
         $userName = $user->getFirstname();
-        $isAdmin = $user->getIsAdmin();
+        $isAdmin = $user->isAdmin();
         $userId = $user->getId();
 
         if ($isAdmin === false) {
@@ -241,7 +242,7 @@ class PostController extends TwigRender
 
         $user = $this->auth->getCurrentUser();
         $userName = $user->getFirstname();
-        $isAdmin = $user->getIsAdmin();
+        $isAdmin = $user->isAdmin();
         $userId = $user->getId();
 
         if ($isAdmin === false) {
@@ -265,11 +266,12 @@ class PostController extends TwigRender
      * Delete a post
      *
      * @param string $slug Post slug
+     * @return void
      */
     public function delete(string $slug)
     {
         $user = $this->auth->getCurrentUser();
-        $isAdmin = $user->getIsAdmin();
+        $isAdmin = $user->isAdmin();
 
         if ($isAdmin === false) {
             $response = new RedirectResponse('/');

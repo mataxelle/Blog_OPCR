@@ -35,11 +35,10 @@ class UserController extends TwigRender
         parent::__construct();
         $this->auth = new Auth();
         $this->userManager = new UserManager();
-
         // End__construct().
     }
 
-    
+
     /**
      * Get a user account information
      *
@@ -49,7 +48,7 @@ class UserController extends TwigRender
     {
         $user = $this->auth->getCurrentUser();
         $userName = $user->getFirstname();
-        $isAdmin = $user->getIsAdmin();
+        $isAdmin = $user->isAdmin();
         $userId = $user->getId();
 
         $this->twig->display(
@@ -74,7 +73,7 @@ class UserController extends TwigRender
     public function delete(int $userId)
     {
         $user = $this->auth->getCurrentUser();
-        $isAdmin = $user->getIsAdmin();
+        $isAdmin = $user->isAdmin();
         
         $this->userManager->deleteUser($userId);
         
@@ -86,4 +85,5 @@ class UserController extends TwigRender
             $response->send();
         }
     }
+
 }

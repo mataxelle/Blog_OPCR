@@ -23,11 +23,10 @@ class UserManager extends ConnectDB
         $response = $database->query('SELECT * FROM user ORDER BY createdAt DESC');
         
         return $response->fetchAll();
-
-        // end getAllUsers()
+        // End getAllUsers()
     }
 
-    
+
     /**
      * Get a user by id
      *
@@ -46,7 +45,7 @@ class UserManager extends ConnectDB
         
         return new User($response->fetch());
     }
-    
+
     /**
      * Register a new user
      *
@@ -65,7 +64,7 @@ class UserManager extends ConnectDB
             [
              $user->getFirstname(),
              $user->getLastname(),
-             $user->getIsAdmin() ? 1 : 0,
+             $user->isAdmin() ? 1 : 0,
              $user->getEmail(),
              $pass_hache,
              (new DateTime())->format('Y-m-d h:i:s'),
@@ -94,7 +93,7 @@ class UserManager extends ConnectDB
         
         return new User($login->fetch());
     }
-    
+
     /**
      * Delete a user
      *

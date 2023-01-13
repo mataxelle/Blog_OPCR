@@ -36,7 +36,9 @@ class UserFormType extends AbstractType
                 ],
             ]);
 
-        // End buildForm.
+        parent::buildForm($builder, $options);
+
+        // End buildForm().
     }
 
     
