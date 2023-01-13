@@ -23,7 +23,7 @@ class UserManager extends ConnectDB
         $response = $database->query('SELECT * FROM user ORDER BY createdAt DESC');
         
         return $response->fetchAll();
-        // End getAllUsers()
+        // End getAllUsers().
     }
 
 

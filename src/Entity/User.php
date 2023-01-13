@@ -114,7 +114,7 @@ class User
     /**
      * Set value of user id
      *
-     * @param mixed $id The set id
+     * @param mixed $userId The set id
      * @return void
      */
     public function setId($userId)

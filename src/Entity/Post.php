@@ -121,7 +121,7 @@ class Post
     /**
      * Set value of post id
      *
-     * @param mixed $id The set id
+     * @param mixed $postId The set id
      * @return void
      */
     public function setId($postId)

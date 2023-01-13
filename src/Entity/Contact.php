@@ -119,7 +119,7 @@ class Contact
     /**
      * Set value of contact id
      *
-     * @param mixed $id The set id
+     * @param mixed $contactId The set id
      * @return void
      */
     public function setId($contactId)

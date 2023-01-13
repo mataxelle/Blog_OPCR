@@ -106,7 +106,7 @@ class Comment
     /**
      * Set value of comment id
      *
-     * @param mixed $id The set id
+     * @param mixed $commentId The set id
      * @return void
      */
     public function setId($commentId)
