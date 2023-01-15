@@ -26,13 +26,6 @@ class PostController extends TwigRender
     private $auth;
 
     /**
-     * Session
-     *
-     * @var Session
-     */
-    private $session;
-
-    /**
      * Comment manager
      *
      * @var CommentManager
@@ -46,13 +39,6 @@ class PostController extends TwigRender
      */
     private $postManager;
 
-    /**
-     * User manager
-     *
-     * @var UserManager
-     */
-    private $userManager;
-
 
     /**
      * Constructor
@@ -63,11 +49,8 @@ class PostController extends TwigRender
     {
         parent::__construct();
         $this->auth = new Auth();
-        $this->session = new Session();
         $this->commentManager = new CommentManager();
         $this->postManager = new PostManager();
-        $this->userManager = new UserManager();
-
         // End __construct().
     }
 
@@ -76,7 +59,6 @@ class PostController extends TwigRender
      * Show a post and his comments
      *
      * @param string $slug Post slug
-     * @return void
      */
     public function show(string $slug)
     {
@@ -101,11 +83,11 @@ class PostController extends TwigRender
         $this->twig->display(
             'post/post_show.html.twig',
             [
-             'post' => $post,
+             'post'     => $post,
              'comments' => $comments,
-             'user' => $userName,
-             'admin' => $isAdmin,
-             'id' => $userId
+             'user'     => $userName,
+             'admin'    => $isAdmin,
+             'id'       => $userId
             ]
         );
 
@@ -174,10 +156,10 @@ class PostController extends TwigRender
         $this->twig->display(
             'post/post_add.html.twig',
             [
-             'form' => $form->createView(),
-             'user' => $userName,
+             'form'  => $form->createView(),
+             'user'  => $userName,
              'admin' => $isAdmin,
-             'id' => $userId
+             'id'    => $userId
             ]
         );
     }
@@ -253,11 +235,11 @@ class PostController extends TwigRender
         $this->twig->display(
             'post/update.html.twig',
             [
-             'form' => $form->createView(),
-             'post' => $post,
-             'user' => $userName,
+             'form'  => $form->createView(),
+             'post'  => $post,
+             'user'  => $userName,
              'admin' => $isAdmin,
-             'id' => $userId
+             'id'  => $userId
             ]
         );
     }

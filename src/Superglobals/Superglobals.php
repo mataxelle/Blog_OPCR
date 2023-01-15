@@ -2,29 +2,50 @@
 
 namespace App\Superglobals;
 
+use Symfony\Component\HttpFoundation\Request;
+
 class Superglobals
 {
 
-    private $SERVER;
+    private $server;
 
-    private $POST;
+    private $post;
 
-    private $GET;
+    private $get;
 
-    private $SESSION;
+    private $session;
+
+    private static $instance;
 
 
     /**
      * Constructor
      *
-     * @return void
+     * @param $get
+     * @param $post
+     * @param $server
+     * @param $session
      */
-    public function __construct()
+    private function __construct($get, $post, $server, $session)
     {
-        $this->define_superglobals();
+        $this->server = $server ?? [];
+        $this->post = $post ?? [];
+        $this->get = $get ?? [];
+        $this->session = $session ?? [];
         // End __construct().
     }
 
+
+    public static function get()
+    {
+        $request = Request::createFromGlobals();
+
+        if (!(self::$instance instanceof self)) {
+            self::$instance = new self($request->query->all(), $request->request->all(), $request->server->all(), $_SESSION);
+        }
+
+        return self::$instance;
+    }
 
     /**
      * Returns a key from the superglobal,
@@ -33,13 +54,13 @@ class Superglobals
      * @param $key Key
      * @return mixed
      */
-    public function get_SERVER($key = null)
+    public function getServer($key = null)
     {
-        if ($key !== null) {
-            return (isset($this->SERVER["$key"])) ? $this->SERVER["$key"] : null;
-        } else {
-            return $this->SERVER;
+        if (array_key_exists($key, $this->server)) {
+            return $this->server[$key];
         }
+
+        return $this->server;
     }
 
 
@@ -50,13 +71,13 @@ class Superglobals
      * @param $key
      * @return mixed
      */
-    public function get_POST($key= null)
+    public function getPost($key= null)
     {
-        if ($key !== null) {
-            return (isset($this->POST["$key"])) ? $this->POST["$key"] : null;
-        } else {
-            return $this->POST;
+        if (array_key_exists($key, $this->post)) {
+            return $this->post[$key];
         }
+
+        return $this->post;
     }
 
     /**
@@ -66,13 +87,13 @@ class Superglobals
      * @param $key
      * @return mixed
      */
-    public function get_GET($key= null)
+    public function getGet($key= null)
     {
-        if ($key !== null) {
-            return (isset($this->GET["$key"])) ? $this->GET["$key"] : null;
-        } else {
-            return $this->GET;
+        if (array_key_exists($key, $this->get)) {
+            return $this->get[$key];
         }
+
+        return $this->get;
     }
 
     /**
@@ -82,52 +103,14 @@ class Superglobals
      * @param $key
      * @return mixed
      */
-    public function get_SESSION($key= null)
+    public function getSession($key= null)
     {
-        if ($key !== null) {
-            return (isset($this->SESSION["$key"])) ? $this->SESSION["$key"] : null;
-        } else {
-            return $this->SESSION;
+        if (array_key_exists($key, $this->session)) {
+            return $this->session[$key];
         }
+
+        return $this->session;
     }
 
-    /**
-     * Function to define superglobals for use locally.
-     * We do not automatically unset the superglobals after
-     * defining them, since they might be used by other code.
-     *
-     * @return mixed
-     */
-    private function define_superglobals()
-    {
-
-        // Store a local copy of the PHP superglobals
-        // This should avoid dealing with the global scope directly
-        // $this->_SERVER = $_SERVER.
-        $this->SERVER = (isset($_SERVER)) ? $_SERVER : null;
-        $this->POST = (isset($_POST)) ? $_POST : null;
-        $this->GET = (isset($_GET)) ? $_GET : null;
-        $this->SESSION = (isset($_SESSION)) ? $_SESSION : null;
-        /*$this->GET = filter_input_array(INPUT_GET) ?? null;
-        $this->POST = filter_input_array(INPUT_POST) ?? null;*/
-        /*var_dump($this);
-        die;*/
-
-    }
-
-    /**
-     * You may call this function from your compositioning root,
-     * if you are sure superglobals will not be needed by
-     * dependencies or outside of your own code.
-     *
-     * @return void
-     */
-    public function unset_superglobals()
-    {
-        unset($_SERVER);
-        unset($_POST);
-        unset($_GET);
-        unset($_SESSION);
-    }
 
 }

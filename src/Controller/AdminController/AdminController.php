@@ -8,7 +8,6 @@ use App\Model\ContactManager;
 use App\Model\PostManager;
 use App\Model\UserManager;
 use App\Twig\TwigRender;
-use App\Session\Session;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class AdminController extends TwigRender
@@ -20,13 +19,6 @@ class AdminController extends TwigRender
      * @var Auth
      */
     private $auth;
-
-    /**
-     * Session
-     *
-     * @var Session
-     */
-    private $session;
 
     /**
      * Comment manager
@@ -66,7 +58,6 @@ class AdminController extends TwigRender
     {
         parent::__construct();
         $this->auth = new Auth();
-        $this->session = new Session();
         $this->commentManager = new CommentManager();
         $this->contactManager = new ContactManager();
         $this->postManager = new PostManager();
@@ -103,12 +94,12 @@ class AdminController extends TwigRender
         $this->twig->display(
             'admin/index.html.twig',
             [
-             'posts' => $posts,
-             'users' => $users,
+             'posts'    => $posts,
+             'users'    => $users,
              'messages' => $messages,
-             'admin' => $isAdmin,
-             'user' => $userName,
-             'id' => $userId,
+             'admin'    => $isAdmin,
+             'user'     => $userName,
+             'id'       => $userId,
              'comments' => $comments
             ]
         );
@@ -139,8 +130,8 @@ class AdminController extends TwigRender
             [
              'posts' => $posts,
              'admin' => $isAdmin,
-             'user' => $userName,
-             'id' => $userId
+             'user'  => $userName,
+             'id'    => $userId
             ]
         );
     }
@@ -168,9 +159,9 @@ class AdminController extends TwigRender
             'admin/comments.html.twig',
             [
              'comments' => $comments,
-             'admin' => $isAdmin,
-             'user' => $userName,
-             'id' => $userId
+             'admin'    => $isAdmin,
+             'user'     => $userName,
+             'id'       => $userId
             ]
         );
     }
@@ -199,8 +190,8 @@ class AdminController extends TwigRender
             [
              'users' => $users,
              'admin' => $isAdmin,
-             'user' => $userName,
-             'id' => $userId
+             'user'  => $userName,
+             'id'    => $userId
             ]
         );
     }
@@ -208,12 +199,12 @@ class AdminController extends TwigRender
     /**
      * Display one user infos
      *
-     * @param int $uId User id
+     * @param int $idUser User id
      * @return User
      */
-    public function usersAccount(int $uId)
+    public function usersAccount(int $idUser)
     {
-        $account = $this->userManager->getUser($uId);
+        $account = $this->userManager->getUser($idUser);
 
         $user = $this->auth->getCurrentUser();
         $userName = $user->getFirstname();
@@ -229,9 +220,9 @@ class AdminController extends TwigRender
             'user/users_account.html.twig',
             [
              'account' => $account,
-             'admin' => $isAdmin,
-             'user' => $userName,
-             'id' => $userId
+             'admin'   => $isAdmin,
+             'user'    => $userName,
+             'id'      => $userId
             ]
         );
     }
@@ -259,9 +250,9 @@ class AdminController extends TwigRender
             'admin/messages.html.twig',
             [
              'messages' => $messages,
-             'admin' => $isAdmin,
-             'user' => $userName,
-             'id' => $userId,
+             'admin'    => $isAdmin,
+             'user'     => $userName,
+             'id'       => $userId,
             ]
         );
     }

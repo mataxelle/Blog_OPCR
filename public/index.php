@@ -4,17 +4,17 @@ use App\Router\HTTPRequest;
 use App\Router\Router;
 use Symfony\Component\Dotenv\Dotenv;
 
+session_start();
+
 require_once __DIR__.'/../vendor/autoload.php';
 
 $dotenv = new Dotenv();
 $dotenv->load(__DIR__.'/../.env');
 
 
-$request = new HTTPRequest;
+$request = new HTTPRequest();
 
 $router = new Router($request);
-
-session_start();
 
 $router->get('/', 'App\Controller\HomeController\HomeController@index');
 $router->get('/register', 'App\Controller\SecurityController\SecurityController@register');

@@ -22,7 +22,7 @@ class HTTPRequest
      */
     public function __construct()
     {
-        $this->superglobals = new Superglobals();
+        $this->superglobals = Superglobals::get();
         // End __construct().
     }
 
@@ -33,7 +33,7 @@ class HTTPRequest
      */
     public function requestMethod()
     {
-        return $this->superglobals->get_SERVER('REQUEST_METHOD');
+        return $this->superglobals->getServer('REQUEST_METHOD');
         // End requestMethod().
     }
     
@@ -44,8 +44,8 @@ class HTTPRequest
      */
     public function getURI()
     {
-        if (array_key_exists('path', $this->superglobals->get_GET())) {
-            return trim($this->superglobals->get_GET('path'), '/');
+        if (array_key_exists('path', $this->superglobals->getGet())) {
+            return trim($this->superglobals->getGet('path'), '/');
         }
 
         return '';

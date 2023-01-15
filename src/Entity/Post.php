@@ -6,47 +6,47 @@ class Post
 {
 
     /**
-     * @var integer
+     * @var integer $postId
      */
     private $postId;
 
     /**
-     * @var integer
+     * @var integer $userId
      */
     private $userId;
 
     /**
-     * @var string
+     * @var string $title
      */
     private $title;
 
     /**
-     * @var string
+     * @var string $slug
      */
     private $slug;
 
     /**
-     * @var string
+     * @var string $image
      */
     private $image;
 
     /**
-     * @var string
+     * @var string $content
      */
     private $content;
 
     /**
-     * @var boolean
+     * @var boolean $isPublished
      */
     private $isPublished;
 
     /**
-     * @var \datetime
+     * @var \datetime $createdAt
      */
     private $createdAt;
 
     /**
-     * @var \datetime
+     * @var \datetime $updatedAt
      */
     private $updatedAt;
 
@@ -68,7 +68,7 @@ class Post
     /**
      * Filling out a new post object with data
      *
-     * @param array $data
+     * @param array $data Data
      * @return void
      */
     public function hydrate(array $data)
@@ -104,6 +104,73 @@ class Post
         }
 
     }
+    
+    /**
+     * Filling out a new post object with data
+     *
+     * @param array $data Data array
+     * @return void
+     * @throws \Exception
+     */
+    /*public function hydrate(array $data): void
+    {
+        foreach ($data as $key => $value) {
+            $this->hydrateData($key, $value);
+            // End foreach.
+        }
+
+    }*/
+
+    /**
+     * Hydrate one data
+     *
+     * @param string $key   Data key
+     * @param string $value Data value
+     * @return void
+     * @throws \Exception
+     */
+    /*public function hydrateData(string $key, string $value): void
+    {
+        $method = 'set'.ucfirst($key);
+
+        if (method_exists($this, $method) === false) {
+           return;
+        }
+
+        $this->process($method, $key, $value);
+    }*/
+
+    /**
+     * Process
+     *
+     * @param string $method The method
+     * @param string $key    The key
+     * @param string $value  The value
+     * @return void
+     * @throws \Exception
+     */
+    /*public function process(string $method, string $key, string $value): void
+    {
+        switch ($key) {
+            case 'id':
+            case 'userId':
+                $this->$method((int) $value);
+                break;
+            case 'isPublished':
+                $this->$method((boolean) $value);
+                break;
+            case 'title':
+            case 'slug':
+            case 'image':
+            case 'content':
+                $this->$method((string) $value);
+                break;
+            case 'createdAt':
+            case 'updtedAt':
+                $this->$method(new \DateTime($value));
+                break;
+        }
+    }*/
 
 
     /**

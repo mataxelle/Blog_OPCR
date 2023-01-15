@@ -2,7 +2,6 @@
 
 namespace App\Controller\HomeController;
 
-use App\Auth\Auth;
 use App\Session\Session;
 use App\Twig\TwigRender;
 use App\Model\PostManager;
@@ -11,25 +10,18 @@ class HomeController extends TwigRender
 {
 
     /**
-     * User Auth
-     *
-     * @var Auth
-     */
-    private $auth;
-
-    /**
      * Session
      *
-     * @var Session
+     * @var Session $session Session
      */
-    private $session;
+    private Session $session;
 
     /**
      * Post manager
      *
-     * @var PostManager
+     * @var PostManager $postManager Post manager
      */
-    private $postManager;
+    private PostManager $postManager;
 
 
     /**
@@ -40,10 +32,9 @@ class HomeController extends TwigRender
     public function __construct()
     {
         parent::__construct();
-        $this->auth = new Auth();
         $this->session = new Session();
         $this->postManager = new PostManager();
-        // End__construct().
+        // End __construct().
     }
 
 
@@ -59,7 +50,7 @@ class HomeController extends TwigRender
         $userName = '';
         $userId = '';
         $isAdmin = '';
-        
+
         if ($this->session->get('firstname')) {
             $userName = $this->session->get('firstname');
         }

@@ -18,23 +18,23 @@ class ContactController extends TwigRender
     /**
      * Session
      *
-     * @var Session
+     * @var Session $session Session
      */
-    private $session;
+    private Session $session;
 
     /**
      * User Auth
      *
-     * @var Auth
+     * @var Auth $auth Auth
      */
-    private $auth;
+    private Auth $auth;
     
     /**
      * Contact manager
      *
-     * @var ContactManager
+     * @var ContactManager $contactManager Contact manager
      */
-    private $contactManager;
+    private ContactManager $contactManager;
 
 
     /**
@@ -102,11 +102,11 @@ class ContactController extends TwigRender
         $this->twig->display(
             'contact/contact_add.html.twig',
             [
-             'form' => $form->createView(),
+             'form'     => $form->createView(),
              'userInfo' => $user,
-             'user' => $userName,
-             'admin' => $isAdmin,
-             'id' => $userId
+             'user'     => $userName,
+             'admin'    => $isAdmin,
+             'id'       => $userId
             ]
         );
 
@@ -131,9 +131,9 @@ class ContactController extends TwigRender
             'contact/message.html.twig',
             [
              'message' => $message,
-             'user' => $userName,
-             'admin' => $isAdmin,
-             'id' => $userId
+             'user'    => $userName,
+             'admin'   => $isAdmin,
+             'id'      => $userId
             ]
         );
     }

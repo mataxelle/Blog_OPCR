@@ -6,37 +6,37 @@ class Comment
 {
 
     /**
-     * @var integer
+     * @var integer $commentId
      */
     private $commentId;
 
     /**
-     * @var integer
+     * @var integer $postId
      */
     private $postId;
 
     /**
-     * @var integer
+     * @var integer $userId
      */
     private $userId;
 
     /**
-     * @var string
+     * @var string $content
      */
     private $content;
 
     /**
-     * @var boolean
+     * @var boolean $isValid
      */
     private $isValid;
 
     /**
-     * @var \datetime
+     * @var \datetime $createdAt
      */
     private $createdAt;
 
     /**
-     * @var \datetime
+     * @var \datetime $updatedAt
      */
     private $updatedAt;
 
@@ -60,36 +60,63 @@ class Comment
      *
      * @param array $data
      * @return void
+     * @throws \Execption
      */
-    public function hydrate(array $data)
+    public function hydrate(array $data): void
     {
         foreach ($data as $key => $value) {
-            $method = 'set'.ucfirst($key);
-
-            if (method_exists($this, $method)) {
-                switch ($key) {
-                case 'id':
-                case 'postId':
-                case 'userId':
-                    $this->$method((int) $value);
-                case 'isValid':
-                    $this->$method((boolean) $value);
-                    break;
-                case 'content':
-                    $this->$method((string) $value);
-                    break;
-                case 'createdAt':
-                case 'updtedAt':
-                    $this->$method(new \DateTime($value));
-                    break;
-                }
-            }
-
-            // End if condition.
+            $this->hydrateData($key, $value);
+            // End foreach.
         }
-
     }
 
+    /**
+     * Hydrate one data
+     *
+     * @param string $key   Data key
+     * @param string $value Data value
+     * @return void
+     * @throws \Exception
+     */
+    public function hydrateData(string $key, string $value): void
+    {
+        $method = 'set'.ucfirst($key);
+
+        if (method_exists($this, $method)) {
+            return;
+        }
+
+        $this->process($method, $key, $value);
+    }
+
+    /**
+     * Process
+     *
+     * @param string $method The method
+     * @param string $key    The key
+     * @param string $value  The value
+     * @return void
+     * @throws \Exception
+     */
+    public function process(string $method, string $key, string $value): void
+    {
+        switch ($key) {
+            case 'id':
+            case 'postId':
+            case 'userId':
+                $this->$method((int) $value);
+            case 'isValid':
+                $this->$method((boolean) $value);
+                break;
+            case 'content':
+                $this->$method((string) $value);
+                break;
+            case 'createdAt':
+            case 'updtedAt':
+                $this->$method(new \DateTime($value));
+                break;
+            }
+    }
     
     /**
      * Get value of comment id

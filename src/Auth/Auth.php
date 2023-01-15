@@ -12,16 +12,16 @@ class Auth
     /**
      * Session
      *
-     * @var Session
+     * @var Session $session Session
      */
-    private $session;
+    private Session $session;
 
     /**
      * User manager
      *
-     * @var UserManager
+     * @var UserManager $userManager User manager
      */
-    private $userManager;
+    private UserManager $userManager;
 
 
     /**

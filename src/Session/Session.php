@@ -22,8 +22,7 @@ class Session
      */
     public function __construct()
     {
-        $this->superglobals = new Superglobals();
-
+        $this->superglobals = Superglobals::get();
         // End __construct().
     }
 
@@ -65,7 +64,7 @@ class Session
     public function get(string $key, $default= null)
     {
         $this->checkIsStarted();
-        if (array_key_exists($key, $this->superglobals->get_SESSION())) {
+        if (array_key_exists($key, $this->superglobals->getSession()) && array_key_exists($key, $this->superglobals->getSession())) {
             return $_SESSION[$key];
         }
 

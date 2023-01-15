@@ -6,42 +6,42 @@ class User
 {
 
     /**
-     * @var integer
+     * @var integer $userId
      */
     private $userId;
 
     /**
-     * @var string
+     * @var string $firstname
      */
     private $firstname;
 
     /**
-     * @var string
+     * @var string $lastname
      */
     private $lastname;
 
     /**
-     * @var boolean
+     * @var boolean $isAdmin
      */
     private $isAdmin;
 
     /**
-     * @var string
+     * @var string $email
      */
     private $email;
 
     /**
-     * @var string
+     * @var string $password
      */
     private $password;
 
     /**
-     * @var \datetime
+     * @var \datetime $createdAt
      */
     private $createdAt;
 
     /**
-     * @var \datetime
+     * @var \datetime $updatedAt
      */
     private $updatedAt;
 
@@ -55,7 +55,6 @@ class User
     public function __construct(array $data= [])
     {
         $this->hydrate($data);
-
         // End __construct().
     }
 
@@ -65,36 +64,64 @@ class User
      *
      * @param array $data
      * @return void
+     * @throws \Exception
      */
-    public function hydrate(array $data)
+    public function hydrate(array $data): void
     {
         foreach ($data as $key => $value) {
-            $method = 'set'.ucfirst($key);
-
-            if (method_exists($this, $method)) {
-                switch ($key) {
-                    case 'id':
-                        $this->$method((int) $value);
-                        break;
-                    case 'isAdmin':
-                        $this->$method((boolean) $value);
-                        break;
-                    case 'firstname':
-                    case 'lastname':
-                    case 'email':
-                    case 'password':
-                        $this->$method((string) $value);
-                        break;
-                    case 'createdAt':
-                    case 'updtedAt':
-                        $this->$method(new \DateTime($value));
-                        break;
-                }
-            }
-            
-            // End if.
+            $this->hydrateData($key, $value);
         }
         // End foreach.
+    }
+
+    /**
+     * Hydrate one data
+     *
+     * @param string $key   Data key
+     * @param string $value Data value
+     * @return void
+     * @throws \Exception
+     */
+    public function hydrateData(string $key, string $value): void
+    {
+        $method = 'set'.ucfirst($key);
+
+        if (method_exists($this, $method) === false) {
+            return;
+        }
+
+        $this->process($method, $key, $value);
+    }
+
+    /**
+     * Process
+     *
+     * @param string $method The method
+     * @param string $key    The key
+     * @param string $value  The value
+     * @return void
+     * @throws \Exception
+     */
+    public function process(string $method, string $key, string $value): void
+    {
+        switch ($key) {
+            case 'id':
+                $this->$method((int) $value);
+                break;
+            case 'isAdmin':
+                $this->$method((boolean) $value);
+                break;
+            case 'firstname':
+            case 'lastname':
+            case 'email':
+            case 'password':
+                $this->$method((string) $value);
+                break;
+            case 'createdAt':
+            case 'updtedAt':
+                $this->$method(new \DateTime($value));
+                break;
+        }
     }
 
 

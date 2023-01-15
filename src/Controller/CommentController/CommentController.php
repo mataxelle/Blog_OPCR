@@ -56,9 +56,9 @@ class CommentController extends TwigRender
      * Create a comment
      *
      * @param string $slug Post slug
-     * @return Response
+     * @return RedirectResponse
      */
-    public function add(string $slug): Response
+    public function add(string $slug): RedirectResponse
     {
         $user = $this->auth->getCurrentUser();
         $userName = $user->getFirstname();
@@ -106,10 +106,10 @@ class CommentController extends TwigRender
             'comment/comment_add.html.twig',
             [
              'commentForm' => $commentForm->createView(),
-             'user' => $userName,
-             'admin' => $isAdmin,
-             'id' => $userId,
-             'post' => $post,
+             'user'        => $userName,
+             'admin'       => $isAdmin,
+             'id'          => $userId,
+             'post'        => $post,
             ]
         );
 
@@ -164,9 +164,9 @@ class CommentController extends TwigRender
             'comment/comment_update.html.twig',
             [
              'commentForm' => $commentForm->createView(),
-             'user' => $userName,
-             'admin' => $isAdmin,
-             'id' => $userId
+             'user'        => $userName,
+             'admin'       => $isAdmin,
+             'id'          => $userId
             ]
         );
     }

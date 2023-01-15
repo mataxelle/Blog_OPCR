@@ -16,11 +16,12 @@ class Environnement
     /**
      * Constructor
      *
+     * @params $envs The envs
      * @return void
      */
-    public function __construct()
+    public function __construct($envs)
     {
-        $this->envs = $_ENV;
+        $this->envs = $envs;
         // End __construct().
     }
 

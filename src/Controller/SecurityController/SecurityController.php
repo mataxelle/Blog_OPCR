@@ -46,7 +46,7 @@ class SecurityController extends TwigRender
         parent::__construct();
         $this->session = new Session();
         $this->userManager = new UserManager();
-        $this->superglobals = new Superglobals();
+        $this->superglobals = Superglobals::get();
         // End __construct().
     }
 
@@ -97,8 +97,8 @@ class SecurityController extends TwigRender
         $this->twig->display(
             'security/register.html.twig',
             [
-             'form' => $form->createView(),
-             'user' => $user,
+             'form'  => $form->createView(),
+             'user'  => $user,
              'admin' => $admin
             ]
         );
@@ -112,10 +112,10 @@ class SecurityController extends TwigRender
      */
     public function login()
     {
-        if (empty($this->superglobals->get_POST()) === false) {
-            $email = htmlspecialchars($this->superglobals->get_POST('email'));
+        if (empty($this->superglobals->getPost()) === false) {
+            $email = htmlspecialchars($this->superglobals->getPost('email'));
             
-            $data['password'] = htmlspecialchars($this->superglobals->get_POST('password'));
+            $data['password'] = htmlspecialchars($this->superglobals->getPost('password'));
             $password = $data['password'];
             
             $user = $this->userManager->getUserByEmail($email);
@@ -166,7 +166,7 @@ class SecurityController extends TwigRender
             'security/login.html.twig',
             [
               'user' => $userName,
-              'id' => $userId,
+              'id'   => $userId,
              'admin' => $isAdmin,
             ]
         );

@@ -35,7 +35,7 @@ class UserController extends TwigRender
         parent::__construct();
         $this->auth = new Auth();
         $this->userManager = new UserManager();
-        // End__construct().
+        // End __construct().
     }
 
 
@@ -55,15 +55,15 @@ class UserController extends TwigRender
             'user/account.html.twig',
             [
              'account' => $user,
-             'user' => $userName,
-             'admin' => $isAdmin,
-             'id' => $userId
+             'user'    => $userName,
+             'admin'   => $isAdmin,
+             'id'      => $userId
             ]
         );
 
     }
-    
-    
+
+
     /**
      * Delete a user
      *
@@ -84,6 +84,8 @@ class UserController extends TwigRender
             $response = new RedirectResponse('/login');
             $response->send();
         }
+
+
     }
 
 }

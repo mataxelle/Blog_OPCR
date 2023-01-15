@@ -6,47 +6,47 @@ class Contact
 {
 
     /**
-     * @var integer
+     * @var integer $contactId
      */
     private $contactId;
 
     /**
-     * @var string
+     * @var string $firstname
      */
     private $firstname;
 
     /**
-     * @var string
+     * @var string $lastname
      */
     private $lastname;
 
     /**
-     * @var string
+     * @var string $email
      */
     private $email;
 
     /**
-     * @var string
+     * @var string $label
      */
     private $label;
 
     /**
-     * @var string
+     * @var string $message
      */
     private $message;
 
     /**
-     * @var \datetime
+     * @var \datetime $createdAt
      */
     private $createdAt;
 
     /**
-     * @var boolean
+     * @var boolean $isAnswered
      */
     private $isAnswered;
 
     /**
-     * @var \datetime
+     * @var \datetime $answeredAt
      */
     private $answeredAt;
 
@@ -60,49 +60,75 @@ class Contact
     public function __construct(array $data= [])
     {
         $this->hydrate($data);
-
         // End __construct().
     }
-    
+
 
     /**
      * Filling out a new user object with data
      *
-     * @param array $data
+     * @param array $data Comment
      * @return void
+     * @throws \Exception
      */
-    public function hydrate(array $data)
+    public function hydrate(array $data): void
     {
         foreach ($data as $key => $value) {
-            $method = 'set'.ucfirst($key);
-
-            if (method_exists($this, $method)) {
-                switch ($key) {
-                    case 'id':
-                        $this->$method((int) $value);
-                        break;
-                    case 'firstname':
-                    case 'lastname':
-                    case 'email':
-                    case 'label':
-                    case 'message':
-                        $this->$method((string) $value);
-                        break;
-                    case 'isAswered':
-                        $this->$method((boolean) $value);
-                        break;
-                    case 'createdAt':
-                    case 'answeredAt':
-                        $this->$method(new \DateTime($value));
-                        break;
-                }
-            }
-
+            $this->hydrateData($key, $value);
             // End foreach.
         }
-
     }
 
+    /**
+     * Hydrate one data
+     *
+     * @param string $key   Data key
+     * @param string $value Data value
+     * @return void
+     * @throws \Exception
+     */
+    public function hydrateData(string $key, string $value): void
+    {
+        $method = 'set'.ucfirst($key);
+
+        if (method_exists($this, $method) === false) {
+            return;
+        }
+
+        $this->process($method, $key, $value);
+    }
+
+    /**
+     * Process
+     *
+     * @param string $method The method
+     * @param string $key    The key
+     * @param string $value  The value
+     * @return void
+     * @throws \Exception
+     */
+    public function process(string $method, string $key, string $value): void
+    {
+        switch ($key) {
+            case 'id':
+                $this->$method((int) $value);
+                break;
+            case 'firstname':
+            case 'lastname':
+            case 'email':
+            case 'label':
+            case 'message':
+                $this->$method((string) $value);
+                break;
+            case 'isAswered':
+                $this->$method((boolean) $value);
+                break;
+            case 'createdAt':
+            case 'answeredAt':
+                $this->$method(new \DateTime($value));
+                break;
+        }
+    }
 
     /**
      * Get value of contact id
@@ -143,6 +169,7 @@ class Contact
     {
         return $this->firstname;
     }
+
 
     /**
      * Set value of contact firstname
