@@ -8,8 +8,6 @@ use App\Form\PostFormType;
 use App\Twig\TwigRender;
 use App\Model\CommentManager;
 use App\Model\PostManager;
-use App\Model\UserManager;
-use App\Session\Session;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -62,6 +60,11 @@ class PostController extends TwigRender
      */
     public function show(string $slug)
     {
+        if ($this->auth->isLoggedIn() === false) {
+            $response = new RedirectResponse('/');
+            $response->send();
+        }
+
         $post = $this->postManager->getOnePost($slug);
 
         $comments = $this->commentManager->getPostComment($post->getId());
@@ -101,6 +104,11 @@ class PostController extends TwigRender
      */
     public function add(): Response
     {
+        if ($this->auth->isLoggedIn() === false) {
+            $response = new RedirectResponse('/');
+            $response->send();
+        }
+
         $post = new Post();
 
         $form = $this->formFactory->createBuilder(
@@ -172,6 +180,11 @@ class PostController extends TwigRender
      */
     public function update(int $postId): Response
     {
+        if ($this->auth->isLoggedIn() === false) {
+            $response = new RedirectResponse('/');
+            $response->send();
+        }
+
         $post = $this->postManager->getPostId($postId);
       
         $oldImage = $post->getImage();

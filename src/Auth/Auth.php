@@ -35,7 +35,19 @@ class Auth
         $this->userManager = new UserManager();
         // End __construct().
     }
-    
+
+    /**
+     * Logged in User
+     * 
+     * @return bool
+     */
+    public function isLoggedIn(): bool
+    {
+        if (empty($this->session->get('id')) && empty($this->session->get('firstname'))) {
+            return false;
+        }
+        return true;
+    }
 
     /**
      * Get current user from session storage

@@ -120,12 +120,22 @@ class ContactController extends TwigRender
      */
     public function message(int $messageId)
     {
+        if ($this->auth->isLoggedIn() === false) {
+            $response = new RedirectResponse('/');
+            $response->send();
+        }
+
         $message = $this->contactManager->getOneMessage($messageId);
 
         $user = $this->auth->getCurrentUser();
         $userName = $user->getFirstname();
         $isAdmin = $user->isAdmin();
         $userId = $user->getId();
+
+        if (!$isAdmin === false) {
+            $response = new RedirectResponse('/');
+            $response->send();
+        }
 
         $this->twig->display(
             'contact/message.html.twig',

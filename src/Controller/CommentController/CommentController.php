@@ -60,6 +60,11 @@ class CommentController extends TwigRender
      */
     public function add(string $slug): RedirectResponse
     {
+        if ($this->auth->isLoggedIn() === false) {
+            $response = new RedirectResponse('/');
+            $response->send();
+        }
+
         $user = $this->auth->getCurrentUser();
         $userName = $user->getFirstname();
         $isAdmin = $user->isAdmin();
@@ -122,6 +127,11 @@ class CommentController extends TwigRender
      */
     public function validation(int $commentId)
     {
+        if ($this->auth->isLoggedIn() === false) {
+            $response = new RedirectResponse('/');
+            $response->send();
+        }
+
         $comment = $this->commentManager->getComment($commentId);
         $comId = $comment->getId();
 

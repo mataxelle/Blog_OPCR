@@ -73,6 +73,11 @@ class AdminController extends TwigRender
      */
     public function admin()
     {
+        if ($this->auth->isLoggedIn() === false) {
+            $response = new RedirectResponse('/');
+            $response->send();
+        }
+
         $posts = $this->postManager->getAllPost();
 
         $users = $this->userManager->getAllUsers();
@@ -113,6 +118,11 @@ class AdminController extends TwigRender
      */
     public function posts()
     {
+        if ($this->auth->isLoggedIn() === false) {
+            $response = new RedirectResponse('/');
+            $response->send();
+        }
+
         $posts = $this->postManager->getAllPost();
 
         $user = $this->auth->getCurrentUser();
@@ -143,6 +153,11 @@ class AdminController extends TwigRender
      */
     public function comments()
     {
+        if ($this->auth->isLoggedIn() === false) {
+            $response = new RedirectResponse('/');
+            $response->send();
+        }
+
         $comments = $this->commentManager->getAllComments();
 
         $user = $this->auth->getCurrentUser();
@@ -173,6 +188,11 @@ class AdminController extends TwigRender
      */
     public function users()
     {
+        if ($this->auth->isLoggedIn() === false) {
+            $response = new RedirectResponse('/');
+            $response->send();
+        }
+
         $users = $this->userManager->getAllUsers();
 
         $user = $this->auth->getCurrentUser();
@@ -204,6 +224,11 @@ class AdminController extends TwigRender
      */
     public function usersAccount(int $idUser)
     {
+        if ($this->auth->isLoggedIn() === false) {
+            $response = new RedirectResponse('/');
+            $response->send();
+        }
+
         $account = $this->userManager->getUser($idUser);
 
         $user = $this->auth->getCurrentUser();
@@ -234,6 +259,11 @@ class AdminController extends TwigRender
      */
     public function messages()
     {
+        if ($this->auth->isLoggedIn() === false) {
+            $response = new RedirectResponse('/');
+            $response->send();
+        }
+
         $messages = $this->contactManager->getAllMessages();
 
         $user = $this->auth->getCurrentUser();
