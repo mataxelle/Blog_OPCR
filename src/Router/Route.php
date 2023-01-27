@@ -33,10 +33,11 @@ class Route
     {
         $this->path = trim($path,'/');
         $this->action = $action;
+        //End __construct().
 
-        // End __construct().
     }
-    
+
+
     /**
      * Return matches
      *

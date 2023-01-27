@@ -34,11 +34,13 @@ class Auth
         $this->session = new Session();
         $this->userManager = new UserManager();
         // End __construct().
+
     }
+
 
     /**
      * Logged in User
-     * 
+     *
      * @return bool
      */
     public function isLoggedIn(): bool
@@ -46,6 +48,7 @@ class Auth
         if (empty($this->session->get('id')) && empty($this->session->get('firstname'))) {
             return false;
         }
+        
         return true;
     }
 

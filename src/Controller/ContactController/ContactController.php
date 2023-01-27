@@ -28,7 +28,7 @@ class ContactController extends TwigRender
      * @var Auth $auth Auth
      */
     private Auth $auth;
-    
+
     /**
      * Contact manager
      *
@@ -48,6 +48,7 @@ class ContactController extends TwigRender
         $this->auth = new Auth();
         $this->session = new Session();
         $this->contactManager = new ContactManager();
+
         // End __construct().
     }
 
@@ -111,6 +112,7 @@ class ContactController extends TwigRender
         );
 
     }
+
     
     /**
      * Get a contact message
@@ -152,6 +154,7 @@ class ContactController extends TwigRender
      * Delete a contact message
      *
      * @param int $messageId Contact message id
+     * @return void
      */
     public function delete(int $messageId)
     {

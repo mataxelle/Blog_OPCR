@@ -4,11 +4,11 @@
 
 ## Table of contents
 
-* [General info](#general-info)
-* [Features](#features)
-* [Development environment](#development-environment)
-* [Install on local](#install-on-local)
-* [Install dependencies](#install-dependencies)
+*  [General info](#general-info)
+*  [Features](#features)
+*  [Development environment](#development-environment)
+*  [Install on local](#install-on-local)
+*  [Install dependencies](#install-dependencies)
 
 ## General info
 
@@ -18,21 +18,21 @@ Project : Develop a professional blog using PHP, MVC architecture and and Twig. 
 
 ### Front : users access
 
-* Homepage : display all posts ordered by latest. Can found a pdf CV and all social networs links.
-* Register / login page
-* Profile page : simple profile page for all registered users
-* Contact page : contact form for any question or subject
-* Blog posts page : post with comments
+*  Homepage : display all posts ordered by latest. Can found a pdf CV and all social networs links.
+*  Register / login page
+*  Profile page : simple profile page for all registered users
+*  Contact page : contact form for any question or subject
+*  Blog posts page : post with comments
 
 ### Back : admin access
 
-* Admin pages : includes all CRUD actions
+*  Admin pages : includes all CRUD actions
 
 ## Development environment
 
-* PHP 8.1.10
-* Mysql
-* Composer
+*  PHP 8.1.10
+*  Mysql
+*  Composer
 
 ## Install on local
 
@@ -41,4 +41,4 @@ Make sure you have Php and composer on your computer.
 
 ## Install dependencies
 
-* `composer install`
+*  `composer install`

@@ -34,7 +34,8 @@ class HomeController extends TwigRender
         parent::__construct();
         $this->session = new Session();
         $this->postManager = new PostManager();
-        // End __construct().
+
+        //End __construct().
     }
 
 
@@ -68,12 +69,12 @@ class HomeController extends TwigRender
             [
              'posts' => $posts,
              'admin' => $isAdmin,
-             'user' => $userName,
-             'id' => $userId
+             'user'  => $userName,
+             'id'    => $userId
             ]
         );
-        
+
     }
-    
-    
+
+
 }

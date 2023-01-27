@@ -62,6 +62,7 @@ class AdminController extends TwigRender
         $this->contactManager = new ContactManager();
         $this->postManager = new PostManager();
         $this->userManager = new UserManager();
+        
         // End __construct().
     }
 
@@ -110,6 +111,7 @@ class AdminController extends TwigRender
         );
 
     }
+
 
     /**
      * Display all posts
@@ -286,5 +288,5 @@ class AdminController extends TwigRender
             ]
         );
     }
-    
+
 }

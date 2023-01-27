@@ -48,6 +48,7 @@ class CommentController extends TwigRender
         $this->auth = new Auth();
         $this->commentManager = new CommentManager();
         $this->postManager = new PostManager();
+        
         // End __construct().
     }
 
@@ -69,7 +70,7 @@ class CommentController extends TwigRender
         $userName = $user->getFirstname();
         $isAdmin = $user->isAdmin();
         $userId = $user->getId();
-        
+
         $post = $this->postManager->getOnePost($slug);
         $postSlug = $post->getSlug();
         $postId = $post->getId();
@@ -120,10 +121,12 @@ class CommentController extends TwigRender
 
     }
 
+
     /**
      * Validate a comment
      *
      * @param int $commentId Comment id
+     * @return void
      */
     public function validation(int $commentId)
     {
@@ -143,12 +146,12 @@ class CommentController extends TwigRender
              'method' => 'POST',
             ]
         )
-        ->getForm();
+            ->getForm();
 
         $request = Request::createFromGlobals();
         
         $commentForm->handleRequest($request);
-        
+
         if ($commentForm->isSubmitted() && $commentForm->isValid()) {
             
             $commentmanager = new CommentManager();

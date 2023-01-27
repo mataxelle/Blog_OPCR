@@ -23,6 +23,7 @@ class Session
     public function __construct()
     {
         $this->superglobals = Superglobals::get();
+
         // End __construct().
     }
 
@@ -54,14 +55,15 @@ class Session
 
     }
 
+
     /**
      * Retrieve the value for `$key` or return `$default` instead
      *
      * @param string $key The parameter to return
-     * @param mixed $default The default value if it contains no value
+     * @param mixed  $default The default value if it contains no value
      * @return mixed
      */
-    public function get(string $key, $default= null)
+    public function get(string $key, $default=null)
     {
         $this->checkIsStarted();
         if (array_key_exists($key, $this->superglobals->getSession()) && array_key_exists($key, $this->superglobals->getSession())) {
@@ -74,7 +76,7 @@ class Session
     /**
      * Set a value on the item for the provided `$key`
      *
-     * @param string $key The parameter to set
+     * @param string $key   The parameter to set
      * @param $value The value
      * @return mixed
      */

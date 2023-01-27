@@ -16,12 +16,13 @@ class Environnement
     /**
      * Constructor
      *
-     * @params $envs The envs
+     * @param $envs Envs
      * @return void
      */
     public function __construct($envs)
     {
         $this->envs = $envs;
+
         // End __construct().
     }
 
@@ -36,4 +37,5 @@ class Environnement
     {
         return $this->envs[$key];
     }
+
 }

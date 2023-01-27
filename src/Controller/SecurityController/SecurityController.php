@@ -36,6 +36,7 @@ class SecurityController extends TwigRender
      */
     private $superglobals;
 
+
     /**
      * Constructor
      *
@@ -47,6 +48,7 @@ class SecurityController extends TwigRender
         $this->session = new Session();
         $this->userManager = new UserManager();
         $this->superglobals = Superglobals::get();
+
         // End __construct().
     }
 
@@ -69,11 +71,10 @@ class SecurityController extends TwigRender
             ]
         )
             ->getForm();
-            
+
         $request = Request::createFromGlobals();
-        
         $form->handleRequest($request);
-        
+
         if ($form->isSubmitted() === true && $form->isValid() === true) {
             $user->setIsAdmin(0);
             $this->userManager->registerForm($user);
@@ -104,6 +105,7 @@ class SecurityController extends TwigRender
         );
 
     }
+
     
     /**
      * Log a user
@@ -142,6 +144,7 @@ class SecurityController extends TwigRender
             } else {
                 $response = new RedirectResponse('/login');
                 $response->send();
+
                 // End if condition.
             }
         }
@@ -165,12 +168,13 @@ class SecurityController extends TwigRender
         $this->twig->display(
             'security/login.html.twig',
             [
-              'user' => $userName,
-              'id'   => $userId,
+             'user'  => $userName,
+             'id'    => $userId,
              'admin' => $isAdmin,
             ]
         );
     }
+
     
     /**
      * Logout a user

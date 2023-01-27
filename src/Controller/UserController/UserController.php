@@ -35,6 +35,7 @@ class UserController extends TwigRender
         parent::__construct();
         $this->auth = new Auth();
         $this->userManager = new UserManager();
+
         // End __construct().
     }
 
@@ -74,7 +75,7 @@ class UserController extends TwigRender
     {
         $user = $this->auth->getCurrentUser();
         $isAdmin = $user->isAdmin();
-        
+
         $this->userManager->deleteUser($userId);
         
         if ($isAdmin) {
@@ -87,5 +88,6 @@ class UserController extends TwigRender
 
 
     }
+
 
 }

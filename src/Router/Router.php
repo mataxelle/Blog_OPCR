@@ -33,11 +33,11 @@ class Router
     public function __construct(HTTPRequest $request)
     {
         $this->url = $request;
+        //End __construct().
 
-        // End __construct().
     }
 
-    
+
     /**
      * Get
      *
@@ -55,14 +55,15 @@ class Router
     /**
      * Post
      *
-     * @param string $path
-     * @param string $action
+     * @param string $path Path
+     * @param string $action Action
      * @return void
      */
     public function post(string $path, string $action)
     {
         $this->routes['POST'][] = new Route($path, $action);
     }
+
 
     /**
      * Run

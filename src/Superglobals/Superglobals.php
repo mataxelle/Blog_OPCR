@@ -7,24 +7,49 @@ use Symfony\Component\HttpFoundation\Request;
 class Superglobals
 {
 
+    /**
+     * Envs
+     *
+     * @var mixed $server
+     */
     private $server;
 
+    /**
+     * Envs
+     *
+     * @var mixed $post
+     */
     private $post;
 
+    /**
+     * Envs
+     *
+     * @var mixed $get
+     */
     private $get;
 
+    /**
+     * Envs
+     *
+     * @var mixed $session
+     */
     private $session;
 
+    /**
+     * Envs
+     *
+     * @var mixed $instance
+     */
     private static $instance;
 
 
     /**
      * Constructor
      *
-     * @param $get
-     * @param $post
-     * @param $server
-     * @param $session
+     * @param $get Get
+     * @param $post Post
+     * @param $server Server
+     * @param $session Session
      */
     private function __construct($get, $post, $server, $session)
     {
@@ -32,6 +57,7 @@ class Superglobals
         $this->post = $post ?? [];
         $this->get = $get ?? [];
         $this->session = $session ?? [];
+
         // End __construct().
     }
 
@@ -47,6 +73,7 @@ class Superglobals
         return self::$instance;
     }
 
+
     /**
      * Returns a key from the superglobal,
      * as it was at the time of instantiation.
@@ -54,7 +81,7 @@ class Superglobals
      * @param $key Key
      * @return mixed
      */
-    public function getServer($key = null)
+    public function getServer($key=null)
     {
         if (array_key_exists($key, $this->server)) {
             return $this->server[$key];
@@ -68,10 +95,10 @@ class Superglobals
      * Returns a key from the superglobal,
      * as it was at the time of instantiation.
      *
-     * @param $key
+     * @param $key Key
      * @return mixed
      */
-    public function getPost($key= null)
+    public function getPost($key=null)
     {
         if (array_key_exists($key, $this->post)) {
             return $this->post[$key];
@@ -84,10 +111,10 @@ class Superglobals
      * Returns a key from the superglobal,
      * as it was at the time of instantiation.
      *
-     * @param $key
+     * @param $key Key
      * @return mixed
      */
-    public function getGet($key= null)
+    public function getGet($key=null)
     {
         if (array_key_exists($key, $this->get)) {
             return $this->get[$key];
@@ -103,7 +130,7 @@ class Superglobals
      * @param $key
      * @return mixed
      */
-    public function getSession($key= null)
+    public function getSession($key=null)
     {
         if (array_key_exists($key, $this->session)) {
             return $this->session[$key];

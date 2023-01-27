@@ -49,6 +49,7 @@ class PostController extends TwigRender
         $this->auth = new Auth();
         $this->commentManager = new CommentManager();
         $this->postManager = new PostManager();
+
         // End __construct().
     }
 
@@ -57,6 +58,7 @@ class PostController extends TwigRender
      * Show a post and his comments
      *
      * @param string $slug Post slug
+     * @return void
      */
     public function show(string $slug)
     {
@@ -68,7 +70,8 @@ class PostController extends TwigRender
         $post = $this->postManager->getOnePost($slug);
 
         $comments = $this->commentManager->getPostComment($post->getId());
-        /*$authors = [];
+        /*
+        $authors = [];
         foreach ($comments as $comment) {
             $com = $this->commentManager->getComment($comment['id']);
             $authorId = $com->getUserId();
@@ -76,7 +79,8 @@ class PostController extends TwigRender
             $authors[$authorId] = $author;
         }
         var_dump($authors);
-            die;*/
+            die;
+        */
 
         $user = $this->auth->getCurrentUser();
         $userName = $user->getFirstname();
@@ -120,7 +124,7 @@ class PostController extends TwigRender
             ]
         )
             ->getForm();
-            
+
         $request = Request::createFromGlobals();
         
         $form->handleRequest($request);
@@ -148,6 +152,7 @@ class PostController extends TwigRender
             $response->prepare($request);
         
             return $response->send();
+
             // End if condition.
         }
 
@@ -171,6 +176,7 @@ class PostController extends TwigRender
             ]
         );
     }
+
     
     /**
      * Update a post
