@@ -70,6 +70,7 @@ class PostController extends TwigRender
         $post = $this->postManager->getOnePost($slug);
 
         $comments = $this->commentManager->getPostComment($post->getId());
+
         /*
         $authors = [];
         foreach ($comments as $comment) {
@@ -177,7 +178,7 @@ class PostController extends TwigRender
         );
     }
 
-    
+
     /**
      * Update a post
      *
@@ -192,7 +193,7 @@ class PostController extends TwigRender
         }
 
         $post = $this->postManager->getPostId($postId);
-      
+
         $oldImage = $post->getImage();
 
         $pId = $post->getId();
@@ -237,7 +238,7 @@ class PostController extends TwigRender
 
             $response = new RedirectResponse('/');
             $response->prepare($request);
-        
+
             return $response->send();
         }
 

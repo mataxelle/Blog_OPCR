@@ -10,14 +10,14 @@
 
 		<h1 class="text-center mt-5 mb-5">Un Blog d'informations, où le partage est essentiel !</h1>
 
-		<h2 class="text-center text-secondary mb-5">Lorem</h2>
+		<h2 class="text-center text-secondary mb-5">Il n'y a pas de hasard</h2>
 
 		<img class="img-fluid" src="/assets/images/light.jpg" alt="image de code">
 
 		
 		{% if admin == 1 %}
 			<h4>
-				<a href="admin/post/add" role="button" class="btn btn-lg btn-primary">Ajouter un article</a>
+				<a href="admin/post/add" role="button" class="btn btn-lg btn-primary mt-5">Ajouter un article</a>
 			</h4>
 		{% endif %}
 
@@ -36,7 +36,7 @@
 							<p class="card-text d-flex justify-content-end">
 								<small class="text-muted">
 									<em>Publié le
-										{{ post.updatedAt }}</em>
+										{{ post.updatedAt|date('d/m/Y') }}</em>
 								</small>
 							</p>
 						</div>

@@ -33,7 +33,6 @@ class Router
     public function __construct(HTTPRequest $request)
     {
         $this->url = $request;
-        //End __construct().
 
     }
 
@@ -55,7 +54,7 @@ class Router
     /**
      * Post
      *
-     * @param string $path Path
+     * @param string $path   Path
      * @param string $action Action
      * @return void
      */

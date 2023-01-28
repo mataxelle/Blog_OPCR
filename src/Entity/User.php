@@ -52,7 +52,7 @@ class User
      * @param array $data Comment
      * @return void
      */
-    public function __construct(array $data= [])
+    public function __construct(array $data = [])
     {
         $this->hydrate($data);
         // End __construct().
@@ -62,7 +62,7 @@ class User
     /**
      * Filling out a new user object with data
      *
-     * @param array $data
+     * @param array $data Data
      * @return void
      * @throws \Exception
      */
@@ -74,6 +74,7 @@ class User
         // End foreach.
     }
 
+
     /**
      * Hydrate one data
      *
@@ -84,7 +85,7 @@ class User
      */
     public function hydrateData(string $key, string $value): void
     {
-        $method = 'set'.ucfirst($key);
+        $method = 'set' . ucfirst($key);
 
         if (method_exists($this, $method) === false) {
             return;
@@ -109,7 +110,7 @@ class User
                 $this->$method((int) $value);
                 break;
             case 'isAdmin':
-                $this->$method((boolean) $value);
+                $this->$method((bool) $value);
                 break;
             case 'firstname':
             case 'lastname':
@@ -133,7 +134,6 @@ class User
     public function getId(): ?int
     {
         return $this->userId;
-
     }
 
 
@@ -154,7 +154,7 @@ class User
             $this->userId = $userId;
         }
     }
-    
+
 
     /**
      * Get value of user firstname
@@ -168,6 +168,9 @@ class User
 
     /**
      * Set value of user firstname
+     *
+     * @param string $firstname User firstname
+     * @return User
      */
     public function setFirstname(string $firstname): self
     {

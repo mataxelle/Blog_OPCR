@@ -28,7 +28,8 @@ $router->get('/comment', 'App\Controller\CommentController\CommentController@pos
 $router->get('/post/:slug/addComment', 'App\Controller\CommentController\CommentController@add');
 $router->post('/post/:slug/addComment', 'App\Controller\CommentController\CommentController@add');
 $router->get('/account/:id', 'App\Controller\UserController\UserController@account');
-$router->get('/account/:id', 'App\Controller\UserController\UserController@usersAccount');
+$router->get('/account/update/:id', 'App\Controller\UserController\UserController@updateAccount');
+$router->post('/account/update/:id', 'App\Controller\UserController\UserController@updateAccount');
 $router->get('/delete_user/:id', 'App\Controller\UserController\UserController@delete');
 $router->get('/contact', 'App\Controller\ContactController\ContactController@contact');
 $router->post('/contact', 'App\Controller\ContactController\ContactController@contact');

@@ -35,7 +35,6 @@ class HTTPRequest
     {
         return $this->superglobals->getServer('REQUEST_METHOD');
         // End requestMethod().
-
     }
 
 

@@ -57,7 +57,7 @@ class Contact
      * @param array $data Comment
      * @return void
      */
-    public function __construct(array $data= [])
+    public function __construct(array $data = [])
     {
         $this->hydrate($data);
         // End __construct().
@@ -67,7 +67,7 @@ class Contact
     /**
      * Filling out a new user object with data
      *
-     * @param array $data Comment
+     * @param array $data Data
      * @return void
      * @throws \Exception
      */
@@ -89,7 +89,7 @@ class Contact
      */
     public function hydrateData(string $key, string $value): void
     {
-        $method = 'set'.ucfirst($key);
+        $method = 'set' . ucfirst($key);
 
         if (method_exists($this, $method) === false) {
             return;
@@ -121,7 +121,7 @@ class Contact
                 $this->$method((string) $value);
                 break;
             case 'isAswered':
-                $this->$method((boolean) $value);
+                $this->$method((bool) $value);
                 break;
             case 'createdAt':
             case 'answeredAt':
@@ -138,7 +138,6 @@ class Contact
     public function getId(): ?int
     {
         return $this->contactId;
-
     }
 
 
@@ -158,7 +157,7 @@ class Contact
             $this->contactId = $contactId;
         }
     }
-    
+
 
     /**
      * Get value of contact firstname
@@ -312,5 +311,4 @@ class Contact
         $this->answeredAt = $answeredAt;
         return $this;
     }
-
 }

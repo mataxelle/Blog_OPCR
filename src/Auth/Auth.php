@@ -48,7 +48,7 @@ class Auth
         if (empty($this->session->get('id')) && empty($this->session->get('firstname'))) {
             return false;
         }
-        
+
         return true;
     }
 

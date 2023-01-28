@@ -46,9 +46,9 @@ class Superglobals
     /**
      * Constructor
      *
-     * @param $get Get
-     * @param $post Post
-     * @param $server Server
+     * @param $get     Get
+     * @param $post    Post
+     * @param $server  Server
      * @param $session Session
      */
     private function __construct($get, $post, $server, $session)

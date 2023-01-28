@@ -116,14 +116,19 @@ class SecurityController extends TwigRender
     {
         if (empty($this->superglobals->getPost()) === false) {
             $email = htmlspecialchars($this->superglobals->getPost('email'));
-            
+
             $data['password'] = htmlspecialchars($this->superglobals->getPost('password'));
             $password = $data['password'];
-            
+
             $user = $this->userManager->getUserByEmail($email);
-            
+
+            if (!$user) {
+                $response = new RedirectResponse('/login');
+                $response->send();
+            }
+
             $isPasswordCorrect = password_verify($password, $user->getPassword());
-            
+
             if ($isPasswordCorrect === true) {
                 $this->session->checkIsStarted();
 
@@ -141,11 +146,6 @@ class SecurityController extends TwigRender
 
                 $response = new RedirectResponse('/');
                 $response->send();
-            } else {
-                $response = new RedirectResponse('/login');
-                $response->send();
-
-                // End if condition.
             }
         }
 
