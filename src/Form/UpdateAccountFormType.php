@@ -18,8 +18,7 @@ class UpdateAccountFormType extends AbstractType
         $builder
             ->add('firstname', TextType::class)
             ->add('lastname', TextType::class)
-            ->add('email', EmailType::class)
-            ;
+            ->add('email', EmailType::class);
 
         parent::buildForm($builder, $options);
 

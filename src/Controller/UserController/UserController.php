@@ -105,7 +105,7 @@ class UserController extends TwigRender
         $this->twig->display(
             'user/update.html.twig',
             [
-             'form'  => $form->createView(),
+             'form'    => $form->createView(),
              'account' => $user,
              'user'    => $userName,
              'admin'   => $isAdmin,

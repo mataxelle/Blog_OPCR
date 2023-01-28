@@ -36,9 +36,14 @@ Project : Develop a professional blog using PHP, MVC architecture and and Twig. 
 
 ## Install on local
 
-Clone the repo on your local webserver : [Repository](https://github.com/mataxelle/Blog_OPCR.git).
-Make sure you have Php and composer on your computer.
+1. Clone the repo on your local webserver : [Repository](https://github.com/mataxelle/Blog_OPCR.git).
+
+2. Make sure you have Php and composer on your computer.
+
+3. Create a database and import the blog.sql file.
 
 ## Install dependencies
+
+Run the following command to install the dependencies : 
 
 *  `composer install`
