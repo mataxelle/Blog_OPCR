@@ -233,6 +233,11 @@ class AdminController extends TwigRender
 
         $account = $this->userManager->getUser($idUser);
 
+        if (!$account) {
+            $response = new RedirectResponse('/notFound');
+            $response->send();
+        }
+
         $user = $this->auth->getCurrentUser();
         $userName = $user->getFirstname();
         $isAdmin = $user->isAdmin();

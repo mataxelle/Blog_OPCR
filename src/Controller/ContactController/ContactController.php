@@ -56,9 +56,9 @@ class ContactController extends TwigRender
     /**
      * Create a contact message
      *
-     * @return Response
+     * @return void
      */
-    public function contact(): Response
+    public function contact()
     {
         $contact = new Contact();
 
@@ -129,12 +129,17 @@ class ContactController extends TwigRender
 
         $message = $this->contactManager->getOneMessage($messageId);
 
+        if (!$message) {
+            $response = new RedirectResponse('/notFound');
+            $response->send();
+        }
+
         $user = $this->auth->getCurrentUser();
         $userName = $user->getFirstname();
         $isAdmin = $user->isAdmin();
         $userId = $user->getId();
 
-        if (!$isAdmin === false) {
+        if (!$isAdmin) {
             $response = new RedirectResponse('/');
             $response->send();
         }

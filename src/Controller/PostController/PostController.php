@@ -69,6 +69,11 @@ class PostController extends TwigRender
 
         $post = $this->postManager->getOnePost($slug);
 
+        if (!$post) {
+            $response = new RedirectResponse('/notFound');
+            $response->send();
+        }
+
         $comments = $this->commentManager->getPostComment($post->getId());
 
         /*
@@ -105,9 +110,9 @@ class PostController extends TwigRender
     /**
      * Add a post
      *
-     * @return Response
+     * @return void
      */
-    public function add(): Response
+    public function add()
     {
         if ($this->auth->isLoggedIn() === false) {
             $response = new RedirectResponse('/');
@@ -183,9 +188,9 @@ class PostController extends TwigRender
      * Update a post
      *
      * @param int $postId Post id
-     * @return Response
+     * @return void
      */
-    public function update(int $postId): Response
+    public function update(int $postId)
     {
         if ($this->auth->isLoggedIn() === false) {
             $response = new RedirectResponse('/');

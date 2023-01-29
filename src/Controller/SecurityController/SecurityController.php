@@ -56,9 +56,9 @@ class SecurityController extends TwigRender
     /**
      * Create a user
      *
-     * @return Response
+     * @return void
      */
-    public function register(): Response
+    public function register()
     {
         $user = new User();
 

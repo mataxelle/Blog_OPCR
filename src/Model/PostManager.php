@@ -76,8 +76,14 @@ class PostManager extends ConnectDB
         $response->bindValue(1, $slug, PDO::PARAM_STR);
         
         $response->execute();
+
+        $fetch = $response->fetch();
+
+        if (!$fetch) {
+            return null;
+        }
         
-        return new Post($response->fetch());
+        return new Post($fetch);
     }
     
     /**

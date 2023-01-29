@@ -42,9 +42,15 @@ class ContactManager extends ConnectDB
 
         $response->bindValue(1, $messageId, PDO::PARAM_INT);
 
-        $response->execute([$messageId]);
+        $response->execute();
 
-        return new Contact($response->fetch());
+        $fetch = $response->fetch();
+
+        if (!$fetch) {
+            return null;
+        }
+        
+        return new Contact($fetch);
     }
 
 

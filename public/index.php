@@ -17,6 +17,7 @@ $request = new HTTPRequest();
 $router = new Router($request);
 
 $router->get('/', 'App\Controller\HomeController\HomeController@index');
+$router->get('/notFound', 'App\Controller\HomeController\HomeController@notFound');
 $router->get('/register', 'App\Controller\SecurityController\SecurityController@register');
 $router->post('/register', 'App\Controller\SecurityController\SecurityController@register');
 $router->get('/login', 'App\Controller\SecurityController\SecurityController@login');

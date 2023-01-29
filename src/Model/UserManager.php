@@ -43,7 +43,15 @@ class UserManager extends ConnectDB
 
         $response->execute();
 
-        return new User($response->fetch());
+        $fetch = $response->fetch();
+
+        if (!$fetch) {
+            return null;
+        }
+        
+        return new User($fetch);
+
+        //return new User($response->fetch());
     }
 
     /**

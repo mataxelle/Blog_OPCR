@@ -65,7 +65,7 @@ class Contact
 
 
     /**
-     * Filling out a new user object with data
+     * Filling out a new contact object with data
      *
      * @param array $data Data
      * @return void
