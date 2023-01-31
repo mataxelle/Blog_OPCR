@@ -38,7 +38,6 @@ class Session
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
-
     }
 
 
@@ -52,7 +51,6 @@ class Session
         if (session_status() === PHP_SESSION_ACTIVE) {
             session_destroy();
         }
-
     }
 
 
@@ -63,7 +61,7 @@ class Session
      * @param mixed  $default The default value if it contains no value
      * @return mixed
      */
-    public function get(string $key, $default=null)
+    public function get(string $key, $default = null)
     {
         $this->checkIsStarted();
         if (array_key_exists($key, $this->superglobals->getSession()) && array_key_exists($key, $this->superglobals->getSession())) {

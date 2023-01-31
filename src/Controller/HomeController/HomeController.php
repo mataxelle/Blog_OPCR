@@ -67,13 +67,12 @@ class HomeController extends TwigRender
         $this->twig->display(
             'home/home.html.twig',
             [
-             'posts' => $posts,
-             'admin' => $isAdmin,
-             'user'  => $userName,
-             'id'    => $userId
+                'posts' => $posts,
+                'admin' => $isAdmin,
+                'user'  => $userName,
+                'id'    => $userId
             ]
         );
-
     }
 
     public function notFound()
@@ -103,6 +102,4 @@ class HomeController extends TwigRender
             ]
         );
     }
-
-
 }

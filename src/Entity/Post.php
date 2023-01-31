@@ -74,7 +74,7 @@ class Post
     public function hydrate(array $data)
     {
         foreach ($data as $key => $value) {
-            $method = 'set'.ucfirst($key);
+            $method = 'set' . ucfirst($key);
 
             if (method_exists($this, $method)) {
                 switch ($key) {
@@ -83,7 +83,7 @@ class Post
                         $this->$method((int) $value);
                         break;
                     case 'isPublished':
-                        $this->$method((boolean) $value);
+                        $this->$method((bool) $value);
                         break;
                     case 'title':
                     case 'slug':
@@ -96,15 +96,14 @@ class Post
                         $this->$method(new \DateTime($value));
                         break;
                 }
-                
+
                 // End switch.
             }
 
             // End foreach.
         }
-
     }
-    
+
     /**
      * Filling out a new post object with data
      *
@@ -181,7 +180,6 @@ class Post
     public function getId(): ?int
     {
         return $this->postId;
-
     }
 
 
@@ -273,7 +271,7 @@ class Post
     /**
      * Set value of post image
      */
-    public function setImage(string $image= null): self
+    public function setImage(string $image = null): self
     {
         $this->image = $image;
         return $this;

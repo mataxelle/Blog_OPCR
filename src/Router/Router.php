@@ -33,7 +33,6 @@ class Router
     public function __construct(HTTPRequest $request)
     {
         $this->url = $request;
-
     }
 
 
@@ -47,10 +46,9 @@ class Router
     public function get(string $path, string $action)
     {
         $this->routes['GET'][] = new Route($path, $action);
-
     }
 
-    
+
     /**
      * Post
      *

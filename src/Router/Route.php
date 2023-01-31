@@ -31,7 +31,7 @@ class Route
      */
     public function __construct(string $path, string $action)
     {
-        $this->path = trim($path,'/');
+        $this->path = trim($path, '/');
         $this->action = $action;
         //End __construct().
 
@@ -53,7 +53,6 @@ class Route
             $this->matches = $matches;
             return true;
         }
-        
     }
 
     /**

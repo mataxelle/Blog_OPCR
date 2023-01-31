@@ -47,7 +47,7 @@ class Comment
      * @param array $data Comment
      * @return void
      */
-    public function __construct(array $data= [])
+    public function __construct(array $data = [])
     {
         $this->hydrate($data);
 
@@ -80,7 +80,7 @@ class Comment
      */
     public function hydrateData(string $key, string $value): void
     {
-        $method = 'set'.ucfirst($key);
+        $method = 'set' . ucfirst($key);
 
         if (method_exists($this, $method)) {
             return;
@@ -106,7 +106,7 @@ class Comment
             case 'userId':
                 $this->$method((int) $value);
             case 'isValid':
-                $this->$method((boolean) $value);
+                $this->$method((bool) $value);
                 break;
             case 'content':
                 $this->$method((string) $value);
@@ -115,9 +115,9 @@ class Comment
             case 'updtedAt':
                 $this->$method(new \DateTime($value));
                 break;
-            }
+        }
     }
-    
+
     /**
      * Get value of comment id
      *
@@ -126,7 +126,6 @@ class Comment
     public function getId(): ?int
     {
         return $this->commentId;
-
     }
 
 

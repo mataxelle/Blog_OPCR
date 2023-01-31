@@ -62,7 +62,7 @@ class AdminController extends TwigRender
         $this->contactManager = new ContactManager();
         $this->postManager = new PostManager();
         $this->userManager = new UserManager();
-        
+
         // End __construct().
     }
 
@@ -100,16 +100,15 @@ class AdminController extends TwigRender
         $this->twig->display(
             'admin/index.html.twig',
             [
-             'posts'    => $posts,
-             'users'    => $users,
-             'messages' => $messages,
-             'admin'    => $isAdmin,
-             'user'     => $userName,
-             'id'       => $userId,
-             'comments' => $comments
+                'posts'    => $posts,
+                'users'    => $users,
+                'messages' => $messages,
+                'admin'    => $isAdmin,
+                'user'     => $userName,
+                'id'       => $userId,
+                'comments' => $comments
             ]
         );
-
     }
 
 
@@ -140,10 +139,10 @@ class AdminController extends TwigRender
         $this->twig->display(
             'admin/posts.html.twig',
             [
-             'posts' => $posts,
-             'admin' => $isAdmin,
-             'user'  => $userName,
-             'id'    => $userId
+                'posts' => $posts,
+                'admin' => $isAdmin,
+                'user'  => $userName,
+                'id'    => $userId
             ]
         );
     }
@@ -175,10 +174,10 @@ class AdminController extends TwigRender
         $this->twig->display(
             'admin/comments.html.twig',
             [
-             'comments' => $comments,
-             'admin'    => $isAdmin,
-             'user'     => $userName,
-             'id'       => $userId
+                'comments' => $comments,
+                'admin'    => $isAdmin,
+                'user'     => $userName,
+                'id'       => $userId
             ]
         );
     }
@@ -210,10 +209,10 @@ class AdminController extends TwigRender
         $this->twig->display(
             'admin/users.html.twig',
             [
-             'users' => $users,
-             'admin' => $isAdmin,
-             'user'  => $userName,
-             'id'    => $userId
+                'users' => $users,
+                'admin' => $isAdmin,
+                'user'  => $userName,
+                'id'    => $userId
             ]
         );
     }
@@ -251,10 +250,10 @@ class AdminController extends TwigRender
         $this->twig->display(
             'user/users_account.html.twig',
             [
-             'account' => $account,
-             'admin'   => $isAdmin,
-             'user'    => $userName,
-             'id'      => $userId
+                'account' => $account,
+                'admin'   => $isAdmin,
+                'user'    => $userName,
+                'id'      => $userId
             ]
         );
     }
@@ -286,12 +285,11 @@ class AdminController extends TwigRender
         $this->twig->display(
             'admin/messages.html.twig',
             [
-             'messages' => $messages,
-             'admin'    => $isAdmin,
-             'user'     => $userName,
-             'id'       => $userId,
+                'messages' => $messages,
+                'admin'    => $isAdmin,
+                'user'     => $userName,
+                'id'       => $userId,
             ]
         );
     }
-
 }

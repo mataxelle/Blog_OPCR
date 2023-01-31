@@ -48,7 +48,7 @@ class UserManager extends ConnectDB
         if (!$fetch) {
             return null;
         }
-        
+
         return new User($fetch);
 
         //return new User($response->fetch());
@@ -70,13 +70,13 @@ class UserManager extends ConnectDB
 
         $createUser->execute(
             [
-             $user->getFirstname(),
-             $user->getLastname(),
-             $user->isAdmin() ? 1 : 0,
-             $user->getEmail(),
-             $pass_hache,
-             (new DateTime())->format('Y-m-d h:i:s'),
-             (new DateTime())->format('Y-m-d h:i:s'),
+                $user->getFirstname(),
+                $user->getLastname(),
+                $user->isAdmin() ? 1 : 0,
+                $user->getEmail(),
+                $pass_hache,
+                (new DateTime())->format('Y-m-d h:i:s'),
+                (new DateTime())->format('Y-m-d h:i:s'),
             ]
         );
 
@@ -102,7 +102,7 @@ class UserManager extends ConnectDB
         $fetch = $login->fetch();
 
         if (!$fetch) {
-           return null;
+            return null;
         }
 
         return new User($fetch);

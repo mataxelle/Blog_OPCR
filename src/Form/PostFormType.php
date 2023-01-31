@@ -31,11 +31,14 @@ class PostFormType extends AbstractType
             ->add('content', TextareaType::class, [
                 'label' => 'Contenu',
             ])
-            ->add('isPublished', CheckboxType::class, [
-                'required' => false
-            ]
+            ->add(
+                'isPublished',
+                CheckboxType::class,
+                [
+                    'required' => false
+                ]
             );
-        
+
         parent::buildForm($builder, $options);
         // End buildForm().
     }
@@ -45,10 +48,8 @@ class PostFormType extends AbstractType
     {
         $resolver->setDefaults(
             [
-             'data_class' => Post::class,
+                'data_class' => Post::class,
             ]
         );
-
     }
-
 }

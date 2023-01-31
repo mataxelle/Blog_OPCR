@@ -42,7 +42,17 @@ Project : Develop a professional blog using PHP, MVC architecture and and Twig. 
 
 3. Create a .env file at the root of your project, same level as .env.exemple, and configure the appropriate values for your blog to run.
 
+```
+#Database standard parameters
+
+DBHOST='localhost'
+DBDATABASE='blog_opcr'
+DBUSERNAME='root'
+DBPASSWORD=''
+```
 4. Create a database and import the blog_opcr.sql file.
+
+5. Try to connect as an admin with : `admin@hotmail.com` `azertyuiop`
 
 ## Install dependencies
 

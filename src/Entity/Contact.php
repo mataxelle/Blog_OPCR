@@ -89,7 +89,7 @@ class Contact
      */
     public function hydrateData(string $key, string $value): void
     {
-        $method = 'set'.ucfirst($key);
+        $method = 'set' . ucfirst($key);
 
         if (method_exists($this, $method) === false) {
             return;

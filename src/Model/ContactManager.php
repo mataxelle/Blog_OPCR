@@ -49,7 +49,7 @@ class ContactManager extends ConnectDB
         if (!$fetch) {
             return null;
         }
-        
+
         return new Contact($fetch);
     }
 
@@ -68,14 +68,14 @@ class ContactManager extends ConnectDB
 
         $addContact->execute(
             [
-             $contact->getFirstname(),
-             $contact->getLastname(),
-             $contact->getEmail(),
-             $contact->getLabel(),
-             $contact->getMessage(),
-             (new DateTime())->format('Y-m-d h:i:s'),
-             $contact->isAnswered() ? 1 : 0,
-             (new DateTime())->format('Y-m-d h:i:s'),
+                $contact->getFirstname(),
+                $contact->getLastname(),
+                $contact->getEmail(),
+                $contact->getLabel(),
+                $contact->getMessage(),
+                (new DateTime())->format('Y-m-d h:i:s'),
+                $contact->isAnswered() ? 1 : 0,
+                (new DateTime())->format('Y-m-d h:i:s'),
             ]
         );
 
@@ -93,7 +93,7 @@ class ContactManager extends ConnectDB
         $database = $this->database;
 
         $delete = $database->prepare('DELETE FROM contact WHERE id = ?');
-        
+
         $delete->execute([$messageId]);
     }
 }

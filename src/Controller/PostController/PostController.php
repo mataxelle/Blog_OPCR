@@ -96,14 +96,13 @@ class PostController extends TwigRender
         $this->twig->display(
             'post/post_show.html.twig',
             [
-             'post'     => $post,
-             'comments' => $comments,
-             'user'     => $userName,
-             'admin'    => $isAdmin,
-             'id'       => $userId
+                'post'     => $post,
+                'comments' => $comments,
+                'user'     => $userName,
+                'admin'    => $isAdmin,
+                'id'       => $userId
             ]
         );
-
     }
 
 
@@ -125,22 +124,22 @@ class PostController extends TwigRender
             PostFormType::class,
             $post,
             [
-             'action' => '/admin/post/add',
-             'method' => 'POST',
+                'action' => '/admin/post/add',
+                'method' => 'POST',
             ]
         )
             ->getForm();
 
         $request = Request::createFromGlobals();
-        
+
         $form->handleRequest($request);
-        
+
         if ($form->isSubmitted() && $form->isValid()) {
             $post->setUserId(1);
 
             if ($post->getImage() !== null) {
                 $file = $form->get('image')->getData();
-                $fileName = uniqid().'.'.$file->guessExtension();
+                $fileName = uniqid() . '.' . $file->guessExtension();
 
                 try {
                     $file->move('./upload/', $fileName);
@@ -156,7 +155,7 @@ class PostController extends TwigRender
 
             $response = new RedirectResponse('/');
             $response->prepare($request);
-        
+
             return $response->send();
 
             // End if condition.
@@ -175,10 +174,10 @@ class PostController extends TwigRender
         $this->twig->display(
             'post/post_add.html.twig',
             [
-             'form'  => $form->createView(),
-             'user'  => $userName,
-             'admin' => $isAdmin,
-             'id'    => $userId
+                'form'  => $form->createView(),
+                'user'  => $userName,
+                'admin' => $isAdmin,
+                'id'    => $userId
             ]
         );
     }
@@ -207,16 +206,16 @@ class PostController extends TwigRender
             PostFormType::class,
             $post,
             [
-             'action' => '/admin/post/update/'.$pId,
-             'method' => 'POST',
+                'action' => '/admin/post/update/' . $pId,
+                'method' => 'POST',
             ]
         )
             ->getForm();
 
         $request = Request::createFromGlobals();
-        
+
         $form->handleRequest($request);
-        
+
         if ($form->isSubmitted() && $form->isValid()) {
             if (!$post->getUserId()) {
                 $post->setUserId(1);
@@ -224,7 +223,7 @@ class PostController extends TwigRender
 
             if ($post->getImage() !== null && $post->getImage() !== $oldImage) {
                 $file = $form->get('image')->getData();
-                $fileName = uniqid().'.'.$file->guessExtension();
+                $fileName = uniqid() . '.' . $file->guessExtension();
 
                 try {
                     $file->move('./upload/', $fileName);
@@ -260,11 +259,11 @@ class PostController extends TwigRender
         $this->twig->display(
             'post/update.html.twig',
             [
-             'form'  => $form->createView(),
-             'post'  => $post,
-             'user'  => $userName,
-             'admin' => $isAdmin,
-             'id'  => $userId
+                'form'  => $form->createView(),
+                'post'  => $post,
+                'user'  => $userName,
+                'admin' => $isAdmin,
+                'id'  => $userId
             ]
         );
     }

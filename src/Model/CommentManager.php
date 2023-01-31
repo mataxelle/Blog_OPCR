@@ -19,9 +19,9 @@ class CommentManager extends ConnectDB
     public function getAllComments()
     {
         $database = $this->database;
-        
+
         $response = $database->query('SELECT * FROM comment ORDER BY updatedAt DESC');
-        
+
         return $response->fetchAll();
         // End getAllComments().
     }
@@ -36,16 +36,16 @@ class CommentManager extends ConnectDB
     public function getComment(int $commentId)
     {
         $database = $this->database;
-        
+
         $response = $database->prepare('SELECT * FROM comment WHERE id = ?');
-        
+
         $response->bindValue(1, $commentId, PDO::PARAM_INT);
-        
+
         $response->execute();
-        
+
         return new Comment($response->fetch());
     }
-    
+
     /**
      * Get post comments
      *
@@ -55,16 +55,16 @@ class CommentManager extends ConnectDB
     public function getPostComment(int $postId)
     {
         $database = $this->database;
-        
+
         $response = $database->prepare('SELECT * FROM comment WHERE postId = ? AND isValid = 1 ORDER BY createdAt DESC');
-        
+
         $response->bindValue(1, $postId, PDO::PARAM_INT);
-        
+
         $response->execute();
-        
+
         return $response->fetchAll();
     }
-    
+
     /**
      * Insert a new comment
      *
@@ -74,23 +74,23 @@ class CommentManager extends ConnectDB
     public function commentForm(Comment $comment)
     {
         $database = $this->database;
-        
+
         $addComment = $database->prepare('INSERT INTO comment (postId, userId, content, isValid, createdAt, updatedAt) VALUES (?, ?, ?, ?, ?, ?)');
-        
+
         $addComment->execute(
             [
-             $comment->getPostId(),
-             $comment->getUserId(),
-             $comment->getContent(),
-             $comment->isValid() ? 1 : 0,
-             (new DateTime())->format('Y-m-d h:i:s'),
-             (new DateTime())->format('Y-m-d h:i:s'),
+                $comment->getPostId(),
+                $comment->getUserId(),
+                $comment->getContent(),
+                $comment->isValid() ? 1 : 0,
+                (new DateTime())->format('Y-m-d h:i:s'),
+                (new DateTime())->format('Y-m-d h:i:s'),
             ]
         );
-        
+
         return $addComment;
     }
-    
+
     /**
      * Validate a comment
      *
@@ -100,16 +100,16 @@ class CommentManager extends ConnectDB
     public function Validation(Comment $comment)
     {
         $database = $this->database;
-        
+
         $commentValidation = $database->prepare('UPDATE comment SET content = ?, isValid = ? WHERE id = ?');
-        
+
         $commentValidation->bindValue(1, $comment->getContent(), PDO::PARAM_STR);
         $commentValidation->bindValue(2, $comment->isValid() ? 1 : 0, PDO::PARAM_INT);
         $commentValidation->bindValue(3, $comment->getId(), PDO::PARAM_INT);
-        
+
         $commentValidation->execute();
     }
-    
+
     /**
      * Delete a comment
      *
@@ -119,11 +119,11 @@ class CommentManager extends ConnectDB
     public function deleteComment(int $commnetId)
     {
         $database = $this->database;
-        
+
         $delete = $database->prepare('DELETE FROM comment WHERE id = ?');
-        
+
         $delete->bindValue(1, $commnetId, PDO::PARAM_INT);
-        
+
         $delete->execute();
     }
 }

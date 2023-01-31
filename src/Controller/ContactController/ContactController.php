@@ -66,16 +66,16 @@ class ContactController extends TwigRender
             ContactFormType::class,
             $contact,
             [
-             'action' => '/contact',
-             'method' => 'POST',
+                'action' => '/contact',
+                'method' => 'POST',
             ]
         )
             ->getForm();
-            
+
         $request = Request::createFromGlobals();
-        
+
         $form->handleRequest($request);
-        
+
         if ($form->isSubmitted() && $form->isValid()) {
             $contact->setIsAnswered(0);
 
@@ -84,7 +84,7 @@ class ContactController extends TwigRender
 
             $response = new RedirectResponse('/');
             $response->prepare($request);
-        
+
             return $response->send();
         }
 
@@ -92,7 +92,7 @@ class ContactController extends TwigRender
         $userName = '';
         $userId = '';
         $isAdmin = '';
-        
+
         if ($this->session->get('firstname') && $this->session->get('id')) {
             $user = $this->auth->getCurrentUser();
             $userName = $user->getFirstname();
@@ -103,17 +103,16 @@ class ContactController extends TwigRender
         $this->twig->display(
             'contact/contact_add.html.twig',
             [
-             'form'     => $form->createView(),
-             'userInfo' => $user,
-             'user'     => $userName,
-             'admin'    => $isAdmin,
-             'id'       => $userId
+                'form'     => $form->createView(),
+                'userInfo' => $user,
+                'user'     => $userName,
+                'admin'    => $isAdmin,
+                'id'       => $userId
             ]
         );
-
     }
 
-    
+
     /**
      * Get a contact message
      *
@@ -147,14 +146,14 @@ class ContactController extends TwigRender
         $this->twig->display(
             'contact/message.html.twig',
             [
-             'message' => $message,
-             'user'    => $userName,
-             'admin'   => $isAdmin,
-             'id'      => $userId
+                'message' => $message,
+                'user'    => $userName,
+                'admin'   => $isAdmin,
+                'id'      => $userId
             ]
         );
     }
-    
+
     /**
      * Delete a contact message
      *
@@ -168,5 +167,4 @@ class ContactController extends TwigRender
         $response = new RedirectResponse('/admin');
         $response->send();
     }
-    
 }

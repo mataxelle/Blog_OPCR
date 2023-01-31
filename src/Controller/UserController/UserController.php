@@ -58,22 +58,21 @@ class UserController extends TwigRender
         $this->twig->display(
             'user/account.html.twig',
             [
-             'account' => $user,
-             'user'    => $userName,
-             'admin'   => $isAdmin,
-             'id'      => $userId
+                'account' => $user,
+                'user'    => $userName,
+                'admin'   => $isAdmin,
+                'id'      => $userId
             ]
         );
-
     }
 
     /**
      * Update account
      *
      * @param int $userId User id
-     * @return Response
+     * @return Void
      */
-    public function updateAccount(int $userId): Response
+    public function updateAccount(int $userId)
     {
         $user = $this->auth->getCurrentUser();
         $userName = $user->getFirstname();
@@ -84,8 +83,8 @@ class UserController extends TwigRender
             UpdateAccountFormType::class,
             $user,
             [
-             'action' => '/account/update/'.$userId,
-             'method' => 'POST',
+                'action' => '/account/update/' . $userId,
+                'method' => 'POST',
             ]
         )
             ->getForm();
@@ -96,7 +95,7 @@ class UserController extends TwigRender
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->userManager->updateForm($user);
-            $response = new RedirectResponse('/account/'.$userId);
+            $response = new RedirectResponse('/account/' . $userId);
             $response->prepare($request);
 
             return $response->send();
@@ -105,14 +104,13 @@ class UserController extends TwigRender
         $this->twig->display(
             'user/update.html.twig',
             [
-             'form'    => $form->createView(),
-             'account' => $user,
-             'user'    => $userName,
-             'admin'   => $isAdmin,
-             'id'      => $userId
+                'form'    => $form->createView(),
+                'account' => $user,
+                'user'    => $userName,
+                'admin'   => $isAdmin,
+                'id'      => $userId
             ]
         );
-
     }
 
 
@@ -128,7 +126,7 @@ class UserController extends TwigRender
         $isAdmin = $user->isAdmin();
 
         $this->userManager->deleteUser($userId);
-        
+
         if ($isAdmin) {
             $response = new RedirectResponse('/admin');
             $response->send();
@@ -136,9 +134,5 @@ class UserController extends TwigRender
             $response = new RedirectResponse('/login');
             $response->send();
         }
-
-
     }
-
-
 }

@@ -60,7 +60,5 @@ class Auth
     public function getCurrentUser(): User
     {
         return $this->userManager->getUser($this->session->get('id'));
-
     }
-
 }

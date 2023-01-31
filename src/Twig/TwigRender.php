@@ -42,7 +42,7 @@ class TwigRender
         $appVarReflection = new \ReflectionClass('\Symfony\Bridge\Twig\AppVariable');
         $vendorTwigBridgeDir = dirname($appVarReflection->getFileName());
 
-        $this->loader = new FilesystemLoader([__DIR__.'./../../templates', $vendorTwigBridgeDir.'/Resources/views/Form']);
+        $this->loader = new FilesystemLoader([__DIR__ . './../../templates', $vendorTwigBridgeDir . '/Resources/views/Form']);
         $this->twig = new Environment($this->loader, ['strict_variables' => true]);
 
         $defaultFormTheme = 'form_div_layout.html.twig';
@@ -53,9 +53,9 @@ class TwigRender
         $this->twig->addRuntimeLoader(
             new FactoryRuntimeLoader(
                 [
-                 FormRenderer::class => function () use ($formEngine, $csrfManager) {
-                    return new FormRenderer($formEngine, $csrfManager);
-                 },
+                    FormRenderer::class => function () use ($formEngine, $csrfManager) {
+                        return new FormRenderer($formEngine, $csrfManager);
+                    },
                 ]
             )
         );
@@ -75,6 +75,4 @@ class TwigRender
 
         // End __construct().
     }
-
-    
 }

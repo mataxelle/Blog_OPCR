@@ -48,7 +48,7 @@ class CommentController extends TwigRender
         $this->auth = new Auth();
         $this->commentManager = new CommentManager();
         $this->postManager = new PostManager();
-        
+
         // End __construct().
     }
 
@@ -81,44 +81,43 @@ class CommentController extends TwigRender
             CommentFormType::class,
             $comment,
             [
-             'action' => '/post/'.$postSlug.'/addComment',
-             'method' => 'POST',
+                'action' => '/post/' . $postSlug . '/addComment',
+                'method' => 'POST',
             ]
         )
             ->getForm();
 
         $request = Request::createFromGlobals();
-        
+
         $commentForm->handleRequest($request);
-        
+
         if ($commentForm->isSubmitted() && $commentForm->isValid()) {
             $comment->setPostId($postId);
             $comment->setUserId($userId);
-            
+
             if ($userId !== 1) {
                 $comment->setIsValid(0);
             }
-            
+
             $commentManager = new CommentManager();
             $commentManager->commentForm($comment);
 
-            $response = new RedirectResponse('/post/'.$postSlug);
+            $response = new RedirectResponse('/post/' . $postSlug);
             $response->prepare($request);
-        
+
             return $response->send();
         }
 
         $this->twig->display(
             'comment/comment_add.html.twig',
             [
-             'commentForm' => $commentForm->createView(),
-             'user'        => $userName,
-             'admin'       => $isAdmin,
-             'id'          => $userId,
-             'post'        => $post,
+                'commentForm' => $commentForm->createView(),
+                'user'        => $userName,
+                'admin'       => $isAdmin,
+                'id'          => $userId,
+                'post'        => $post,
             ]
         );
-
     }
 
 
@@ -142,24 +141,24 @@ class CommentController extends TwigRender
             CommentFormType::class,
             $comment,
             [
-             'action' => '/admin/comment/'.$comId.'/validation',
-             'method' => 'POST',
+                'action' => '/admin/comment/' . $comId . '/validation',
+                'method' => 'POST',
             ]
         )
             ->getForm();
 
         $request = Request::createFromGlobals();
-        
+
         $commentForm->handleRequest($request);
 
         if ($commentForm->isSubmitted() && $commentForm->isValid()) {
-            
+
             $commentmanager = new CommentManager();
             $commentmanager->Validation($comment);
 
             $response = new RedirectResponse('/admin/comments');
             $response->prepare($request);
-        
+
             return $response->send();
         }
 
@@ -176,14 +175,14 @@ class CommentController extends TwigRender
         $this->twig->display(
             'comment/comment_update.html.twig',
             [
-             'commentForm' => $commentForm->createView(),
-             'user'        => $userName,
-             'admin'       => $isAdmin,
-             'id'          => $userId
+                'commentForm' => $commentForm->createView(),
+                'user'        => $userName,
+                'admin'       => $isAdmin,
+                'id'          => $userId
             ]
         );
     }
-    
+
     /**
      * Delete a comment
      *
@@ -198,12 +197,10 @@ class CommentController extends TwigRender
             $response = new RedirectResponse('/');
             $response->send();
         }
-        
+
         $this->commentManager->deleteComment($commentId);
 
         $response = new RedirectResponse('/admin');
         $response->send();
-
     }
-    
 }

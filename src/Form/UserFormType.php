@@ -23,19 +23,20 @@ class UserFormType extends AbstractType
             ->add('lastname', TextType::class)
             ->add('email', EmailType::class)
             ->add(
-                'password', PasswordType::class,
+                'password',
+                PasswordType::class,
                 [
-                 'attr' => ['autocomplete' => 'new-password'],
-                 'constraints' => [
-                    new NotBlank([
-                        'message' => 'Veuillez saisir un mot de passe valide',
-                    ]),
-                    new Length([
-                        'min' => 6,
-                        'minMessage' => 'Votre mot de passe doit contenir au moins {{ limit }} caractères',
-                        'max' => 4096,
-                    ]),
-                 ],
+                    'attr' => ['autocomplete' => 'new-password'],
+                    'constraints' => [
+                        new NotBlank([
+                            'message' => 'Veuillez saisir un mot de passe valide',
+                        ]),
+                        new Length([
+                            'min' => 6,
+                            'minMessage' => 'Votre mot de passe doit contenir au moins {{ limit }} caractères',
+                            'max' => 4096,
+                        ]),
+                    ],
                 ]
             );
 
@@ -49,11 +50,8 @@ class UserFormType extends AbstractType
     {
         $resolver->setDefaults(
             [
-             'data_class' => User::class,
+                'data_class' => User::class,
             ]
         );
-
     }
-
-
 }

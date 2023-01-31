@@ -81,7 +81,7 @@ class Superglobals
      * @param $key Key
      * @return mixed
      */
-    public function getServer($key=null)
+    public function getServer($key = null)
     {
         if (array_key_exists($key, $this->server)) {
             return $this->server[$key];
@@ -98,7 +98,7 @@ class Superglobals
      * @param $key Key
      * @return mixed
      */
-    public function getPost($key=null)
+    public function getPost($key = null)
     {
         if (array_key_exists($key, $this->post)) {
             return $this->post[$key];
@@ -114,7 +114,7 @@ class Superglobals
      * @param $key Key
      * @return mixed
      */
-    public function getGet($key=null)
+    public function getGet($key = null)
     {
         if (array_key_exists($key, $this->get)) {
             return $this->get[$key];
@@ -130,7 +130,7 @@ class Superglobals
      * @param $key
      * @return mixed
      */
-    public function getSession($key=null)
+    public function getSession($key = null)
     {
         if (array_key_exists($key, $this->session)) {
             return $this->session[$key];
@@ -138,6 +138,4 @@ class Superglobals
 
         return $this->session;
     }
-
-
 }

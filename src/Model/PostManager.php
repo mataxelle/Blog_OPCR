@@ -19,15 +19,15 @@ class PostManager extends ConnectDB
     public function getAllPost()
     {
         $database = $this->database;
-        
+
         $response = $database->query('SELECT * FROM post ORDER BY createdAt DESC');
-        
+
         return $response->fetchAll();
 
         // End getAllPosts().
     }
-    
-    
+
+
     /**
      * Get all validated posts
      *
@@ -36,12 +36,12 @@ class PostManager extends ConnectDB
     public function getAllValidedPost()
     {
         $database = $this->database;
-        
+
         $response = $database->query('SELECT * FROM post WHERE isPublished = 1 ORDER BY createdAt DESC');
-        
+
         return $response->fetchAll();
     }
-    
+
     /**
      * Get a post by id
      *
@@ -51,16 +51,16 @@ class PostManager extends ConnectDB
     public function getPostId(int $postId)
     {
         $database = $this->database;
-        
+
         $response = $database->prepare('SELECT * FROM post WHERE id = ?');
-        
+
         $response->bindValue(1, $postId, PDO::PARAM_INT);
-        
+
         $response->execute();
-        
+
         return new Post($response->fetch());
     }
-    
+
     /**
      * get a post by slug
      *
@@ -70,11 +70,11 @@ class PostManager extends ConnectDB
     public function getOnePost(string $slug)
     {
         $database = $this->database;
-        
+
         $response = $database->prepare('SELECT * FROM post WHERE slug = ?');
-        
+
         $response->bindValue(1, $slug, PDO::PARAM_STR);
-        
+
         $response->execute();
 
         $fetch = $response->fetch();
@@ -82,10 +82,10 @@ class PostManager extends ConnectDB
         if (!$fetch) {
             return null;
         }
-        
+
         return new Post($fetch);
     }
-    
+
     /**
      * Insert a new post
      *
@@ -95,22 +95,22 @@ class PostManager extends ConnectDB
     public function postForm(Post $post)
     {
         $database = $this->database;
-        
+
         $addPost = $database->prepare('INSERT INTO post (userId, title, slug, image, content, isPublished, createdAt, updatedAt) VALUES (?, ?, ?, ?, ?, ?, ?, ?)');
-        
+
         $addPost->execute(
             [
-             $post->getUserId(),
-             $post->getTitle(),
-             $post->getSlug(),
-             $post->getImage(),
-             $post->getContent(),
-             $post->isPublished() ? 1 : 0,
-             (new DateTime())->format('Y-m-d h:i:s'),
-             (new DateTime())->format('Y-m-d h:i:s'),
+                $post->getUserId(),
+                $post->getTitle(),
+                $post->getSlug(),
+                $post->getImage(),
+                $post->getContent(),
+                $post->isPublished() ? 1 : 0,
+                (new DateTime())->format('Y-m-d h:i:s'),
+                (new DateTime())->format('Y-m-d h:i:s'),
             ]
         );
-        
+
         return $addPost;
     }
 
@@ -149,7 +149,7 @@ class PostManager extends ConnectDB
         $database = $this->database;
 
         $delete = $database->prepare('DELETE FROM post WHERE slug = ?');
-        
+
         $delete->execute([$slug]);
     }
 }

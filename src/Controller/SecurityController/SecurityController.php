@@ -66,8 +66,8 @@ class SecurityController extends TwigRender
             UserFormType::class,
             $user,
             [
-             'action' => '/register',
-             'method' => 'POST',
+                'action' => '/register',
+                'method' => 'POST',
             ]
         )
             ->getForm();
@@ -86,7 +86,7 @@ class SecurityController extends TwigRender
 
         $user = '';
         $admin = '';
-        
+
         if ($this->session->get('firstname') === true) {
             $user = $this->session->get('lastname');
         }
@@ -98,15 +98,14 @@ class SecurityController extends TwigRender
         $this->twig->display(
             'security/register.html.twig',
             [
-             'form'  => $form->createView(),
-             'user'  => $user,
-             'admin' => $admin
+                'form'  => $form->createView(),
+                'user'  => $user,
+                'admin' => $admin
             ]
         );
-
     }
 
-    
+
     /**
      * Log a user
      *
@@ -138,7 +137,7 @@ class SecurityController extends TwigRender
                 $this->session->set('lastname', $user->getLastname());
                 $this->session->set('isAdmin', $user->isAdmin());
                 $this->session->set('email', $user->getEmail());
-                
+
                 if ($user->isAdmin() === true) {
                     $response = new RedirectResponse('/admin');
                     $response->send();
@@ -152,7 +151,7 @@ class SecurityController extends TwigRender
         $userName = '';
         $userId = '';
         $isAdmin = '';
-        
+
         if ($this->session->get('firstname')) {
             $userName = $this->session->get('firstname');
         }
@@ -168,14 +167,14 @@ class SecurityController extends TwigRender
         $this->twig->display(
             'security/login.html.twig',
             [
-             'user'  => $userName,
-             'id'    => $userId,
-             'admin' => $isAdmin,
+                'user'  => $userName,
+                'id'    => $userId,
+                'admin' => $isAdmin,
             ]
         );
     }
 
-    
+
     /**
      * Logout a user
      *
