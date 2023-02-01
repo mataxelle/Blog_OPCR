@@ -62,6 +62,11 @@ class Superglobals
     }
 
 
+    /**
+     * Return superglobal
+     *
+     * @return Superglobals
+     */
     public static function get()
     {
         $request = Request::createFromGlobals();
@@ -127,7 +132,7 @@ class Superglobals
      * Returns a key from the superglobal,
      * as it was at the time of instantiation.
      *
-     * @param $key
+     * @param $key Key
      * @return mixed
      */
     public function getSession($key = null)

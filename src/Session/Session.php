@@ -57,7 +57,7 @@ class Session
     /**
      * Retrieve the value for `$key` or return `$default` instead
      *
-     * @param string $key The parameter to return
+     * @param string $key     The parameter to return
      * @param mixed  $default The default value if it contains no value
      * @return mixed
      */
@@ -75,7 +75,7 @@ class Session
      * Set a value on the item for the provided `$key`
      *
      * @param string $key   The parameter to set
-     * @param $value The value
+     * @param $value        The value
      * @return mixed
      */
     public function set(string $key, $value): void

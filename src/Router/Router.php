@@ -2,9 +2,8 @@
 
 namespace App\Router;
 
-use App\Exceptions\RouteNotFoundException;
 use App\Router\HTTPRequest;
-use Exception;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class Router
 {
@@ -75,6 +74,7 @@ class Router
             }
         }
 
-        // Throw new Exception('404 Not Found').
+        $response = new RedirectResponse('/notFound');
+        $response->send();
     }
 }
