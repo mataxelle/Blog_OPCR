@@ -3,16 +3,20 @@
 
 	{% if comments %}
 		{% for comment in comments %}
-			<div class="row mb-3">
+		<div class="row mb-3">
+			{% for author in authors %}
+				{% if author.id == comment.userId %}
 				<div class="col-4">
-					<p>{{ comment.userId }}</p>
+					<p>{{ author.firstname }}</p>
 				</div>
-				<div class="col-8">
-					<div>
-						<p>{{ comment.content }}</p>
-					</div>
+				{% endif %}
+			{% endfor %}
+			<div class="col-8">
+				<div>
+					<p>{{ comment.content }}</p>
 				</div>
 			</div>
+		</div>	
 		{% endfor %}
 	{% else %}
 		<p>Pas de commentaires</p>

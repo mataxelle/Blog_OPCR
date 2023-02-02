@@ -8,10 +8,12 @@ use App\Form\PostFormType;
 use App\Twig\TwigRender;
 use App\Model\CommentManager;
 use App\Model\PostManager;
+use App\Model\UserManager;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\Validator\Constraints\Length;
 
 class PostController extends TwigRender
 {
@@ -37,6 +39,13 @@ class PostController extends TwigRender
      */
     private $postManager;
 
+    /**
+     * User manager
+     *
+     * @var UserManager
+     */
+    private $userManager;
+
 
     /**
      * Constructor
@@ -49,6 +58,7 @@ class PostController extends TwigRender
         $this->auth = new Auth();
         $this->commentManager = new CommentManager();
         $this->postManager = new PostManager();
+        $this->userManager = new UserManager();
 
         // End __construct().
     }
@@ -75,18 +85,13 @@ class PostController extends TwigRender
         }
 
         $comments = $this->commentManager->getPostComment($post->getId());
-
-        /*
         $authors = [];
         foreach ($comments as $comment) {
-            $com = $this->commentManager->getComment($comment['id']);
-            $authorId = $com->getUserId();
-            $author = $this->userManager->getUser($authorId);
-            $authors[$authorId] = $author;
+            $comAuthorId = $comment['userId'];
+            $author = $this->userManager->getUser($comAuthorId);
+            $authors[$comAuthorId] = $author;
         }
-        var_dump($authors);
-            die;
-        */
+
 
         $user = $this->auth->getCurrentUser();
         $userName = $user->getFirstname();
@@ -98,6 +103,7 @@ class PostController extends TwigRender
             [
                 'post'     => $post,
                 'comments' => $comments,
+                'authors'  => $authors,
                 'user'     => $userName,
                 'admin'    => $isAdmin,
                 'id'       => $userId

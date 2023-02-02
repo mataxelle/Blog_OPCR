@@ -6,6 +6,7 @@ use App\BaseD\ConnectDB;
 use App\Entity\User;
 use DateTime;
 use PDO;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class UserManager extends ConnectDB
 {
@@ -63,6 +64,43 @@ class UserManager extends ConnectDB
     public function registerForm(User $user)
     {
         $database = $this->database;
+
+        if ($user->getFirstname()) {
+
+            if (!preg_match("#[a-zA-ZÀ-ÿ]#", $user->getFirstname())) {
+                $res = new RedirectResponse('/register');
+                $res->send();
+                return false;
+            }
+        }
+
+        if ($user->getLastname()) {
+
+            if (!preg_match("#[a-zA-ZÀ-ÿ]#", $user->getLastname())) {
+                $res = new RedirectResponse('/register');
+                $res->send();
+                echo '<script>alert("Welcome to Geeks for Geeks")</script>';
+                return false;
+            }
+        }
+
+        if ($user->getEmail()) {
+
+            if (!preg_match("#^[a-z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}#", $user->getEmail())) {
+                $res = new RedirectResponse('/register');
+                $res->send();
+                return false;
+            }
+        }
+
+        if ($user->getPassword()) {
+
+            if (!preg_match("#[a-zA-Z0-9._?%$-]#", $user->getPassword())) {
+                $res = new RedirectResponse('/register');
+                $res->send();
+                return false;
+            }
+        }
 
         $createUser = $database->prepare('INSERT INTO user (firstname, lastname, isAdmin, email, password, createdAt, updatedAt) VALUES (?, ?, ?, ?, ?, ?, ?)');
 
