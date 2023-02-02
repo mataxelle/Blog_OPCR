@@ -79,7 +79,6 @@ class UserManager extends ConnectDB
             if (!preg_match("#[a-zA-ZÀ-ÿ]#", $user->getLastname())) {
                 $res = new RedirectResponse('/register');
                 $res->send();
-                echo '<script>alert("Welcome to Geeks for Geeks")</script>';
                 return false;
             }
         }
