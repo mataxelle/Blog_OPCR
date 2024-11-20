@@ -12,7 +12,7 @@
 
 ## General info
 
-Project : Develop a professional blog using PHP, MVC architecture and and Twig. Include all users access and admin gestion.
+Project : Develop a professional blog using PHP, MVC architecture and Twig. Include all users access and admin gestion.
 
 ## Features
 
